@@ -1,0 +1,29 @@
+site:
+  name: "AI Content Hub"
+  url: "https://yourdomain.com"
+  languages: ["en", "ja", "zh"]
+  default_language: "en"
+
+content:
+  min_words: 2500
+  max_words: 4000
+  default_type: "howto"
+  aeo_answer_capsule_max_words: 60
+  faq_count: 3
+  internal_links_min: 2
+
+image:
+  style: "modern, clean, tech-themed, blue and white color scheme"
+  aspect_ratio: "16:9"
+  width: 1200
+  height: 675
+
+hugo:
+  content_dir: "./hugo-site/content"
+  image_dir: "./hugo-site/static/images"
+  draft_default: true
+
+seo:
+  auto_article_schema: true
+  auto_faq_schema: true
+  auto_breadcrumb: true

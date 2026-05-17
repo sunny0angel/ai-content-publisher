@@ -1,0 +1,23 @@
+# Hugo output
+hugo-site/public/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
