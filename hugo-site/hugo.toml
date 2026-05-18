@@ -1,4 +1,4 @@
-baseURL = "https://ai-content-hub.pages.dev"
+baseURL = "https://ai-content-hub-b0t.pages.dev"
 title = "AI Content Hub"
 theme = "papermod"
 defaultContentLanguage = "en"
@@ -61,7 +61,6 @@ summaryLength = 30
   [languages.en]
     locale = "en-US"
     label = "English"
-    languageName = "English"
     title = "AI Content Hub"
     contentDir = "content/en"
     weight = 1
@@ -71,7 +70,6 @@ summaryLength = 30
   [languages.ja]
     locale = "ja-JP"
     label = "日本語"
-    languageName = "日本語"
     title = "AI Content Hub"
     contentDir = "content/ja"
     weight = 2
@@ -96,7 +94,6 @@ summaryLength = 30
   [languages.zh]
     locale = "zh-CN"
     label = "中文"
-    languageName = "中文"
     title = "AI Content Hub"
     contentDir = "content/zh"
     weight = 3
