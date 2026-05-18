@@ -24,18 +24,63 @@ Examples:
 Step 0: コンテンツタイプを自動判定
 Step 1: Webリサーチ（WebFetchツール or research.py）
 Step 2: 英語記事を生成（Article Generatorプロンプトリファレンス）
-Step 3: SEOメタデータを生成（SEO Metadataプロンプトリファレンス）
-Step 4: 日本語に翻訳（同じプロンプト、lang=jaで再実行）
-Step 5: 中国語に翻訳（同じプロンプト、lang=zhで再実行）
-Step 6: 画像プロンプトを生成し、ユーザーに提示（gemini-prompt-template.md）
-Step 7: ユーザーがGeminiで生成 → 指定パスに保存
-Step 8: Hugo記事ファイル（index.md）を3言語分作成（画像パスを含む）
-Step 9: GitHubにプッシュ（draft=Hugoフロントマター）
-Step 10: プレビューURLをユーザーに提示
-Step 11: ユーザー承認後、draft=falseにして再プッシュ
-Step 12: プロモーション投稿文を生成（social-promo.md プロンプトリファレンス）
-Step 13: social_poster.py で X + LinkedIn に自動投稿
+Step 3: セルフレビュー＆修正（下記「Article Review Checklist」を必ず実行）
+Step 4: SEOメタデータを生成（SEO Metadataプロンプトリファレンス）
+Step 5: 日本語に翻訳（同じプロンプト、lang=jaで再実行）
+Step 6: 中国語に翻訳（同じプロンプト、lang=zhで再実行）
+Step 7: 画像プロンプトを生成し、ユーザーに提示（gemini-prompt-template.md）
+Step 8: ユーザーがGeminiで生成 → 指定パスに保存
+Step 9: Hugo記事ファイル（index.md）を3言語分作成（画像パスを含む）
+Step 10: GitHubにプッシュ（draft=Hugoフロントマター）
+Step 11: プレビューURLをユーザーに提示
+Step 12: ユーザー承認後、draft=falseにして再プッシュ
+Step 13: プロモーション投稿文を生成（social-promo.md プロンプトリファレンス）
+Step 14: social_poster.py で X + LinkedIn に自動投稿
 ```
+
+## Article Review Checklist (Step 3: must complete before translation)
+
+英語記事を生成したら、**必ずすべての項目を順にチェックし、問題があれば修正してから** 翻訳に進む。
+
+### 1. ロジック・構成チェック
+- 記事全体の論理の流れは自然か（主張 → 根拠 → 具体例 → 結論）
+- 同じ内容が複数セクションで重複していないか
+- セクション間のトランジションはスムーズか
+- 結論は分析を踏まえたものになっているか（単なる感想や予測で終わっていないか）
+
+### 2. 深掘り不足チェック
+- 「なぜ」が十分に説明されていない箇所はないか
+- 読者が次に知りたくなる質問が unanswered のまま残っていないか
+- 表面的な一般論で済ませているセクションはないか
+- 各セクションに固有の主張があるか（他のセクションの言い換えになっていないか）
+
+### 3. 具体例・データチェック
+- 抽象的な主張には具体例（企業名、業種、具体的な数字、シナリオ）が付随しているか
+- データがない主張には統計や調査結果を追加できるか
+- データは最新か（可能なら2025-2026年のソースを優先）
+- 「多くの企業が...」のような漠然とした主語を具体化できるか
+
+### 4. データソースの信頼性チェック
+- 引用した統計や調査は信頼できる一次ソースか（SBE Council, Salesforce, McKinsey, JP Morgan, US Census Bureau など）
+- ブログの二次引用やベンダーのマーケティングデータを一次ソースのように使っていないか
+- 各データには出典URLへのハイパーリンクが付いているか
+- リンクはanchor textとして自然に埋め込まれているか（「調査によると」ではなく「SBE Councilの[2026年調査](URL)によると」）
+
+### 5. AI臭除去チェック
+以下のような典型的な「AI文章パターン」がないか徹底的になくす：
+- ✗ 「In today's rapidly evolving landscape...」— 削除
+- ✗ 「It is important to note that...」— 削除または言い換え
+- ✗ 「This article will explore...」— 「This article examines...」などすべて削除
+- ✗ 「Let's dive into...」— 削除
+- ✗ 「In conclusion...」— 削除または自然な締めに
+- ✗ 「It's worth mentioning that...」— 削除
+- ✗ 「The truth is that...」— 削除
+- ✗ 各段落の先頭が「According to [Source]...」の繰り返し— 構造を変える
+- ✗ 同じ文型（「X found that Y...」）の連続— バリエーションをつける
+- ✗ 過剰な接続詞（However, Moreover, Furthermore, Consequently）— 半分以上削除
+- ✗ 疑問文で始まるセクションがテンプレート化していないか— 言い回しを変える
+- ✗ どの記事にも同じ文体パターンが現れていないか— 記事ごとに変える
+- ✓ チェック後、声に出して読んでみて「人間が書いた」と感じるか確認
 
 ## Content Rules (NEVER VIOLATE)
 
