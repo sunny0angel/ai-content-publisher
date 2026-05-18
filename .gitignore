@@ -16,6 +16,12 @@ __pycache__/
 .venv/
 venv/
 
+# Hugo
+hugo-site/.hugo_build.lock
+
+# Cloudflare Wrangler
+.wrangler/
+
 # IDE
 .idea/
 .vscode/
