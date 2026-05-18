@@ -18,6 +18,7 @@ venv/
 
 # Hugo
 hugo-site/.hugo_build.lock
+hugo-site/resources/
 
 # Cloudflare Wrangler
 .wrangler/

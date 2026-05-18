@@ -106,6 +106,22 @@ recentPostCount = 5
 listStyle = "summary"
 listLayout = "default"
 
+[params.plugins]
+[[params.plugins.css]]
+URL = "css/custom.css"
+[[params.plugins.css]]
+URL = "css/adritian-icons.css"
+[[params.plugins.css]]
+URL = "css/bootstrap-print.css"
+[[params.plugins.js]]
+URL = "js/rad-animations.js"
+[[params.plugins.js]]
+URL = "js/sticky-header.js"
+[[params.plugins.js]]
+URL = "js/library/fontfaceobserver.js"
+[[params.plugins.scss]]
+URL = "scss/adritian.scss"
+
 [languages]
 [languages.en]
 disabled = false
