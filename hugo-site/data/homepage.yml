@@ -1,0 +1,41 @@
+showcase:
+  button:
+    URL: "#contact"
+    icon: "icon-email"
+  image:
+    src: ""
+
+about:
+  button:
+    URL: "https://www.linkedin.com/in/yudi"
+    icon: "icon-linkedin"
+  image:
+    src: ""
+  v_align: "center"
+  h_align: "left"
+
+experience:
+  button:
+    enable: true
+    URL: "https://www.linkedin.com/in/yudi"
+    icon: "icon-linkedin"
+  button2:
+    enable: true
+    URL: "https://x.com/sunny0angel"
+    icon: "icon-x-twitter"
+  button3:
+    enable: false
+    URL: "/experience"
+    icon: "icon-list"
+
+contact:
+  form_action: ""
+  form_method: "POST"
+  phone: "Tokyo, Japan"
+  email: "hello@ai-content-hub.pages.dev"
+  location: "AI Automation · HR Tech · Productivity · SAP HCM"
+
+newsletter:
+  form:
+    action: ""
+    method: "POST"

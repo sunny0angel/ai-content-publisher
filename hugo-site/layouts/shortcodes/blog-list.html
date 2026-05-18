@@ -1,0 +1,28 @@
+{{- $count := .Get "count" | default 5 -}}
+{{- $pages := where site.RegularPages "Type" "blog" -}}
+{{- if eq (len $pages) 0 -}}
+  {{- $pages = where site.RegularPages "Section" "blog" -}}
+{{- end -}}
+{{- $pages = $pages | first $count -}}
+<div class="row blog-list">
+  {{- range $pages }}
+  <article class="col-12 col-md-6 col-lg-4 mb-4">
+    <div class="card h-100">
+      {{- if .Params.cover.image }}
+      <img src="{{ .Params.cover.image | absURL }}" class="card-img-top" alt="{{ .Title }}" loading="lazy">
+      {{- end }}
+      <div class="card-body">
+        <h5 class="card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h5>
+        <p class="card-text text-muted small">{{ .Description | plainify | truncate 120 }}</p>
+        <div class="d-flex justify-content-between align-items-center">
+          <small class="text-muted">{{ .Date.Format "Jan 2, 2006" }}</small>
+          <a href="{{ .RelPermalink }}" class="btn btn-sm btn-outline-primary">{{ i18n "read_more" }}</a>
+        </div>
+      </div>
+    </div>
+  </article>
+  {{- end -}}
+</div>
+{{- if eq (len $pages) 0 -}}
+<p class="text-muted">No articles yet. Check back soon!</p>
+{{- end -}}
