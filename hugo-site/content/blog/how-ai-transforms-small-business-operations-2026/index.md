@@ -5,7 +5,8 @@ lastmod: 2026-05-18
 description: "82% of small businesses now use AI tools. Here's where they're seeing real returns, where they're stuck, and how to move from experimentation to embedded operations."
 tags: [AI adoption, small business, AI operations, business automation, AI ROI]
 categories: ["AI for Business"]
-image: "/images/how-ai-transforms-small-business-operations-2026.jpg"
+images:
+  featured_image: "/images/how-ai-transforms-small-business-operations-2026.jpg"
 draft: false
 slug: "how-ai-transforms-small-business-operations-2026"
 ---

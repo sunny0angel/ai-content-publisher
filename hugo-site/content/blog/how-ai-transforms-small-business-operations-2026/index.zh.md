@@ -5,7 +5,8 @@ lastmod: 2026-05-18
 description: "82%的中小企业已投资AI工具。哪些领域真正看到了回报？哪些地方遇到了瓶颈？如何从试验阶段过渡到深度嵌入业务流程？"
 tags: [AI采用, 中小企业, 业务自动化, AI应用, 运营效率]
 categories: ["AI for Business"]
-image: "/images/how-ai-transforms-small-business-operations-2026.jpg"
+images:
+  featured_image: "/images/how-ai-transforms-small-business-operations-2026.jpg"
 draft: false
 slug: "how-ai-transforms-small-business-operations-2026"
 ---

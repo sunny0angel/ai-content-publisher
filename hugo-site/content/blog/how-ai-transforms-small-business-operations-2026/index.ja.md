@@ -5,7 +5,8 @@ lastmod: 2026-05-18
 description: "中小企業の82%がAIツールを導入済み。どこで実際に効果が出ていて、どこで停滞しているのか。実験段階から業務に組み込むまでに何が必要かを解説します。"
 tags: [AI導入, 中小企業, 業務自動化, AI活用, ビジネス効率化]
 categories: ["AI for Business"]
-image: "/images/how-ai-transforms-small-business-operations-2026.jpg"
+images:
+  featured_image: "/images/how-ai-transforms-small-business-operations-2026.jpg"
 draft: false
 slug: "how-ai-transforms-small-business-operations-2026"
 ---
