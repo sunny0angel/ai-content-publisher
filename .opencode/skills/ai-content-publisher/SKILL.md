@@ -33,6 +33,8 @@ Step 8: Hugo記事ファイル（index.md）を3言語分作成（画像パス�
 Step 9: GitHubにプッシュ（draft=Hugoフロントマター）
 Step 10: プレビューURLをユーザーに提示
 Step 11: ユーザー承認後、draft=falseにして再プッシュ
+Step 12: プロモーション投稿文を生成（social-promo.md プロンプトリファレンス）
+Step 13: social_poster.py で X + LinkedIn に自動投稿
 ```
 
 ## Content Rules (NEVER VIOLATE)
@@ -181,6 +183,8 @@ Prompt: [generated prompt]
 5. Tell user the preview URL
 6. Wait for user approval ("公開で" or "publish")
 7. Change draft to false, git commit + push again
+8. Generate social promo posts (X + LinkedIn) using `prompts/social-promo.md`
+9. Post to X and LinkedIn via `scripts/social_poster.py both "<text>"`
 
 ## Scripts Reference
 
@@ -188,3 +192,19 @@ Prompt: [generated prompt]
 ```
 python scripts/hugo_publish.py --commit --push
 ```
+
+### social_poster.py (X / LinkedIn auto-post)
+```
+python scripts/social_poster.py both "Your promotional text here"
+python scripts/social_poster.py x "Only for X"
+python scripts/social_poster.py linkedin "Only for LinkedIn"
+```
+Requires API keys in `.env`:
+- X: `X_API_KEY`, `X_API_SECRET`, `X_ACCESS_TOKEN`, `X_ACCESS_SECRET`
+- LinkedIn: `LINKEDIN_CLIENT_ID`, `LINKEDIN_CLIENT_SECRET`, `LINKEDIN_ACCESS_TOKEN`
+
+### linkedin_oauth.py (get LinkedIn access token)
+```
+python scripts/linkedin_oauth.py
+```
+Opens browser for OAuth, prints the token.
