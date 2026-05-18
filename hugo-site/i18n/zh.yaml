@@ -1,5 +1,7 @@
 - id: "logo_text1"
   translation: "AI Content Hub"
+- id: "logo_text2"
+  translation: ""
 - id: "meta_title"
   translation: "AI Content Hub — 商业与人力资源的AI实用指南"
 - id: "meta_description"
