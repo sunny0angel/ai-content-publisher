@@ -7,7 +7,7 @@ tags: [日本AI, 日元汇率, 日本经济, AI投资, 全球资本, 实体AI, �
 categories: ["AI for Business"]
 images:
   featured_image: "/images/japan-ai-economy-yen-global-capital-2026.jpg"
-draft: true
+draft: false
 slug: "japan-ai-economy-yen-global-capital-2026"
 ---
 

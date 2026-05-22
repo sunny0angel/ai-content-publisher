@@ -7,7 +7,7 @@ tags: [Japan AI, yen exchange rate, Japanese economy, AI investment, global capi
 categories: ["AI for Business"]
 images:
   featured_image: "/images/japan-ai-economy-yen-global-capital-2026.jpg"
-draft: true
+draft: false
 slug: "japan-ai-economy-yen-global-capital-2026"
 ---
 

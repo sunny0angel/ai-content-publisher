@@ -7,7 +7,7 @@ tags: [日本AI, 円相場, 日本経済, AI投資, グローバル資本, フ�
 categories: ["AI for Business"]
 images:
   featured_image: "/images/japan-ai-economy-yen-global-capital-2026.jpg"
-draft: true
+draft: false
 slug: "japan-ai-economy-yen-global-capital-2026"
 ---
 
