@@ -1,8 +1,9 @@
-baseURL = "https://ai-content-hub-b0t.pages.dev"
-title = "AI Content Hub"
+baseURL = "https://aifwd.net"
+title = "AI Forward"
 theme = "adritian"
 defaultContentLanguage = "en"
 enableRobotsTXT = true
+hasCJKLanguage = true
 
 [pagination]
 pagerSize = 10
@@ -67,26 +68,29 @@ source = "node_modules/bootstrap-print-css/css/bootstrap-print.css"
 target = "assets/css/bootstrap-print.css"
 
 [params]
-title = "AI Content Hub — Practical AI Guides for Business & HR"
+title = "AI Forward — Practical AI Guides for Business & HR"
 description = "Practical guides, tutorials, and insights on leveraging AI for business, HR, and productivity. Stay ahead with the latest AI trends and automation strategies."
 themeColor = "#2563eb"
 colorScheme = "default"
+logo = "/images/logo.png"
+slogan = "Forward with AI"
+
+[params.favicons]
+source = "icons/favicon.png"
 
 [params.seo]
-siteName = "AI Content Hub"
+siteName = "AI Forward"
 siteDescription = "Practical guides, tutorials, and insights on leveraging AI for business, HR, and productivity."
 siteImage = "/images/og-image.png"
 
 [params.seo.person]
 name = "Yudi"
-url = "https://ai-content-hub-b0t.pages.dev"
+url = "https://aifwd.net"
 sameAs = [
   "https://x.com/sunny0angel",
-  "https://www.linkedin.com/in/yudi",
 ]
 sections = [
   "showcase",
-  "about",
   "education",
   "experience",
   "testimonial",
@@ -128,7 +132,7 @@ disabled = false
 locale = "en"
 direction = "ltr"
 label = "English"
-title = "AI Content Hub"
+title = "AI Forward"
 contentDir = "content"
 weight = 0
 
@@ -143,7 +147,7 @@ URL = "/blog"
 weight = 2
 [[languages.en.menus.header]]
 name = "About"
-URL = "#about"
+URL = "/about/"
 weight = 3
 [[languages.en.menus.header]]
 pre = "search"
@@ -160,7 +164,7 @@ URL = "/blog"
 weight = 2
 [[languages.en.menus.footer]]
 name = "About"
-URL = "#about"
+URL = "/about/"
 weight = 3
 
 [languages.ja]
@@ -168,7 +172,7 @@ disabled = false
 locale = "ja"
 direction = "ltr"
 label = "日本語"
-title = "AI Content Hub"
+title = "AI Forward"
 contentDir = "content"
 weight = 0
 
@@ -183,7 +187,7 @@ URL = "/ja/blog"
 weight = 2
 [[languages.ja.menus.header]]
 name = "プロフィール"
-URL = "/ja/#about"
+URL = "/ja/about/"
 weight = 3
 [[languages.ja.menus.header]]
 pre = "search"
@@ -200,7 +204,7 @@ URL = "/ja/blog"
 weight = 2
 [[languages.ja.menus.footer]]
 name = "プロフィール"
-URL = "/ja/#about"
+URL = "/ja/about/"
 weight = 3
 
 [languages.zh]
@@ -208,7 +212,7 @@ disabled = false
 locale = "zh"
 direction = "ltr"
 label = "中文"
-title = "AI Content Hub"
+title = "AI Forward"
 contentDir = "content"
 weight = 0
 
@@ -223,7 +227,7 @@ URL = "/zh/blog"
 weight = 2
 [[languages.zh.menus.header]]
 name = "关于"
-URL = "/zh/#about"
+URL = "/zh/about/"
 weight = 3
 [[languages.zh.menus.header]]
 pre = "search"
@@ -240,7 +244,7 @@ URL = "/zh/blog"
 weight = 2
 [[languages.zh.menus.footer]]
 name = "关于"
-URL = "/zh/#about"
+URL = "/zh/about/"
 weight = 3
 
 [params.languages.selector.disable]

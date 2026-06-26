@@ -1,0 +1,88 @@
+.header .navbar-brand {
+  gap: 16px;
+  align-items: center;
+}
+.header .navbar-brand .slogan {
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+@media (min-width: 768px) {
+  .header .navbar-brand .slogan {
+    font-size: 15px;
+  }
+}
+
+.stats-section {
+  padding: 3rem 0;
+}
+.stat-item {
+  margin-bottom: 1.5rem;
+}
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #2563eb;
+  line-height: 1.2;
+}
+.stat-label {
+  font-size: 0.95rem;
+  color: #666;
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+.cta-section {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  margin: 2rem 0;
+}
+.cta-section h2 {
+  color: #fff;
+  font-size: 1.75rem;
+}
+.cta-section .lead {
+  color: rgba(255,255,255,0.9);
+  font-size: 1.05rem;
+}
+.cta-section .btn-primary {
+  background: #fff;
+  color: #2563eb;
+  border: none;
+  font-weight: 600;
+}
+.cta-section .btn-primary:hover {
+  background: #f0f0f0;
+  color: #1e40af;
+}
+
+.about-page .card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  transition: box-shadow 0.2s ease;
+}
+.about-page .card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.about-page .card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.about-page .card-text {
+  font-size: 0.9rem;
+  color: #666;
+}
+.about-page h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+.about-page h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #2563eb;
+}
