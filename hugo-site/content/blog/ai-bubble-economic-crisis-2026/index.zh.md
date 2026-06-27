@@ -7,7 +7,7 @@ tags: [AI泡沫, AI崩盘, 2026股市, 美股七巨头, AI投资风险]
 categories: ["AI Industry Analysis"]
 images:
   featured_image: "/images/ai-bubble-economic-crisis-2026.jpg"
-draft: true
+draft: false
 slug: "ai-bubble-economic-crisis-2026"
 ---
 

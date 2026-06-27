@@ -7,7 +7,7 @@ tags: [AIバブル, AIクラッシュ, 株式市場2026, マグニフィセン�
 categories: ["AI Industry Analysis"]
 images:
   featured_image: "/images/ai-bubble-economic-crisis-2026.jpg"
-draft: true
+draft: false
 slug: "ai-bubble-economic-crisis-2026"
 ---
 

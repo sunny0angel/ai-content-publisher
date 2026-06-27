@@ -7,7 +7,7 @@ tags: [AI bubble, AI crash, stock market 2026, Magnificent Seven, AI investment 
 categories: ["AI Industry Analysis"]
 images:
   featured_image: "/images/ai-bubble-economic-crisis-2026.jpg"
-draft: true
+draft: false
 slug: "ai-bubble-economic-crisis-2026"
 ---
 
