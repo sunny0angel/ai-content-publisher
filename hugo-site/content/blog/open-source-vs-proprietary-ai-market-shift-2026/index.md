@@ -7,7 +7,7 @@ tags: [open source AI, proprietary AI, DeepSeek, OpenAI, AI market share, AI eco
 categories: ["AI Industry Analysis"]
 images:
   featured_image: "/images/open-source-vs-proprietary-ai-market-shift-2026.jpg"
-draft: true
+draft: false
 slug: "open-source-vs-proprietary-ai-market-shift-2026"
 ---
 

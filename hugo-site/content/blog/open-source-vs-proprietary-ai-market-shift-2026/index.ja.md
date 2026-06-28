@@ -7,7 +7,7 @@ tags: [オープンソースAI, プロプライエタリAI, DeepSeek, OpenAI, AI
 categories: ["AI Industry Analysis"]
 images:
   featured_image: "/images/open-source-vs-proprietary-ai-market-shift-2026.jpg"
-draft: true
+draft: false
 slug: "open-source-vs-proprietary-ai-market-shift-2026"
 ---
 

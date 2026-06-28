@@ -7,7 +7,7 @@ tags: [开源AI, 闭源AI, DeepSeek, OpenAI, AI市场份额, AI经济学]
 categories: ["AI Industry Analysis"]
 images:
   featured_image: "/images/open-source-vs-proprietary-ai-market-shift-2026.jpg"
-draft: true
+draft: false
 slug: "open-source-vs-proprietary-ai-market-shift-2026"
 ---
 
