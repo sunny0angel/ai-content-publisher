@@ -83,7 +83,7 @@ Healthcare follows at 61% production deployment, driven by clinical documentatio
 | Education | — | $0.3B | Tutoring, administrative workflows, scheduling | $70K |
 | Real Estate | — | $0.1B | Lead qualification, property research, virtual tours | $45K |
 
-*Sources: KXN Technologies (production deployment); AgentMarketCap / HouseofMVPs (spend and deal size). Government deals are largest by size but slowest in growth; retail is fastest-growing vertical at 68% YoY.*
+*Sources: KXN Technologies survey (production deployment — only covered Financial Services, Healthcare, and Manufacturing); AgentMarketCap / HouseofMVPs (spend and deal size). Remaining industries marked "—" lack a direct surveyed production deployment rate from available sources. Government deals are largest by size but slowest in growth; retail is fastest-growing vertical at 68% YoY.*
 
 ## What Are the Most Common AI Agent Use Cases?
 
