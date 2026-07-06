@@ -7,7 +7,7 @@ tags: [AIエージェント, エージェンティックAI, エンタープラ�
 categories: ["AI for Business"]
 images:
   featured_image: "/images/ai-agents-report-2026.jpg"
-draft: true
+draft: false
 slug: "ai-agents-report-2026"
 hidden: false
 ---

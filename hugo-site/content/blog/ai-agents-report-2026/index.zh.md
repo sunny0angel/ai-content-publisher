@@ -7,7 +7,7 @@ tags: [AI智能体, 代理式AI, 企业AI, AI采用, AI ROI, 自主智能体, AI
 categories: ["AI for Business"]
 images:
   featured_image: "/images/ai-agents-report-2026.jpg"
-draft: true
+draft: false
 slug: "ai-agents-report-2026"
 hidden: false
 ---
