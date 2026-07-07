@@ -51,7 +51,7 @@ Article 99 establishes a three-tier penalty framework. The fines are the higher 
 
 *Source: EU AI Act, Article 99. Penalties are the second-highest percentage-based fines in EU digital regulation, behind only the Digital Markets Act.*
 
-![Horizontal bar chart comparing maximum AI penalties across jurisdictions](/images/charts/ai-regulation-2026-chart-1.png "Maximum AI penalties by jurisdiction (million € equivalent): EU prohibited €35M, South Korea €22M, Canada proposed €18M, EU obligations €15M, China account suspension (€10M est.), Brazil proposed €4M. Sources: EU AI Act Art. 99, Korean AI Basic Act, DLA Piper global tracker, 2026.")
+![Horizontal bar chart comparing maximum AI penalties across jurisdictions in USD equivalent](/images/charts/ai-regulation-2026-chart-1.png "Maximum AI penalties by jurisdiction ($M USD equivalent): EU Tier 1 (prohibited practices) $38M, South Korea $22M, Canada proposed $18M, EU Tier 2 (obligations) $16M, Brazil proposed $9M, EU Tier 3 (incorrect info) $8M. China excluded — uses operational penalties (account suspension, content removal) rather than monetary fines. Sources: EU AI Act Art. 99, Korean AI Basic Act, DLA Piper global tracker, 2026.")
 
 The EU AI Office is operational and exercising oversight for general-purpose AI models. National market surveillance authorities across all 27 member states will enforce high-risk obligations. For US companies, enforcement flows through their EU authorized representative, EU business partners, or direct investigation triggered by incidents or complaints. The practical implication: a US-based SaaS company whose AI-powered hiring tool evaluates EU residents must comply with Annex III employment provisions even if the company has no physical presence in Europe.
 
