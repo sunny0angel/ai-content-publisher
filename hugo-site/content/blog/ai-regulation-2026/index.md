@@ -17,7 +17,7 @@ On August 2, 2026 — 26 days from this publication — the EU AI Act's high-ris
 
 This is not a future regulatory landscape. It is the present operating environment for any organization that develops, deploys, or distributes AI systems across multiple jurisdictions.
 
-This report consolidates data from the EU AI Act (Regulation 2024/1689), the AI Law Tracker, Presenc AI's policy tracker, White & Case's global regulatory tracker, DLA Piper's AI Laws of the World, China's CAC enforcement records, South Korea's AI Basic Act, Japan's AI Promotion Act, and state-level legislative tracking to give you a single reference for AI regulation in mid-2026.
+This report consolidates data from the EU AI Act (Regulation 2024/1689), the AI Law Tracker, Presenc AI's policy tracker, White & Case's global regulatory tracker, DLA Piper's AI Laws of the World, China's CAC enforcement records, South Korea's AI Basic Act, Japan's AI Promotion Act, and state-level legislative tracking to give you a single reference for AI regulation in mid-2026. For context on how AI regulation intersects with national security, see our analysis of the [US government's AI control efforts](/blog/us-government-vs-anthropic-ai-control-2026/).
 
 ## What Is the EU AI Act and When Does It Apply?
 
@@ -52,7 +52,7 @@ Article 99 establishes a three-tier penalty framework. The fines are the higher 
 
 ![Horizontal bar chart comparing maximum AI penalties across jurisdictions in USD equivalent](/images/charts/ai-regulation-2026-chart-1.png "Maximum AI penalties by jurisdiction ($M USD equivalent): EU Tier 1 (prohibited practices) $38M, South Korea $22M, Canada proposed $18M, EU Tier 2 (obligations) $16M, Brazil proposed $9M, EU Tier 3 (incorrect info) $8M. China excluded — uses operational penalties (account suspension, content removal) rather than monetary fines. Sources: EU AI Act Art. 99, Korean AI Basic Act, DLA Piper global tracker, 2026.")
 
-The EU AI Office is operational and exercising oversight for general-purpose AI models. National market surveillance authorities across all 27 member states will enforce high-risk obligations. For US companies, enforcement flows through their EU authorized representative, EU business partners, or direct investigation triggered by incidents or complaints. The practical implication: a US-based SaaS company whose AI-powered hiring tool evaluates EU residents must comply with Annex III employment provisions even if the company has no physical presence in Europe.
+The EU AI Office is operational and exercising oversight for general-purpose AI models. National market surveillance authorities across all 27 member states will enforce high-risk obligations. For US companies, enforcement flows through their EU authorized representative, EU business partners, or direct investigation triggered by incidents or complaints. The practical implication: a US-based SaaS company whose AI-powered hiring tool evaluates EU residents must comply with Annex III employment provisions even if the company has no physical presence in Europe. Many of these regulated systems are [AI agents deployed in production](/blog/ai-agents-report-2026/), which face simultaneous obligations under multiple frameworks.
 
 ## Which US States Have Active AI Laws?
 
@@ -183,3 +183,13 @@ China has the most detailed regime — mandatory dual labeling (visible + metada
 ### What should companies do to prepare for AI regulation in 2026?
 
 Classify all AI systems by risk tier. Map each system to applicable jurisdictions — if your AI processes data from EU residents, the EU AI Act applies regardless of where your company is based. Implement risk management, documentation, and human oversight processes for high-risk systems. Monitor the EU Digital Omnibus and US federal preemption litigation for deadline changes. Begin compliance preparation now regardless of potential deadline extensions — the asymmetry is clear: prepare early and gain extra time if delayed; wait and risk fines up to 7% of global turnover.
+
+{{< faq-schema >}}
+[
+  {"q": "When does the EU AI Act become enforceable?", "a": "Prohibited practices have been enforceable since February 2, 2025. General-purpose AI obligations since August 2, 2025. High-risk system requirements take effect August 2, 2026. Full application for AI in regulated products extends to August 2027."},
+  {"q": "What are the penalties for violating the EU AI Act?", "a": "Up to €35 million or 7% of global annual turnover for prohibited practices. Up to €15 million or 3% for other obligations. Up to €7.5 million or 1.5% for supplying incorrect information to authorities."},
+  {"q": "Does the US have a federal AI law?", "a": "No comprehensive federal AI statute exists as of July 2026. AI is governed through sectoral agencies (FTC, EEOC, CFPB, HHS) and seven active state-level laws. Three state laws face active federal preemption challenges."},
+  {"q": "Which countries have the strictest AI labeling requirements?", "a": "China has the most detailed regime — mandatory dual labeling (visible + metadata) for all AI-generated content, enforced through coordinated campaigns. South Korea requires realism-tiered labeling. The EU AI Act Article 50 transparency obligations become enforceable August 2026."},
+  {"q": "What should companies do to prepare for AI regulation in 2026?", "a": "Classify all AI systems by risk tier. Map each system to applicable jurisdictions. Implement risk management, documentation, and human oversight processes for high-risk systems. Monitor the EU Digital Omnibus and US federal preemption litigation. Begin compliance preparation now regardless of potential deadline extensions."}
+]
+{{< /faq-schema >}}
