@@ -130,7 +130,13 @@ Beyond the EU, US, and China, several major economies have established distinct 
 
 *Sources: EU AI Act Article 99, Korean AI Basic Act, DLA Piper global tracker, Presenc AI. Penalty structures vary substantially — EU has highest percentage-based fines; China relies on operational penalties rather than fixed fines.*
 
-![Bar chart showing timeline of first binding AI laws by jurisdiction 2022-2026](/images/charts/ai-regulation-2026-chart-2.png "Timeline: first binding AI laws by major jurisdiction. China (algorithm rules 2022, deep synthesis 2023), EU AI Act adopted 2024, Japan AI Promotion Act 2025, South Korea AI Basic Act 2026. Sources: EU AI Act, CAC China, Korean AI Basic Act, Japan AI Promotion Act.")
+| Jurisdiction | First Binding Law | Year | Type |
+|-------------|-------------------|------|------|
+| China | Algorithmic Recommendation Rules | 2022 | Technology-specific regulation |
+| China | Deep Synthesis Regulations | 2023 | Technology-specific regulation |
+| EU | AI Act (adopted) | 2024 | Comprehensive horizontal regulation |
+| Japan | AI Promotion Act | 2025 | Soft-law / principles-based |
+| South Korea | AI Basic Act | 2026 | Comprehensive horizontal regulation |
 
 ## How Should Organizations Prioritize Compliance by Risk Tier?
 
