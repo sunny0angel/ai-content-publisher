@@ -70,6 +70,7 @@ target = "assets/css/bootstrap-print.css"
 [params]
 title = "AI Forward — Practical AI Guides for Business & HR"
 description = "Practical guides, tutorials, and insights on leveraging AI for business, HR, and productivity. Stay ahead with the latest AI trends and automation strategies."
+images = ["/images/og-image.png"]
 themeColor = "#2563eb"
 colorScheme = "default"
 logo = "/images/logo.png"
@@ -87,7 +88,7 @@ siteImage = "/images/og-image.png"
 name = "Yudi"
 url = "https://aifwd.net"
 sameAs = [
-  "https://x.com/sunny0angel",
+  "https://x.com/AIFWD_NET",
 ]
 sections = [
   "showcase",
@@ -98,7 +99,7 @@ sections = [
 ]
 
 [params.social]
-twitter = "sunny0angel"
+twitter = "AIFWD_NET"
 
 [params.blog]
 layout = "sidebar-right"

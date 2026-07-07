@@ -8,6 +8,7 @@ categories: ["AI Entrepreneurship"]
 images:
   featured_image: "/images/ai-solo-entrepreneur-guide-2026.jpg"
 draft: false
+slug: "ai-solo-entrepreneur-guide-2026"
 ---
 
 > **Featured image:** Person working alone at a desk with multiple screens showing AI interfaces. Photo by [fauxels](https://www.pexels.com/photo/photo-of-person-using-laptop-3183197/) on Pexels (Free to use).

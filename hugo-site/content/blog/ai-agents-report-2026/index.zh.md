@@ -9,7 +9,6 @@ images:
   featured_image: "/images/ai-agents-report-2026.jpg"
 draft: false
 slug: "ai-agents-report-2026"
-hidden: false
 ---
 
 > **Featured image:** 数字网络中相互连接的AI智能体节点抽象可视化。Photo by [Tara Winstead](https://www.pexels.com/photo/a-robot-pointing-on-a-white-background-8386434/) on Pexels（免费使用）

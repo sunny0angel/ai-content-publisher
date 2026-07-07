@@ -9,7 +9,6 @@ images:
   featured_image: "/images/ai-regulation-2026.jpg"
 draft: false
 slug: "ai-regulation-2026"
-hidden: false
 ---
 
 > **Featured image:** 放置在数字电路板上的法官木槌，象征AI法律与监管。Photo by [Tara Winstead](https://www.pexels.com/photo/a-robot-pointing-on-a-white-background-8386434/) on Pexels（免费使用）

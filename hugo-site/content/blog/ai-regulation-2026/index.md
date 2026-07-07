@@ -9,7 +9,6 @@ images:
   featured_image: "/images/ai-regulation-2026.jpg"
 draft: false
 slug: "ai-regulation-2026"
-hidden: false
 ---
 
 > **Featured image:** Gavel resting on a digital circuit board, symbolizing AI law and regulation. Photo by [Tara Winstead](https://www.pexels.com/photo/a-robot-pointing-on-a-white-background-8386434/) on Pexels (Free to use).

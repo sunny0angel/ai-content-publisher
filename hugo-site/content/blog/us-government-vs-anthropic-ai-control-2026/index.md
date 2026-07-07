@@ -8,6 +8,7 @@ categories: ["AI Geopolitics"]
 images:
   featured_image: "/images/us-government-vs-anthropic-ai-control-2026.jpg"
 draft: false
+slug: "us-government-vs-anthropic-ai-control-2026"
 ---
 
 > **Featured image:** Photograph of Anthropic logo, keyboard, and robotic hand. Photo by [Dado Ruvic/Illustration](https://www.reuters.com) via Reuters (Editorial use).

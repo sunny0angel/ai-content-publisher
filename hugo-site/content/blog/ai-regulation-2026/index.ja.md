@@ -9,7 +9,6 @@ images:
   featured_image: "/images/ai-regulation-2026.jpg"
 draft: false
 slug: "ai-regulation-2026"
-hidden: false
 ---
 
 > **注目の画像:** デジタル回路基板の上に置かれた裁判官の木槌。AI法と規制を象徴。Photo by [Tara Winstead](https://www.pexels.com/photo/a-robot-pointing-on-a-white-background-8386434/) on Pexels（無料利用可）

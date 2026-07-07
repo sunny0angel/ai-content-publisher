@@ -8,6 +8,7 @@ categories: ["AI Industry Analysis"]
 images:
   featured_image: "/images/state-of-ai-2026-stanford-index.jpg"
 draft: false
+slug: "state-of-ai-2026-stanford-index"
 ---
 
 > **Featured image:** Pexels

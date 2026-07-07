@@ -9,7 +9,6 @@ images:
   featured_image: "/images/ai-agents-report-2026.jpg"
 draft: false
 slug: "ai-agents-report-2026"
-hidden: false
 ---
 
 > **注目の画像:** デジタルネットワーク内で相互接続されたAIエージェントノードの抽象的なビジュアライゼーション。Photo by [Tara Winstead](https://www.pexels.com/photo/a-robot-pointing-on-a-white-background-8386434/) on Pexels（無料利用可）
