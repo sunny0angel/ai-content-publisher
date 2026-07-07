@@ -7,7 +7,7 @@ tags: [AI規制, AIコンプライアンス, EU AI Act, AI法, AIガバナンス
 categories: ["AI Policy"]
 images:
   featured_image: "/images/ai-regulation-2026.jpg"
-draft: true
+draft: false
 slug: "ai-regulation-2026"
 hidden: false
 ---

@@ -7,7 +7,7 @@ tags: [AI监管, AI合规, EU AI Act, AI法律, AI治理, AI政策]
 categories: ["AI Policy"]
 images:
   featured_image: "/images/ai-regulation-2026.jpg"
-draft: true
+draft: false
 slug: "ai-regulation-2026"
 hidden: false
 ---
