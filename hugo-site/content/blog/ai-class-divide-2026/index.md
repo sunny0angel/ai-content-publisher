@@ -7,7 +7,7 @@ tags: [AI divide, AI inequality, AI access, AI income gap, future of work, AI jo
 categories: ["AI & Society"]
 images:
   featured_image: "/images/ai-class-divide-2026.jpg"
-draft: true
+draft: false
 slug: "ai-class-divide-2026"
 ---
 

@@ -7,7 +7,7 @@ tags: [AI格差, AI不平等, AIアクセス, AI所得格差, 未来の仕事, A
 categories: ["AI & Society"]
 images:
   featured_image: "/images/ai-class-divide-2026.jpg"
-draft: true
+draft: false
 slug: "ai-class-divide-2026"
 ---
 

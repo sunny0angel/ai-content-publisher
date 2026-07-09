@@ -7,7 +7,7 @@ tags: [AI鸿沟, AI不平等, AI获取, AI收入差距, 未来工作, AI工作, 
 categories: ["AI & Society"]
 images:
   featured_image: "/images/ai-class-divide-2026.jpg"
-draft: true
+draft: false
 slug: "ai-class-divide-2026"
 ---
 
