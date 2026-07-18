@@ -2,7 +2,7 @@
 title: "2026年医療AIの現状：臨床導入、規制、成果に関する包括レポート"
 date: 2026-07-18
 lastmod: 2026-07-18
-description: "2026年の医療AI：米国医療機関の75%がAI導入、1,451件のFDA承認機器、投資1ドルあたり3.20ドルのROI。専門分野別導入率、精度、規制、臨床成果を網羅。"
+description: "2026年の医療AI：米国医療機関の75%が導入、1,451件のFDA承認機器、ROIは$1対$3.20。専門分野別の導入率と精度を網羅。"
 tags: [医療AI, 臨床AI, FDA承認AI, 医療AI導入, 医療AI規制, AI診断]
 categories: ["Industry Analysis"]
 images:

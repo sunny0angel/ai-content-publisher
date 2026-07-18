@@ -2,7 +2,7 @@
 title: "美国政府 vs Anthropic：决定AI控制权归属的战役"
 date: 2026-07-03
 lastmod: 2026-07-03
-description: "NSPM-11强制AI公司为军方服务，否则失去合同。Anthropic反抗，被列入黑名单，再遭出口管制。万亿美元的问题：谁控制前沿AI？"
+description: "NSPM-11强制AI公司为军方服务。Anthropic反抗后被列入黑名单并遭出口管制。谁控制前沿AI？"
 tags: [Anthropic, NSPM-11, 美国AI政策, AI军事, AI监管, 五角大楼AI]
 categories: ["AI地缘政治"]
 images:
@@ -105,3 +105,20 @@ Anthropic拒绝允许其AI模型用于大规模国内监控和全自主武器系
 ### Anthropic的IPO面临风险吗？
 
 Anthropic正准备进行估值近1万亿美元的IPO。出口管制问题已解决，但投资者现在必须将未来政府干预的风险计入估值。
+
+{{< faq-schema >}}
+[
+  {
+    "q": "什么是NSPM-11？",
+    "a": "2026年6月5日签署的国家安全总统备忘录，指示美军和情报机构加速采用AI。其最重要的条款是要求终止与限制政府技术使用的AI公司的合同。"
+  },
+  {
+    "q": "为什么五角大楼将Anthropic列入黑名单？",
+    "a": "Anthropic拒绝允许其AI模型用于大规模国内监控和全自主武器系统。五角大楼于2026年3月将其指定为\"供应链风险\"。"
+  },
+  {
+    "q": "Anthropic的IPO面临风险吗？",
+    "a": "Anthropic正准备进行估值近1万亿美元的IPO。出口管制问题已解决，但投资者现在必须将未来政府干预的风险计入估值。"
+  }
+]
+{{< /faq-schema >}}

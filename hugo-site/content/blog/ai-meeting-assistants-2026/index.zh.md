@@ -1,8 +1,8 @@
 ---
-title: "2026年最佳AI会议助手工具对比：Otter vs Fireflies vs Fathom"
+title: "2026年AI会议助手工具对比：Otter vs Fireflies vs Fathom"
 date: 2026-07-11
 lastmod: 2026-07-11
-description: "用2026年最新数据对比Otter.ai、Fireflies.ai和Fathom。独立测试显示Fathom以95%准确率领先。根据团队规模、CRM集成需求和预算选择最适合你的工具。"
+description: "对比Otter.ai、Fireflies.ai和Fathom的准确率、定价和功能。Fathom以95%准确率领先，最佳选择取决于团队规模和预算。"
 tags: [AI会议助手, Otter.ai, Fireflies.ai, Fathom, 会议转录, AI笔记工具, 会议纪要AI, 最佳会议助手]
 categories: ["AI Tools"]
 images:

@@ -2,7 +2,7 @@
 title: "AI Regulation in 2026: The Global Compliance Map by Region, Sector, and Risk Tier"
 date: 2026-07-07
 lastmod: 2026-07-07
-description: "Complete guide to AI regulation in 2026: EU AI Act enforcement begins Aug 2, 7 US states with active laws, China's labeling regime, Korea's AI Act, and global penalty comparisons by region and risk tier."
+description: "Guide to AI regulation in 2026: EU AI Act enforcement begins Aug 2, 7 US states with active laws, China's labeling regime, global penalties by risk tier."
 tags: [AI regulation, AI compliance, EU AI Act, AI laws, AI governance, AI policy, AI legislation]
 categories: ["AI Policy"]
 images:

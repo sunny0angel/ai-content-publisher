@@ -2,7 +2,7 @@
 title: "The AI Hegemony: Why Centralization Is Technology's Original Sin — And How to Decentralize Before It's Too Late"
 date: 2026-06-09
 lastmod: 2026-06-09
-description: "Four companies control the entire AI stack — chips, compute, models, and data. This is not an accident. It is the repeating pattern of every technology revolution. Here is how centralization became AI's defining risk, what it means for innovation, and what genuine bottom-up decentralization looks like."
+description: "Four companies control the AI stack: chips, compute, models, data. History repeats. Centralization is AI’s defining risk; decentralization is the answer."
 tags: [AI centralization, tech hegemony, decentralized AI, open source AI, AI infrastructure, NVIDIA monopoly, Big Tech, AI governance, internet decentralization, digital sovereignty]
 categories: ["Opinion/Policy", "AI Infrastructure"]
 images:
@@ -164,3 +164,50 @@ The question is not whether AI will be centralized or decentralized in 2026. It 
 - DeepSeek. "DeepSeek-V3 Technical Report." December 2025. https://arxiv.org/abs/2512.01234
 - US National AI Research Resource (NAIRR). Pilot Program. https://nairrpilot.org/
 - European Commission. "Data Governance Act." 2024. https://digital-strategy.ec.europa.eu/en/policies/data-governance-act
+
+## Frequently Asked Questions
+
+### What is AI hegemony and why does it matter?
+
+AI hegemony refers to the concentration of control over the full AI stack — chips, cloud infrastructure, foundation models, and data — in a small number of corporations. In 2026, NVIDIA controls 80–90% of the AI chip market, a handful of cloud providers host the majority of AI workloads, and three foundation model companies dominate frontier research. This concentration creates gatekeeping power over which AI applications reach the market and who can innovate on top of the stack.
+
+### Which companies dominate the AI stack in 2026?
+
+NVIDIA controls the hardware layer with 80–90% of the AI chip market. On the cloud layer, AWS, Microsoft Azure, and Google Cloud host the vast majority of AI training and inference workloads. At the model layer, OpenAI, Anthropic, and Google command the frontier of foundation model development. Each layer has its own dominant players, and the deepest concentration is at the hardware layer, where NVIDIA's CUDA ecosystem creates extremely high switching costs.
+
+### How does data concentration reinforce AI centralization?
+
+Data is the least concentrated layer of the AI stack — the internet still produces an enormous volume of diverse data — but the most valuable data for training frontier models is increasingly locked within the ecosystems of the largest tech companies. User interaction data from ChatGPT, search queries from Google, and enterprise data passing through Microsoft's cloud create feedback loops where the companies with the most users generate the best training data, which produces the best models, which attracts more users.
+
+### What is being done to decentralize AI?
+
+Several counter-forces are emerging. Open-source model development through initiatives like DeepSeek and Llama is compressing margins in the model layer. Government initiatives like the US National AI Research Resource (NAIRR) and the EU's Data Governance Act aim to create public alternatives to corporate infrastructure. Chip startups like Cerebras and Groq are challenging NVIDIA's hardware monopoly. However, these efforts remain early-stage relative to the scale of incumbent concentration.
+
+### Will the AI industry become more centralized or more decentralized?
+
+The outcome depends on deliberate action in the next 2–3 years. The default path — the path of least resistance — leads to further centralization, as network effects and economies of scale favor incumbents. The alternative path requires regulatory frameworks that treat AI infrastructure as an essential resource, public investment in open infrastructure, and technical contributions to open-source stacks. Without coordinated effort across policy, investment, and technology, the centralized outcome is significantly more likely.
+
+{{< faq-schema >}}
+[
+  {
+    "q": "What is AI hegemony and why does it matter?",
+    "a": "AI hegemony refers to the concentration of control over the full AI stack — chips, cloud infrastructure, foundation models, and data — in a small number of corporations. In 2026, NVIDIA controls 80–90% of the AI chip market, a handful of cloud providers host the majority of AI workloads, and three foundation model companies dominate frontier research. This concentration creates gatekeeping power over which AI applications reach the market and who can innovate on top of the stack."
+  },
+  {
+    "q": "Which companies dominate the AI stack in 2026?",
+    "a": "NVIDIA controls the hardware layer with 80–90% of the AI chip market. On the cloud layer, AWS, Microsoft Azure, and Google Cloud host the vast majority of AI training and inference workloads. At the model layer, OpenAI, Anthropic, and Google command the frontier of foundation model development. Each layer has its own dominant players, and the deepest concentration is at the hardware layer, where NVIDIA's CUDA ecosystem creates extremely high switching costs."
+  },
+  {
+    "q": "How does data concentration reinforce AI centralization?",
+    "a": "Data is the least concentrated layer of the AI stack — the internet still produces an enormous volume of diverse data — but the most valuable data for training frontier models is increasingly locked within the ecosystems of the largest tech companies. User interaction data from ChatGPT, search queries from Google, and enterprise data passing through Microsoft's cloud create feedback loops where the companies with the most users generate the best training data, which produces the best models, which attracts more users."
+  },
+  {
+    "q": "What is being done to decentralize AI?",
+    "a": "Several counter-forces are emerging. Open-source model development through initiatives like DeepSeek and Llama is compressing margins in the model layer. Government initiatives like the US National AI Research Resource (NAIRR) and the EU's Data Governance Act aim to create public alternatives to corporate infrastructure. Chip startups like Cerebras and Groq are challenging NVIDIA's hardware monopoly. However, these efforts remain early-stage relative to the scale of incumbent concentration."
+  },
+  {
+    "q": "Will the AI industry become more centralized or more decentralized?",
+    "a": "The outcome depends on deliberate action in the next 2–3 years. The default path — the path of least resistance — leads to further centralization, as network effects and economies of scale favor incumbents. The alternative path requires regulatory frameworks that treat AI infrastructure as an essential resource, public investment in open infrastructure, and technical contributions to open-source stacks. Without coordinated effort across policy, investment, and technology, the centralized outcome is significantly more likely."
+  }
+]
+{{< /faq-schema >}}

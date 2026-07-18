@@ -2,7 +2,7 @@
 title: "AI Solo Entrepreneurship in 2026: How to Pick a Direction, Validate Fast, and Scale Alone"
 date: 2026-07-04
 lastmod: 2026-07-04
-description: "The complete playbook for IT founders building alone with AI: success rates, direction selection, 30-day validation, growth from $0 to $50K MRR, and when to hire."
+description: "The complete playbook for IT founders building alone with AI: success rates, 30-day validation, growth from $0 to $50K MRR, and when to hire."
 tags: [AI solopreneur, one-person business, AI entrepreneurship, indie hacking, micro SaaS, solo founder]
 categories: ["AI Entrepreneurship"]
 images:

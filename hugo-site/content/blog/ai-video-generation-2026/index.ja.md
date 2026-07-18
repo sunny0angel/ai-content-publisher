@@ -2,7 +2,7 @@
 title: "AI動画生成が本格化：2026年、本当に使えるツールはどれか"
 date: 2026-07-09
 lastmod: 2026-07-09
-description: "AI動画生成市場は2026年に10億ドル目前。Sora、Veo、Runway、Kling、Pikaの価格、品質、実用例をデータで比較し、テクノロジーの限界を明らかにする。"
+description: "AI動画生成市場は2026年に10億ドル目前。Sora、Veo、Runway、Kling、Pikaを価格・品質・実用例で比較。"
 tags: [AI動画, AI動画生成, Sora, Veo, Runway, Kling, Pika, テキスト動画変換, AIコンテンツ制作, 動画制作, AIツール2026]
 categories: ["AI Tools & Platforms"]
 images:

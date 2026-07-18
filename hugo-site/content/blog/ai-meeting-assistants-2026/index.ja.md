@@ -2,7 +2,7 @@
 title: "2026年 AIミーティングアシスタント徹底比較 Otter vs Fireflies vs Fathom"
 date: 2026-07-11
 lastmod: 2026-07-11
-description: "Otter.ai、Fireflies.ai、Fathomを2026年の最新データで比較。独立テストでFathomが精度95%でリード。チーム規模、CRM連携ニーズ、予算に応じた最適なツールを解説。"
+description: "Otter.ai、Fireflies.ai、Fathomを精度・価格・機能で比較。Fathomが精度95%でリード。チーム規模と予算に応じた最適ツールを解説。"
 tags: [AIミーティングアシスタント, Otter.ai, Fireflies.ai, Fathom, 議事録AI, 文字起こし, ミーティングツール]
 categories: ["AI Tools"]
 images:

@@ -2,7 +2,7 @@
 title: "The State of AI in Healthcare 2026: A Comprehensive Report on Clinical Adoption, Regulation, and Outcomes"
 date: 2026-07-18
 lastmod: 2026-07-18
-description: "AI in healthcare 2026: 75% of US health systems adopted AI, 1,451 FDA-cleared devices, $3.20 per $1 ROI. Complete breakdown by specialty, accuracy, regulation, and outcomes."
+description: "AI in healthcare 2026: 75% of US health systems adopted AI, 1,451 FDA-cleared devices, $3.20 per $1 ROI. Breakdown by specialty, accuracy, and outcomes."
 tags: [AI healthcare, clinical AI, FDA AI devices, healthcare AI adoption, medical AI regulation, AI in medicine, AI diagnostics]
 categories: ["Industry Analysis"]
 images:

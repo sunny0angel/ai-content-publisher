@@ -2,7 +2,7 @@
 title: "2026年AI小企业会计工具盘点：哪些工具真正比手工记账省时间？"
 date: 2026-07-10
 lastmod: 2026-07-10
-description: "AI会计工具为小企业主每月节省10小时以上，并将簿记成本降低40-50%。用真实数据对比QuickBooks、Xero和FreshBooks的时间节省、定价及投资回报率。"
+description: "AI会计工具为小企业每月节省10+小时，降低成本40-50%。用真实数据对比QuickBooks、Xero和FreshBooks的定价与ROI。"
 tags: [AI会计, 小企业会计, AI簿记, QuickBooks AI, Xero JAX, FreshBooks AI, 自动记账, 小企业财务]
 categories: ["AI for Business"]
 images:

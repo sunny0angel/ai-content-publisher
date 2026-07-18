@@ -2,7 +2,7 @@
 title: "2026年、AIの恩恵を実際に受けているのは誰か？答えは収入次第"
 date: 2026-07-08
 lastmod: 2026-07-08
-description: "AIは3層の格差を生み出している：無料ユーザーはチャットボット、プロフェッショナルは生産性ツール、富裕層はインフラを所有。HP、IBM、KXN、PagerDutyのデータが示す現実。"
+description: "AIは3層の格差を生む：無料ユーザーはチャットボット、プロは生産性ツール、富裕層はインフラを所有。HP、IBM、PagerDutyのデータ。"
 tags: [AI格差, AI不平等, AIアクセス, AI所得格差, 未来の仕事, AI雇用, AI経済]
 categories: ["AI & Society"]
 images:

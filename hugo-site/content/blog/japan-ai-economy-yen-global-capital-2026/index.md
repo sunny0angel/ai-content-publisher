@@ -2,7 +2,7 @@
 title: "Japan's AI Revolution: Reshaping the Economy, the Yen, and Global Capital Flows in 2026"
 date: 2026-05-22
 lastmod: 2026-05-22
-description: "How Japan's AI strategy is intersecting with yen depreciation, industry transformation, and global capital allocation — an analysis for business professionals."
+description: "How Japan's AI strategy intersects with yen depreciation, industry transformation, and global capital allocation — analysis for business professionals."
 tags: [Japan AI, yen exchange rate, Japanese economy, AI investment, global capital, physical AI, BOJ policy]
 categories: ["AI for Business"]
 images:
@@ -167,3 +167,28 @@ AI cannot reverse population decline, but modeling by the IMF and Japan's Cabine
 ### How does Japan's AI regulation differ from the EU AI Act?
 
 Japan's AI Promotion Act takes a lighter-touch approach than the EU's AI Act — no mandatory licensing for general-purpose AI, a "comply or explain" model rather than prescriptive rules, and no direct penalties for non-compliance. The government positions this innovation-first approach as a competitive advantage.
+
+{{< faq-schema >}}
+[
+  {
+    "q": "Will the yen continue to weaken through the rest of 2026?",
+    "a": "The interest rate differential between Japan and the US remains the primary driver, and the BOJ's cautious hiking pace suggests the gap will narrow slowly. Market forecasts range from 156 to 165 by year-end 2026, with the key variable being whether the BOJ follows through on the hawkish signals from its April 2026 minutes."
+  },
+  {
+    "q": "How does Japan's AI investment compare to the US and China?",
+    "a": "Japan's ¥4 trillion ($27.6 billion) public AI program is the third-largest nationally, behind only the US and China. But Japan's approach differs fundamentally: while the US dominates generative AI and China leads in consumer AI applications, Japan is targeting physical AI for industrial automation, robotics, and manufacturing."
+  },
+  {
+    "q": "What is \"physical AI\" and why is it important for Japan?",
+    "a": "Physical AI refers to artificial intelligence systems that operate in and interact with the physical world — controlling robots, managing factory processes, and navigating real environments. Japan's industrial base and robotics expertise give it a structural advantage in this domain that it does not have in purely digital AI."
+  },
+  {
+    "q": "Can AI solve Japan's demographic problem?",
+    "a": "AI cannot reverse population decline, but modeling by the IMF and Japan's Cabinet Office suggests AI-driven productivity gains could offset 40-60% of the GDP impact of workforce contraction by 2035. The strategy requires sustained investment, workforce reskilling at scale, and successful deployment of AI in sectors like elderly care where labor demand grows as the workforce shrinks."
+  },
+  {
+    "q": "How does Japan's AI regulation differ from the EU AI Act?",
+    "a": "Japan's AI Promotion Act takes a lighter-touch approach than the EU's AI Act — no mandatory licensing for general-purpose AI, a \"comply or explain\" model rather than prescriptive rules, and no direct penalties for non-compliance. The government positions this innovation-first approach as a competitive advantage."
+  }
+]
+{{< /faq-schema >}}

@@ -2,7 +2,7 @@
 title: "2026年、AI会計ツールで中小企業の経理はどう変わる？手作業と比較した本当の時短効果"
 date: 2026-07-10
 lastmod: 2026-07-10
-description: "AI会計ツールは中小企業の経理業務を月10時間以上削減し、コストを40-50%削減。QuickBooks、Xero、FreshBooksを実際の時間節約効果、価格、ROIのデータで比較します。"
+description: "AI会計ツールは中小企業の経理を月10時間以上削減しコスト40-50%カット。QuickBooks、Xero、FreshBooksを価格とROIで比較。"
 tags: [AI会計, 中小企業経理, AI経理, QuickBooks AI, Xero JAX, FreshBooks AI, 自動経理, 中小企業財務]
 categories: ["AI for Business"]
 images:

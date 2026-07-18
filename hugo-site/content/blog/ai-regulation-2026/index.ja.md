@@ -2,7 +2,7 @@
 title: "2026年AI規制マップ：地域別・業種別・リスク階層別のグローバルコンプライアンスガイド"
 date: 2026-07-07
 lastmod: 2026-07-07
-description: "2026年AI規制の完全ガイド：EU AI Actが8月2日に本格施行、米国7州がアクティブ、中国のラベリング規制、韓国AI基本法、地域別・リスク階層別の罰則比較。"
+description: "2026年AI規制ガイド：EU AI Act8月2日施行、米国7州で法律成立、中国のラベリング規制、グローバル罰則比較。"
 tags: [AI規制, AIコンプライアンス, EU AI Act, AI法, AIガバナンス, AI政策]
 categories: ["AI Policy"]
 images:

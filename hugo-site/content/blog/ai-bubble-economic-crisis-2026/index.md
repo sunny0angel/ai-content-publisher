@@ -2,7 +2,7 @@
 title: "AI Bubble 2026: Is a Crash Coming? Data-Driven Analysis"
 date: 2026-06-27
 lastmod: 2026-06-27
-description: "The AI bubble may be the largest in history relative to the economy. Data from Goldman Sachs, CEPR, Capital Economics, and Oliver Wyman on when it could burst and what to do."
+description: "The AI bubble may be the largest in history. Data from Goldman Sachs, CEPR, and Oliver Wyman on when it could burst and how to prepare."
 tags: [AI bubble, AI crash, stock market 2026, Magnificent Seven, AI investment risk]
 categories: ["AI Industry Analysis"]
 images:
@@ -117,3 +117,28 @@ Individual investors should recognize that a 34% allocation to seven stocks in p
 ### How does this compare to the 2000 dot-com bubble?
 
 The current Mag 7 concentration at 34% of the S&P 500 far exceeds the 22-24% peak of the 2000 tech bubble. While absolute valuation multiples are lower (28x forward P/E vs 56x in 2000), the market value relative to GDP is nearly twice as large. The involvement of debt markets and private credit in financing AI infrastructure adds a systemic risk that did not exist in 2000.
+
+{{< faq-schema >}}
+[
+  {
+    "q": "What is the AI bubble and why are economists worried about it?",
+    "a": "The AI bubble refers to the extreme valuation of AI-related stocks, particularly the Magnificent Seven, which now comprise 34% of the S&P 500 — the highest concentration in history. Economists warn that when valuation multiples revert to historical averages, the wealth destruction could reach $40 trillion, exceeding both the 2000 dot-com crash and the 2008 financial crisis."
+  },
+  {
+    "q": "How much money is being spent on AI infrastructure?",
+    "a": "Goldman Sachs projects $7.6 trillion in cumulative AI infrastructure spending between 2026 and 2031, covering data centers, power infrastructure, and computing hardware. Annual spending is expected to grow from $765 billion in 2026 to $1.6 trillion by 2031. The four largest hyperscalers alone are projected to spend $5.3 trillion by 2030."
+  },
+  {
+    "q": "Could a crash cause a recession?",
+    "a": "Oliver Wyman estimates that a correction comparable to the early 2000s would destroy approximately $33 trillion in market value, exceeding US GDP. The wealth effect on consumption, combined with cutbacks in AI-related capital spending that drives much of current GDP growth, would likely push the economy into a significant recession. The IMF also warns that rapid AI diffusion could trigger widespread job displacement and rising social spending pressures."
+  },
+  {
+    "q": "What should regular investors do to protect themselves?",
+    "a": "Individual investors should recognize that a 34% allocation to seven stocks in passive index funds is not historically diversified. Rebalancing toward value sectors, international equities, and fixed income reduces exposure. Taking profits incrementally, reducing leverage, and maintaining a long time horizon are the most practical steps, rather than attempting to time the exact market peak."
+  },
+  {
+    "q": "How does this compare to the 2000 dot-com bubble?",
+    "a": "The current Mag 7 concentration at 34% of the S&P 500 far exceeds the 22-24% peak of the 2000 tech bubble. While absolute valuation multiples are lower (28x forward P/E vs 56x in 2000), the market value relative to GDP is nearly twice as large. The involvement of debt markets and private credit in financing AI infrastructure adds a systemic risk that did not exist in 2000."
+  }
+]
+{{< /faq-schema >}}

@@ -2,7 +2,7 @@
 title: "AI视频生成进入黄金时代：2026年真正好用的工具有哪些"
 date: 2026-07-09
 lastmod: 2026-07-09
-description: "AI视频生成市场在2026年逼近10亿美元。本文通过数据对比Sora、Veo、Runway、Kling和Pika的价格、质量和实际用例，揭示该技术仍存在的局限。"
+description: "AI视频生成市场2026年逼近10亿美元。对比Sora、Veo、Runway、Kling和Pika的价格、质量和实际用例。"
 tags: [AI视频, AI视频生成, Sora, Veo, Runway, Kling, Pika, 文生视频, AI内容创作, 视频制作, AI工具2026]
 categories: ["AI Tools & Platforms"]
 images:

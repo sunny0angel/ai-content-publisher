@@ -2,7 +2,7 @@
 title: "2026年AI智能体现状：按行业、用例和ROI的综合报告"
 date: 2026-07-06
 lastmod: 2026-07-06
-description: "2026年AI智能体：109亿美元市场、50%CAGR增长、67%企业进入生产环境、ROI中位数240万美元。按行业、用例和可衡量回报的完整数据。"
+description: "2026年AI智能体：109亿美元市场、50%CAGR增长、67%企业进入生产环境、ROI中位数240万美元。按行业和用例分析。"
 tags: [AI智能体, 代理式AI, 企业AI, AI采用, AI ROI, 自主智能体, AI自动化]
 categories: ["AI for Business"]
 images:

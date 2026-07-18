@@ -2,7 +2,7 @@
 title: "2026年AI监管地图：按地区、行业和风险等级的全球合规指南"
 date: 2026-07-07
 lastmod: 2026-07-07
-description: "2026年AI监管完全指南：EU AI Act 8月2日全面生效，美国7州有活跃AI法律，中国AI内容标签制度，韩国AI基本法，按地区和风险等级的全球罚款对比。"
+description: "2026年AI监管指南：EU AI Act 8月2日生效，美国7州有活跃AI法律，中国标签制度，全球按风险等级的罚款对比。"
 tags: [AI监管, AI合规, EU AI Act, AI法律, AI治理, AI政策]
 categories: ["AI Policy"]
 images:

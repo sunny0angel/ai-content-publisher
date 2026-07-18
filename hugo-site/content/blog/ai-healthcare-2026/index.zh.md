@@ -2,7 +2,7 @@
 title: "2026年医疗AI现状：临床采用、监管与成果的综合报告"
 date: 2026-07-18
 lastmod: 2026-07-18
-description: "2026年医疗AI：75%的美国医疗机构已采用AI，1,451个FDA批准的医疗AI设备，每1美元投资回报3.20美元。按专业分类的采用率、准确性、监管和临床成果分析。"
+description: "2026年医疗AI：75%美国医疗机构已采用AI，1,451个FDA批准设备，每1美元回报3.20美元。按专科分析准确率和临床成果。"
 tags: [医疗AI, 临床AI, FDA医疗AI, 医疗AI采用, 医疗AI监管, AI诊断]
 categories: ["Industry Analysis"]
 images:

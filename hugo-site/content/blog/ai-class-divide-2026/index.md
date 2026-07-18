@@ -2,7 +2,7 @@
 title: "Who Actually Benefits from AI in 2026? The Answer Depends on How Much You Make"
 date: 2026-07-08
 lastmod: 2026-07-08
-description: "AI is creating a three-class divide: free users get chatbots, professionals get productivity tools, and the wealthy own the infrastructure. Data from HP, IBM, KXN, and PagerDuty shows who really benefits."
+description: "AI creates a three-class divide: free users get chatbots, professionals get productivity tools, the wealthy own infrastructure. Data from HP, IBM, PagerDuty."
 tags: [AI divide, AI inequality, AI access, AI income gap, future of work, AI jobs, AI economy]
 categories: ["AI & Society"]
 images:

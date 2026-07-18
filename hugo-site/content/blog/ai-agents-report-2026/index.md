@@ -2,7 +2,7 @@
 title: "The State of AI Agents in 2026: A Comprehensive Report by Industry, Use Case, and ROI"
 date: 2026-07-06
 lastmod: 2026-07-06
-description: "AI agents in 2026: $10.9B market growing at 50% CAGR, 67% of enterprises in production, median ROI of $2.4M. Complete breakdown by industry, use case, and measurable returns."
+description: "AI agents in 2026: $10.9B market at 50% CAGR, 67% of enterprises in production, median ROI of $2.4M. Breakdown by industry and use case."
 tags: [AI agents, agentic AI, enterprise AI, AI adoption, AI ROI, autonomous agents, AI automation]
 categories: ["AI for Business"]
 images:

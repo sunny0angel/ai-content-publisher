@@ -2,7 +2,7 @@
 title: "2026年谁真正从AI中受益？答案取决于你赚多少钱"
 date: 2026-07-08
 lastmod: 2026-07-08
-description: "AI正在制造三层鸿沟：免费用户得到聊天机器人，专业人士得到效率工具，富人拥有基础设施。HP、IBM、KXN、PagerDuty的数据揭示了谁真正获益。"
+description: "AI制造三层鸿沟：免费用户得聊天机器人，专业人士得效率工具，富人拥有基础设施。HP、IBM、PagerDuty数据揭示真相。"
 tags: [AI鸿沟, AI不平等, AI获取, AI收入差距, 未来工作, AI工作, AI经济]
 categories: ["AI & Society"]
 images:
