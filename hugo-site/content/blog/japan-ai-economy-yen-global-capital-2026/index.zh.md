@@ -16,7 +16,7 @@ slug: "japan-ai-economy-yen-global-capital-2026"
 
 2026年的日本呈现出一个悖论：日元兑美元汇率徘徊在159附近——数十年来最弱水平——同时正推进着全球最具雄心的AI战略。就在日元逼近160、令人想起2024年4月干预措施的同一个月，软银、NEC、索尼、本田等日本巨头组成的联盟宣布了一项1万亿日元（63亿美元）的政府支持计划，旨在构建"实体AI"基础模型。货币疲软与AI变革——这两个故事并非孤立发生。它们是同一结构性转变的两面。
 
-本文分析日本AI战略如何与其宏观经济挑战相互作用，对各行业意味着什么，以及为何全球资本市场正密切关注。关于企业层面AI应用的实际情况，请参阅我们的[AI自动化入门指南](/blog/getting-started-with-ai-automation/)和[中小企业AI运营指南](/blog/how-ai-transforms-small-business-operations-2026/)。
+本文分析日本AI战略如何与其宏观经济挑战相互作用，对各行业意味着什么，以及为何全球资本市场正密切关注。关于企业层面AI应用的实际情况，请参阅我们的[AI自动化入门指南](/zh/blog/getting-started-with-ai-automation/)和[中小企业AI运营指南](/zh/blog/how-ai-transforms-small-business-operations-2026/)。
 
 ## 2026年日元为何持续贬值？对日本经济意味着什么？
 
