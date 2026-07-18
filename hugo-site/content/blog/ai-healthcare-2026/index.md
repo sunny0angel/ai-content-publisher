@@ -7,7 +7,7 @@ tags: [AI healthcare, clinical AI, FDA AI devices, healthcare AI adoption, medic
 categories: ["Industry Analysis"]
 images:
   featured_image: "/images/ai-healthcare-2026.jpg"
-draft: true
+draft: false
 authors: ["AI Forward"]
 slug: "ai-healthcare-2026"
 ---

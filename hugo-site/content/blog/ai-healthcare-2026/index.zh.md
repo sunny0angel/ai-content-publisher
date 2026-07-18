@@ -7,7 +7,7 @@ tags: [医疗AI, 临床AI, FDA医疗AI, 医疗AI采用, 医疗AI监管, AI诊断
 categories: ["Industry Analysis"]
 images:
   featured_image: "/images/ai-healthcare-2026.jpg"
-draft: true
+draft: false
 authors: ["AI Forward"]
 slug: "ai-healthcare-2026"
 ---

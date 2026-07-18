@@ -7,7 +7,7 @@ tags: [医療AI, 臨床AI, FDA承認AI, 医療AI導入, 医療AI規制, AI診断
 categories: ["Industry Analysis"]
 images:
   featured_image: "/images/ai-healthcare-2026.jpg"
-draft: true
+draft: false
 authors: ["AI Forward"]
 slug: "ai-healthcare-2026"
 ---
