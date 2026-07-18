@@ -8,6 +8,7 @@ categories: ["AI地缘政治"]
 images:
   featured_image: "/images/us-government-vs-anthropic-ai-control-2026.jpg"
 draft: false
+authors: ["AI Forward"]
 ---
 
 > **Featured image:** Anthropic标志、键盘和机械手的照片。Photo by [Dado Ruvic/Illustration](https://www.reuters.com) via Reuters（编辑用途）

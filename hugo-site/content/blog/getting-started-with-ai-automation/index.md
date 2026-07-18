@@ -8,8 +8,11 @@ categories: ["AI Tutorials"]
 images:
   featured_image: "/images/getting-started-with-ai-automation.jpg"
 draft: false
+authors: ["AI Forward"]
 slug: "getting-started-with-ai-automation"
 ---
+
+> **Featured image:** Woman programming on a laptop with a Python book nearby. Photo by [Christina Morillo](https://www.pexels.com/photo/1181359/) on Pexels (Free to use).
 
 AI automation in 2026 is not about robots taking over your business. It is about taking a task you or your team does manually four times a day, every day, and letting software handle it so you can focus on something that actually needs your judgment.
 

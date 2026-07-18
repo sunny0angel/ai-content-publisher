@@ -1,7 +1,30 @@
-<script type="application/ld+json">
+<div id="faq-visible-items"></div>
+<script type="application/ld+json" id="faq-schema-data">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": {{ .Inner | safeJS }}
 }
+</script>
+<script>
+(function() {
+  var script = document.getElementById('faq-schema-data');
+  if (!script) return;
+  try {
+    var data = JSON.parse(script.textContent);
+    var items = data.mainEntity;
+    if (!items || !items.length) return;
+    var html = '';
+    for (var i = 0; i < items.length; i++) {
+      var q = items[i].q || items[i].name || '';
+      var a = items[i].a || items[i].acceptedAnswer || items[i].text || '';
+      if (typeof a === 'object' && a.text) a = a.text;
+      html += '<details style="margin-bottom:1rem;border:1px solid #ddd;border-radius:8px;padding:0.5rem 1rem">';
+      html += '<summary style="font-weight:600;cursor:pointer;padding:0.5rem 0"><strong>' + q + '</strong></summary>';
+      html += '<div style="padding:0.5rem 0;line-height:1.6">' + a + '</div>';
+      html += '</details>';
+    }
+    document.getElementById('faq-visible-items').innerHTML = html;
+  } catch(e) {}
+})();
 </script>

@@ -8,6 +8,7 @@ categories: ["AI for Business"]
 images:
   featured_image: "/images/ai-agents-report-2026.jpg"
 draft: false
+authors: ["AI Forward"]
 slug: "ai-agents-report-2026"
 ---
 

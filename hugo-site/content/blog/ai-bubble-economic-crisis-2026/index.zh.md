@@ -8,6 +8,7 @@ categories: ["AI Industry Analysis"]
 images:
   featured_image: "/images/ai-bubble-economic-crisis-2026.jpg"
 draft: false
+authors: ["AI Forward"]
 slug: "ai-bubble-economic-crisis-2026"
 ---
 

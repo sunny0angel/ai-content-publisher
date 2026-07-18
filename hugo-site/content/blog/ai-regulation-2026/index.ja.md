@@ -8,6 +8,7 @@ categories: ["AI Policy"]
 images:
   featured_image: "/images/ai-regulation-2026.jpg"
 draft: false
+authors: ["AI Forward"]
 slug: "ai-regulation-2026"
 ---
 

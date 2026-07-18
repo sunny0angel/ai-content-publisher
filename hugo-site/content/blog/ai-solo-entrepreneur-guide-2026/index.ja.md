@@ -8,6 +8,7 @@ categories: ["AI起業"]
 images:
   featured_image: "/images/ai-solo-entrepreneur-guide-2026.jpg"
 draft: false
+authors: ["AI Forward"]
 ---
 
 > **注目の画像:** 複数のAI画面を見ながら一人で作業する人物。Photo by [fauxels](https://www.pexels.com/photo/photo-of-person-using-laptop-3183197/) on Pexels（無料利用可）

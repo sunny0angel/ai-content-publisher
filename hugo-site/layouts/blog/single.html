@@ -9,11 +9,14 @@
             <span class="published-label">{{ i18n "published_on" }}</span>
             <time id="date" class="date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Mon Jan 2, 2006" }}</time>
             <span class="meta-separator" aria-hidden="true">·</span>
-            <span id="wordcount" class="wordcount">{{ .WordCount }} Words</span>
-            {{ $readingTime := div .WordCount 200 }}
+            {{- $wc := .WordCount -}}
+            {{- with .Params.wordcount -}}{{- $wc = . -}}{{- end -}}
+            <span id="wordcount" class="wordcount">{{ $wc }} {{ i18n "words" }}</span>
+            {{ $readingTime := .ReadingTime }}
             {{ if lt $readingTime 1 }}
               {{ $readingTime = 1 }}
             {{ end }}
+            {{- with .Params.readingtime -}}{{- $readingTime = . -}}{{- end -}}
             <span class="meta-separator" aria-hidden="true">·</span>
             <span id="reading-time" class="reading-time">{{ $readingTime }} {{ i18n "min_read" | default "min read" }}</span>
             {{ if .Params.lastmod }}

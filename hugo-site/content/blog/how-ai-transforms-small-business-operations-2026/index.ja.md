@@ -8,8 +8,11 @@ categories: ["AI for Business"]
 images:
   featured_image: "/images/how-ai-transforms-small-business-operations-2026.jpg"
 draft: false
+authors: ["AI Forward"]
 slug: "how-ai-transforms-small-business-operations-2026"
 ---
+
+> **注目の画像:** コードを見ながら協力する2人の女性。写真提供: [Christina Morillo](https://www.pexels.com/photo/1181263/)（Pexels / 無料利用可）
 
 2026年、中小企業の経営者に「AIを使っていますか」と聞けば、5人中4人が「はい」と答える。本当に重要なのは、その先の問いだ——どれだけうまく使えているか。
 

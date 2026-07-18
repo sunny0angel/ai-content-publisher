@@ -8,6 +8,7 @@ categories: ["AI & Society"]
 images:
   featured_image: "/images/ai-class-divide-2026.jpg"
 draft: false
+authors: ["AI Forward"]
 slug: "ai-class-divide-2026"
 ---
 

@@ -8,8 +8,11 @@ categories: ["AI Tutorials"]
 images:
   featured_image: "/images/getting-started-with-ai-automation.jpg"
 draft: false
+authors: ["AI Forward"]
 slug: "getting-started-with-ai-automation"
 ---
+
+> **注目の画像:** ノートパソコンでプログラミングをする女性。写真提供: [Christina Morillo](https://www.pexels.com/photo/1181359/)（Pexels / 無料利用可）
 
 2026年のAI自動化とは、ロボットがビジネスを乗っ取ることではない。あなたやあなたのチームが毎日4回手作業で行っているタスクを、ソフトウェアに任せて、本当に判断力が必要な仕事に集中できるようにすることだ。
 

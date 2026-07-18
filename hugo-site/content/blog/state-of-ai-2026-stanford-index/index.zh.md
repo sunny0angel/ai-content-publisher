@@ -8,6 +8,7 @@ categories: ["AI行业分析"]
 images:
   featured_image: "/images/state-of-ai-2026-stanford-index.jpg"
 draft: false
+authors: ["AI Forward"]
 ---
 
 > **Featured image:** Pexels

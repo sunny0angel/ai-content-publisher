@@ -20,6 +20,9 @@ venv/
 hugo-site/.hugo_build.lock
 hugo-site/resources/
 
+# Node
+hugo-site/node_modules/
+
 # Cloudflare Wrangler
 .wrangler/
 

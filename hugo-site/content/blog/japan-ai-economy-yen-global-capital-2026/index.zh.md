@@ -8,6 +8,7 @@ categories: ["AI for Business"]
 images:
   featured_image: "/images/japan-ai-economy-yen-global-capital-2026.jpg"
 draft: false
+authors: ["AI Forward"]
 slug: "japan-ai-economy-yen-global-capital-2026"
 ---
 

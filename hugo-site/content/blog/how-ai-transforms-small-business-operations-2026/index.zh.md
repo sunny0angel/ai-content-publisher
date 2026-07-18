@@ -8,8 +8,11 @@ categories: ["AI for Business"]
 images:
   featured_image: "/images/how-ai-transforms-small-business-operations-2026.jpg"
 draft: false
+authors: ["AI Forward"]
 slug: "how-ai-transforms-small-business-operations-2026"
 ---
+
+> **Featured image:** 两位女性在室内协作进行软件编程。Photo by [Christina Morillo](https://www.pexels.com/photo/1181263/) on Pexels（免费使用）
 
 2026年，如果你问一位中小企业主是否在使用AI，五分之四的人会回答"是"。真正重要的问题是：你用得好吗？
 

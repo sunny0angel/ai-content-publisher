@@ -8,6 +8,7 @@ categories: ["AI地政学"]
 images:
   featured_image: "/images/us-government-vs-anthropic-ai-control-2026.jpg"
 draft: false
+authors: ["AI Forward"]
 ---
 
 > **注目の画像:** Anthropicのロゴ、キーボード、ロボットハンドの写真。Photo by [Dado Ruvic/Illustration](https://www.reuters.com) via Reuters（編集目的使用）

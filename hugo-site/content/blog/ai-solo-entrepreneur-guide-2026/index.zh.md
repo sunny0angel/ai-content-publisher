@@ -8,6 +8,7 @@ categories: ["AI创业"]
 images:
   featured_image: "/images/ai-solo-entrepreneur-guide-2026.jpg"
 draft: false
+authors: ["AI Forward"]
 ---
 
 > **Featured image:** 一个人在多个AI屏幕前独自工作的场景。Photo by [fauxels](https://www.pexels.com/photo/photo-of-person-using-laptop-3183197/) on Pexels（免费使用）

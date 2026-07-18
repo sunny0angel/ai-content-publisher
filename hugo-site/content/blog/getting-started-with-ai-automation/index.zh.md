@@ -8,8 +8,11 @@ categories: ["AI Tutorials"]
 images:
   featured_image: "/images/getting-started-with-ai-automation.jpg"
 draft: false
+authors: ["AI Forward"]
 slug: "getting-started-with-ai-automation"
 ---
+
+> **Featured image:** 正在笔记本电脑上编程的女性。Photo by [Christina Morillo](https://www.pexels.com/photo/1181359/) on Pexels（免费使用）
 
 2026年的AI自动化，不是让机器人接管你的生意。而是把你或你的团队每天手动做四次的重复任务，交给软件处理，让你能专注于真正需要判断力的工作。
 

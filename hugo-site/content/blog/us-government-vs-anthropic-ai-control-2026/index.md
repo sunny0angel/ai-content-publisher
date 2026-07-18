@@ -8,6 +8,7 @@ categories: ["AI Geopolitics"]
 images:
   featured_image: "/images/us-government-vs-anthropic-ai-control-2026.jpg"
 draft: false
+authors: ["AI Forward"]
 slug: "us-government-vs-anthropic-ai-control-2026"
 ---
 

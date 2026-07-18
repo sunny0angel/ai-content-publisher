@@ -8,6 +8,7 @@ categories: ["AI Entrepreneurship"]
 images:
   featured_image: "/images/ai-solo-entrepreneur-guide-2026.jpg"
 draft: false
+authors: ["AI Forward"]
 slug: "ai-solo-entrepreneur-guide-2026"
 ---
 

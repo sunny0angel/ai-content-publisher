@@ -8,6 +8,7 @@ categories: ["行业分析"]
 images:
   featured_image: "/images/us-china-ai-race-2026.jpg"
 draft: false
+authors: ["AI Forward"]
 slug: "us-china-ai-race-2026"
 ---
 

@@ -8,6 +8,7 @@ categories: ["AI Industry Analysis"]
 images:
   featured_image: "/images/open-source-vs-proprietary-ai-market-shift-2026.jpg"
 draft: false
+authors: ["AI Forward"]
 slug: "open-source-vs-proprietary-ai-market-shift-2026"
 ---
 

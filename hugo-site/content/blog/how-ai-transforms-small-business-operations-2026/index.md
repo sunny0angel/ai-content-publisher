@@ -8,8 +8,11 @@ categories: ["AI for Business"]
 images:
   featured_image: "/images/how-ai-transforms-small-business-operations-2026.jpg"
 draft: false
+authors: ["AI Forward"]
 slug: "how-ai-transforms-small-business-operations-2026"
 ---
+
+> **Featured image:** Two women collaborating on software programming indoors. Photo by [Christina Morillo](https://www.pexels.com/photo/1181263/) on Pexels (Free to use).
 
 Ask a small business owner in 2026 whether they use AI, and there's a four-in-five chance the answer is yes. The question that actually matters is: how well?
 
