@@ -7,7 +7,7 @@ tags: [AI客服, AI客户服务, 客服AI, AI智能体, 聊天机器人, 美国A
 categories: ["AI行业分析"]
 images:
   featured_image: "/images/ai-customer-service-2026.jpg"
-draft: true
+draft: false
 authors: ["AI Forward"]
 slug: "ai-customer-service-2026"
 ---

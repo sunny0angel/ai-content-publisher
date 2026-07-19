@@ -7,7 +7,7 @@ tags: [AIカスタマーサービス, AI CX, カスタマーサービスAI, AI�
 categories: ["AI Industry Analysis"]
 images:
   featured_image: "/images/ai-customer-service-2026.jpg"
-draft: true
+draft: false
 authors: ["AI Forward"]
 slug: "ai-customer-service-2026"
 ---
