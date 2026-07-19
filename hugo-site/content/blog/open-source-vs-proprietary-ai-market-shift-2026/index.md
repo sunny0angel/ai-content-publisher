@@ -112,26 +112,6 @@ The most likely outcome is a bifurcated market: commodity inference served by op
 
 ## Frequently Asked Questions
 
-### How much cheaper are open-source AI models than proprietary ones?
-
-Open-source models cost 50-90% less than comparable proprietary alternatives. DeepSeek V3.2 costs $0.28/$0.42 per million tokens compared to GPT-5.4 at $2.50/$15.00 — up to 36x cheaper on output tokens. A workload costing $12,500/month on GPT-5.4 drops to $770 on DeepSeek V3.2. Self-hosting open models can reduce costs even further.
-
-### What percentage of enterprises use open-source AI models?
-
-Eighty-nine percent of enterprises now use at least one open-source model in production, according to Presenc AI's Q1 2026 survey of enterprise AI leaders. The dominant pattern is a tiered stack: open-weight models for routine inference and closed-model APIs for reasoning-heavy or sensitive workflows.
-
-### Is open-source AI as good as proprietary models?
-
-For routine tasks — classification, extraction, summarization, standard customer support — the gap has effectively closed, with open models within 1-5 percentage points of closed leaders. For complex reasoning, closed models retain a 15-30 point lead. The optimal enterprise strategy is a tiered routing architecture rather than a single model.
-
-### Why did the Big 3 lose so much market share?
-
-The combined token share of OpenAI, Google, and Anthropic fell from 72% to 33% in 12 months driven by three forces: open-source models costing 87% less, performance convergence on standard benchmarks, and collapsing switching costs as enterprises adopt multi-model routing architectures.
-
-### Will proprietary AI models survive?
-
-Proprietary models will survive in a bifurcated market. Commodity inference will shift to open-weight models at near-zero margins. Frontier capability — complex reasoning, safety-critical applications, enterprise-grade integration — will remain a premium service concentrated among well-capitalized providers. The mass market for premium AI inference tokens is structurally shrinking.
-
 {{< faq-schema >}}
 [
   {

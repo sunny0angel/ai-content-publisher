@@ -108,34 +108,6 @@ The report's data also underscores a paradox: as AI capability concentrates in f
 
 ## Frequently Asked Questions
 
-### What is the Stanford AI Index 2026?
-
-The Stanford HAI AI Index is an annual report tracking AI's technical progress, economic impact, adoption, regulation, and societal effects across dozens of countries. The 2026 edition spans over 400 pages and is considered the most comprehensive public accounting of AI's trajectory.
-
-### How much was invested in AI in 2025?
-
-Global corporate AI investment reached $581.7 billion in 2025, more than double the $253 billion invested in 2024. Private investment led at $344.7 billion (up 127.5%), with generative AI capturing nearly half of all private AI funding.
-
-### How close are AI models to human-level performance?
-
-On several key benchmarks like SWE-bench Verified and Humanity's Last Exam, AI has reached or approached human-level performance within the past year. However, models still read analog clocks at only 50.6% accuracy versus 90.1% for humans, and real-world household robotics remains at just 12% success rates.
-
-### Has the US-China AI gap really closed?
-
-The top US model leads China's best by just 2.7% as of March 2026, down from a 31.6 percentage point gap in May 2023. US and Chinese models have traded the top position multiple times since early 2025, and China now leads in research publication volume and citations.
-
-### Is AI already replacing jobs?
-
-The report shows employment for software developers ages 22 to 25 has fallen nearly 20% from 2024, the first concrete demographic evidence of AI-driven displacement. One-third of organizations expect workforce reductions in the coming year. However, large-scale job losses have not yet appeared in overall employment data.
-
-### Why are AI models becoming less transparent?
-
-The Foundation Model Transparency Index dropped from 58 to 40 out of 100 in a single year. Leading labs including OpenAI, Anthropic, and Google no longer disclose training data composition, parameter counts, or training compute for their most capable models.
-
-### What is AI's environmental impact?
-
-Training a single frontier model like Grok 4 generated 72,816 tons of CO₂ equivalent. AI data centers now consume 29.6 GW of power — comparable to New York state's peak demand. GPT-4o's annual inference water use may exceed the needs of 1.2 million people.
-
 {{< faq-schema >}}
 [
   {

@@ -106,22 +106,6 @@ For HR professionals specifically, the path forward requires three strategic shi
 
 ## Frequently Asked Questions
 
-### Is it still worth learning a foreign language in the age of AI?
-
-Yes. AI can help you translate and express, but it cannot help you understand cultural context. Learning a language means understanding how others think, their sense of humor, negotiation habits, and unspoken assumptions. In cross-border collaboration, these soft skills become more valuable, not less.
-
-### Can one-person companies really replace traditional teams?
-
-Under the right conditions. Solo operations work best for businesses with standardized products, clear customer acquisition channels, and automatable delivery processes. For large-scale projects requiring deep cross-disciplinary collaboration, teams remain irreplaceable. One-person companies and traditional teams are not substitutes — they coexist at different market levels.
-
-### Does AI recruitment amplify algorithmic bias?
-
-Potentially. AI matching systems train on historical data. If historical data contains bias around gender, race, or age, AI may amplify it. The 2026 compliance trend requires AI recruiting tools to provide transparent match explanations and bias audit reports. One of HR's critical roles is overseeing AI fairness.
-
-### Is there still a career path in HR?
-
-Yes, but the role is fundamentally changing. The future HR professional is no longer an administrative executor but an organizational designer, culture manager, and AI process supervisor. This shift requires new skills in data analysis, AI tool management, and organizational behavior. What gets eliminated is not the HR function itself — it is the purely administrative HR role.
-
 {{< faq-schema >}}
 [
   {

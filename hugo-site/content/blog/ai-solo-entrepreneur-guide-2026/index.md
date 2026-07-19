@@ -121,30 +121,6 @@ The solo founder era is real, and 2026 is the year it went mainstream. The tools
 
 ## Frequently Asked Questions
 
-### How much money do I need to start an AI solo business in 2026?
-
-$500 to $2,000 is sufficient for the MVP phase. This covers AI tool subscriptions ($200–$500/month for a full stack), hosting, and domain costs. The 2020 equivalent was $10,000 to $30,000.
-
-### What is the success rate for solo AI businesses?
-
-Most still fail, but the pattern has shifted. 65% of new solo businesses use AI tools as core to strategy. AI-enabled freelancers earn 25-47% more than peers. The sustainable solo revenue ceiling is now $1M to $3M ARR, up from $200K to $500K in 2020.
-
-### What is the best business model for a solo founder?
-
-Start with services or consulting (70-80% margin) to validate demand and build relationships. Services provide immediate cash flow and direct customer feedback that no survey can match. Over time, productize repeatable workflows into SaaS — this shifts the business from selling time to selling software, pushing margins to 95%. Micro-SaaS in narrow B2B niches offers the best revenue-to-effort ratio because B2B customers have higher willingness to pay and lower churn than consumer markets.
-
-### How long does it take to validate an idea?
-
-A 30-day framework works: one week research, one week customer conversations, one week MVP, one week first sales. If no one pays by month three, change direction. The most common mistake is spending too long on the MVP. In 2026, a weekend build that solves one specific workflow step is sufficient for validation. Do not build auth, billing, or onboarding flows before you have confirmed someone will pay
-
-### When should I hire my first employee?
-
-Between $30K and $50K MRR is the typical threshold. Hire for roles AI cannot fill: strategic judgment, relationship management, and accountability. Do not hire another engineer unless the technical workload is the bottleneck — in most cases it is not. The bottleneck is almost always distribution, positioning, or enterprise trust, which requires human relationships. A part-time customer success person or a fractional CRO (chief revenue officer) is often the highest-ROI first hire.
-
-### Do I need to incorporate?
-
-Not immediately. Operate as a sole proprietorship until you reach $10K MRR or need liability protection. At that point, an LLC (US) or KK (Japan) is sufficient. Avoid raising venture capital — the pressure to grow destroys the lifestyle advantages of solo entrepreneurship. Bootstrap everything until you have proven demand, then only consider revenue-based financing if you need growth capital.
-
 {{< faq-schema >}}
 [
   {"q": "How much money do I need to start an AI solo business in 2026?", "a": "$500 to $2,000 is sufficient for the MVP phase. This covers AI tool subscriptions ($200-$500/month for a full stack), hosting, and domain costs. The 2020 equivalent was $10,000 to $30,000."},

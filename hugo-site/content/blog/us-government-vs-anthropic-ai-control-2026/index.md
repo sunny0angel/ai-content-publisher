@@ -127,30 +127,6 @@ The US will not win the AI competition with China by controlling its own compani
 
 ## Frequently Asked Questions
 
-### What is NSPM-11?
-
-National Security Presidential Memorandum 11, signed June 5, 2026, directs US military and intelligence agencies to accelerate AI adoption. Its most significant provision requires terminating contracts with AI companies that repeatedly limit government use of their technology.
-
-### Why did the Pentagon blacklist Anthropic?
-
-Anthropic refused to allow its AI models to be used for mass domestic surveillance and fully autonomous weapons systems. The Pentagon designated the company a "supply-chain risk" in March 2026 — the first time a US company received this label.
-
-### Did Amazon cause the export control order?
-
-Amazon CEO Andy Jassy personally alerted the White House about a potential jailbreak in Anthropic's Mythos 5 model. Amazon is Anthropic's largest investor, primary cloud host, and a direct competitor. The role of Amazon's financial interests in triggering government action has not been resolved.
-
-### Is Anthropic's IPO at risk?
-
-Anthropic is preparing for an IPO that could value it at nearly $1 trillion. The export control dispute adds uncertainty, but the controls were lifted before directly affecting the offering. Investors must now price in the risk of future government intervention.
-
-### What happens next?
-
-Congress has an opportunity to establish a statutory framework through the NDAA. If it does not act, the framework governing AI in national security will remain entirely executive — improvised in real time and reversible by the next administration.
-
-### How does this affect other countries?
-
-The episode demonstrated that American AI can be switched off for political reasons with no notice. This is accelerating investment in non-American AI alternatives across Asia, Europe, and the Global South.
-
 {{< faq-schema >}}
 [
   {

@@ -99,26 +99,6 @@ For organizations that act now — investing in integration, training, and trans
 
 ## Frequently Asked Questions
 
-### How much of customer service will be AI-powered by 2027?
-
-Industry projections from Zendesk and Gartner suggest that by late 2027, 100% of customer interactions will involve AI in some form, with approximately 80% resolved without human agent intervention. This varies by market: China is closest to this benchmark today, while Japan is furthest.
-
-### Which country leads in AI customer service adoption?
-
-China leads in interaction volume and AI resolution rates (85-95%), driven by the WeChat ecosystem and platforms like Alibaba. The United States leads in enterprise-grade deployment sophistication and total market spending. Japan lags in adoption but is accelerating through government subsidies.
-
-### What is the biggest challenge in AI customer service today?
-
-The training gap is the most acute issue: 55% of agents worldwide have received no AI training, and only 21% are satisfied with the training they have received. This organizational failure limits the ROI of AI investments more than any technology limitation.
-
-### How do consumers feel about AI customer service globally?
-
-Consumer attitudes vary sharply by region. 68% of Chinese consumers trust AI customer service, compared to 52% in the US, 41% in Europe, and just 34% in Japan. Younger consumers across all markets show significantly higher trust levels.
-
-### Is AI replacing human customer service agents?
-
-AI is not primarily replacing agents but augmenting them. 75% of CX leaders view AI as a force for amplifying human intelligence, and 80% of employees say AI has improved their work quality. The role of agents is shifting from handling routine inquiries to managing complex cases, supervising AI, and focusing on relationship-building.
-
 {{< faq-schema >}}
 [
   {"q": "How much of customer service will be AI-powered by 2027?", "a": "Industry projections from Zendesk and Gartner suggest that by late 2027, 100% of customer interactions will involve AI in some form, with approximately 80% resolved without human agent intervention. This varies by market: China is closest to this benchmark today, while Japan is furthest."},

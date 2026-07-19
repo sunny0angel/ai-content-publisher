@@ -120,26 +120,6 @@ For a small business owner reading this in May 2026, the practical takeaway is s
 
 ## Frequently Asked Questions
 
-### What is the minimum budget needed for a small business to start with AI?
-
-A starter stack costing $48 per month — ChatGPT Plus ($20), Canva Pro ($13), and Grammarly Business ($15) — typically saves 10–15 hours per week across a five-person team. The SBE Council reports median annual AI spend of $2,200, or roughly $183 per month.
-
-### Which AI tools give small businesses the fastest return?
-
-Email triage, appointment scheduling automation, and invoice reminder tools typically show measurable ROI within 30 days because the time savings are directly countable. Marketing content generation tools have a slightly longer payback window (60–90 days) but higher absolute returns.
-
-### Why are some small businesses not adopting AI despite clear benefits?
-
-The primary barrier is lack of expertise (31.2%), not cost. Business owners do not know which tools to choose or how to integrate them. The JP Morgan Chase Institute confirms that employer firms adopt AI at nearly double the rate of non-employers, even at the same revenue level, because they have organizational capacity to evaluate and implement tools.
-
-### How many AI tools does the typical small business use?
-
-The median is five tools, according to the SBE Council's March 2026 survey: an AI writing assistant, an AI-enhanced business platform, a workflow automation tool, a specialized industry tool, and a meeting or communication AI.
-
-### Is AI cost-effective for solo business owners and freelancers?
-
-Yes. Entry costs have declined to $20–30 per month per tool. Solo operators typically see the highest per-hour ROI because every hour saved is their own time, which is the most expensive resource in a one-person business. A $20/month ChatGPT Plus subscription that saves five hours per week returns roughly $500/month in recovered time at a $25/hour billing rate.
-
 {{< faq-schema >}}
 [
   {

@@ -116,26 +116,6 @@ The practical implications for hiring in 2026 and beyond:
 
 ## FAQ
 
-### Is AI going to replace all specialists?
-
-No. AI replaces execution in routine, well-defined tasks. Specialists whose primary value is judgment, experience-based decision-making, and creative vision will remain in demand. The specialists most at risk are those whose work consists of pattern-matching and standard execution — exactly what AI does best.
-
-### What kinds of experts are safest from AI displacement?
-
-Experts whose value comes from tacit knowledge — experiential understanding that cannot be extracted from training data. This includes senior architects, creative directors, experienced litigators, product strategists, and leaders who make judgment calls based on context, relationships, and accumulated experience.
-
-### Should I hire a specialist or a generalist with AI skills?
-
-It depends on the tier of work. For routine execution in a defined domain, hire a generalist with AI fluency — they will cover the work effectively at lower cost. For high-stakes decisions, novel problems, or creative direction, hire a genuine expert. The ratio is shifting toward generalists, but experts have not disappeared.
-
-### How does AI fluency change hiring criteria?
-
-AI fluency — the ability to use AI tools effectively, evaluate their outputs critically, and integrate them into workflows — has become one of the most sought-after skills. McKinsey found it is the fastest-growing skill in US job postings, with demand rising sevenfold in two years. Hiring for AI fluency alongside domain knowledge is now standard practice.
-
-### Can a generalist with AI really replace a team of specialists?
-
-In many cases, yes. A single product engineer with AI tools can now handle coding, basic design, copywriting, and data analysis. This does not mean specialists are obsolete — it means the ratio has changed. Organizations that once needed five specialists per function can now operate with two or three AI-augmented generalists backed by a smaller number of deep experts for the work that genuinely requires specialization.
-
 {{< faq-schema >}}
 [
   {

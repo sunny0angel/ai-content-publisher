@@ -189,30 +189,6 @@ For a broader perspective on how AI adoption compares across all industries, see
 
 ## Frequently Asked Questions
 
-### How many FDA-cleared AI medical devices are there in 2026?
-
-As of December 2025, the FDA had authorized 1,451 AI/ML-enabled medical devices. Radiology accounts for 76% (1,104 devices), followed by cardiovascular at 10%, neurology at 6%, and oncology at 4%. The FDA cleared 295 devices in 2025 alone — a single-year record.
-
-### What is the ROI of AI in healthcare?
-
-The average ROI for AI in healthcare is $3.20 for every $1 invested, with typical payback within 14 months. Revenue cycle management delivers the highest returns at $4.50-$6.00 per dollar. Ambient AI scribes recover 4-5 hours of physician documentation time per week.
-
-### Which medical specialty uses AI the most?
-
-Radiology is the dominant adopter, representing 76% of all FDA-cleared AI devices. Pathology and cardiology are the fastest-growing specialties for AI adoption, driven by digital pathology workflows and AI-powered echocardiogram analysis respectively.
-
-### Is AI as accurate as human doctors?
-
-In specific diagnostic tasks, AI matches or exceeds human accuracy: 99.6% negative predictive value for heart attack rule-out, 99.2% sensitivity for diabetic retinopathy screening, and 87.3% accuracy for operative report generation vs. 72.8% for surgeons. However, AI accuracy degrades 5-12% on patient populations underrepresented in training data.
-
-### What are the biggest barriers to AI adoption in healthcare?
-
-Data quality and governance (54% of organizations), legacy system integration (46%), and regulatory uncertainty (38%) are the top three barriers. Only about one-third of health systems have integrated AI into clinical workflows at the point of care, with the rest using AI primarily for administrative tasks.
-
-### When will AI replace doctors?
-
-AI is not on a trajectory to replace physicians. 79% of healthcare workers believe AI will be useful in their area of work, and only 10% worry about replacement. The dominant model is augmentation: AI handles pattern recognition, data synthesis, and documentation while clinicians focus on complex reasoning, patient communication, and procedural care.
-
 {{< faq-schema >}}
 [
   {"q": "How many FDA-cleared AI medical devices are there in 2026?", "a": "As of December 2025, the FDA had authorized 1,451 AI/ML-enabled medical devices. Radiology accounts for 76% (1,104 devices), followed by cardiovascular at 10%, neurology at 6%, and oncology at 4%. The FDA cleared 295 devices in 2025 alone — a single-year record."},

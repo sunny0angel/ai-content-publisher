@@ -108,26 +108,6 @@ The starting point is a single task. Clean input, clear output, low risk. Build 
 
 ## Frequently Asked Questions
 
-### How much does AI automation cost for a small business?
-
-Entry-level setups cost $50 to $200 per month for tools like Zapier, ChatGPT, and Tidio, and save 8 to 12 hours per week. Most small businesses find their ideal spend between $100 and $300 per month, recovering 15 to 25 hours weekly.
-
-### Do I need technical skills to set up AI automation?
-
-No. Platforms like Zapier and Make use visual, drag-and-drop builders that require no coding. If you can use a spreadsheet, you can build basic automations. Coding only becomes relevant for custom integrations or very specific workflows.
-
-### How long does it take to set up a first automation?
-
-A simple automation (trigger, action, notification) takes 1 to 2 hours to build and one week to test with live data. The four-week timeline in this guide — audit, build, deploy, measure — covers the full process from zero to a running workflow.
-
-### What is the single most important thing to know before starting?
-
-Map the process on paper before touching any tool. Define the starting trigger, the exact steps, and what "done" looks like. Most automation failures happen because the underlying process was never clearly defined.
-
-### Which automation platform is best for a complete beginner?
-
-Zapier has the gentlest learning curve, the most integrations (8,000+), and the most predictable pricing. Start there. If you outgrow it or need more complex workflows at lower cost, migrate to Make or n8n after you have proven value on the first workflow.
-
 {{< faq-schema >}}
 [
   {

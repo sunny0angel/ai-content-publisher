@@ -165,26 +165,6 @@ The bottom line for July 2026: AI regulation is no longer theoretical. Eleven ju
 
 ## Frequently Asked Questions
 
-### When does the EU AI Act become enforceable?
-
-Prohibited practices have been enforceable since February 2, 2025. General-purpose AI obligations since August 2, 2025. High-risk system requirements take effect August 2, 2026 — 26 days from this publication. Full application for AI in regulated products extends to August 2027.
-
-### What are the penalties for violating the EU AI Act?
-
-Up to €35 million or 7% of global annual turnover for prohibited practices (whichever is higher). Up to €15 million or 3% for other obligations. Up to €7.5 million or 1.5% for supplying incorrect information to authorities.
-
-### Does the US have a federal AI law?
-
-No comprehensive federal AI statute exists as of July 2026. AI is governed through sectoral agencies (FTC, EEOC, CFPB, HHS) and seven active state-level laws. Three state laws face active federal preemption challenges.
-
-### Which countries have the strictest AI labeling requirements?
-
-China has the most detailed regime — mandatory dual labeling (visible + metadata) for all AI-generated content, enforced through coordinated campaigns. South Korea requires realism-tiered labeling. The EU AI Act Article 50 transparency obligations become enforceable August 2026.
-
-### What should companies do to prepare for AI regulation in 2026?
-
-Classify all AI systems by risk tier. Map each system to applicable jurisdictions — if your AI processes data from EU residents, the EU AI Act applies regardless of where your company is based. Implement risk management, documentation, and human oversight processes for high-risk systems. Monitor the EU Digital Omnibus and US federal preemption litigation for deadline changes. Begin compliance preparation now regardless of potential deadline extensions — the asymmetry is clear: prepare early and gain extra time if delayed; wait and risk fines up to 7% of global turnover.
-
 {{< faq-schema >}}
 [
   {"q": "When does the EU AI Act become enforceable?", "a": "Prohibited practices have been enforceable since February 2, 2025. General-purpose AI obligations since August 2, 2025. High-risk system requirements take effect August 2, 2026. Full application for AI in regulated products extends to August 2027."},

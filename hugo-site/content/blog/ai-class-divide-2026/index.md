@@ -149,26 +149,6 @@ The data from every source in this report converges on the same pattern: the ret
 
 ## Frequently Asked Questions
 
-### What percentage of workers actually use AI?
-
-88% of technology workers use AI at least occasionally, 77% in finance, 45% in healthcare, 58% in education, and just 35% in retail. Across all sectors, 46% of eligible workers do not use AI at all, per the HP 2026 survey.
-
-### How much does AI cost for different income levels?
-
-Free tier for basic use. $20/month for ChatGPT Plus or Claude Pro. $95,000 to $850,000 for enterprise AI agent deployments. $725 billion for Big Tech infrastructure investment. The gap between consumer and enterprise tiers is roughly 19,000x.
-
-### Who captures the most value from AI?
-
-The owners of AI infrastructure and equity — Big Tech companies, venture investors, and founders — capture the exponential returns. Enterprises capture operational savings. Individual workers capture modest productivity gains.
-
-### Is AI reducing inequality?
-
-No. The data shows AI is widening inequality. AI-enabled workers earn 25-47% more than non-AI peers. Enterprise ROI averages 171%. AI engineer salaries ($229K median) are 4-6x data annotator salaries ($52K median). The gap is growing faster than comparable technology adoption cycles.
-
-### What can the average person do to benefit from AI?
-
-The most effective step is to move from Tier 1 (free chatbot use) to Tier 2 (paid tools integrated into work). AI-enabled freelancers earn 25-47% more. 56% of employees say they would switch employers for better AI training. The subscription cost ($20-80/month) is the highest-ROI investment available to the average worker in 2026.
-
 {{< faq-schema >}}
 [
   {"q": "What percentage of workers actually use AI?", "a": "88% of technology workers use AI at least occasionally, 77% in finance, 45% in healthcare, 58% in education, and just 35% in retail. Across all sectors, 46% of eligible workers do not use AI at all, per the HP 2026 survey."},

@@ -175,26 +175,6 @@ The bottom line for mid-2026: AI agents are not a future trend. They are a prese
 
 ## Frequently Asked Questions
 
-### What is the difference between an AI agent and a chatbot?
-
-A chatbot responds to individual prompts with text or actions. An AI agent reasons through a multi-step problem, makes decisions, executes sub-tasks autonomously, and can use external tools (APIs, databases, file systems) to achieve a goal without requiring step-by-step human guidance.
-
-### How much does an AI agent deployment cost?
-
-Enterprise agent deployments average $95K to $850K depending on industry and complexity, per KXN Technologies survey data. Government and insurance deals are largest ($420K-$850K); education and retail are smallest ($70K-$95K). The median payback period is 8.3 months.
-
-### Which industry has the highest AI agent adoption?
-
-Financial services leads at 74% production deployment, followed by healthcare at 61% and technology at 58%. Retail is the fastest-growing vertical at 68% year-over-year growth, driven by accessible customer service automation.
-
-### What is the biggest risk with AI agents?
-
-Legacy system integration is the top barrier (61% of enterprises). Data quality and governance is second (54%). In regulated industries, explainability requirements (43%) create additional friction. 78% of enterprises now require human-in-the-loop validation for significant decisions.
-
-### When will AI agents be fully autonomous?
-
-19% of organizations already run agents autonomously at scale (Box-commissioned survey, 2026). The trajectory suggests most enterprises will reach autonomous operation for specific bounded workflows within 12-24 months, but fully autonomous cross-functional agents remain 3-5 years out for most organizations.
-
 {{< faq-schema >}}
 [
   {"q": "What is the difference between an AI agent and a chatbot?", "a": "A chatbot responds to individual prompts with text or actions. An AI agent reasons through a multi-step problem, makes decisions, executes sub-tasks autonomously, and can use external tools (APIs, databases, file systems) to achieve a goal without requiring step-by-step human guidance."},
