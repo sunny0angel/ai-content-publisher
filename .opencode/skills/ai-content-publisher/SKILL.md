@@ -475,6 +475,29 @@ Key points:
 python scripts/hugo_publish.py --commit --push
 ```
 
+## Post-Deployment: Search Console 站点地图提交
+
+### 提交的 URL
+
+部署到 Cloudflare Pages 后，在 Google Search Console 中提交：
+
+```
+https://aifwd.net/sitemap.xml
+```
+
+Hugo 会自动从该索引文件发现各语言的子站点地图：
+- `/en/sitemap.xml` — 英文页面
+- `/ja/sitemap.xml` — 日文页面
+- `/zh/sitemap.xml` — 中文页面
+
+### ⚠️ 不要提交的 URL
+
+| URL | 原因 |
+|-----|------|
+| `/index.xml` | RSS 订阅源，不是标准站点地图 |
+| `/zh/index.xml` | RSS 订阅源，仅包含最近 20 篇文章 |
+| `/ja/index.xml` | RSS 订阅源，仅包含最近 20 篇文章 |
+
 ### social_poster.py (X / LinkedIn auto-post)
 ```
 python scripts/social_poster.py both "Your promotional text here"
