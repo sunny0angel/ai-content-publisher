@@ -7,7 +7,7 @@ tags: [GPT-5.6, DeepSeek V4, API pricing, AI cost comparison, OpenAI vs DeepSeek
 categories: ["AI Industry Analysis"]
 images:
   featured_image: "/images/gpt-5.6-vs-deepseek-v4-pricing-2026.jpg"
-draft: true
+draft: false
 authors: ["AI Forward"]
 slug: "gpt-5.6-vs-deepseek-v4-pricing-2026"
 ---
