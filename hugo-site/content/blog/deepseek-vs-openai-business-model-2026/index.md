@@ -7,7 +7,7 @@ tags: [DeepSeek, OpenAI, AI business model, AI revenue, OpenAI revenue, DeepSeek
 categories: ["AI Industry Analysis"]
 images:
   featured_image: "/images/deepseek-vs-openai-business-model-2026.jpg"
-draft: true
+draft: false
 authors: ["AI Forward"]
 slug: "deepseek-vs-openai-business-model-2026"
 ---
