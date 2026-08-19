@@ -7,7 +7,7 @@ tags: [Nvidia H20, 輸出規制, 華為昇騰, SMIC, 中国AIチップ, 米中AI
 categories: ["AI産業分析"]
 images:
   featured_image: "/images/nvidia-h20-ban-backfired-china-ai-chips.jpg"
-draft: true
+draft: false
 authors: ["AI Forward"]
 slug: "nvidia-h20-ban-backfired-china-ai-chips"
 ---

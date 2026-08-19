@@ -7,7 +7,7 @@ tags: [Nvidia H20, export controls, Huawei Ascend, SMIC, China AI chips, US Chin
 categories: ["AI Industry Analysis"]
 images:
   featured_image: "/images/nvidia-h20-ban-backfired-china-ai-chips.jpg"
-draft: true
+draft: false
 authors: ["AI Forward"]
 slug: "nvidia-h20-ban-backfired-china-ai-chips"
 ---

@@ -7,7 +7,7 @@ tags: [英伟达 H20, 出口管制, 华为昇腾, 中芯国际, 中国AI芯片, 
 categories: ["AI行业分析"]
 images:
   featured_image: "/images/nvidia-h20-ban-backfired-china-ai-chips.jpg"
-draft: true
+draft: false
 authors: ["AI Forward"]
 slug: "nvidia-h20-ban-backfired-china-ai-chips"
 ---
