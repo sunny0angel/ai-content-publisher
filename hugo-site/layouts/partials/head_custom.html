@@ -1,2 +1,12 @@
-{{/* Custom head hook — add analytics, verification tags, or custom meta here */}}
+{{/* Custom head hook — analytics, verification tags, or custom meta here */}}
 {{/* Cloudflare Pages Analytics is enabled by default via the Pages dashboard. */}}
+
+{{/* Google tag — GTM container: GTM-MPJMGKGK */}}
+{{/* 说明：此 partial 由 baseof.html 与 home.html 各引用一次，页面内只会注入一份。 */}}
+<script async src="https://www.googletagmanager.com/gtag/js?id=GTM-MPJMGKGK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'GTM-MPJMGKGK');
+</script>
