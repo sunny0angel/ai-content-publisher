@@ -90,13 +90,14 @@
 
     {{ partial "toc.html" . }}
 
-    <div class="row flex-column-reverse flex-md-row rad-fade-down">
-      <div class="col-12 post-content">{{ .Content | safeHTML }}</div>
+    <div class="row rad-fade-down">
+      <div class="col-12 col-lg-8 post-content">{{ .Content | safeHTML }}</div>
+      <div class="col-12 col-lg-4">
+        {{ partial "related-posts-sticky.html" . }}
+      </div>
     </div>
 
     {{ partial "social-sharing.html" . }}
-
-    {{ partial "related-posts.html" . }}
 
     <aside class="content-browser light-border-top">
       {{ i18n "continue_reading" }}

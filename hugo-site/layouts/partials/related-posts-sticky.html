@@ -1,0 +1,17 @@
+{{/* 粘性相关文章侧栏 — 随滚动保持可见，替代页脚的 related-posts */}}
+{{ $related := .Site.RegularPages.Related . | first 3 }}
+{{ with $related }}
+<div class="related-rail">
+  <div class="related-rail-inner">
+    <h3 id="related-rail-title">{{ i18n "related_posts" | default "Related Posts" }}</h3>
+    <ul class="related-rail-list">
+      {{ range . }}
+      <li>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <span class="post-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+</div>
+{{ end }}
