@@ -1,5 +1,4 @@
-{{/* 侧栏：相关文章 + 随机推荐（带缩略图，JS 平滑跟随滚动） */}}
-{{ $fallback := "/images/logo.png" }}
+{{/* 侧栏：相关文章 + 随机推荐（纯文字，JS 固定定位跟随滚动） */}}
 <div class="related-rail">
   <div class="related-rail-inner">
     {{ $related := .Site.RegularPages.Related . | first 3 }}
@@ -9,14 +8,6 @@
       {{ range . }}
       <li>
         <a href="{{ .RelPermalink }}" class="rail-item">
-          {{ $img := $fallback }}
-          {{ with .Params.images }}
-            {{ with .featured_image }}
-              {{ $img = . }}
-            {{ end }}
-          {{ end }}
-          {{ $thumb := replace $img "/images/" "/images/thumbs/" }}
-          <span class="rail-thumb"><img src="{{ $thumb | relURL }}" alt="" width="72" height="54" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ $img | relURL }}';"></span>
           <span class="rail-text">
             <span class="rail-title">{{ .Title }}</span>
             <span class="post-date">{{ .Date.Format "Jan 2, 2006" }}</span>
@@ -35,14 +26,6 @@
       {{ range . }}
       <li>
         <a href="{{ .RelPermalink }}" class="rail-item">
-          {{ $img := $fallback }}
-          {{ with .Params.images }}
-            {{ with .featured_image }}
-              {{ $img = . }}
-            {{ end }}
-          {{ end }}
-          {{ $thumb := replace $img "/images/" "/images/thumbs/" }}
-          <span class="rail-thumb"><img src="{{ $thumb | relURL }}" alt="" width="72" height="54" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ $img | relURL }}';"></span>
           <span class="rail-text">
             <span class="rail-title">{{ .Title }}</span>
             <span class="post-date">{{ .Date.Format "Jan 2, 2006" }}</span>
