@@ -15,7 +15,8 @@
               {{ $img = . }}
             {{ end }}
           {{ end }}
-          <span class="rail-thumb"><img src="{{ $img | relURL }}" alt="" width="64" height="48" loading="lazy" decoding="async"></span>
+          {{ $thumb := replace $img "/images/" "/images/thumbs/" }}
+          <span class="rail-thumb"><img src="{{ $thumb | relURL }}" alt="" width="72" height="54" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ $img | relURL }}';"></span>
           <span class="rail-text">
             <span class="rail-title">{{ .Title }}</span>
             <span class="post-date">{{ .Date.Format "Jan 2, 2006" }}</span>
@@ -40,7 +41,8 @@
               {{ $img = . }}
             {{ end }}
           {{ end }}
-          <span class="rail-thumb"><img src="{{ $img | relURL }}" alt="" width="64" height="48" loading="lazy" decoding="async"></span>
+          {{ $thumb := replace $img "/images/" "/images/thumbs/" }}
+          <span class="rail-thumb"><img src="{{ $thumb | relURL }}" alt="" width="72" height="54" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ $img | relURL }}';"></span>
           <span class="rail-text">
             <span class="rail-title">{{ .Title }}</span>
             <span class="post-date">{{ .Date.Format "Jan 2, 2006" }}</span>

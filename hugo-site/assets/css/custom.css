@@ -222,12 +222,9 @@
   font-weight: 600;
 }
 
-/* ===== 相关文章侧栏（博客文章页，JS 平滑跟随滚动） ===== */
+/* ===== 相关文章侧栏（博客文章页，JS 固定定位跟随滚动） ===== */
 .related-rail {
-  position: absolute; /* 桌面端定位于列顶部，translateY 由 related-rail.js 平滑控制 */
-  top: 0;
-  left: 0;
-  right: 0;
+  position: relative; /* 文档流内默认位置；滚动时由 related-rail.js 切换为 fixed */
   z-index: 5;
 }
 .related-rail-inner {
@@ -268,9 +265,9 @@
   text-decoration: none;
 }
 .rail-thumb {
-  flex: 0 0 64px;
-  width: 64px;
-  height: 48px;
+  flex: 0 0 72px;
+  width: 72px;
+  height: 54px;
   border-radius: 6px;
   overflow: hidden;
   background: var(--bs-tertiary-bg, #f1f3f5);
