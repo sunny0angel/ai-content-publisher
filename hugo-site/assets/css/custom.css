@@ -222,9 +222,12 @@
   font-weight: 600;
 }
 
-/* ===== 相关文章侧栏（博客文章页，JS 随滚动吸附） ===== */
+/* ===== 相关文章侧栏（博客文章页，JS 平滑跟随滚动） ===== */
 .related-rail {
-  position: relative; /* 定位由 related-rail.js 接管（body overflow:hidden 使 CSS sticky 失效） */
+  position: absolute; /* 桌面端定位于列顶部，translateY 由 related-rail.js 平滑控制 */
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 5;
 }
 .related-rail-inner {
@@ -251,23 +254,46 @@
   padding: 0;
 }
 .related-rail-list li {
-  padding: 0.6rem 0;
+  padding: 0.55rem 0;
   border-top: 1px dashed var(--bs-border-color, #dee2e6);
 }
 .related-rail-list li:first-child {
   border-top: none;
   padding-top: 0;
 }
-.related-rail-list a {
-  display: block;
-  font-size: 0.9rem;
-  font-weight: 600;
-  line-height: 1.4;
+.related-rail-list a.rail-item {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
   text-decoration: none;
+}
+.rail-thumb {
+  flex: 0 0 64px;
+  width: 64px;
+  height: 48px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bs-tertiary-bg, #f1f3f5);
+}
+.rail-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.rail-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.rail-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.35;
 }
 .related-rail-list .post-date {
   display: block;
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   margin-top: 0.15rem;
   color: var(--bs-secondary-color, #6c757d);
 }

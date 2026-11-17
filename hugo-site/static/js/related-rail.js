@@ -1,9 +1,10 @@
-/* 相关文章侧栏：随滚动吸附（因主题 body { overflow: hidden } 使 CSS sticky 失效，用 JS 模拟） */
+/* 相关文章侧栏：translateY 平滑跟随滚动。
+   主题 body { overflow: hidden } 使 CSS sticky 失效，且滚动可能发生在内层容器，
+   故用 JS + 捕获阶段 scroll 监听 + transform（无重排、无跳动、回顶完全复原）。 */
 (function () {
   'use strict';
 
   function init() {
-    // 仅桌面端（lg 以上，侧栏与正文并排）
     if (!window.matchMedia('(min-width: 992px)').matches) return;
 
     var rail = document.querySelector('.related-rail');
@@ -13,42 +14,36 @@
     col.style.position = 'relative';
 
     var OFFSET = 92; // fixed-top header 高度余量
-
-    function reset() {
-      rail.style.position = '';
-      rail.style.top = '';
-      rail.style.bottom = '';
-      rail.style.width = '';
-    }
+    var ticking = false;
 
     function update() {
+      ticking = false;
       if (!window.matchMedia('(min-width: 992px)').matches) {
-        reset();
+        rail.style.transform = '';
         return;
       }
-      var cr = col.getBoundingClientRect();
-      var rh = rail.offsetHeight;
+      var colRect = col.getBoundingClientRect();
+      var railH = rail.offsetHeight;
+      var colH = col.offsetHeight;
+      var maxDelta = colH - railH;
+      var delta = -colRect.top + OFFSET;
 
-      if (cr.top <= OFFSET && cr.bottom > OFFSET + rh) {
-        // 吸附：跟随滚动，始终可见
-        rail.style.position = 'fixed';
-        rail.style.top = OFFSET + 'px';
-        rail.style.bottom = 'auto';
-        rail.style.width = cr.width + 'px';
-      } else if (cr.bottom <= OFFSET + rh && cr.top <= OFFSET) {
-        // 滚到文章末尾：停靠在侧栏底部，随内容自然滚走
-        rail.style.position = 'absolute';
-        rail.style.top = 'auto';
-        rail.style.bottom = '0';
-        rail.style.width = '100%';
-      } else {
-        // 侧栏顶部还在视口下方：保持原位
-        reset();
+      if (delta < 0) delta = 0;
+      if (maxDelta > 0 && delta > maxDelta) delta = maxDelta;
+
+      rail.style.transform = 'translateY(' + Math.round(delta) + 'px)';
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
       }
     }
 
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
+    // capture=true 捕获内层滚动容器的 scroll 事件（主题可能不在 window 上滚动）
+    document.addEventListener('scroll', onScroll, true);
+    window.addEventListener('resize', onScroll);
     update();
   }
 

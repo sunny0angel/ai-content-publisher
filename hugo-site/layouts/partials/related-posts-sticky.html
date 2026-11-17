@@ -1,4 +1,5 @@
-{{/* 侧栏：相关文章 + 随机推荐（JS 随滚动吸附，body overflow:hidden 使 CSS sticky 失效，故用 JS） */}}
+{{/* 侧栏：相关文章 + 随机推荐（带缩略图，JS 平滑跟随滚动） */}}
+{{ $fallback := "/images/logo.png" }}
 <div class="related-rail">
   <div class="related-rail-inner">
     {{ $related := .Site.RegularPages.Related . | first 3 }}
@@ -7,8 +8,19 @@
     <ul class="related-rail-list">
       {{ range . }}
       <li>
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        <span class="post-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+        <a href="{{ .RelPermalink }}" class="rail-item">
+          {{ $img := $fallback }}
+          {{ with .Params.images }}
+            {{ with .featured_image }}
+              {{ $img = . }}
+            {{ end }}
+          {{ end }}
+          <span class="rail-thumb"><img src="{{ $img | relURL }}" alt="" width="64" height="48" loading="lazy" decoding="async"></span>
+          <span class="rail-text">
+            <span class="rail-title">{{ .Title }}</span>
+            <span class="post-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+          </span>
+        </a>
       </li>
       {{ end }}
     </ul>
@@ -21,8 +33,19 @@
     <ul class="related-rail-list">
       {{ range . }}
       <li>
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        <span class="post-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+        <a href="{{ .RelPermalink }}" class="rail-item">
+          {{ $img := $fallback }}
+          {{ with .Params.images }}
+            {{ with .featured_image }}
+              {{ $img = . }}
+            {{ end }}
+          {{ end }}
+          <span class="rail-thumb"><img src="{{ $img | relURL }}" alt="" width="64" height="48" loading="lazy" decoding="async"></span>
+          <span class="rail-text">
+            <span class="rail-title">{{ .Title }}</span>
+            <span class="post-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+          </span>
+        </a>
       </li>
       {{ end }}
     </ul>
