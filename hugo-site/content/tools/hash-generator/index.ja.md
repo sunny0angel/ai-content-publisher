@@ -40,3 +40,6 @@ slug: "hash-generator"
 - **API署名**: HMAC-SHA256はリクエスト署名とWebhookの標準
 
 ダイジェストをJSONペイロード内で運ぶ必要があるときは[Base64エンコーダー](/ja/tools/base64-encoder/)、トークンの署名アルゴリズムを調べるときは[JWTデコーダー](/ja/tools/jwt-decoder/)と組み合わせてどうぞ。
+
+
+ハッシュの全体ガイド——SHA-256を使うべきでない場面を含む——は[SHA-256徹底解説](/ja/blog/sha-256-explained/)をご覧ください。

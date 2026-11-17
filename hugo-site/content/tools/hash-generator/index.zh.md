@@ -40,3 +40,6 @@ slug: "hash-generator"
 - **API 签名**：HMAC-SHA256 是请求签名与 Webhook 的标准
 
 摘要需要在 JSON 请求体内传输时配合 [Base64 编码器](/zh/tools/base64-encoder/)，要查看令牌签名算法时配合 [JWT 解码器](/zh/tools/jwt-decoder/)。
+
+
+想了解哈希的完整指南——包括不该用 SHA-256 的场合——请阅读 [SHA-256 详解](/zh/blog/sha-256-explained/)。

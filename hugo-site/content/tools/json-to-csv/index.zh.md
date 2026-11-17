@@ -33,3 +33,6 @@ slug: "json-to-csv"
 - 每个不同键对应一列，顺序按首次出现
 
 先用 [JSON 格式化器](/zh/tools/json-formatter/)校验输入，CSV 需要塞进其他请求体时配合 [Base64 编码器](/zh/tools/base64-encoder/)。
+
+
+想了解完整的转换指南，请阅读 [JSON 转 CSV 实用指南](/zh/blog/json-to-csv-guide/)。

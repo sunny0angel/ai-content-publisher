@@ -32,3 +32,6 @@ A JSON Web Token is three Base64url-encoded parts joined by dots: `header.payloa
 ## Typical use
 
 Debugging a 401 loop: decode the token, check `exp` and `aud`, and confirm which key/issuer your backend expects. Pairs naturally with the [Base64 encoder](/tools/base64-encoder/) (JWTs are Base64url under the hood) and the [SHA hash generator](/tools/hash-generator/) (HS256 = HMAC-SHA-256).
+
+
+For the full guide to JWT structure and security, read [JWT Explained](/blog/jwt-explained/).

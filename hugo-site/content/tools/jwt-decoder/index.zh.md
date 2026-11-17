@@ -32,3 +32,6 @@ JSON Web Token 由三个以点分隔的 Base64url 编码部分组成：`header.p
 ## 典型用途
 
 调试 401 死循环：解码 token，检查 `exp` 和 `aud`，确认后端期待的密钥和签发方。与 [Base64 编码器](/zh/tools/base64-encoder/)（JWT 底层就是 Base64url）和 [SHA 哈希生成器](/zh/tools/hash-generator/)（HS256 即 HMAC-SHA-256）天然搭配。
+
+
+想了解 JWT 结构与安全的完整指南，请阅读 [JWT 详解](/zh/blog/jwt-explained/)。

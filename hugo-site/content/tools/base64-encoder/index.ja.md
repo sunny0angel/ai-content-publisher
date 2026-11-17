@@ -30,3 +30,6 @@ Base64はバイナリデータを64種類の表示可能なASCII文字（`A–Z`
 - **Basic認証**: `Authorization: Basic base64(user:pass)` ——ここでのエンコードは輸送手段であってセキュリティではありません。誰でもデコードできます
 
 データワークフローの残り半分——構造化レコードのテーブル変換——は[JSON to CSV変換](/ja/tools/json-to-csv/)をご覧ください。
+
+
+エンコード自体の深掘りは[Base64エンコード徹底解説](/ja/blog/base64-encoding-explained/)をご覧ください。

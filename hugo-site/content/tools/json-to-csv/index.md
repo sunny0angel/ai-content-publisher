@@ -33,3 +33,6 @@ The tool takes an array of flat objects and produces a CSV file with one header 
 - One output column per distinct key; order follows first appearance
 
 Pair with the [JSON formatter](/tools/json-formatter/) to validate your input first, and the [Base64 encoder](/tools/base64-encoder/) if the CSV must travel inside another payload.
+
+
+For the full conversion guide, read [How to Convert JSON to CSV](/blog/json-to-csv-guide/).

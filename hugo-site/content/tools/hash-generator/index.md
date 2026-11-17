@@ -40,3 +40,6 @@ For passwords specifically, none of these are suitable: use a slow, salted funct
 - **API signing**: HMAC-SHA256 is the standard for request signatures and webhooks
 
 Pair it with the [Base64 encoder](/tools/base64-encoder/) when a digest must travel inside a JSON payload, or the [JWT decoder](/tools/jwt-decoder/) to inspect the signature algorithm of a token.
+
+
+For the full guide to hashing — including when not to use SHA-256 — read [SHA-256 Explained](/blog/sha-256-explained/).

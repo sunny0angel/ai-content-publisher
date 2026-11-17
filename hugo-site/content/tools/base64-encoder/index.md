@@ -30,3 +30,6 @@ This tool encodes text to UTF-8 bytes first, then applies Base64 — the correct
 - **Basic auth**: `Authorization: Basic base64(user:pass)` — encoding here is transport, not security; anyone can decode it.
 
 For the other half of the data workflow — converting structured records into tables — see the [JSON to CSV converter](/tools/json-to-csv/).
+
+
+For a deeper dive into the encoding itself, read [Base64 Encoding Explained](/blog/base64-encoding-explained/).

@@ -32,3 +32,6 @@ JSON Web Tokenは、ドットで区切られた3つのBase64urlエンコード�
 ## 典型的な用途
 
 401ループのデバッグ：トークンをデコードし、`exp` と `aud` を確認し、バックエンドが期待する鍵・発行者を特定する。[Base64エンコーダー](/ja/tools/base64-encoder/)（JWTは内部的にBase64url）と[SHAハッシュジェネレーター](/ja/tools/hash-generator/)（HS256＝HMAC-SHA-256）と自然に組み合わせられます。
+
+
+JWTの構造とセキュリティの全体ガイドは[JWT徹底解説](/ja/blog/jwt-explained/)をご覧ください。

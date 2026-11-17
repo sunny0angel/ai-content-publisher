@@ -30,3 +30,6 @@ Base64 用 64 个可打印 ASCII 字符（`A–Z`、`a–z`、`0–9`、`+`、`/
 - **Basic 认证**：`Authorization: Basic base64(user:pass)`——这里的编码只是传输手段，不是安全措施，任何人都能解码
 
 数据工作流的另一半——结构化记录转表格——见 [JSON 转 CSV](/zh/tools/json-to-csv/)。
+
+
+想深入了解编码本身，请阅读 [Base64 编码详解](/zh/blog/base64-encoding-explained/)。
