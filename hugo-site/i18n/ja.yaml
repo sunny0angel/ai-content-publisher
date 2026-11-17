@@ -162,3 +162,5 @@
   translation: "フッターナビゲーション"
 - id: "words"
   translation: "文字"
+- id: "random_posts"
+  translation: "おすすめの記事"

@@ -160,3 +160,5 @@
   translation: "底部导航"
 - id: "words"
   translation: "字"
+- id: "random_posts"
+  translation: "随机推荐"

@@ -1,8 +1,8 @@
-{{/* 粘性相关文章侧栏 — 随滚动保持可见，替代页脚的 related-posts */}}
-{{ $related := .Site.RegularPages.Related . | first 3 }}
-{{ with $related }}
+{{/* 侧栏：相关文章 + 随机推荐（JS 随滚动吸附，body overflow:hidden 使 CSS sticky 失效，故用 JS） */}}
 <div class="related-rail">
   <div class="related-rail-inner">
+    {{ $related := .Site.RegularPages.Related . | first 3 }}
+    {{ with $related }}
     <h3 id="related-rail-title">{{ i18n "related_posts" | default "Related Posts" }}</h3>
     <ul class="related-rail-list">
       {{ range . }}
@@ -12,6 +12,21 @@
       </li>
       {{ end }}
     </ul>
+    {{ end }}
+
+    {{ $pool := where .Site.RegularPages "Type" "blog" | complement (slice .) }}
+    {{ $rand := first 3 (shuffle $pool) }}
+    {{ with $rand }}
+    <h3 class="random-heading">{{ i18n "random_posts" | default "You Might Also Like" }}</h3>
+    <ul class="related-rail-list">
+      {{ range . }}
+      <li>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <span class="post-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+      </li>
+      {{ end }}
+    </ul>
+    {{ end }}
   </div>
 </div>
-{{ end }}
+<script defer src='{{ "js/related-rail.js" | absURL }}'></script>
