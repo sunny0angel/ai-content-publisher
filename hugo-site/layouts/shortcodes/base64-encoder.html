@@ -1,0 +1,51 @@
+<div class="afw-tool afw-b64" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-b64{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-b64 textarea{width:100%;box-sizing:border-box;min-height:120px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.55;border:1px solid #cbd5e1;border-radius:8px;padding:.7rem .85rem;background:#fff;color:#1e293b;resize:vertical}
+.afw-b64 label{display:block;font-size:.85rem;font-weight:600;margin:.5rem 0 .35rem;color:#334155}
+.afw-b64 .btns{display:flex;flex-wrap:wrap;gap:.5rem;margin:.7rem 0}
+.afw-b64 .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer}
+.afw-b64 .btn:hover{background:#1d4ed8}
+.afw-b64 .btn.sec{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1}
+.afw-b64 .btn.sec:hover{background:#e2e8f0}
+.afw-b64 .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem;background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+</style>
+
+<label class="lbl-in"></label>
+<textarea id="afwB64In" placeholder="Hello, AI Forward!"></textarea>
+<div class="btns">
+  <button class="btn" id="afwB64Enc" type="button"></button>
+  <button class="btn sec" id="afwB64Dec" type="button"></button>
+  <button class="btn sec" id="afwB64Swap" type="button"></button>
+  <button class="btn sec" id="afwB64Copy" type="button"></button>
+</div>
+<label class="lbl-out"></label>
+<textarea id="afwB64Out" readonly></textarea>
+<div class="msg" id="afwB64Msg" hidden></div>
+
+<script>
+(function(){
+var root=document.querySelector('.afw-b64');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{input:'Input (plain text or Base64)',output:'Output',encode:'Encode → Base64',decode:'Decode → Text',swap:'Swap',copy:'Copy',copied:'Copied',invalid:'Invalid Base64 input'},
+ ja:{input:'入力（プレーンテキストまたはBase64）',output:'出力',encode:'Base64にエンコード',decode:'テキストにデコード',swap:'入れ替え',copy:'コピー',copied:'コピーしました',invalid:'Base64として不正な入力です'},
+ zh:{input:'输入（纯文本或 Base64）',output:'输出',encode:'编码为 Base64',decode:'解码为文本',swap:'交换',copy:'复制',copied:'已复制',invalid:'输入的 Base64 无效'}
+}[L]||I.en;
+document.querySelector('.afw-b64 .lbl-in').textContent=I.input;
+document.querySelector('.afw-b64 .lbl-out').textContent=I.output;
+document.getElementById('afwB64Enc').textContent=I.encode;
+document.getElementById('afwB64Dec').textContent=I.decode;
+document.getElementById('afwB64Swap').textContent=I.swap;
+document.getElementById('afwB64Copy').textContent=I.copy;
+var tin=document.getElementById('afwB64In'),tout=document.getElementById('afwB64Out'),msg=document.getElementById('afwB64Msg');
+function show(t){msg.hidden=false;msg.textContent=t;}
+function encode(s){var b=new TextEncoder().encode(s);var bin='';for(var i=0;i<b.length;i++)bin+=String.fromCharCode(b[i]);return btoa(bin);}
+function decode(s){var bin=atob(s);var b=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)b[i]=bin.charCodeAt(i);return new TextDecoder().decode(b);}
+document.getElementById('afwB64Enc').addEventListener('click',function(){tout.value=encode(tin.value);show(I.copied);});
+document.getElementById('afwB64Dec').addEventListener('click',function(){try{tout.value=decode(tin.value.trim());show(I.copied);}catch(e){show(I.invalid);}});
+document.getElementById('afwB64Swap').addEventListener('click',function(){var t=tin.value;tin.value=tout.value;tout.value=t;});
+document.getElementById('afwB64Copy').addEventListener('click',function(){if(!tout.value)return;navigator.clipboard&&navigator.clipboard.writeText(tout.value).then(function(){show(I.copied);},function(){});});
+})();
+</script>
+</div>

@@ -1,0 +1,52 @@
+<div class="afw-tool afw-jwt" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-jwt{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-jwt textarea{width:100%;box-sizing:border-box;min-height:80px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.55;border:1px solid #cbd5e1;border-radius:8px;padding:.7rem .85rem;background:#fff;color:#1e293b;resize:vertical}
+.afw-jwt .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem 0}
+.afw-jwt .btn:hover{background:#1d4ed8}
+.afw-jwt .part{margin:.7rem 0}
+.afw-jwt .part h4{margin:0 0 .3rem;font-size:.9rem;color:#334155}
+.afw-jwt pre{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:.7rem .9rem;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.55;white-space:pre-wrap;word-break:break-all;color:#0f172a;margin:0}
+.afw-jwt .sig pre{color:#64748b;font-size:12px}
+.afw-jwt .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem;background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+</style>
+
+<textarea id="afwJwtIn" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.signature"></textarea>
+<div>
+  <button class="btn" id="afwJwtDec" type="button"></button>
+</div>
+<div class="msg" id="afwJwtMsg" hidden></div>
+<div class="part"><h4 class="lbl-hdr"></h4><pre id="afwJwtHeader"></pre></div>
+<div class="part"><h4 class="lbl-pay"></h4><pre id="afwJwtPayload"></pre></div>
+<div class="part sig"><h4 class="lbl-sig"></h4><pre id="afwJwtSig"></pre></div>
+
+<script>
+(function(){
+var root=document.querySelector('.afw-jwt');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{decode:'Decode JWT',hdr:'Header',pay:'Payload',sig:'Signature (not verified — no key supplied)',invalid:'Not a valid JWT: expected 3 dot-separated parts',empty:'Paste a JWT first',times:'iat / exp (local time)'},
+ ja:{decode:'JWTをデコード',hdr:'ヘッダー',pay:'ペイロード',sig:'署名（鍵がないため検証していません）',invalid:'有効なJWTではありません（ドット区切りの3パートが必要）',empty:'先にJWTを貼り付けてください',times:'iat / exp（ローカル時刻）'},
+ zh:{decode:'解码 JWT',hdr:'Header',pay:'Payload',sig:'签名（未提供密钥，未做验证）',invalid:'不是有效的 JWT：需要 3 个以点分隔的部分',empty:'请先粘贴 JWT',times:'iat / exp（本地时间）'}
+}[L]||I.en;
+document.getElementById('afwJwtDec').textContent=I.decode;
+document.querySelector('.afw-jwt .lbl-hdr').textContent=I.hdr;
+document.querySelector('.afw-jwt .lbl-pay').textContent=I.pay;
+document.querySelector('.afw-jwt .lbl-sig').textContent=I.sig;
+var tin=document.getElementById('afwJwtIn'),msg=document.getElementById('afwJwtMsg');
+function b64u(s){s=s.replace(/-/g,'+').replace(/_/g,'/');var pad=s.length%4;if(pad)s+='='.repeat(4-pad);var bin=atob(s);var b=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)b[i]=bin.charCodeAt(i);return new TextDecoder().decode(b);}
+function fmt(part){var raw=b64u(part);var j=JSON.parse(raw);var s=JSON.stringify(j,null,2);['iat','exp','nbf'].forEach(function(k){if(typeof j[k]==='number'){var d=new Date(j[k]*1000);s+='\n'+(I.times?k+' = '+d.toISOString():'');}});return s;}
+document.getElementById('afwJwtDec').addEventListener('click',function(){
+  var t=tin.value.trim();msg.hidden=true;
+  if(!t){msg.hidden=false;msg.textContent=I.empty;return;}
+  var parts=t.split('.');
+  if(parts.length!==3){msg.hidden=false;msg.textContent=I.invalid;return;}
+  try{
+    document.getElementById('afwJwtHeader').textContent=fmt(parts[0]);
+    document.getElementById('afwJwtPayload').textContent=fmt(parts[1]);
+    document.getElementById('afwJwtSig').textContent=parts[2].slice(0,60)+(parts[2].length>60?'…':'');
+  }catch(e){msg.hidden=false;msg.textContent=I.invalid+': '+(e.message||e);}
+});
+})();
+</script>
+</div>

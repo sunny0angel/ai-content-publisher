@@ -1,0 +1,63 @@
+<div class="afw-tool afw-j2c" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-j2c{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-j2c textarea{width:100%;box-sizing:border-box;min-height:160px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.55;border:1px solid #cbd5e1;border-radius:8px;padding:.7rem .85rem;background:#fff;color:#1e293b;resize:vertical}
+.afw-j2c label{display:block;font-size:.85rem;font-weight:600;margin:.5rem 0 .35rem;color:#334155}
+.afw-j2c .btns{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0}
+.afw-j2c .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer}
+.afw-j2c .btn:hover{background:#1d4ed8}
+.afw-j2c .btn.sec{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1}
+.afw-j2c .btn.sec:hover{background:#e2e8f0}
+.afw-j2c .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem}
+.afw-j2c .msg.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.afw-j2c .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+</style>
+
+<label class="lbl-in"></label>
+<textarea id="afwJ2cIn" placeholder='[{"name":"Ada","plan":"pro","active":true},{"name":"Alan","plan":"basic","active":false}]'></textarea>
+<div class="btns">
+  <button class="btn" id="afwJ2cConv" type="button"></button>
+  <button class="btn sec" id="afwJ2cCopy" type="button"></button>
+  <button class="btn sec" id="afwJ2cDl" type="button"></button>
+</div>
+<label class="lbl-out"></label>
+<textarea id="afwJ2cOut" readonly></textarea>
+<div class="msg" id="afwJ2cMsg" hidden></div>
+
+<script>
+(function(){
+var root=document.querySelector('.afw-j2c');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{input:'JSON array of objects',output:'CSV',conv:'Convert to CSV',copy:'Copy',dl:'Download CSV',copied:'Copied',err:'Input must be a JSON array of objects',rows:'rows',cols:'columns'},
+ ja:{input:'オブジェクトのJSON配列',output:'CSV',conv:'CSVに変換',copy:'コピー',dl:'CSVをダウンロード',copied:'コピーしました',err:'入力はオブジェクトのJSON配列である必要があります',rows:'行',cols:'列'},
+ zh:{input:'对象数组 JSON',output:'CSV',conv:'转换为 CSV',copy:'复制',dl:'下载 CSV',copied:'已复制',err:'输入必须是对象数组 JSON',rows:'行',cols:'列'}
+}[L]||I.en;
+document.querySelector('.afw-j2c .lbl-in').textContent=I.input;
+document.querySelector('.afw-j2c .lbl-out').textContent=I.output;
+document.getElementById('afwJ2cConv').textContent=I.conv;
+document.getElementById('afwJ2cCopy').textContent=I.copy;
+document.getElementById('afwJ2cDl').textContent=I.dl;
+var tin=document.getElementById('afwJ2cIn'),tout=document.getElementById('afwJ2cOut'),msg=document.getElementById('afwJ2cMsg');
+function esc(v){if(v===null||typeof v==='undefined')return '';var s=String(v);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}
+function conv(){
+  var arr;try{arr=JSON.parse(tin.value);}catch(e){return null;}
+  if(!Array.isArray(arr)||!arr.every(function(r){return r&&typeof r==='object'&&!Array.isArray(r);}))return null;
+  var keys=[];arr.forEach(function(r){Object.keys(r).forEach(function(k){if(keys.indexOf(k)<0)keys.push(k);});});
+  var lines=[keys.join(',')];
+  arr.forEach(function(r){lines.push(keys.map(function(k){return esc(r[k]);}).join(','));});
+  return lines.join('\n');
+}
+function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
+document.getElementById('afwJ2cConv').addEventListener('click',function(){
+  var csv=conv();
+  if(csv===null){show(I.err,false);return;}
+  tout.value=csv;
+  var rows=csv.split('\n').length-1;var cols=tout.value.split('\n')[0].split(',').length;
+  show(rows+' '+I.rows+' / '+cols+' '+I.cols,true);
+});
+document.getElementById('afwJ2cCopy').addEventListener('click',function(){if(!tout.value)return;navigator.clipboard&&navigator.clipboard.writeText(tout.value).then(function(){show(I.copied,true);},function(){});});
+document.getElementById('afwJ2cDl').addEventListener('click',function(){if(!tout.value)return;var a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+tout.value],{type:'text/csv;charset=utf-8'}));a.download='data.csv';a.click();});
+})();
+</script>
+</div>

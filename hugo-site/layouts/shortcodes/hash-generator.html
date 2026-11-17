@@ -1,0 +1,56 @@
+<div class="afw-tool afw-hash" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-hash{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-hash textarea,.afw-hash input[type=text]{width:100%;box-sizing:border-box;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.55;border:1px solid #cbd5e1;border-radius:8px;padding:.7rem .85rem;background:#fff;color:#1e293b}
+.afw-hash textarea{min-height:120px;resize:vertical}
+.afw-hash label{display:block;font-size:.85rem;font-weight:600;margin:.5rem 0 .35rem;color:#334155}
+.afw-hash .row{display:flex;flex-wrap:wrap;gap:.6rem;align-items:end;margin:.6rem 0}
+.afw-hash select{font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.55rem .7rem;background:#fff;color:#1e293b}
+.afw-hash .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer}
+.afw-hash .btn:hover{background:#1d4ed8}
+.afw-hash .btn.sec{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1}
+.afw-hash .btn.sec:hover{background:#e2e8f0}
+.afw-hash .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem;background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+</style>
+
+<label class="lbl-in"></label>
+<textarea id="afwHashIn" placeholder="Hello, AI Forward!"></textarea>
+<div class="row">
+  <label style="margin:0" class="lbl-algo"></label>
+  <select id="afwHashAlgo">
+    <option value="SHA-256" selected>SHA-256</option>
+    <option value="SHA-512">SHA-512</option>
+    <option value="SHA-1">SHA-1</option>
+  </select>
+  <button class="btn" id="afwHashGen" type="button"></button>
+  <button class="btn sec" id="afwHashCopy" type="button"></button>
+</div>
+<label class="lbl-out"></label>
+<input type="text" id="afwHashOut" readonly>
+<div class="msg" id="afwHashMsg" hidden></div>
+
+<script>
+(function(){
+var root=document.querySelector('.afw-hash');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{input:'Input text',output:'Digest (hex)',algo:'Algorithm',gen:'Generate hash',copy:'Copy',copied:'Copied'},
+ ja:{input:'入力テキスト',output:'ハッシュ値（16進数）',algo:'アルゴリズム',gen:'ハッシュを生成',copy:'コピー',copied:'コピーしました'},
+ zh:{input:'输入文本',output:'哈希值（十六进制）',algo:'算法',gen:'生成哈希',copy:'复制',copied:'已复制'}
+}[L]||I.en;
+document.querySelector('.afw-hash .lbl-in').textContent=I.input;
+document.querySelector('.afw-hash .lbl-out').textContent=I.output;
+document.querySelector('.afw-hash .lbl-algo').textContent=I.algo;
+document.getElementById('afwHashGen').textContent=I.gen;
+document.getElementById('afwHashCopy').textContent=I.copy;
+var tin=document.getElementById('afwHashIn'),tout=document.getElementById('afwHashOut'),msg=document.getElementById('afwHashMsg');
+function hex(buf){return Array.from(new Uint8Array(buf),function(b){return b.toString(16).padStart(2,'0');}).join('');}
+document.getElementById('afwHashGen').addEventListener('click',function(){
+  var algo=document.getElementById('afwHashAlgo').value;
+  var data=new TextEncoder().encode(tin.value);
+  crypto.subtle.digest(algo,data).then(function(buf){tout.value=hex(buf);msg.hidden=false;msg.textContent=I.copied;});
+});
+document.getElementById('afwHashCopy').addEventListener('click',function(){if(!tout.value)return;navigator.clipboard&&navigator.clipboard.writeText(tout.value).then(function(){msg.hidden=false;msg.textContent=I.copied;},function(){});});
+})();
+</script>
+</div>
