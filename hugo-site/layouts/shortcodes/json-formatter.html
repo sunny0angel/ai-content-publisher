@@ -1,0 +1,47 @@
+<div class="afw-tool afw-json" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-json{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-json textarea{width:100%;box-sizing:border-box;min-height:240px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.55;border:1px solid #cbd5e1;border-radius:8px;padding:.7rem .85rem;background:#fff;color:#1e293b;resize:vertical}
+.afw-json .btns{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0}
+.afw-json .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer}
+.afw-json .btn:hover{background:#1d4ed8}
+.afw-json .btn.sec{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1}
+.afw-json .btn.sec:hover{background:#e2e8f0}
+.afw-json .msg{margin:.6rem 0;padding:.6rem .9rem;border-radius:8px;font-size:.9rem;line-height:1.5}
+.afw-json .msg.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.afw-json .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+</style>
+
+<textarea id="afwJsonIn" placeholder='{"name": "AI Forward", "tags": ["ai", "tools"], "active": true}'></textarea>
+<div class="btns">
+  <button class="btn" id="afwJsonFormat" type="button"></button>
+  <button class="btn sec" id="afwJsonMinify" type="button"></button>
+  <button class="btn sec" id="afwJsonValidate" type="button"></button>
+  <button class="btn sec" id="afwJsonCopy" type="button"></button>
+  <button class="btn sec" id="afwJsonClear" type="button"></button>
+</div>
+<div class="msg" id="afwJsonMsg" hidden></div>
+
+<script>
+(function(){
+var root=document.querySelector('.afw-json');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{format:'Format',minify:'Minify',validate:'Validate',copy:'Copy',clear:'Clear',ok:'Valid JSON ✓',err:'Invalid JSON',copied:'Copied to clipboard',empty:'Paste JSON first',bytes:'characters'},
+ ja:{format:'整形',minify:'圧縮',validate:'検証',copy:'コピー',clear:'クリア',ok:'有効なJSONです ✓',err:'JSONが不正です',copied:'クリップボードにコピーしました',empty:'先にJSONを貼り付けてください',bytes:'文字'},
+ zh:{format:'格式化',minify:'压缩',validate:'校验',copy:'复制',clear:'清空',ok:'JSON 有效 ✓',err:'JSON 无效',copied:'已复制到剪贴板',empty:'请先粘贴 JSON',bytes:'字符'}
+}[L]||I.en;
+var btn={format:document.getElementById('afwJsonFormat'),minify:document.getElementById('afwJsonMinify'),validate:document.getElementById('afwJsonValidate'),copy:document.getElementById('afwJsonCopy'),clear:document.getElementById('afwJsonClear')};
+btn.format.textContent=I.format;btn.minify.textContent=I.minify;btn.validate.textContent=I.validate;btn.copy.textContent=I.copy;btn.clear.textContent=I.clear;
+var ta=document.getElementById('afwJsonIn'),msg=document.getElementById('afwJsonMsg');
+function show(txt,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=txt;}
+function hide(){msg.hidden=true;}
+function parse(){var v=ta.value;if(!v.trim()){show(I.empty,false);return null;}try{return JSON.parse(v);}catch(e){show(I.err+': '+(e.message||e),false);return null;}}
+btn.format.addEventListener('click',function(){var o=parse();if(o!==null){ta.value=JSON.stringify(o,null,2);show(I.ok+' ('+ta.value.length+' '+I.bytes+')',true);}});
+btn.minify.addEventListener('click',function(){var o=parse();if(o!==null){ta.value=JSON.stringify(o);show(I.ok+' ('+ta.value.length+' '+I.bytes+')',true);}});
+btn.validate.addEventListener('click',function(){var v=ta.value;if(!v.trim()){show(I.empty,false);return;}try{JSON.parse(v);show(I.ok,true);}catch(e){show(I.err+': '+(e.message||e),false);}});
+btn.copy.addEventListener('click',function(){if(!ta.value){show(I.empty,false);return;}navigator.clipboard&&navigator.clipboard.writeText(ta.value).then(function(){show(I.copied,true);},function(){ta.select();document.execCommand('copy');show(I.copied,true);});});
+btn.clear.addEventListener('click',function(){ta.value='';hide();ta.focus();});
+})();
+</script>
+</div>

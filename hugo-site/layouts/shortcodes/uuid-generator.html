@@ -1,0 +1,46 @@
+<div class="afw-tool afw-uuid" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-uuid{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-uuid .controls{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;margin-bottom:.9rem}
+.afw-uuid label{font-size:.88rem;font-weight:600;color:#334155}
+.afw-uuid input[type=number]{width:90px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.5rem .6rem}
+.afw-uuid .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer}
+.afw-uuid .btn:hover{background:#1d4ed8}
+.afw-uuid .btn.sec{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1}
+.afw-uuid .btn.sec:hover{background:#e2e8f0}
+.afw-uuid pre{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem;min-height:110px;max-height:320px;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.8;white-space:pre-wrap;word-break:break-all;color:#0f172a;margin:0}
+.afw-uuid .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem;background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+</style>
+
+<div class="controls">
+  <label class="lbl-count"></label>
+  <input type="number" id="afwUuidCount" value="5" min="1" max="100">
+  <label><input type="checkbox" id="afwUuidUpper"> <span class="lbl-upper"></span></label>
+  <button class="btn" id="afwUuidGen" type="button"></button>
+  <button class="btn sec" id="afwUuidCopy" type="button"></button>
+</div>
+<pre id="afwUuidOut"></pre>
+<div class="msg" id="afwUuidMsg" hidden></div>
+
+<script>
+(function(){
+var root=document.querySelector('.afw-uuid');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{count:'Count',upper:'Uppercase',gen:'Generate UUIDs',copy:'Copy all',copied:'Copied to clipboard',note:'UUID v4 — randomly generated, RFC 9562.'},
+ ja:{count:'個数',upper:'大文字',gen:'UUIDを生成',copy:'すべてコピー',copied:'クリップボードにコピーしました',note:'UUID v4 — ランダム生成（RFC 9562）'},
+ zh:{count:'数量',upper:'大写',gen:'生成 UUID',copy:'复制全部',copied:'已复制到剪贴板',note:'UUID v4 — 随机生成（RFC 9562）'}
+}[L]||I.en;
+document.querySelector('.afw-uuid .lbl-count').textContent=I.count;
+document.querySelector('.afw-uuid .lbl-upper').textContent=I.upper;
+document.getElementById('afwUuidGen').textContent=I.gen;
+document.getElementById('afwUuidCopy').textContent=I.copy;
+var out=document.getElementById('afwUuidOut'),msg=document.getElementById('afwUuidMsg');
+function uuid4(){if(window.crypto&&crypto.randomUUID)return crypto.randomUUID();var b=crypto.getRandomValues(new Uint8Array(16));b[6]=(b[6]&0x0f)|0x40;b[8]=(b[8]&0x3f)|0x80;var h=Array.from(b,function(x){return x.toString(16).padStart(2,'0')});return h.slice(0,4).join('')+'-'+h.slice(4,6).join('')+'-'+h.slice(6,8).join('')+'-'+h.slice(8,10).join('')+'-'+h.slice(10).join('');}
+function gen(){var n=Math.min(100,Math.max(1,Number(document.getElementById('afwUuidCount').value)||5));var up=document.getElementById('afwUuidUpper').checked;var arr=[];for(var i=0;i<n;i++){var u=uuid4();arr.push(up?u.toUpperCase():u);}out.textContent=arr.join('\n');}
+document.getElementById('afwUuidGen').addEventListener('click',gen);
+document.getElementById('afwUuidCopy').addEventListener('click',function(){var t=out.textContent;if(!t)return;navigator.clipboard&&navigator.clipboard.writeText(t).then(function(){msg.hidden=false;msg.textContent=I.copied;},function(){});});
+gen();
+})();
+</script>
+</div>

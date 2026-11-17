@@ -1,0 +1,94 @@
+<div class="afw-tool afw-token" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-token{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-token textarea,.afw-token input[type=number]{width:100%;box-sizing:border-box;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;line-height:1.5;border:1px solid #cbd5e1;border-radius:8px;padding:.65rem .8rem;background:#fff;color:#1e293b}
+.afw-token .grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:end}
+.afw-token label{display:block;font-size:.85rem;font-weight:600;margin:.8rem 0 .35rem;color:#334155}
+.afw-token select{width:100%;box-sizing:border-box;font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.6rem .7rem;background:#fff;color:#1e293b}
+.afw-token .out{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.1rem;margin-top:1.2rem}
+.afw-token .out .big{font-size:1.5rem;font-weight:700;color:#0f172a}
+.afw-token .row{display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px dashed #e2e8f0;font-size:.92rem;color:#334155}
+.afw-token .row:last-child{border-bottom:none}
+.afw-token .row b{color:#0f172a;font-variant-numeric:tabular-nums}
+.afw-token .note{font-size:.82rem;color:#64748b;margin-top:.8rem;line-height:1.5}
+.afw-token .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.6rem 1.2rem;font-size:.95rem;font-weight:600;cursor:pointer}
+.afw-token .btn:hover{background:#1d4ed8}
+@media(max-width:640px){.afw-token .grid{grid-template-columns:1fr}}
+</style>
+
+<div class="grid">
+  <div>
+    <label class="lbl-input"></label>
+    <textarea id="afwTokenText" rows="6" placeholder='{"model":"gpt-5.6-luna","messages":[{"role":"user","content":"Hello, world!"}]}'></textarea>
+  </div>
+  <div>
+    <label class="lbl-model"></label>
+    <select id="afwTokenModel">
+      <option value="5.00,30.00" data-n="GPT-5.6 Sol (OpenAI)">GPT-5.6 Sol (OpenAI) — $5.00 / $30.00</option>
+      <option value="2.00,12.00" data-n="GPT-5.6 Terra (OpenAI)">GPT-5.6 Terra (OpenAI) — $2.00 / $12.00</option>
+      <option value="0.20,1.20" data-n="GPT-5.6 Luna (OpenAI)" selected>GPT-5.6 Luna (OpenAI) — $0.20 / $1.20</option>
+      <option value="0.435,0.87" data-n="DeepSeek V4 Pro">DeepSeek V4 Pro — $0.435 / $0.87</option>
+      <option value="0.14,0.28" data-n="DeepSeek V4 Flash">DeepSeek V4 Flash — $0.14 / $0.28</option>
+    </select>
+    <label class="lbl-split"></label>
+    <select id="afwTokenSplit">
+      <option value="50" selected>50% input / 50% output</option>
+      <option value="100">100% input</option>
+      <option value="0">100% output</option>
+    </select>
+    <p style="margin-top:1.2rem"><button class="btn" id="afwTokenCalc" type="button"></button></p>
+  </div>
+</div>
+
+<div class="out" id="afwTokenOut" hidden>
+  <div class="lbl-est"></div>
+  <div class="big" id="afwTokenBig">—</div>
+  <div class="row lbl-cost-req"><span></span><b id="afwTokenCost">—</b></div>
+  <div class="row lbl-cost-1k"><span></span><b id="afwTokenCost1k">—</b></div>
+  <div class="row lbl-cost-1m"><span></span><b id="afwTokenCost1m">—</b></div>
+  <div class="row lbl-budget"><span></span><b id="afwTokenBudget">—</b></div>
+</div>
+
+<div class="note" id="afwTokenNote"></div>
+
+<script>
+(function(){
+var d=document.getElementById('afwTokenCalc')&&document.querySelector('.afw-token');
+if(!d)return;
+var L=d.getAttribute('data-lang')||'en';
+var I={
+ en:{input:'Paste your prompt / API payload',model:'Model (price per 1M input / 1M output tokens)',split:'Input / output split',calc:'Calculate cost',est:'Estimated tokens',costReq:'Estimated cost per request',cost1k:'Cost for 1,000 requests',cost1m:'Cost for 1M requests',budget:'Requests covered by $100 budget',note:'Token counts are estimated with the 4-chars-per-token heuristic. Real tokenizers differ by ±10–30% depending on language and code. Prices are official list prices as of August 2026 — see our full GPT-5.6 vs DeepSeek-V4 pricing analysis for details and sources.'},
+ ja:{input:'プロンプト / APIペイロードを貼り付け',model:'モデル（入力100万 / 出力100万トークン単価）',split:'入力 / 出力の割合',calc:'コストを計算',est:'推定トークン数',costReq:'1リクエストあたりの推定コスト',cost1k:'1,000リクエストのコスト',cost1m:'100万リクエストのコスト',budget:'$100の予算で送れるリクエスト数',note:'トークン数は「4文字＝1トークン」の近似で算出しています。実際のトークナイザーは言語やコードにより±10〜30%異なります。価格は2026年8月時点の公式リスト価格です。詳細と出典はGPT-5.6 vs DeepSeek-V4の価格比較分析をご覧ください。'},
+ zh:{input:'粘贴提示词 / API 请求内容',model:'模型（每百万输入 / 输出 token 价格）',split:'输入 / 输出比例',calc:'计算费用',est:'预估 token 数',costReq:'单次请求预估费用',cost1k:'1,000 次请求费用',cost1m:'100 万次请求费用',budget:'$100 预算可覆盖的请求数',note:'Token 数按「4 字符 ≈ 1 token」的近似规则估算，实际分词器视语言和代码不同会有 ±10–30% 偏差。价格为 2026 年 8 月官方列表价，详细对比与出处见 GPT-5.6 与 DeepSeek-V4 API 价格对比文章。'}
+}[L]||I.en;
+var t=I;
+document.querySelector('.afw-token .lbl-input').textContent=t.input;
+document.querySelector('.afw-token .lbl-model').textContent=t.model;
+document.querySelector('.afw-token .lbl-split').textContent=t.split;
+document.getElementById('afwTokenCalc').textContent=t.calc;
+document.querySelector('.afw-token .lbl-est').textContent=t.est;
+document.querySelector('.afw-token .lbl-cost-req span').textContent=t.costReq;
+document.querySelector('.afw-token .lbl-cost-1k span').textContent=t.cost1k;
+document.querySelector('.afw-token .lbl-cost-1m span').textContent=t.cost1m;
+document.querySelector('.afw-token .lbl-budget span').textContent=t.budget;
+document.getElementById('afwTokenNote').textContent=t.note;
+function fmt(n){if(n>=1e9)return (n/1e9).toFixed(2)+'B';if(n>=1e6)return (n/1e6).toFixed(2)+'M';if(n>=1e3)return (n/1e3).toFixed(1)+'K';return n.toFixed(0);}
+function money(n){if(n>=1)return '$'+n.toFixed(2);return '$'+n.toFixed(4);}
+document.getElementById('afwTokenCalc').addEventListener('click',function(){
+  var text=document.getElementById('afwTokenText').value||'';
+  if(!text.trim())return;
+  var tok=Math.max(1,Math.round(text.length/4));
+  var p=document.getElementById('afwTokenModel').value.split(',').map(Number);
+  var sp=Number(document.getElementById('afwTokenSplit').value)/100;
+  var inTok=tok*sp, outTok=tok*(1-sp);
+  var per=(inTok/1e6)*p[0]+(outTok/1e6)*p[1];
+  document.getElementById('afwTokenBig').textContent='≈ '+fmt(tok)+' tokens';
+  document.getElementById('afwTokenCost').textContent=money(per);
+  document.getElementById('afwTokenCost1k').textContent=money(per*1000);
+  document.getElementById('afwTokenCost1m').textContent=money(per*1e6);
+  document.getElementById('afwTokenBudget').textContent=per>0?fmt(100/per)+' requests':'—';
+  document.getElementById('afwTokenOut').hidden=false;
+});
+})();
+</script>
+</div>

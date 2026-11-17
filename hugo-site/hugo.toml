@@ -147,14 +147,18 @@ name = "Blog"
 URL = "/blog"
 weight = 2
 [[languages.en.menus.header]]
+name = "Tools"
+URL = "/tools/"
+weight = 3
+[[languages.en.menus.header]]
 name = "About"
 URL = "/about/"
-weight = 3
+weight = 4
 [[languages.en.menus.header]]
 pre = "search"
 name = "Search"
 URL = "/search"
-weight = 4
+weight = 5
 [[languages.en.menus.footer]]
 name = "Home"
 URL = "/"
@@ -164,9 +168,13 @@ name = "Blog"
 URL = "/blog"
 weight = 2
 [[languages.en.menus.footer]]
+name = "Tools"
+URL = "/tools/"
+weight = 3
+[[languages.en.menus.footer]]
 name = "About"
 URL = "/about/"
-weight = 3
+weight = 4
 
 [languages.ja]
 disabled = false
@@ -187,14 +195,18 @@ name = "ブログ"
 URL = "/ja/blog"
 weight = 2
 [[languages.ja.menus.header]]
+name = "ツール"
+URL = "/ja/tools/"
+weight = 3
+[[languages.ja.menus.header]]
 name = "プロフィール"
 URL = "/ja/about/"
-weight = 3
+weight = 4
 [[languages.ja.menus.header]]
 pre = "search"
 name = "検索"
 URL = "/search"
-weight = 4
+weight = 5
 [[languages.ja.menus.footer]]
 name = "ホーム"
 URL = "/ja/"
@@ -204,9 +216,13 @@ name = "ブログ"
 URL = "/ja/blog"
 weight = 2
 [[languages.ja.menus.footer]]
+name = "ツール"
+URL = "/ja/tools/"
+weight = 3
+[[languages.ja.menus.footer]]
 name = "プロフィール"
 URL = "/ja/about/"
-weight = 3
+weight = 4
 
 [languages.zh]
 disabled = false
@@ -227,14 +243,18 @@ name = "博客"
 URL = "/zh/blog"
 weight = 2
 [[languages.zh.menus.header]]
+name = "工具"
+URL = "/zh/tools/"
+weight = 3
+[[languages.zh.menus.header]]
 name = "关于"
 URL = "/zh/about/"
-weight = 3
+weight = 4
 [[languages.zh.menus.header]]
 pre = "search"
 name = "搜索"
 URL = "/search"
-weight = 4
+weight = 5
 [[languages.zh.menus.footer]]
 name = "首页"
 URL = "/zh/"
@@ -244,9 +264,13 @@ name = "博客"
 URL = "/zh/blog"
 weight = 2
 [[languages.zh.menus.footer]]
+name = "工具"
+URL = "/zh/tools/"
+weight = 3
+[[languages.zh.menus.footer]]
 name = "关于"
 URL = "/zh/about/"
-weight = 3
+weight = 4
 
 [params.languages.selector.disable]
 footer = false
