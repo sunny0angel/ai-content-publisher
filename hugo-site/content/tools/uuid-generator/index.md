@@ -12,6 +12,8 @@ slug: "uuid-generator"
 
 Generate up to 100 version 4 UUIDs at once, in lowercase or uppercase. IDs are created locally with the Web Crypto API (`crypto.getRandomValues` / `crypto.randomUUID`), so no request ever leaves your browser and no two runs can collide in practice.
 
+<!--more-->
+
 {{< uuid-generator >}}
 
 ## What is a UUID?

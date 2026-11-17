@@ -12,6 +12,8 @@ slug: "ai-token-cost-calculator"
 
 プロンプトやAPIペイロードを貼り付けるだけで、主要5モデルのトークン数とコストを即座に試算できます。価格は2026年8月時点の公式リスト価格で、[GPT-5.6 vs DeepSeek-V4の料金比較分析](/ja/blog/gpt-5.6-vs-deepseek-v4-pricing-2026/)と同じ数値を使用しています。
 
+<!--more-->
+
 {{< token-calculator >}}
 
 ## 試算の仕組み

@@ -12,6 +12,8 @@ slug: "ai-token-cost-calculator"
 
 Paste any prompt or API payload and get an instant estimate of token count and cost across the five major frontier models. Prices are the official list prices as of August 2026, taken from our [GPT-5.6 vs DeepSeek-V4 pricing analysis](/blog/gpt-5.6-vs-deepseek-v4-pricing-2026/).
 
+<!--more-->
+
 {{< token-calculator >}}
 
 ## How the estimate works

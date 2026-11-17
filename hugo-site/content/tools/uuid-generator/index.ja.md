@@ -12,6 +12,8 @@ slug: "uuid-generator"
 
 UUID v4を最大100個まで一度に生成できます（小文字／大文字選択可）。IDはWeb Crypto API（`crypto.getRandomValues` / `crypto.randomUUID`）でブラウザ内生成されるため、リクエストが外部に送信されることはなく、実用上衝突も起こりません。
 
+<!--more-->
+
 {{< uuid-generator >}}
 
 ## UUIDとは

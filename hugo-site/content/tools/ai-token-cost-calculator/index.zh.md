@@ -12,6 +12,8 @@ slug: "ai-token-cost-calculator"
 
 粘贴任意提示词或 API 请求内容，即可即时估算五大前沿模型的 token 数量和费用。价格采用 2026 年 8 月的官方列表价，与 [GPT-5.6 与 DeepSeek-V4 价格对比分析](/zh/blog/gpt-5.6-vs-deepseek-v4-pricing-2026/)使用同一套数据。
 
+<!--more-->
+
 {{< token-calculator >}}
 
 ## 估算原理
