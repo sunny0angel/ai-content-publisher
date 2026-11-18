@@ -1,0 +1,56 @@
+<div class="afw-tool afw-col" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-col{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-col input[type=text]{width:100%;box-sizing:border-box;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.6rem .8rem;background:#fff;color:#1e293b}
+.afw-col label{display:block;font-size:.85rem;font-weight:600;margin:.6rem 0 .35rem;color:#334155}
+.afw-col .swatch{width:100%;height:56px;border-radius:8px;border:1px solid #cbd5e1;margin:.6rem 0}
+.afw-col .out{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:.9rem 1rem;margin-top:.6rem}
+.afw-col .row{display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px dashed #e2e8f0;font-size:.92rem;color:#334155}
+.afw-col .row:last-child{border-bottom:none}
+.afw-col .row b{color:#0f172a;font-variant-numeric:tabular-nums}
+</style>
+<label class="lbl-in"></label>
+<input type="text" id="afwColIn" placeholder="#2563eb / rgb(37,99,235) / hsl(221,83%,53%)">
+<div class="swatch" id="afwColSw"></div>
+<div class="out" id="afwColOut" hidden>
+  <div class="row">HEX<b id="afwColHex"></b></div>
+  <div class="row">RGB<b id="afwColRgb"></b></div>
+  <div class="row">HSL<b id="afwColHsl"></b></div>
+</div>
+<script>
+(function(){
+var root=document.querySelector('.afw-col');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{input:'Enter HEX / RGB / HSL color',err:'Unrecognized color — try #2563eb, rgb(37,99,235) or hsl(221,83%,53%)'},
+ ja:{input:'HEX / RGB / HSLの色を入力',err:'色を認識できません。#2563eb、rgb(37,99,235)、hsl(221,83%,53%)などを試してください'},
+ zh:{input:'输入 HEX / RGB / HSL 颜色',err:'无法识别该颜色——试试 #2563eb、rgb(37,99,235) 或 hsl(221,83%,53%)'}
+}[L]||I.en;
+document.querySelector('.afw-col .lbl-in').textContent=I.input;
+var tin=document.getElementById('afwColIn'),sw=document.getElementById('afwColSw'),out=document.getElementById('afwColOut');
+function parse(v){
+  v=v.trim();
+  var m;
+  if(m=v.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i)){
+    var h=m[1];if(h.length===3)h=h.split('').map(function(c){return c+c;}).join('');
+    return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];
+  }
+  if(m=v.match(/^rgba?\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)/)){
+    return [clamp(+m[1]),clamp(+m[2]),clamp(+m[3])];
+  }
+  if(m=v.match(/^hsla?\(\s*(\d+)[,\s]+(\d+)%[,\s]+(\d+)%/)){
+    return hsl2rgb(+m[1],+m[2],+m[3]);
+  }
+  return null;
+}
+function clamp(x){return Math.max(0,Math.min(255,x));}
+function hsl2rgb(h,s,l){h=(h%360+360)%360;s/=100;l/=100;var c=(1-Math.abs(2*l-1))*s,x=c*(1-Math.abs((h/60)%2-1)),m=l-c/2,r=0,g=0,b=0;if(h<60){r=c;g=x;}else if(h<120){r=x;g=c;}else if(h<180){g=c;b=x;}else if(h<240){g=x;b=c;}else if(h<300){r=x;b=c;}else{r=c;b=x;}return [Math.round((r+m)*255),Math.round((g+m)*255),Math.round((b+m)*255)];}
+function rgb2hsl(r,g,b){r/=255;g/=255;b/=255;var mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2,h=0,s=0;if(mx!==mn){var d=mx-mn;s=l>0.5?d/(2-mx-mn):d/(mx+mn);if(mx===r)h=(g-b)/d+(g<b?6:0);else if(mx===g)h=(b-r)/d+2;else h=(r-g)/d+4;h*=60;}return [Math.round(h),Math.round(s*100),Math.round(l*100)];}
+function hex(r,g,b){return '#'+[r,g,b].map(function(x){return x.toString(16).padStart(2,'0');}).join('');}
+function show(){var c=parse(tin.value);if(!c){document.getElementById('afwColSw').style.background='#fff';return;}var h=hex(c[0],c[1],c[2]);var hsl=rgb2hsl(c[0],c[1],c[2]);sw.style.background=h;document.getElementById('afwColHex').textContent=h;document.getElementById('afwColRgb').textContent='rgb('+c.join(', ')+')';document.getElementById('afwColHsl').textContent='hsl('+hsl.join(', ')+')';out.hidden=false;}
+tin.addEventListener('input',function(){var c=parse(tin.value);if(c){sw.style.background=hex(c[0],c[1],c[2]);}});
+tin.addEventListener('change',function(){var c=parse(tin.value);if(!c){sw.style.background='#fff';sw.title=I.err;}else{show();}});
+show();
+})();
+</script>
+</div>

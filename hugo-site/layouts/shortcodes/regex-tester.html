@@ -1,0 +1,68 @@
+<div class="afw-tool afw-re" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-re{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-re textarea,.afw-re input[type=text]{width:100%;box-sizing:border-box;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.55;border:1px solid #cbd5e1;border-radius:8px;padding:.7rem .85rem;background:#fff;color:#1e293b}
+.afw-re textarea{min-height:90px;resize:vertical}
+.afw-re label{display:block;font-size:.85rem;font-weight:600;margin:.6rem 0 .35rem;color:#334155}
+.afw-re .row2{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.afw-re .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem 0}
+.afw-re .btn:hover{background:#1d4ed8}
+.afw-re .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem}
+.afw-re .msg.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.afw-re .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.afw-re .hl{background:#fff;border:1px solid #cbd5e1;border-radius:8px;padding:.7rem .85rem;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.55;white-space:pre-wrap;word-break:break-all;color:#1e293b}
+.afw-re .hl mark{background:#fef08a;color:#111;padding:0;border-radius:2px}
+</style>
+<label class="lbl-pat"></label>
+<input type="text" id="afwRePat" placeholder="\\b\\w+@\\w+\\.\\w+\\b">
+<label class="lbl-flags"></label>
+<div class="row2">
+  <label style="margin:0"><input type="checkbox" id="afwReG" checked> g</label>
+  <label style="margin:0"><input type="checkbox" id="afwReI"> i</label>
+  <label style="margin:0"><input type="checkbox" id="afwReM"> m</label>
+  <label style="margin:0"><input type="checkbox" id="afwReS"> s</label>
+</div>
+<label class="lbl-text"></label>
+<textarea id="afwReText" placeholder="Contact ada@example.com or alan@example.org"></textarea>
+<div>
+  <button class="btn" id="afwReRun" type="button"></button>
+</div>
+<div class="msg" id="afwReMsg" hidden></div>
+<div class="hl" id="afwReOut"></div>
+<script>
+(function(){
+var root=document.querySelector('.afw-re');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{pat:'Pattern',flags:'Flags',text:'Test text',run:'Test regex',matches:'matches',err:'Invalid pattern',empty:'Pattern and text required'},
+ ja:{pat:'パターン',flags:'フラグ',text:'テスト文字列',run:'正規表現をテスト',matches:'件マッチ',err:'正規表現が不正です',empty:'パターンと文字列を入力してください'},
+ zh:{pat:'正则表达式',flags:'标志',text:'测试文本',run:'测试正则',matches:'处匹配',err:'正则表达式无效',empty:'请输入正则和文本'}
+}[L]||I.en;
+document.querySelector('.afw-re .lbl-pat').textContent=I.pat;
+document.querySelector('.afw-re .lbl-flags').textContent=I.flags;
+document.querySelector('.afw-re .lbl-text').textContent=I.text;
+document.getElementById('afwReRun').textContent=I.run;
+var msg=document.getElementById('afwReMsg'),out=document.getElementById('afwReOut');
+function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
+document.getElementById('afwReRun').addEventListener('click',function(){
+  var p=document.getElementById('afwRePat').value,t=document.getElementById('afwReText').value;
+  if(!p||!t){show(I.empty,false);return;}
+  var f='';if(document.getElementById('afwReG').checked)f+='g';if(document.getElementById('afwReI').checked)f+='i';if(document.getElementById('afwReM').checked)f+='m';if(document.getElementById('afwReS').checked)f+='s';
+  var re;try{re=new RegExp(p,f);}catch(e){show(I.err+': '+e.message,false);return;}
+  if(f.indexOf('g')<0)f+='g',re=new RegExp(p,f);
+  var last=0,html='',count=0;
+  re.lastIndex=0;var m;
+  while((m=re.exec(t))!==null){
+    if(m[0]===''){re.lastIndex++;continue;}
+    html+=esc(t.slice(last,m.index))+'<mark>'+esc(m[0])+'</mark>';
+    last=m.index+m[0].length;count++;
+    if(re.lastIndex===m.index)re.lastIndex++;
+  }
+  html+=esc(t.slice(last));
+  out.innerHTML=html;
+  show(count+' '+I.matches,true);
+});
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+})();
+</script>
+</div>

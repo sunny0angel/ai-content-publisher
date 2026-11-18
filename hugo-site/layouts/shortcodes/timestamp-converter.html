@@ -1,0 +1,48 @@
+<div class="afw-tool afw-ts" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-ts{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-ts input[type=text],.afw-ts input[type=number]{width:100%;box-sizing:border-box;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.6rem .8rem;background:#fff;color:#1e293b}
+.afw-ts label{display:block;font-size:.85rem;font-weight:600;margin:.8rem 0 .35rem;color:#334155}
+.afw-ts .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem .4rem .6rem 0}
+.afw-ts .btn:hover{background:#1d4ed8}
+.afw-ts .out{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.1rem;margin-top:1rem}
+.afw-ts .row{display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px dashed #e2e8f0;font-size:.92rem;color:#334155}
+.afw-ts .row:last-child{border-bottom:none}
+.afw-ts .row b{color:#0f172a;font-variant-numeric:tabular-nums}
+</style>
+<label class="lbl-in"></label>
+<input type="text" id="afwTsIn" placeholder="1764...">
+<div>
+  <button class="btn" id="afwTsNow" type="button"></button>
+  <button class="btn" id="afwTsCalc" type="button"></button>
+</div>
+<div class="out" id="afwTsOut" hidden>
+  <div class="row lbl-local"><span></span><b id="afwTsLocal"></b></div>
+  <div class="row lbl-utc"><span></span><b id="afwTsUtc"></b></div>
+  <div class="row lbl-iso"><span></span><b id="afwTsIso"></b></div>
+  <div class="row lbl-rel"><span></span><b id="afwTsRel"></b></div>
+</div>
+<script>
+(function(){
+var root=document.querySelector('.afw-ts');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{input:'Unix timestamp (seconds or milliseconds)',now:'Use current time',calc:'Convert',local:'Local time',utc:'UTC',iso:'ISO 8601',rel:'Relative',future:'in the future',past:'ago'},
+ ja:{input:'Unixタイムスタンプ（秒またはミリ秒）',now:'現在時刻を使用',calc:'変換',local:'ローカル時刻',utc:'UTC',iso:'ISO 8601',rel:'相対時刻',future:'後',past:'前'},
+ zh:{input:'Unix 时间戳（秒或毫秒）',now:'使用当前时间',calc:'转换',local:'本地时间',utc:'UTC',iso:'ISO 8601',rel:'相对时间',future:'后',past:'前'}
+}[L]||I.en;
+document.querySelector('.afw-ts .lbl-in').textContent=I.input;
+document.getElementById('afwTsNow').textContent=I.now;
+document.getElementById('afwTsCalc').textContent=I.calc;
+document.querySelector('.afw-ts .lbl-local span').textContent=I.local;
+document.querySelector('.afw-ts .lbl-utc span').textContent=I.utc;
+document.querySelector('.afw-ts .lbl-iso span').textContent=I.iso;
+document.querySelector('.afw-ts .lbl-rel span').textContent=I.rel;
+var tin=document.getElementById('afwTsIn'),out=document.getElementById('afwTsOut');
+function rel(ms){var s=Math.abs(ms)/1000;var u=[[31536000,'y'],[86400,'d'],[3600,'h'],[60,'m'],[1,'s']];for(var i=0;i<u.length;i++){if(s>=u[i][0]){return Math.floor(s/u[i][0])+' '+u[i][1]+' '+(ms>0?I.future:I.past);}}return '0s';}
+function conv(v){var n=Number(v);if(!isFinite(n)||n<=0)return;if(String(Math.trunc(n)).length===13)n=Math.floor(n/1000);var d=new Date(n*1000);if(isNaN(d.getTime()))return;document.getElementById('afwTsLocal').textContent=d.toLocaleString();document.getElementById('afwTsUtc').textContent=d.toUTCString();document.getElementById('afwTsIso').textContent=d.toISOString();document.getElementById('afwTsRel').textContent=rel(d.getTime()-Date.now());out.hidden=false;}
+document.getElementById('afwTsCalc').addEventListener('click',function(){conv(tin.value);});
+document.getElementById('afwTsNow').addEventListener('click',function(){tin.value=String(Math.floor(Date.now()/1000));conv(tin.value);});
+})();
+</script>
+</div>

@@ -1,0 +1,47 @@
+<div class="afw-tool afw-url" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-url{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-url textarea{width:100%;box-sizing:border-box;min-height:110px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.55;border:1px solid #cbd5e1;border-radius:8px;padding:.7rem .85rem;background:#fff;color:#1e293b;resize:vertical}
+.afw-url label{display:block;font-size:.85rem;font-weight:600;margin:.5rem 0 .35rem;color:#334155}
+.afw-url .btns{display:flex;flex-wrap:wrap;gap:.5rem;margin:.7rem 0}
+.afw-url .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer}
+.afw-url .btn:hover{background:#1d4ed8}
+.afw-url .btn.sec{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1}
+.afw-url .btn.sec:hover{background:#e2e8f0}
+.afw-url .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem;background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+</style>
+<label class="lbl-in"></label>
+<textarea id="afwUrlIn" placeholder="https://example.com/search?q=AI+Forward&lang=ja"></textarea>
+<div class="btns">
+  <button class="btn" id="afwUrlEnc" type="button"></button>
+  <button class="btn sec" id="afwUrlDec" type="button"></button>
+  <button class="btn sec" id="afwUrlSwap" type="button"></button>
+  <button class="btn sec" id="afwUrlCopy" type="button"></button>
+</div>
+<label class="lbl-out"></label>
+<textarea id="afwUrlOut" readonly></textarea>
+<div class="msg" id="afwUrlMsg" hidden></div>
+<script>
+(function(){
+var root=document.querySelector('.afw-url');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{input:'Input (URL or encoded text)',output:'Output',enc:'Encode URL',dec:'Decode URL',swap:'Swap',copy:'Copy',copied:'Copied',err:'Invalid input'},
+ ja:{input:'入力（URLまたはエンコード済みテキスト）',output:'出力',enc:'URLエンコード',dec:'URLデコード',swap:'入れ替え',copy:'コピー',copied:'コピーしました',err:'不正な入力です'},
+ zh:{input:'输入（URL 或已编码文本）',output:'输出',enc:'URL 编码',dec:'URL 解码',swap:'交换',copy:'复制',copied:'已复制',err:'输入无效'}
+}[L]||I.en;
+document.querySelector('.afw-url .lbl-in').textContent=I.input;
+document.querySelector('.afw-url .lbl-out').textContent=I.output;
+document.getElementById('afwUrlEnc').textContent=I.enc;
+document.getElementById('afwUrlDec').textContent=I.dec;
+document.getElementById('afwUrlSwap').textContent=I.swap;
+document.getElementById('afwUrlCopy').textContent=I.copy;
+var tin=document.getElementById('afwUrlIn'),tout=document.getElementById('afwUrlOut'),msg=document.getElementById('afwUrlMsg');
+function show(t){msg.hidden=false;msg.textContent=t;}
+document.getElementById('afwUrlEnc').addEventListener('click',function(){try{tout.value=encodeURIComponent(tin.value);show(I.copied);}catch(e){show(I.err);}});
+document.getElementById('afwUrlDec').addEventListener('click',function(){try{tout.value=decodeURIComponent(tin.value);show(I.copied);}catch(e){show(I.err);}});
+document.getElementById('afwUrlSwap').addEventListener('click',function(){var t=tin.value;tin.value=tout.value;tout.value=t;});
+document.getElementById('afwUrlCopy').addEventListener('click',function(){if(!tout.value)return;navigator.clipboard&&navigator.clipboard.writeText(tout.value).then(function(){show(I.copied);},function(){});});
+})();
+</script>
+</div>

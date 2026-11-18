@@ -1,0 +1,62 @@
+<div class="afw-tool afw-diff" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-diff{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-diff textarea{width:100%;box-sizing:border-box;min-height:110px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.55;border:1px solid #cbd5e1;border-radius:8px;padding:.7rem .85rem;background:#fff;color:#1e293b;resize:vertical}
+.afw-diff label{display:block;font-size:.85rem;font-weight:600;margin:.6rem 0 .35rem;color:#334155}
+.afw-diff .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem 0}
+.afw-diff .btn:hover{background:#1d4ed8}
+.afw-diff .out{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;line-height:1.6;border:1px solid #e2e8f0;border-radius:8px;padding:.7rem .85rem;background:#f8fafc;white-space:pre-wrap;word-break:break-all}
+.afw-diff .add{background:#dcfce7;color:#14532d;display:block}
+.afw-diff .del{background:#fee2e2;color:#7f1d1d;display:block}
+.afw-diff .same{color:#334155}
+</style>
+<label class="lbl-a"></label>
+<textarea id="afwDiffA" placeholder="Original text…"></textarea>
+<label class="lbl-b"></label>
+<textarea id="afwDiffB" placeholder="Modified text…"></textarea>
+<div>
+  <button class="btn" id="afwDiffRun" type="button"></button>
+</div>
+<div class="out" id="afwDiffOut"></div>
+<script>
+(function(){
+var root=document.querySelector('.afw-diff');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{a:'Original',b:'Modified',run:'Compare',empty:'Enter both texts'},
+ ja:{a:'元のテキスト',b:'変更後のテキスト',run:'比較',empty:'両方のテキストを入力してください'},
+ zh:{a:'原文',b:'修改后',run:'对比',empty:'请输入两段文本'}
+}[L]||I.en;
+document.querySelector('.afw-diff .lbl-a').textContent=I.a;
+document.querySelector('.afw-diff .lbl-b').textContent=I.b;
+document.getElementById('afwDiffRun').textContent=I.run;
+var a=document.getElementById('afwDiffA'),b=document.getElementById('afwDiffB'),out=document.getElementById('afwDiffOut');
+function lcs(x,y){
+  var m=x.length,n=y.length,dp=[],i,j;
+  for(i=0;i<=m;i++){dp[i]=new Array(n+1).fill(0);}
+  for(i=m-1;i>=0;i--)for(j=n-1;j>=0;j--)dp[i][j]=x[i]===y[j]?dp[i+1][j+1]+1:Math.max(dp[i+1][j],dp[i][j+1]);
+  var res=[];i=0;j=0;
+  while(i<m&&j<n){
+    if(x[i]===y[j]){res.push(['s',x[i]]);i++;j++;}
+    else if(dp[i+1][j]>=dp[i][j+1]){res.push(['d',x[i]]);i++;}
+    else{res.push(['a',y[j]]);j++;}
+  }
+  while(i<m){res.push(['d',x[i++]]);}
+  while(j<n){res.push(['a',y[j++]]);}
+  return res;
+}
+document.getElementById('afwDiffRun').addEventListener('click',function(){
+  if(!a.value.trim()&&!b.value.trim()){out.innerHTML='<span class=same>'+I.empty+'</span>';return;}
+  var x=a.value.split('\n'),y=b.value.split('\n');
+  var ops=lcs(x,y),html='';
+  for(var i=0;i<ops.length;i++){
+    var t=ops[i][1].replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')||' ';
+    if(ops[i][0]==='a')html+='<span class=add>+ '+t+'</span>';
+    else if(ops[i][0]==='d')html+='<span class=del>- '+t+'</span>';
+    else html+='<span class=same>  '+t+'</span>';
+  }
+  out.innerHTML=html;
+});
+})();
+</script>
+</div>

@@ -1,0 +1,48 @@
+<div class="afw-tool afw-case" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-case{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-case textarea{width:100%;box-sizing:border-box;min-height:110px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.55;border:1px solid #cbd5e1;border-radius:8px;padding:.7rem .85rem;background:#fff;color:#1e293b;resize:vertical}
+.afw-case label{display:block;font-size:.85rem;font-weight:600;margin:.5rem 0 .35rem;color:#334155}
+.afw-case .btns{display:flex;flex-wrap:wrap;gap:.5rem;margin:.7rem 0}
+.afw-case .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer}
+.afw-case .btn:hover{background:#1d4ed8}
+.afw-case .btn.sec{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1}
+.afw-case .btn.sec:hover{background:#e2e8f0}
+</style>
+<label class="lbl-in"></label>
+<textarea id="afwCaseIn" placeholder="hello world example"></textarea>
+<div class="btns">
+  <button class="btn" id="afwCaseU" type="button"></button>
+  <button class="btn" id="afwCaseL" type="button"></button>
+  <button class="btn" id="afwCaseT" type="button"></button>
+  <button class="btn" id="afwCaseC" type="button"></button>
+  <button class="btn sec" id="afwCaseS" type="button"></button>
+  <button class="btn sec" id="afwCaseK" type="button"></button>
+  <button class="btn sec" id="afwCaseCopy" type="button"></button>
+</div>
+<script>
+(function(){
+var root=document.querySelector('.afw-case');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{input:'Input text',upper:'UPPERCASE',lower:'lowercase',title:'Title Case',camel:'camelCase',snake:'snake_case',kebab:'kebab-case',copy:'Copy'},
+ ja:{input:'入力テキスト',upper:'大文字',lower:'小文字',title:'タイトルケース',camel:'camelCase',snake:'snake_case',kebab:'kebab-case',copy:'コピー'},
+ zh:{input:'输入文本',upper:'全大写',lower:'全小写',title:'首字母大写',camel:'camelCase',snake:'snake_case',kebab:'kebab-case',copy:'复制'}
+}[L]||I.en;
+document.querySelector('.afw-case .lbl-in').textContent=I.input;
+var ids=['afwCaseU','afwCaseL','afwCaseT','afwCaseC','afwCaseS','afwCaseK','afwCaseCopy'];
+var keys=['upper','lower','title','camel','snake','kebab','copy'];
+ids.forEach(function(id,i){document.getElementById(id).textContent=I[keys[i]];});
+var tin=document.getElementById('afwCaseIn');
+function words(s){return s.trim().split(/[\s_-]+/).filter(Boolean);}
+function cap(w){return w.charAt(0).toUpperCase()+w.slice(1).toLowerCase();}
+document.getElementById('afwCaseU').addEventListener('click',function(){tin.value=tin.value.toUpperCase();});
+document.getElementById('afwCaseL').addEventListener('click',function(){tin.value=tin.value.toLowerCase();});
+document.getElementById('afwCaseT').addEventListener('click',function(){tin.value=words(tin.value).map(cap).join(' ');});
+document.getElementById('afwCaseC').addEventListener('click',function(){var w=words(tin.value);tin.value=w[0].toLowerCase()+w.slice(1).map(cap).join('');});
+document.getElementById('afwCaseS').addEventListener('click',function(){tin.value=words(tin.value).map(function(x){return x.toLowerCase();}).join('_');});
+document.getElementById('afwCaseK').addEventListener('click',function(){tin.value=words(tin.value).map(function(x){return x.toLowerCase();}).join('-');});
+document.getElementById('afwCaseCopy').addEventListener('click',function(){if(!tin.value)return;navigator.clipboard&&navigator.clipboard.writeText(tin.value);});
+})();
+</script>
+</div>

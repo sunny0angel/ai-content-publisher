@@ -1,0 +1,56 @@
+<div class="afw-tool afw-cron" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-cron{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-cron input[type=text]{width:100%;box-sizing:border-box;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.6rem .8rem;background:#fff;color:#1e293b}
+.afw-cron label{display:block;font-size:.85rem;font-weight:600;margin:.6rem 0 .35rem;color:#334155}
+.afw-cron .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem 0}
+.afw-cron .btn:hover{background:#1d4ed8}
+.afw-cron .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem}
+.afw-cron .msg.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.afw-cron .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.afw-cron .out{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:.9rem 1rem;margin-top:.6rem;font-size:.9rem;line-height:1.7;color:#334155}
+.afw-cron .out b{color:#0f172a}
+</style>
+<label class="lbl-in"></label>
+<input type="text" id="afwCronIn" placeholder="*/15 * * * *">
+<div>
+  <button class="btn" id="afwCronRun" type="button"></button>
+</div>
+<div class="msg" id="afwCronMsg" hidden></div>
+<div class="out" id="afwCronOut" hidden></div>
+<script>
+(function(){
+var root=document.querySelector('.afw-cron');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{input:'Cron expression (5 fields: min hour day month weekday)',run:'Explain + next runs',next:'Next runs',err:'Invalid cron: need 5 space-separated fields',every:'every'},
+ ja:{input:'cron式（5フィールド: 分 時 日 月 曜日）',run:'解説と次の実行時刻',next:'次の実行時刻',err:'不正なcron式です（スペース区切り5フィールドが必要）',every:'ごと'},
+ zh:{input:'cron 表达式（5 个字段：分 时 日 月 星期）',run:'解析并显示下次执行',next:'接下来几次执行',err:'cron 无效：需要 5 个空格分隔的字段',every:'每'}
+}[L]||I.en;
+var LBL=[[0,'min'],[1,'hour'],[2,'day'],[3,'month'],[4,'weekday']];
+document.querySelector('.afw-cron .lbl-in').textContent=I.input;
+document.getElementById('afwCronRun').textContent=I.run;
+var msg=document.getElementById('afwCronMsg'),out=document.getElementById('afwCronOut');
+function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
+function part(p,min,max){var set=new Set();var seg=p.split(',');for(var i=0;i<seg.length;i++){var s=seg[i];var step=1;var sp=s.split('/');if(sp.length===2){s=sp[0];step=parseInt(sp[1],10);if(!step)return null;}var lo,hi;if(s==='*'){lo=min;hi=max;}else if(s.indexOf('-')>-1){var r=s.split('-');lo=parseInt(r[0],10);hi=parseInt(r[1],10);}else{lo=hi=parseInt(s,10);}if(isNaN(lo)||isNaN(hi)||lo<min||hi>max||lo>hi)return null;for(var v=lo;v<=hi;v+=step)set.add(v);}return set;}
+function matches(p,t){return p.has(t);}
+function desc(field,p){if(!p)return '';var arr=Array.from(p).sort(function(a,b){return a-b;});if(arr.length===0)return '';return I.every+' '+arr.join(',');}
+document.getElementById('afwCronRun').addEventListener('click',function(){
+  var f=tin.value.trim().split(/\s+/);msg.hidden=true;out.hidden=true;
+  if(f.length!==5){show(I.err,false);return;}
+  var sets=[[0,59],[0,23],[1,31],[1,12],[0,6]].map(function(r,i){return part(f[i],r[0],r[1]);});
+  if(sets.some(function(s){return s===null;})){show(I.err,false);return;}
+  var d=new Date();d.setSeconds(0,0);var found=[];var guard=0;
+  while(found.length<5&&guard<530000){
+    d=new Date(d.getTime()+60000);guard++;
+    if(matches(sets[0],d.getMinutes())&&matches(sets[1],d.getHours())&&matches(sets[3],d.getMonth()+1)&&matches(sets[4],d.getDay())&&matches(sets[2],d.getDate())){
+      found.push(d.toLocaleString());
+    }
+  }
+  var html='<b>'+I.next+':</b><br>'+found.map(function(x){return '• '+x;}).join('<br>');
+  out.innerHTML=html;out.hidden=false;show(I.run+' ✓',true);
+});
+var tin=document.getElementById('afwCronIn');
+})();
+</script>
+</div>

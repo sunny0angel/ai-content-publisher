@@ -1,0 +1,53 @@
+<div class="afw-tool afw-lorem" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-lorem{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-lorem .row2{display:flex;flex-wrap:wrap;gap:.8rem;align-items:end;margin:.6rem 0}
+.afw-lorem select,.afw-lorem input[type=number]{font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.55rem .7rem;background:#fff;color:#1e293b}
+.afw-lorem input[type=number]{width:90px}
+.afw-lorem label{display:block;font-size:.85rem;font-weight:600;margin:0 0 .3rem;color:#334155}
+.afw-lorem .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin-right:.5rem}
+.afw-lorem .btn:hover{background:#1d4ed8}
+.afw-lorem .btn.sec{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1}
+.afw-lorem .btn.sec:hover{background:#e2e8f0}
+.afw-lorem .out{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem;margin-top:.7rem;max-height:320px;overflow:auto;font-size:.92rem;line-height:1.7;color:#334155}
+</style>
+<div class="row2">
+  <div><label class="lbl-unit"></label><select id="afwLoremUnit"><option value="paragraphs">Paragraphs</option><option value="sentences">Sentences</option><option value="words">Words</option></select></div>
+  <div><label class="lbl-count"></label><input type="number" id="afwLoremCount" value="3" min="1" max="100"></div>
+  <div>
+    <button class="btn" id="afwLoremGen" type="button"></button>
+    <button class="btn sec" id="afwLoremCopy" type="button"></button>
+  </div>
+</div>
+<div class="out" id="afwLoremOut"></div>
+<script>
+(function(){
+var root=document.querySelector('.afw-lorem');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{unit:'Unit',count:'Count',gen:'Generate',copy:'Copy'},
+ ja:{unit:'単位',count:'個数',gen:'生成',copy:'コピー'},
+ zh:{unit:'单位',count:'数量',gen:'生成',copy:'复制'}
+}[L]||I.en;
+document.querySelector('.afw-lorem .lbl-unit').textContent=I.unit;
+document.querySelector('.afw-lorem .lbl-count').textContent=I.count;
+document.getElementById('afwLoremGen').textContent=I.gen;
+document.getElementById('afwLoremCopy').textContent=I.copy;
+var WORDS=('lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco laboris nisi aliquip ex ea commodo consequat duis aute irure in reprehenderit voluptate velit esse cillum eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt culpa qui officia deserunt mollit anim id est laborum').split(' ');
+function word(){return WORDS[Math.floor(Math.random()*WORDS.length)];}
+function sentence(){var n=6+Math.floor(Math.random()*9),w=[];for(var i=0;i<n;i++)w.push(word());var s=w.join(' ');return s.charAt(0).toUpperCase()+s.slice(1)+'.';}
+function paragraph(){var n=3+Math.floor(Math.random()*4),s=[];for(var i=0;i<n;i++)s.push(sentence());return s.join(' ');}
+function gen(){
+  var unit=document.getElementById('afwLoremUnit').value;
+  var n=Math.max(1,Math.min(100,parseInt(document.getElementById('afwLoremCount').value,10)||1));
+  var out=[];
+  if(unit==='words'){while(out.length<n)out.push(word());out=out.slice(0,n);document.getElementById('afwLoremOut').innerHTML=out.join(' ');}
+  else if(unit==='sentences'){for(var i=0;i<n;i++)out.push(sentence());document.getElementById('afwLoremOut').innerHTML=out.join(' ');}
+  else{for(var j=0;j<n;j++)out.push('<p>'+paragraph()+'</p>');document.getElementById('afwLoremOut').innerHTML=out.join('');}
+}
+document.getElementById('afwLoremGen').addEventListener('click',gen);
+document.getElementById('afwLoremCopy').addEventListener('click',function(){var t=document.getElementById('afwLoremOut').innerText;if(!t)return;navigator.clipboard&&navigator.clipboard.writeText(t);});
+gen();
+})();
+</script>
+</div>

@@ -1,0 +1,44 @@
+<div class="afw-tool afw-base" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-base{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-base input[type=text]{width:100%;box-sizing:border-box;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.6rem .8rem;background:#fff;color:#1e293b}
+.afw-base label{display:block;font-size:.85rem;font-weight:600;margin:.6rem 0 .35rem;color:#334155}
+.afw-base .row2{display:flex;flex-wrap:wrap;gap:.8rem}
+.afw-base .row2>div{flex:1;min-width:140px}
+.afw-base .row2 select{width:100%;font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.55rem .7rem;background:#fff;color:#1e293b}
+.afw-base .out{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:.9rem 1rem;margin-top:.8rem}
+.afw-base .row{display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px dashed #e2e8f0;font-size:.92rem;color:#334155}
+.afw-base .row:last-child{border-bottom:none}
+.afw-base .row b{color:#0f172a;font-family:ui-monospace,Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+</style>
+<label class="lbl-in"></label>
+<input type="text" id="afwBaseIn" placeholder="255">
+<div class="row2">
+  <div><label class="lbl-from"></label><select id="afwBaseFrom"><option value="10" selected>Decimal (10)</option><option value="16">Hex (16)</option><option value="2">Binary (2)</option><option value="8">Octal (8)</option><option value="36">Base36</option></select></div>
+  <div><label class="lbl-to"></label><select id="afwBaseTo"><option value="16" selected>Hex (16)</option><option value="10">Decimal (10)</option><option value="2">Binary (2)</option><option value="8">Octal (8)</option><option value="36">Base36</option></select></div>
+</div>
+<div class="out" id="afwBaseOut" hidden>
+  <div class="row">HEX (16)<b id="afwBaseHex"></b></div>
+  <div class="row">DEC (10)<b id="afwBaseDec"></b></div>
+  <div class="row">BIN (2)<b id="afwBaseBin"></b></div>
+  <div class="row">OCT (8)<b id="afwBaseOct"></b></div>
+</div>
+<script>
+(function(){
+var root=document.querySelector('.afw-base');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{input:'Input value',from:'From base',to:'To base',err:'Invalid input for the selected base'},
+ ja:{input:'入力値',from:'変換元',to:'変換先',err:'選択した基数に対して不正な入力です'},
+ zh:{input:'输入值',from:'源进制',to:'目标进制',err:'输入值不符合所选进制'}
+}[L]||I.en;
+document.querySelector('.afw-base .lbl-in').textContent=I.input;
+document.querySelector('.afw-base .lbl-from').textContent=I.from;
+document.querySelector('.afw-base .lbl-to').textContent=I.to;
+var tin=document.getElementById('afwBaseIn'),out=document.getElementById('afwBaseOut');
+function show(){var v=tin.value.trim();if(!v)return;var from=parseInt(document.getElementById('afwBaseFrom').value,10);var n;try{n=BigInt('0x'+0);var num;if(from===10){num=BigInt(v);}else{num=parseBigInt(v,from);}if(typeof num==='undefined'||num===null){out.hidden=true;return;}document.getElementById('afwBaseHex').textContent=num.toString(16).toUpperCase();document.getElementById('afwBaseDec').textContent=num.toString(10);document.getElementById('afwBaseBin').textContent=num.toString(2);document.getElementById('afwBaseOct').textContent=num.toString(8);out.hidden=false;}catch(e){out.hidden=true;}}
+function parseBigInt(s,base){var neg=false;if(s[0]==='-'){neg=true;s=s.slice(1);}s=s.toLowerCase();var digits='0123456789abcdefghijklmnopqrstuvwxyz';var n=0n,b=BigInt(base);for(var i=0;i<s.length;i++){var d=digits.indexOf(s[i]);if(d<0||d>=base)return null;n=n*b+BigInt(d);}return neg?-n:n;}
+tin.addEventListener('input',show);
+})();
+</script>
+</div>
