@@ -1,0 +1,75 @@
+<div class="afw-tool afw-iwm" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-iwm{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-iwm input[type=file]{font-size:.9rem;color:#334155}
+.afw-iwm input[type=text]{font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.5rem .6rem;background:#fff;color:#1e293b;margin:.4rem .6rem .4rem 0}
+.afw-iwm select,.afw-iwm input[type=range]{margin:.4rem .6rem .4rem 0}
+.afw-iwm label{font-size:.9rem;color:#334155;margin-right:.3rem}
+.afw-iwm .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.5rem .4rem 0 0;text-decoration:none}
+.afw-iwm .btn:hover{background:#1d4ed8}
+.afw-iwm img{max-width:300px;max-height:220px;border:1px solid #e2e8f0;border-radius:8px;margin:.8rem 0;display:block}
+</style>
+<input type="file" id="afwIwmFile" accept="image/*">
+<div>
+  <label class="lbl-text"></label>
+  <input type="text" id="afwIwmText" placeholder="© AI Forward" value="© AI Forward">
+</div>
+<div>
+  <label class="lbl-pos"></label>
+  <select id="afwIwmPos">
+    <option value="br">Bottom right</option>
+    <option value="bl">Bottom left</option>
+    <option value="tr">Top right</option>
+    <option value="tl">Top left</option>
+    <option value="c">Center</option>
+  </select>
+  <label class="lbl-op"></label>
+  <input type="range" id="afwIwmOp" min="10" max="100" value="60">
+</div>
+<div>
+  <button class="btn" id="afwIwmGo" type="button"></button>
+  <a id="afwIwmDl" style="display:none" class="btn"></a>
+</div>
+<img id="afwIwmImg" alt="">
+<script>
+(function(){
+var root=document.querySelector('.afw-iwm');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{text:'Watermark text',pos:'Position',op:'Opacity',go:'Apply watermark',dl:'Download',pick:'Choose an image first'},
+ ja:{text:'透かしテキスト',pos:'位置',op:'不透明度',go:'透かしを適用',dl:'ダウンロード',pick:'先に画像を選択してください'},
+ zh:{text:'水印文字',pos:'位置',op:'不透明度',go:'添加水印',dl:'下载',pick:'请先选择图片'}
+}[L]||I.en;
+document.querySelector('.afw-iwm .lbl-text').textContent=I.text;
+document.querySelector('.afw-iwm .lbl-pos').textContent=I.pos;
+document.querySelector('.afw-iwm .lbl-op').textContent=I.op;
+document.getElementById('afwIwmGo').textContent=I.go;
+document.getElementById('afwIwmDl').textContent=I.dl;
+var file=document.getElementById('afwIwmFile'),img=document.getElementById('afwIwmImg'),dl=document.getElementById('afwIwmDl');
+var src=null;
+file.addEventListener('change',function(){if(!file.files[0])return;var fr=new FileReader();fr.onload=function(e){src=e.target.result;img.src=src;dl.style.display='none';};fr.readAsDataURL(file.files[0]);});
+document.getElementById('afwIwmGo').addEventListener('click',function(){
+  if(!src){alert(I.pick);return;}
+  var txt=document.getElementById('afwIwmText').value||'© AI Forward';
+  var pos=document.getElementById('afwIwmPos').value;
+  var op=parseInt(document.getElementById('afwIwmOp').value,10)/100;
+  var W=img.naturalWidth,H=img.naturalHeight;
+  var c=document.createElement('canvas');c.width=W;c.height=H;
+  var x=c.getContext('2d');
+  x.drawImage(img,0,0);
+  var fs=Math.max(14,Math.round(W/25));
+  x.font='600 '+fs+'px -apple-system, "Helvetica Neue", Arial, sans-serif';
+  x.textBaseline='middle';
+  var tw=x.measureText(txt).width,pad=20;
+  var px=pos.indexOf('l')>-1?pad:(pos.indexOf('r')>-1?W-tw-pad:(W-tw)/2);
+  var py=pos.indexOf('t')>-1?pad+fs/2:(pos.indexOf('b')>-1?H-pad-fs/2:H/2);
+  x.fillStyle='rgba(255,255,255,'+op+')';
+  x.fillText(txt,px+2,py+2);
+  x.fillStyle='rgba(0,0,0,'+op+')';
+  x.fillText(txt,px,py);
+  var url=c.toDataURL('image/jpeg',0.9);
+  img.src=url;dl.href=url;dl.download='watermarked.jpg';dl.style.display='inline-block';
+});
+})();
+</script>
+</div>

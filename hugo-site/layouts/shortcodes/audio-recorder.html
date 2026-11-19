@@ -1,0 +1,53 @@
+<div class="afw-tool afw-arec" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-arec{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-arec .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem .4rem 0 0;text-decoration:none}
+.afw-arec .btn:hover{background:#1d4ed8}
+.afw-arec .btn.rec{background:#dc2626}
+.afw-arec .btn.rec:hover{background:#b91c1c}
+.afw-arec .btn.sec{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1}
+.afw-arec .btn.sec:hover{background:#e2e8f0}
+.afw-arec audio{display:block;margin:.8rem 0;width:100%}
+.afw-arec .meta{font-size:.82rem;color:#64748b}
+</style>
+<div>
+  <button class="btn rec" id="afwArecStart" type="button"></button>
+  <button class="btn sec" id="afwArecStop" type="button" disabled></button>
+  <a class="btn" id="afwArecDl" style="display:none"></a>
+</div>
+<audio id="afwArecAudio" controls></audio>
+<div class="meta" id="afwArecMeta"></div>
+<script>
+(function(){
+var root=document.querySelector('.afw-arec');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{start:'Start recording',stop:'Stop',dl:'Download',no:'Recording not supported in this browser',live:'Recording… click Stop when done',done:'Ready — playback and download available',perm:'Microphone permission denied'},
+ ja:{start:'録音開始',stop:'停止',dl:'ダウンロード',no:'このブラウザでは録音できません',live:'録音中…終了するには停止をクリック',done:'完了——再生とダウンロードが利用可能です',perm:'マイクの許可が拒否されました'},
+ zh:{start:'开始录音',stop:'停止',dl:'下载',no:'此浏览器不支持录音',live:'录音中…完成后点击停止',done:'完成——可播放和下载',perm:'麦克风权限被拒绝'}
+}[L]||I.en;
+document.getElementById('afwArecStart').textContent=I.start;
+document.getElementById('afwArecStop').textContent=I.stop;
+document.getElementById('afwArecDl').textContent=I.dl;
+var start=document.getElementById('afwArecStart'),stop=document.getElementById('afwArecStop'),audio=document.getElementById('afwArecAudio'),meta=document.getElementById('afwArecMeta'),dl=document.getElementById('afwArecDl');
+var rec,chunks=[];
+start.addEventListener('click',function(){
+  navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
+    rec=new MediaRecorder(stream);
+    chunks=[];
+    rec.ondataavailable=function(e){chunks.push(e.data);};
+    rec.onstop=function(){
+      var blob=new Blob(chunks,{type:rec.mimeType||'audio/webm'});
+      var url=URL.createObjectURL(blob);
+      audio.src=url;dl.href=url;dl.download='recording.webm';dl.style.display='inline-block';
+      meta.textContent=I.done;
+    };
+    rec.start();
+    start.disabled=true;stop.disabled=false;meta.textContent=I.live;
+  }).catch(function(){meta.textContent=I.perm;});
+});
+stop.addEventListener('click',function(){if(rec){rec.stop();start.disabled=false;stop.disabled=true;}});
+if(!navigator.mediaDevices||!window.MediaRecorder){start.disabled=true;meta.textContent=I.no;}
+})();
+</script>
+</div>

@@ -1,0 +1,71 @@
+<div class="afw-tool afw-icr" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-icr{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-icr input[type=file]{font-size:.9rem;color:#334155}
+.afw-icr select,.afw-icr input[type=range]{margin:.4rem .6rem .4rem 0}
+.afw-icr label{font-size:.9rem;color:#334155;margin-right:.3rem}
+.afw-icr .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.5rem .4rem 0 0;text-decoration:none}
+.afw-icr .btn:hover{background:#1d4ed8}
+.afw-icr .prev img{max-width:300px;max-height:220px;border:1px solid #e2e8f0;border-radius:8px;margin:.8rem 0;display:block}
+.afw-icr .out img{max-width:300px;max-height:220px;border:1px solid #10b981;border-radius:8px;margin:.8rem 0;display:block}
+</style>
+<input type="file" id="afwIcrFile" accept="image/*">
+<div>
+  <label class="lbl-ratio"></label>
+  <select id="afwIcrRatio">
+    <option value="free">Free</option>
+    <option value="1:1">1:1</option>
+    <option value="4:3">4:3</option>
+    <option value="16:9">16:9</option>
+  </select>
+</div>
+<div>
+  <label class="lbl-x"></label><input type="range" id="afwIcrX" min="0" max="100" value="50">
+  <label class="lbl-y"></label><input type="range" id="afwIcrY" min="0" max="100" value="50">
+  <label class="lbl-zoom"></label><input type="range" id="afwIcrZ" min="10" max="100" value="100">
+</div>
+<div>
+  <button class="btn" id="afwIcrGo" type="button"></button>
+  <a id="afwIcrDl" style="display:none" class="btn"></a>
+</div>
+<div class="prev"><img id="afwIcrPrev" alt=""></div>
+<div class="out"><img id="afwIcrOut" alt=""></div>
+<script>
+(function(){
+var root=document.querySelector('.afw-icr');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{ratio:'Aspect ratio',x:'Center X',y:'Center Y',zoom:'Crop size',go:'Crop',dl:'Download',pick:'Choose an image first'},
+ ja:{ratio:'アスペクト比',x:'中心X',y:'中心Y',zoom:'切り取りサイズ',go:'切り取り',dl:'ダウンロード',pick:'先に画像を選択してください'},
+ zh:{ratio:'宽高比',x:'中心 X',y:'中心 Y',zoom:'裁剪大小',go:'裁剪',dl:'下载',pick:'请先选择图片'}
+}[L]||I.en;
+document.querySelector('.afw-icr .lbl-ratio').textContent=I.ratio;
+document.querySelector('.afw-icr .lbl-x').textContent=I.x;
+document.querySelector('.afw-icr .lbl-y').textContent=I.y;
+document.querySelector('.afw-icr .lbl-zoom').textContent=I.zoom;
+document.getElementById('afwIcrGo').textContent=I.go;
+document.getElementById('afwIcrDl').textContent=I.dl;
+var file=document.getElementById('afwIcrFile'),img=document.getElementById('afwIcrPrev'),oimg=document.getElementById('afwIcrOut'),dl=document.getElementById('afwIcrDl');
+var src=null;
+file.addEventListener('change',function(){if(!file.files[0])return;var fr=new FileReader();fr.onload=function(e){src=e.target.result;img.src=src;dl.style.display='none';};fr.readAsDataURL(file.files[0]);});
+document.getElementById('afwIcrGo').addEventListener('click',function(){
+  if(!src){alert(I.pick);return;}
+  var ratio=document.getElementById('afwIcrRatio').value;
+  var xp=parseInt(document.getElementById('afwIcrX').value,10)/100;
+  var yp=parseInt(document.getElementById('afwIcrY').value,10)/100;
+  var zp=parseInt(document.getElementById('afwIcrZ').value,10)/100;
+  var cw=img.naturalWidth*zp,ch=img.naturalHeight*zp;
+  if(ratio!=='free'){
+    var parts=ratio.split(':').map(Number),rw=parts[0],rh=parts[1];
+    var byH=cw/rh*rh;
+    if(byH<=ch){ch=byH;}else{cw=ch/rw*rw;}
+  }
+  var sx=(img.naturalWidth-cw)*xp,sy=(img.naturalHeight-ch)*yp;
+  var c=document.createElement('canvas');c.width=cw;c.height=ch;
+  c.getContext('2d').drawImage(img,sx,sy,cw,ch,0,0,cw,ch);
+  var url=c.toDataURL('image/png');
+  oimg.src=url;dl.href=url;dl.download='cropped.png';dl.style.display='inline-block';
+});
+})();
+</script>
+</div>

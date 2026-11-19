@@ -1,0 +1,61 @@
+<div class="afw-tool afw-tts" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-tts{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-tts textarea{width:100%;box-sizing:border-box;min-height:110px;font-size:14px;line-height:1.55;border:1px solid #cbd5e1;border-radius:8px;padding:.7rem .85rem;background:#fff;color:#1e293b;resize:vertical}
+.afw-tts select,.afw-tts input[type=range]{margin:.4rem .6rem .4rem 0}
+.afw-tts label{font-size:.9rem;color:#334155;margin-right:.3rem}
+.afw-tts .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.5rem .4rem 0 0}
+.afw-tts .btn:hover{background:#1d4ed8}
+.afw-tts .btn.sec{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1}
+.afw-tts .btn.sec:hover{background:#e2e8f0}
+.afw-tts .meta{font-size:.82rem;color:#64748b;margin-top:.5rem}
+</style>
+<label class="lbl-text"></label>
+<textarea id="afwTtsText" placeholder="Hello! This is your browser speaking."></textarea>
+<div>
+  <label class="lbl-voice"></label>
+  <select id="afwTtsVoice"></select>
+  <label class="lbl-rate"></label>
+  <input type="range" id="afwTtsRate" min="0.5" max="2" step="0.1" value="1">
+</div>
+<div>
+  <button class="btn" id="afwTtsSpeak" type="button"></button>
+  <button class="btn sec" id="afwTtsStop" type="button"></button>
+</div>
+<div class="meta" id="afwTtsMeta"></div>
+<script>
+(function(){
+var root=document.querySelector('.afw-tts');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{text:'Text',voice:'Voice',rate:'Rate',speak:'Speak',stop:'Stop',no:'Speech synthesis not supported in this browser',note:'Uses your browser\'s built-in voices — available offline. No audio file is downloaded; this is a listening tool.'},
+ ja:{text:'テキスト',voice:'声',rate:'速度',speak:'読み上げ',stop:'停止',no:'このブラウザは音声合成に対応していません',note:'ブラウザ内蔵の音声を使用——オフラインでも動作します。音声ファイルはダウンロードされません。聴くためのツールです。'},
+ zh:{text:'文本',voice:'声音',rate:'语速',speak:'朗读',stop:'停止',no:'此浏览器不支持语音合成',note:'使用浏览器内置语音——离线可用。不会下载音频文件，这是一个试听工具。'}
+}[L]||I.en;
+document.querySelector('.afw-tts .lbl-text').textContent=I.text;
+document.querySelector('.afw-tts .lbl-voice').textContent=I.voice;
+document.querySelector('.afw-tts .lbl-rate').textContent=I.rate;
+document.getElementById('afwTtsSpeak').textContent=I.speak;
+document.getElementById('afwTtsStop').textContent=I.stop;
+document.getElementById('afwTtsMeta').textContent=I.note;
+var sel=document.getElementById('afwTtsVoice');
+function loadVoices(){
+  var vs=speechSynthesis.getVoices();
+  sel.innerHTML='';
+  vs.forEach(function(v){var o=document.createElement('option');o.value=v.name;o.textContent=v.name+' ('+v.lang+')';sel.appendChild(o);});
+}
+if(!window.speechSynthesis){document.getElementById('afwTtsMeta').textContent=I.no;document.getElementById('afwTtsSpeak').disabled=true;}
+else{speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+document.getElementById('afwTtsSpeak').addEventListener('click',function(){
+  var u=new SpeechSynthesisUtterance(document.getElementById('afwTtsText').value);
+  var vs=speechSynthesis.getVoices();
+  var name=sel.value;
+  var v=vs.find(function(x){return x.name===name;});
+  if(v)u.voice=v;
+  u.rate=parseFloat(document.getElementById('afwTtsRate').value);
+  speechSynthesis.speak(u);
+});
+document.getElementById('afwTtsStop').addEventListener('click',function(){speechSynthesis&&speechSynthesis.cancel();});
+})();
+</script>
+</div>

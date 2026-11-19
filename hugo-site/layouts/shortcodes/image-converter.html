@@ -1,0 +1,63 @@
+<div class="afw-tool afw-imc" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-imc{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-imc input[type=file]{font-size:.9rem;color:#334155}
+.afw-imc select{font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.5rem .6rem;background:#fff;color:#1e293b;margin-right:.6rem}
+.afw-imc label{font-size:.9rem;color:#334155;margin-right:.3rem}
+.afw-imc .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin-right:.4rem}
+.afw-imc .btn:hover{background:#1d4ed8}
+.afw-imc .prev img{max-width:280px;max-height:200px;border:1px solid #e2e8f0;border-radius:8px;margin:.8rem 0}
+.afw-imc .meta{font-size:.82rem;color:#64748b}
+</style>
+<input type="file" id="afwImcFile" accept="image/*">
+<div style="margin:.6rem 0">
+  <label class="lbl-format"></label>
+  <select id="afwImcFmt">
+    <option value="image/jpeg">JPG</option>
+    <option value="image/png">PNG</option>
+    <option value="image/webp">WebP</option>
+  </select>
+  <button class="btn" id="afwImcGo" type="button"></button>
+  <a id="afwImcDl" style="display:none" class="btn"></a>
+</div>
+<div class="prev"><img id="afwImcPrev" alt=""></div>
+<div class="meta" id="afwImcMeta"></div>
+<script>
+(function(){
+var root=document.querySelector('.afw-imc');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{format:'Convert to',go:'Convert',dl:'Download',pick:'Choose an image first',unsupported:'This browser cannot encode WebP — try Chrome or Edge',done:'Converted'},
+ ja:{format:'変換先',go:'変換',dl:'ダウンロード',pick:'先に画像を選択してください',unsupported:'このブラウザはWebPをエンコードできません——ChromeまたはEdgeをお試しください',done:'変換完了'},
+ zh:{format:'转换为',go:'转换',dl:'下载',pick:'请先选择图片',unsupported:'此浏览器无法编码 WebP——请用 Chrome 或 Edge',done:'转换完成'}
+}[L]||I.en;
+document.querySelector('.afw-imc .lbl-format').textContent=I.format;
+document.getElementById('afwImcGo').textContent=I.go;
+document.getElementById('afwImcDl').textContent=I.dl;
+var file=document.getElementById('afwImcFile'),img=document.getElementById('afwImcPrev'),dl=document.getElementById('afwImcDl'),meta=document.getElementById('afwImcMeta');
+var srcData=null;
+file.addEventListener('change',function(){
+  if(!file.files[0])return;
+  var fr=new FileReader();
+  fr.onload=function(e){srcData=e.target.result;img.src=srcData;dl.style.display='none';};
+  fr.readAsDataURL(file.files[0]);
+});
+document.getElementById('afwImcGo').addEventListener('click',function(){
+  if(!srcData){alert(I.pick);return;}
+  var fmt=document.getElementById('afwImcFmt').value;
+  var im=new Image();
+  im.onload=function(){
+    var c=document.createElement('canvas');c.width=im.width;c.height=im.height;
+    c.getContext('2d').drawImage(im,0,0);
+    var url;
+    try{url=c.toDataURL(fmt,0.92);}catch(e){meta.textContent=I.unsupported;return;}
+    if(url.indexOf('data:,')===0){meta.textContent=I.unsupported;return;}
+    var ext=fmt.split('/')[1];if(ext==='jpeg')ext='jpg';
+    dl.href=url;dl.download='converted.'+ext;dl.style.display='inline-block';
+    meta.textContent=I.done;
+  };
+  im.src=srcData;
+});
+})();
+</script>
+</div>

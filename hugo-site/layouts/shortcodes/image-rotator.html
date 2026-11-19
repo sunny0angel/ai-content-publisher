@@ -1,0 +1,72 @@
+<div class="afw-tool afw-irot" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-irot{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-irot input[type=file]{font-size:.9rem;color:#334155}
+.afw-irot .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.5rem .4rem 0 0;text-decoration:none}
+.afw-irot .btn:hover{background:#1d4ed8}
+.afw-irot .btn.sec{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1}
+.afw-irot .btn.sec:hover{background:#e2e8f0}
+.afw-irot .prev img{max-width:280px;max-height:200px;border:1px solid #e2e8f0;border-radius:8px;margin:.8rem 0;display:block}
+</style>
+<input type="file" id="afwIrotFile" accept="image/*">
+<div>
+  <button class="btn" id="afwIrotL" type="button"></button>
+  <button class="btn" id="afwIrotR" type="button"></button>
+  <button class="btn sec" id="afwIrotH" type="button"></button>
+  <button class="btn sec" id="afwIrotV" type="button"></button>
+  <a id="afwIrotDl" style="display:none" class="btn sec"></a>
+</div>
+<div class="prev"><img id="afwIrotPrev" alt=""></div>
+<script>
+(function(){
+var root=document.querySelector('.afw-irot');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{l:'Rotate 90° left',r:'Rotate 90° right',h:'Flip horizontal',v:'Flip vertical',dl:'Download',pick:'Choose an image first'},
+ ja:{l:'左に90°回転',r:'右に90°回転',h:'左右反転',v:'上下反転',dl:'ダウンロード',pick:'先に画像を選択してください'},
+ zh:{l:'左转 90°',r:'右转 90°',h:'水平翻转',v:'垂直翻转',dl:'下载',pick:'请先选择图片'}
+}[L]||I.en;
+document.getElementById('afwIrotL').textContent=I.l;
+document.getElementById('afwIrotR').textContent=I.r;
+document.getElementById('afwIrotH').textContent=I.h;
+document.getElementById('afwIrotV').textContent=I.v;
+document.getElementById('afwIrotDl').textContent=I.dl;
+var file=document.getElementById('afwIrotFile'),img=document.getElementById('afwIrotPrev'),dl=document.getElementById('afwIrotDl');
+var state=0; // 0=orig 1=90 2=180 3=270
+var src=null,origW=0,origH=0;
+function render(){
+  if(!src)return;
+  var c=document.createElement('canvas');
+  var rot=state%2===1;
+  c.width=rot?origH:origW;c.height=rot?origW:origH;
+  var ctx=c.getContext('2d');
+  ctx.translate(c.width/2,c.height/2);
+  ctx.rotate(state*Math.PI/2);
+  ctx.drawImage(img,0,0);
+  // 简单方案：用 Image 重绘
+  var out=new Image();
+  out.onload=function(){
+    var c2=document.createElement('canvas');
+    var r=state%2===1;
+    c2.width=r?out.height:out.width;c2.height=r?out.width:out.height;
+    var x=c2.getContext('2d');
+    x.translate(c2.width/2,c2.height/2);x.rotate(state*Math.PI/2);
+    x.drawImage(out,-out.width/2,-out.height/2);
+    var url=c2.toDataURL('image/png');
+    img.src=url;dl.href=url;dl.download='rotated.png';dl.style.display='inline-block';
+  };
+  out.src=src;
+}
+file.addEventListener('change',function(){
+  if(!file.files[0])return;
+  var fr=new FileReader();
+  fr.onload=function(e){src=e.target.result;img.src=src;img.onload=function(){origW=img.naturalWidth;origH=img.naturalHeight;img.onload=null;};state=0;dl.style.display='none';};
+  fr.readAsDataURL(file.files[0]);
+});
+document.getElementById('afwIrotL').addEventListener('click',function(){if(!src){alert(I.pick);return;}state=(state+3)%4;render();});
+document.getElementById('afwIrotR').addEventListener('click',function(){if(!src){alert(I.pick);return;}state=(state+1)%4;render();});
+document.getElementById('afwIrotH').addEventListener('click',function(){if(!src){alert(I.pick);return;}var c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;var x=c.getContext('2d');x.translate(c.width,0);x.scale(-1,1);x.drawImage(img,0,0);var url=c.toDataURL('image/png');img.src=url;dl.href=url;dl.download='flipped.png';dl.style.display='inline-block';});
+document.getElementById('afwIrotV').addEventListener('click',function(){if(!src){alert(I.pick);return;}var c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;var x=c.getContext('2d');x.translate(0,c.height);x.scale(1,-1);x.drawImage(img,0,0);var url=c.toDataURL('image/png');img.src=url;dl.href=url;dl.download='flipped.png';dl.style.display='inline-block';});
+})();
+</script>
+</div>

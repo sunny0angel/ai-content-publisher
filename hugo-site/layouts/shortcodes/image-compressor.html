@@ -1,0 +1,72 @@
+<div class="afw-tool afw-ic" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-ic{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-ic input[type=file]{font-size:.9rem;color:#334155}
+.afw-ic .row2{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;margin:.6rem 0}
+.afw-ic select,.afw-ic input[type=number]{font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.5rem .6rem;background:#fff;color:#1e293b}
+.afw-ic input[type=number]{width:80px}
+.afw-ic label{font-size:.9rem;color:#334155;margin-right:.3rem}
+.afw-ic .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin-right:.4rem}
+.afw-ic .btn:hover{background:#1d4ed8}
+.afw-ic .prev{display:flex;gap:1rem;flex-wrap:wrap;margin:.8rem 0}
+.afw-ic .prev img{max-width:280px;max-height:200px;border:1px solid #e2e8f0;border-radius:8px}
+.afw-ic .meta{font-size:.82rem;color:#64748b;line-height:1.6}
+</style>
+<input type="file" id="afwIcFile" accept="image/*">
+<div class="row2">
+  <label class="lbl-quality"></label>
+  <input type="number" id="afwIcQ" value="80" min="10" max="100">
+  <label class="lbl-maxw"></label>
+  <input type="number" id="afwIcW" value="1600" min="100" max="8000">
+</div>
+<div>
+  <button class="btn" id="afwIcGo" type="button"></button>
+  <a id="afwIcDl" style="display:none" class="btn"></a>
+</div>
+<div class="prev">
+  <img id="afwIcOrig" alt="">
+  <img id="afwIcNew" alt="">
+</div>
+<div class="meta" id="afwIcMeta"></div>
+<script>
+(function(){
+var root=document.querySelector('.afw-ic');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{quality:'Quality',maxw:'Max width',go:'Compress',dl:'Download compressed',pick:'Choose an image first',orig:'Original:',new:'Compressed:',saved:'saved'},
+ ja:{quality:'画質',maxw:'最大幅',go:'圧縮',dl:'圧縮画像をダウンロード',pick:'先に画像を選択してください',orig:'元画像:',new:'圧縮後:',saved:'削減'},
+ zh:{quality:'质量',maxw:'最大宽度',go:'压缩',dl:'下载压缩图',pick:'请先选择图片',orig:'原图:',new:'压缩后:',saved:'节省'}
+}[L]||I.en;
+document.querySelector('.afw-ic .lbl-quality').textContent=I.quality;
+document.querySelector('.afw-ic .lbl-maxw').textContent=I.maxw;
+document.getElementById('afwIcGo').textContent=I.go;
+document.getElementById('afwIcDl').textContent=I.dl;
+var file=document.getElementById('afwIcFile'),origImg=document.getElementById('afwIcOrig'),newImg=document.getElementById('afwIcNew'),meta=document.getElementById('afwIcMeta'),dl=document.getElementById('afwIcDl');
+file.addEventListener('change',function(){
+  if(!file.files[0])return;
+  var fr=new FileReader();
+  fr.onload=function(e){origImg.src=e.target.result;newImg.removeAttribute('src');dl.style.display='none';meta.textContent=I.orig+' '+fmtSize(file.files[0].size);};
+  fr.readAsDataURL(file.files[0]);
+});
+function fmtSize(b){return b>1048576?(b/1048576).toFixed(2)+' MB':(b/1024).toFixed(1)+' KB';}
+document.getElementById('afwIcGo').addEventListener('click',function(){
+  if(!origImg.src){alert(I.pick);return;}
+  var q=parseInt(document.getElementById('afwIcQ').value,10)/100;
+  var w=parseInt(document.getElementById('afwIcW').value,10);
+  var img=new Image();
+  img.onload=function(){
+    var scale=Math.min(1,w/img.width);
+    var c=document.createElement('canvas');
+    c.width=Math.round(img.width*scale);c.height=Math.round(img.height*scale);
+    var ctx=c.getContext('2d');ctx.drawImage(img,0,0,c.width,c.height);
+    var url=c.toDataURL('image/jpeg',q);
+    newImg.src=url;
+    var bytes=Math.round(url.length*3/4);
+    meta.textContent=I.new+' '+fmtSize(bytes)+'（'+I.saved+' '+(100-Math.round(bytes/file.files[0].size*100))+'%）';
+    dl.href=url;dl.download='compressed.jpg';dl.style.display='inline-block';
+  };
+  img.src=origImg.src;
+});
+})();
+</script>
+</div>

@@ -1,0 +1,45 @@
+<div class="afw-tool afw-vi" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-vi{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-vi input[type=file]{font-size:.9rem;color:#334155}
+.afw-vi video{max-width:320px;max-height:220px;border:1px solid #e2e8f0;border-radius:8px;margin:.8rem 0;display:block}
+.afw-vi .out{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.1rem;margin-top:.6rem}
+.afw-vi .row{display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px dashed #e2e8f0;font-size:.92rem;color:#334155}
+.afw-vi .row:last-child{border-bottom:none}
+.afw-vi .row b{color:#0f172a;font-variant-numeric:tabular-nums}
+</style>
+<input type="file" id="afwViFile" accept="video/*">
+<video id="afwViVideo" controls></video>
+<div class="out" id="afwViOut" hidden>
+  <div class="row lbl-res"><span></span><b id="afwViRes"></b></div>
+  <div class="row lbl-dur"><span></span><b id="afwViDur"></b></div>
+  <div class="row lbl-fs"><span></span><b id="afwViFs"></b></div>
+</div>
+<script>
+(function(){
+var root=document.querySelector('.afw-vi');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{res:'Resolution',dur:'Duration',fs:'File size',note:'Reads video metadata locally — nothing is uploaded.'},
+ ja:{res:'解像度',dur:'長さ',fs:'ファイルサイズ',note:'動画メタデータをローカルで読み取ります——アップロードはありません。'},
+ zh:{res:'分辨率',dur:'时长',fs:'文件大小',note:'在本地读取视频元信息——不会上传任何内容。'}
+}[L]||I.en;
+document.querySelector('.afw-vi .lbl-res span').textContent=I.res;
+document.querySelector('.afw-vi .lbl-dur span').textContent=I.dur;
+document.querySelector('.afw-vi .lbl-fs span').textContent=I.fs;
+var file=document.getElementById('afwViFile'),video=document.getElementById('afwViVideo'),out=document.getElementById('afwViOut');
+file.addEventListener('change',function(){
+  if(!file.files[0])return;
+  var f=file.files[0];
+  video.src=URL.createObjectURL(f);
+  video.onloadedmetadata=function(){
+    document.getElementById('afwViRes').textContent=video.videoWidth+' × '+video.videoHeight;
+    var s=video.duration,m=Math.floor(s/60),sec=Math.round(s%60);
+    document.getElementById('afwViDur').textContent=m+':'+String(sec).padStart(2,'0');
+    document.getElementById('afwViFs').textContent=(f.size/1048576).toFixed(2)+' MB';
+    out.hidden=false;video.onloadedmetadata=null;
+  };
+});
+})();
+</script>
+</div>

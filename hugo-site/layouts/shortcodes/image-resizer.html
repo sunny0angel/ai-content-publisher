@@ -1,0 +1,58 @@
+<div class="afw-tool afw-ir" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-ir{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-ir input[type=file]{font-size:.9rem;color:#334155}
+.afw-ir .row2{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;margin:.6rem 0}
+.afw-ir input[type=number]{width:90px;font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.5rem .6rem;background:#fff;color:#1e293b}
+.afw-ir label{font-size:.9rem;color:#334155;margin-right:.3rem}
+.afw-ir .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin-right:.4rem;text-decoration:none}
+.afw-ir .btn:hover{background:#1d4ed8}
+.afw-ir .prev img{max-width:280px;max-height:200px;border:1px solid #e2e8f0;border-radius:8px;margin:.8rem 0}
+</style>
+<input type="file" id="afwIrFile" accept="image/*">
+<div class="row2">
+  <span><label class="lbl-w"></label><input type="number" id="afwIrW" value="800"></span>
+  <span><label class="lbl-h"></label><input type="number" id="afwIrH" value="600"></span>
+  <span><label class="lbl-pct"></label><input type="number" id="afwIrP" value="100"></span>
+</div>
+<div>
+  <button class="btn" id="afwIrGo" type="button"></button>
+  <a id="afwIrDl" style="display:none" class="btn"></a>
+</div>
+<div class="prev"><img id="afwIrPrev" alt=""></div>
+<script>
+(function(){
+var root=document.querySelector('.afw-ir');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{w:'Width',h:'Height',pct:'%',go:'Resize',dl:'Download',pick:'Choose an image first',mode:'Fill width, height, or percentage (100 = keep)'},
+ ja:{w:'幅',h:'高さ',pct:'%',go:'リサイズ',dl:'ダウンロード',pick:'先に画像を選択してください',mode:'幅・高さ・パーセントのいずれかを指定（100＝そのまま）'},
+ zh:{w:'宽',h:'高',pct:'%',go:'调整尺寸',dl:'下载',pick:'请先选择图片',mode:'填宽度、高度或百分比（100 = 保持）'}
+}[L]||I.en;
+document.querySelector('.afw-ir .lbl-w').textContent=I.w;
+document.querySelector('.afw-ir .lbl-h').textContent=I.h;
+document.querySelector('.afw-ir .lbl-pct').textContent=I.pct;
+document.getElementById('afwIrGo').textContent=I.go;
+document.getElementById('afwIrDl').textContent=I.dl;
+var file=document.getElementById('afwIrFile'),img=document.getElementById('afwIrPrev'),dl=document.getElementById('afwIrDl');
+var src=null;
+file.addEventListener('change',function(){if(!file.files[0])return;var fr=new FileReader();fr.onload=function(e){src=e.target.result;img.src=src;dl.style.display='none';};fr.readAsDataURL(file.files[0]);});
+document.getElementById('afwIrGo').addEventListener('click',function(){
+  if(!src){alert(I.pick);return;}
+  var im=new Image();
+  im.onload=function(){
+    var w=parseInt(document.getElementById('afwIrW').value,10)||0;
+    var h=parseInt(document.getElementById('afwIrH').value,10)||0;
+    var p=parseInt(document.getElementById('afwIrP').value,10)||100;
+    var tw=w||Math.round(im.width*p/100),th=h||Math.round(im.height*p/100);
+    if(p!==100&&!w&&!h){tw=Math.round(im.width*p/100);th=Math.round(im.height*p/100);}
+    var c=document.createElement('canvas');c.width=tw;c.height=th;
+    c.getContext('2d').drawImage(im,0,0,tw,th);
+    var url=c.toDataURL('image/png');
+    img.src=url;dl.href=url;dl.download='resized.png';dl.style.display='inline-block';
+  };
+  im.src=src;
+});
+})();
+</script>
+</div>

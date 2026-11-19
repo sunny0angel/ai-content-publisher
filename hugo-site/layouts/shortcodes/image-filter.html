@@ -1,0 +1,62 @@
+<div class="afw-tool afw-ifl" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-ifl{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-ifl input[type=file]{font-size:.9rem;color:#334155}
+.afw-ifl select,.afw-ifl input[type=range]{margin:.4rem .6rem .4rem 0}
+.afw-ifl label{font-size:.9rem;color:#334155;margin-right:.3rem}
+.afw-ifl .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.5rem .4rem 0 0;text-decoration:none}
+.afw-ifl .btn:hover{background:#1d4ed8}
+.afw-ifl img{max-width:300px;max-height:220px;border:1px solid #e2e8f0;border-radius:8px;margin:.8rem 0;display:block}
+</style>
+<input type="file" id="afwIflFile" accept="image/*">
+<div>
+  <label class="lbl-fx"></label>
+  <select id="afwIflFx">
+    <option value="none">None</option>
+    <option value="grayscale">Grayscale</option>
+    <option value="sepia">Sepia</option>
+    <option value="invert">Invert</option>
+    <option value="blur">Blur</option>
+  </select>
+</div>
+<div>
+  <label class="lbl-b"></label><input type="range" id="afwIflB" min="50" max="150" value="100">
+  <label class="lbl-c"></label><input type="range" id="afwIflC" min="50" max="150" value="100">
+</div>
+<div>
+  <button class="btn" id="afwIflGo" type="button"></button>
+  <a id="afwIflDl" style="display:none" class="btn"></a>
+</div>
+<img id="afwIflImg" alt="">
+<script>
+(function(){
+var root=document.querySelector('.afw-ifl');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{fx:'Filter',b:'Brightness',c:'Contrast',go:'Apply',dl:'Download',pick:'Choose an image first'},
+ ja:{fx:'フィルター',b:'明るさ',c:'コントラスト',go:'適用',dl:'ダウンロード',pick:'先に画像を選択してください'},
+ zh:{fx:'滤镜',b:'亮度',c:'对比度',go:'应用',dl:'下载',pick:'请先选择图片'}
+}[L]||I.en;
+document.querySelector('.afw-ifl .lbl-fx').textContent=I.fx;
+document.querySelector('.afw-ifl .lbl-b').textContent=I.b;
+document.querySelector('.afw-ifl .lbl-c').textContent=I.c;
+document.getElementById('afwIflGo').textContent=I.go;
+document.getElementById('afwIflDl').textContent=I.dl;
+var file=document.getElementById('afwIflFile'),img=document.getElementById('afwIflImg'),dl=document.getElementById('afwIflDl');
+var src=null;
+file.addEventListener('change',function(){if(!file.files[0])return;var fr=new FileReader();fr.onload=function(e){src=e.target.result;img.src=src;dl.style.display='none';};fr.readAsDataURL(file.files[0]);});
+document.getElementById('afwIflGo').addEventListener('click',function(){
+  if(!src){alert(I.pick);return;}
+  var fx=document.getElementById('afwIflFx').value;
+  var b=parseInt(document.getElementById('afwIflB').value,10)/100;
+  var ct=parseInt(document.getElementById('afwIflC').value,10)/100;
+  var c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;
+  var x=c.getContext('2d');
+  x.filter='brightness('+b+') contrast('+ct+')'+(fx==='none'?'':(fx==='blur'?' blur(4px)':' '+fx+'(1)'));
+  x.drawImage(img,0,0);
+  var url=c.toDataURL('image/jpeg',0.9);
+  img.src=url;dl.href=url;dl.download='filtered.jpg';dl.style.display='inline-block';
+});
+})();
+</script>
+</div>

@@ -1,0 +1,53 @@
+<div class="afw-tool afw-vea" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-vea{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-vea input[type=file]{font-size:.9rem;color:#334155}
+.afw-vea video{max-width:320px;max-height:220px;border:1px solid #e2e8f0;border-radius:8px;margin:.8rem 0;display:block}
+.afw-vea .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.5rem .4rem 0 0;text-decoration:none}
+.afw-vea .btn:hover{background:#1d4ed8}
+.afw-vea audio{display:block;margin:.8rem 0;width:100%}
+.afw-vea .meta{font-size:.82rem;color:#64748b;margin-top:.4rem}
+</style>
+<input type="file" id="afwVeaFile" accept="video/*">
+<div>
+  <button class="btn" id="afwVeaGo" type="button"></button>
+  <a id="afwVeaDl" style="display:none" class="btn"></a>
+</div>
+<video id="afwVeaVideo" controls></video>
+<audio id="afwVeaAudio" controls></audio>
+<div class="meta" id="afwVeaMeta"></div>
+<script>
+(function(){
+var root=document.querySelector('.afw-vea');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{go:'Extract audio (records in real time)',dl:'Download',pick:'Choose a video first',no:'Not supported in this browser',rec:'Recording… let the video play through, then it stops automatically'},
+ ja:{go:'音声を抽出（リアルタイム録音）',dl:'ダウンロード',pick:'先に動画を選択してください',no:'このブラウザでは未対応です',rec:'録音中…動画を最後まで再生すると自動停止します'},
+ zh:{go:'提取音频（实时录制）',dl:'下载',pick:'请先选择视频',no:'此浏览器不支持',rec:'录制中…让视频播放完毕即自动停止'}
+}[L]||I.en;
+document.getElementById('afwVeaGo').textContent=I.go;
+document.getElementById('afwVeaDl').textContent=I.dl;
+var file=document.getElementById('afwVeaFile'),video=document.getElementById('afwVeaVideo'),audio=document.getElementById('afwVeaAudio'),meta=document.getElementById('afwVeaMeta'),dl=document.getElementById('afwVeaDl');
+if(!window.MediaRecorder){meta.textContent=I.no;document.getElementById('afwVeaGo').disabled=true;}
+file.addEventListener('change',function(){if(!file.files[0])return;video.src=URL.createObjectURL(file.files[0]);dl.style.display='none';});
+document.getElementById('afwVeaGo').addEventListener('click',function(){
+  if(!video.src){alert(I.pick);return;}
+  var actx=new (window.AudioContext||window.webkitAudioContext)();
+  var srcEl=actx.createMediaElementSource(video);
+  var dest=actx.createMediaStreamDestination();
+  srcEl.connect(dest);srcEl.connect(actx.destination);
+  var rec=new MediaRecorder(dest.stream),chunks=[];
+  rec.ondataavailable=function(e){chunks.push(e.data);};
+  rec.onstop=function(){
+    var blob=new Blob(chunks,{type:'audio/webm'});
+    var url=URL.createObjectURL(blob);
+    audio.src=url;dl.href=url;dl.download='extracted-audio.webm';dl.style.display='inline-block';
+  };
+  rec.start();
+  meta.textContent=I.rec;
+  video.currentTime=0;video.play();
+  video.onended=function(){rec.stop();video.onended=null;};
+});
+})();
+</script>
+</div>

@@ -1,0 +1,43 @@
+<div class="afw-tool afw-vth" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-vth{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-vth input[type=file]{font-size:.9rem;color:#334155}
+.afw-vth video{max-width:320px;max-height:220px;border:1px solid #e2e8f0;border-radius:8px;margin:.8rem 0;display:block}
+.afw-vth .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.5rem .4rem 0 0;text-decoration:none}
+.afw-vth .btn:hover{background:#1d4ed8}
+.afw-vth img{max-width:320px;max-height:220px;border:1px solid #10b981;border-radius:8px;margin:.8rem 0;display:block}
+.afw-vth .meta{font-size:.82rem;color:#64748b}
+</style>
+<input type="file" id="afwVthFile" accept="video/*">
+<div>
+  <button class="btn" id="afwVthGo" type="button"></button>
+  <a id="afwVthDl" style="display:none" class="btn"></a>
+</div>
+<video id="afwVthVideo" controls></video>
+<img id="afwVthImg" alt="">
+<div class="meta" id="afwVthMeta"></div>
+<script>
+(function(){
+var root=document.querySelector('.afw-vth');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{go:'Capture frame',dl:'Download PNG',pick:'Choose a video first',meta:'Seek to the moment you want, pause, then capture. Capturing a paused video may fail in some browsers — capturing during playback is more reliable.'},
+ ja:{go:'フレームをキャプチャ',dl:'PNGをダウンロード',pick:'先に動画を選択してください',meta:'目的の場面でシークして一時停止し、キャプチャします。一時停止中のキャプチャは一部ブラウザで失敗するため、再生中のキャプチャが確実です。'},
+ zh:{go:'截取帧',dl:'下载 PNG',pick:'请先选择视频',meta:'拖动到想要的画面并暂停，然后截取。部分浏览器暂停状态下截取会失败，播放中截取更可靠。'}
+}[L]||I.en;
+document.getElementById('afwVthGo').textContent=I.go;
+document.getElementById('afwVthDl').textContent=I.dl;
+document.getElementById('afwVthMeta').textContent=I.meta;
+var file=document.getElementById('afwVthFile'),video=document.getElementById('afwVthVideo'),img=document.getElementById('afwVthImg'),dl=document.getElementById('afwVthDl');
+file.addEventListener('change',function(){if(!file.files[0])return;video.src=URL.createObjectURL(file.files[0]);dl.style.display='none';});
+document.getElementById('afwVthGo').addEventListener('click',function(){
+  if(!video.src){alert(I.pick);return;}
+  var c=document.createElement('canvas');
+  c.width=video.videoWidth||1280;c.height=video.videoHeight||720;
+  c.getContext('2d').drawImage(video,0,0);
+  var url=c.toDataURL('image/png');
+  img.src=url;dl.href=url;dl.download='frame.png';dl.style.display='inline-block';
+});
+})();
+</script>
+</div>
