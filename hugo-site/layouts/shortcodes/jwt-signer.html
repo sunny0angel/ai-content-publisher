@@ -1,0 +1,64 @@
+<div class="afw-tool afw-jwts" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-jwts{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-jwts textarea,.afw-jwts input[type=text],.afw-jwts input[type=password]{width:100%;box-sizing:border-box;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.55;border:1px solid #cbd5e1;border-radius:8px;padding:.65rem .8rem;background:#fff;color:#1e293b}
+.afw-jwts textarea{min-height:90px;resize:vertical}
+.afw-jwts label{display:block;font-size:.85rem;font-weight:600;margin:.6rem 0 .35rem;color:#334155}
+.afw-jwts .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem 0}
+.afw-jwts .btn:hover{background:#1d4ed8}
+.afw-jwts .btn.sec{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;margin-left:.4rem}
+.afw-jwts .btn.sec:hover{background:#e2e8f0}
+.afw-jwts .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem}
+.afw-jwts .msg.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.afw-jwts .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.afw-jwts .tok{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:.9rem 1rem;margin-top:.6rem;word-break:break-all;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;color:#0f172a;max-height:160px;overflow:auto}
+.afw-jwts .note{font-size:.82rem;color:#64748b;margin-top:.7rem;line-height:1.5}
+</style>
+<label class="lbl-hdr"></label>
+<textarea id="afwJwtsHdr">{"alg":"HS256","typ":"JWT"}</textarea>
+<label class="lbl-pay"></label>
+<textarea id="afwJwtsPay">{"sub":"1234567890","name":"Ada","exp":1893456000}</textarea>
+<label class="lbl-sec"></label>
+<input type="password" id="afwJwtsSec" placeholder="your-256-bit-secret">
+<div>
+  <button class="btn" id="afwJwtsGen" type="button"></button>
+  <button class="btn sec" id="afwJwtsCopy" type="button"></button>
+</div>
+<div class="msg" id="afwJwtsMsg" hidden></div>
+<div class="tok" id="afwJwtsOut"></div>
+<div class="note" id="afwJwtsNote"></div>
+<script>
+(function(){
+var root=document.querySelector('.afw-jwts');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{hdr:'Header (JSON)',pay:'Payload (JSON)',sec:'Secret (HS256)',gen:'Sign JWT',copy:'Copy token',ok:'Signed ✓',err:'Invalid JSON or missing secret',note:'The secret is used only in this tab to compute the HMAC-SHA256 signature — it is never transmitted anywhere. Anyone with the secret can forge tokens: guard it like a password. This tool signs; the JWT decoder verifies nothing without a key.'},
+ ja:{hdr:'ヘッダー（JSON）',pay:'ペイロード（JSON）',sec:'秘密鍵（HS256）',gen:'JWTに署名',copy:'トークンをコピー',ok:'署名完了 ✓',err:'JSONが不正、または秘密鍵が空です',note:'秘密鍵はこのタブ内でHMAC-SHA256署名の計算にのみ使われ、どこにも送信されません。鍵を持つ者は誰でもトークンを偽造できます——パスワード同様に管理してください。このツールは署名を行い、デコーダーは鍵なしでは検証しません。'},
+ zh:{hdr:'Header（JSON）',pay:'Payload（JSON）',sec:'密钥（HS256）',gen:'签发 JWT',copy:'复制 token',ok:'已签发 ✓',err:'JSON 无效或密钥为空',note:'密钥仅在本标签页内用于计算 HMAC-SHA256 签名，绝不会发送到任何地方。任何持有密钥的人都能伪造 token——请像密码一样保管。本工具负责签发；解码器在无密钥时不做验证。'}
+}[L]||I.en;
+document.querySelector('.afw-jwts .lbl-hdr').textContent=I.hdr;
+document.querySelector('.afw-jwts .lbl-pay').textContent=I.pay;
+document.querySelector('.afw-jwts .lbl-sec').textContent=I.sec;
+document.getElementById('afwJwtsGen').textContent=I.gen;
+document.getElementById('afwJwtsCopy').textContent=I.copy;
+document.getElementById('afwJwtsNote').textContent=I.note;
+var msg=document.getElementById('afwJwtsMsg'),out=document.getElementById('afwJwtsOut');
+function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
+function b64url(bytes){var bin='';for(var i=0;i<bytes.length;i++)bin+=String.fromCharCode(bytes[i]);return btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+function enc(s){return new TextEncoder().encode(s);}
+document.getElementById('afwJwtsGen').addEventListener('click',function(){
+  var h,p,sec=document.getElementById('afwJwtsSec').value;
+  if(!sec){show(I.err,false);return;}
+  try{h=JSON.parse(document.getElementById('afwJwtsHdr').value);p=JSON.parse(document.getElementById('afwJwtsPay').value);}catch(e){show(I.err,false);return;}
+  var hp=b64url(enc(JSON.stringify(h))),pp=b64url(enc(JSON.stringify(p)));
+  crypto.subtle.importKey('raw',enc(sec),{name:'HMAC',hash:'SHA-256'},false,['sign']).then(function(key){
+    return crypto.subtle.sign('HMAC',key,enc(hp+'.'+pp));
+  }).then(function(sig){
+    out.textContent=hp+'.'+pp+'.'+b64url(new Uint8Array(sig));
+    show(I.ok,true);
+  });
+});
+document.getElementById('afwJwtsCopy').addEventListener('click',function(){if(!out.textContent)return;navigator.clipboard&&navigator.clipboard.writeText(out.textContent);});
+})();
+</script>
+</div>

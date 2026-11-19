@@ -1,0 +1,110 @@
+<div class="afw-tool afw-pc" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-pc{max-width:860px;margin:1.5rem 0;font-family:inherit}
+.afw-pc textarea,.afw-pc input[type=text],.afw-pc input[type=password]{width:100%;box-sizing:border-box;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.55;border:1px solid #cbd5e1;border-radius:8px;padding:.65rem .8rem;background:#fff;color:#1e293b}
+.afw-pc textarea{min-height:110px;resize:vertical}
+.afw-pc label{display:block;font-size:.85rem;font-weight:600;margin:.6rem 0 .35rem;color:#334155}
+.afw-pc .grid{display:flex;gap:.8rem;flex-wrap:wrap}
+.afw-pc .grid>div{flex:1;min-width:280px}
+.afw-pc .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem .4rem .6rem 0}
+.afw-pc .btn:hover{background:#1d4ed8}
+.afw-pc .btn.sec{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1}
+.afw-pc .btn.sec:hover{background:#e2e8f0}
+.afw-pc .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem}
+.afw-pc .msg.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.afw-pc .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.afw-pc .res{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:.8rem .9rem;white-space:pre-wrap;word-break:break-word;font-size:.92rem;line-height:1.6;color:#0f172a;min-height:120px;max-height:300px;overflow:auto}
+.afw-pc .meta{font-size:.78rem;color:#64748b;margin-top:.3rem}
+.afw-pc .note{font-size:.82rem;color:#64748b;margin-top:.7rem;line-height:1.5}
+</style>
+<label class="lbl-cfg"></label>
+<div class="grid">
+  <div><label class="lbl-base"></label><input type="text" id="afwPcBase" value="https://api.openai.com/v1"></div>
+  <div><label class="lbl-model"></label><input type="text" id="afwPcModel" placeholder="gpt-5.6-luna"></div>
+  <div><label class="lbl-key"></label><input type="password" id="afwPcKey" placeholder="sk-..."></div>
+</div>
+<label class="lbl-sys"></label>
+<textarea id="afwPcSys" rows="2" placeholder="You are a helpful assistant."></textarea>
+<div class="grid">
+  <div><label class="lbl-a"></label><textarea id="afwPcA" placeholder="Prompt A…"></textarea></div>
+  <div><label class="lbl-b"></label><textarea id="afwPcB" placeholder="Prompt B…"></textarea></div>
+</div>
+<div>
+  <button class="btn" id="afwPcRun" type="button"></button>
+  <button class="btn sec" id="afwPcClear" type="button"></button>
+</div>
+<div class="msg" id="afwPcMsg" hidden></div>
+<div class="grid">
+  <div><label class="lbl-outa"></label><div class="res" id="afwPcOutA"></div><div class="meta" id="afwPcMetaA"></div></div>
+  <div><label class="lbl-outb"></label><div class="res" id="afwPcOutB"></div><div class="meta" id="afwPcMetaB"></div></div>
+</div>
+<div class="note" id="afwPcNote"></div>
+<script>
+(function(){
+var root=document.querySelector('.afw-pc');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{cfg:'API config',base:'Base URL (OpenAI-compatible)',model:'Model',key:'API key',sys:'System prompt',a:'Prompt A',b:'Prompt B',run:'Run both',clear:'Clear outputs',outa:'Output A',outb:'Output B',err:'Request failed',need:'Set base URL, model, key, and both prompts',note:'Your API key and prompts stay in this tab: requests go directly from your browser to the API base URL you entered. Nothing passes through this site — it has no backend. Key is saved to localStorage for convenience; delete it when using a shared computer.'},
+ ja:{cfg:'API設定',base:'ベースURL（OpenAI互換）',model:'モデル',key:'APIキー',sys:'システムプロンプト',a:'プロンプトA',b:'プロンプトB',run:'両方実行',clear:'出力をクリア',outa:'出力A',outb:'出力B',err:'リクエスト失敗',need:'ベースURL・モデル・キー・両プロンプトを設定してください',note:'APIキーとプロンプトはこのタブ内に留まります：リクエストはブラウザから入力したAPIベースURLへ直接送信されます。このサイトを経由しません——バックエンドがありません。キーは利便性のためlocalStorageに保存されます。共有PCでは削除してください。'},
+ zh:{cfg:'API 配置',base:'Base URL（OpenAI 兼容）',model:'模型',key:'API key',sys:'系统提示词',a:'Prompt A',b:'Prompt B',run:'同时运行',clear:'清空输出',outa:'输出 A',outb:'输出 B',err:'请求失败',need:'请填写 Base URL、模型、key 和两个提示词',note:'你的 API key 和提示词只留在本标签页：请求从浏览器直接发往你填写的 API Base URL，不经过本站——本站没有后端。key 为方便起见存在 localStorage；共用电脑请删除。'}
+}[L]||I.en;
+document.querySelector('.afw-pc .lbl-cfg').textContent=I.cfg;
+document.querySelector('.afw-pc .lbl-base').textContent=I.base;
+document.querySelector('.afw-pc .lbl-model').textContent=I.model;
+document.querySelector('.afw-pc .lbl-key').textContent=I.key;
+document.querySelector('.afw-pc .lbl-sys').textContent=I.sys;
+document.querySelector('.afw-pc .lbl-a').textContent=I.a;
+document.querySelector('.afw-pc .lbl-b').textContent=I.b;
+document.getElementById('afwPcRun').textContent=I.run;
+document.getElementById('afwPcClear').textContent=I.clear;
+document.querySelector('.afw-pc .lbl-outa').textContent=I.outa;
+document.querySelector('.afw-pc .lbl-outb').textContent=I.outb;
+document.getElementById('afwPcNote').textContent=I.note;
+var msg=document.getElementById('afwPcMsg');
+function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
+try{
+  var saved=JSON.parse(localStorage.getItem('afw-pc')||'{}');
+  document.getElementById('afwPcBase').value=saved.base||'https://api.openai.com/v1';
+  document.getElementById('afwPcModel').value=saved.model||'';
+  document.getElementById('afwPcKey').value=saved.key||'';
+}catch(e){}
+function save(){
+  try{localStorage.setItem('afw-pc',JSON.stringify({base:document.getElementById('afwPcBase').value,model:document.getElementById('afwPcModel').value,key:document.getElementById('afwPcKey').value}));}catch(e){}
+}
+function run(side,prompt){
+  var base=document.getElementById('afwPcBase').value.replace(/\/+$/,'');
+  var model=document.getElementById('afwPcModel').value;
+  var key=document.getElementById('afwPcKey').value;
+  var sys=document.getElementById('afwPcSys').value;
+  save();
+  var t0=Date.now();
+  var messages=[];if(sys.trim())messages.push({role:'system',content:sys});
+  messages.push({role:'user',content:prompt});
+  return fetch(base+'/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},body:JSON.stringify({model:model,messages:messages})})
+    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+    .then(function(d){
+      var text=d.choices&&d.choices[0]&&d.choices[0].message?d.choices[0].message.content:'';
+      var meta=(d.usage?(d.usage.prompt_tokens+' + '+d.usage.completion_tokens+' tokens, '):'')+(Date.now()-t0)+'ms';
+      document.getElementById('afwPcOut'+side).textContent=text||'(empty)';
+      document.getElementById('afwPcMeta'+side).textContent=meta;
+      return true;
+    })
+    .catch(function(e){
+      document.getElementById('afwPcOut'+side).textContent=I.err+': '+e.message;
+      document.getElementById('afwPcMeta'+side).textContent='';
+      throw e;
+    });
+}
+document.getElementById('afwPcRun').addEventListener('click',function(){
+  var a=document.getElementById('afwPcA').value.trim(),b=document.getElementById('afwPcB').value.trim();
+  if(!a||!b||!document.getElementById('afwPcKey').value||!document.getElementById('afwPcModel').value){show(I.need,false);return;}
+  msg.hidden=true;
+  Promise.allSettled([run('A',a),run('B',b)]);
+});
+document.getElementById('afwPcClear').addEventListener('click',function(){
+  document.getElementById('afwPcOutA').textContent='';document.getElementById('afwPcMetaA').textContent='';
+  document.getElementById('afwPcOutB').textContent='';document.getElementById('afwPcMetaB').textContent='';
+});
+})();
+</script>
+</div>

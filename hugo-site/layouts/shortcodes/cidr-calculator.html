@@ -1,0 +1,72 @@
+<div class="afw-tool afw-cidr" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-cidr{max-width:860px;margin:1.5rem 0;font-family:inherit}
+.afw-cidr input[type=text]{width:100%;box-sizing:border-box;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.6rem .8rem;background:#fff;color:#1e293b}
+.afw-cidr label{display:block;font-size:.85rem;font-weight:600;margin:.6rem 0 .35rem;color:#334155}
+.afw-cidr .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem 0}
+.afw-cidr .btn:hover{background:#1d4ed8}
+.afw-cidr .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem}
+.afw-cidr .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.afw-cidr .out{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:.9rem 1rem;margin-top:.6rem}
+.afw-cidr .row{display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px dashed #e2e8f0;font-size:.92rem;color:#334155;flex-wrap:wrap;gap:.3rem}
+.afw-cidr .row:last-child{border-bottom:none}
+.afw-cidr .row b{color:#0f172a;font-family:ui-monospace,Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+.afw-cidr table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:.5rem}
+.afw-cidr th,.afw-cidr td{border:1px solid #e2e8f0;padding:.3rem .5rem;text-align:left;font-family:ui-monospace,Menlo,Consolas,monospace}
+.afw-cidr th{background:#f1f5f9;color:#334155}
+</style>
+<label class="lbl-in"></label>
+<input type="text" id="afwCidrIn" placeholder="192.168.1.0/24">
+<div>
+  <button class="btn" id="afwCidrCalc" type="button"></button>
+</div>
+<div class="msg" id="afwCidrMsg" hidden></div>
+<div class="out" id="afwCidrOut" hidden></div>
+<script>
+(function(){
+var root=document.querySelector('.afw-cidr');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{input:'CIDR (IPv4, e.g. 192.168.1.0/24)',calc:'Calculate',err:'Invalid IPv4 CIDR — use the form a.b.c.d/0-32',network:'Network address',broadcast:'Broadcast',first:'First host',last:'Last host',hosts:'Total addresses',usable:'Usable hosts',mask:'Subnet mask',wildcard:'Wildcard mask',class:'Class',subnets:'Split into /29 subnets'},
+ ja:{input:'CIDR（IPv4、例: 192.168.1.0/24）',calc:'計算',err:'不正なIPv4 CIDRです——a.b.c.d/0-32 の形式で',network:'ネットワークアドレス',broadcast:'ブロードキャスト',first:'最初のホスト',last:'最後のホスト',hosts:'総アドレス数',usable:'利用可能ホスト数',mask:'サブネットマスク',wildcard:'ワイルドカードマスク',class:'クラス',subnets:'/29サブネットに分割'},
+ zh:{input:'CIDR（IPv4，如 192.168.1.0/24）',calc:'计算',err:'IPv4 CIDR 无效——请使用 a.b.c.d/0-32 格式',network:'网络地址',broadcast:'广播地址',first:'首个主机',last:'末个主机',hosts:'地址总数',usable:'可用主机数',mask:'子网掩码',wildcard:'通配符掩码',class:'类别',subnets:'拆分为 /29 子网'}
+}[L]||I.en;
+document.querySelector('.afw-cidr .lbl-in').textContent=I.input;
+document.getElementById('afwCidrCalc').textContent=I.calc;
+var msg=document.getElementById('afwCidrMsg'),out=document.getElementById('afwCidrOut');
+function showErr(t){msg.hidden=false;msg.className='msg err';msg.textContent=t;}
+function dots(n){return [(n>>24n)&255n,(n>>16n)&255n,(n>>8n)&255n,n&255n].join('.');}
+document.getElementById('afwCidrCalc').addEventListener('click',function(){
+  var v=document.getElementById('afwCidrIn').value.trim();msg.hidden=true;
+  var m=v.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})\/(\d{1,2})$/);
+  if(!m){showErr(I.err);return;}
+  var o=[+m[1],+m[2],+m[3],+m[4]],p=+m[5];
+  if(o.some(function(x){return x>255;})||p>32){showErr(I.err);return;}
+  var ip=BigInt(o[0])*2n**24n+BigInt(o[1])*2n**16n+BigInt(o[2])*2n**8n+BigInt(o[3]);
+  var mask=p===0?0n:((1n<<32n)-1n)^((1n<<(32n-p))-1n);
+  var net=ip&mask,br=net|((1n<<(32n-p))-1n);
+  var total=2n**(32n-p);
+  var first=p>=31?net:net+1n,last=p>=31?br:br-1n;
+  var cls=o[0]<128?'A':(o[0]<192?'B':(o[0]<224?'C':(o[0]<240?'D':'E')));
+  var html='<div class=row><span>'+I.network+'</span><b>'+dots(net)+'</b></div>'
+    +'<div class=row><span>'+I.broadcast+'</span><b>'+dots(br)+'</b></div>'
+    +'<div class=row><span>'+I.first+'</span><b>'+dots(first)+'</b></div>'
+    +'<div class=row><span>'+I.last+'</span><b>'+dots(last)+'</b></div>'
+    +'<div class=row><span>'+I.hosts+'</span><b>'+total+'</b></div>'
+    +'<div class=row><span>'+I.usable+'</span><b>'+(total>2n?total-2n:total)+'</b></div>'
+    +'<div class=row><span>'+I.mask+'</span><b>'+dots(mask)+'</b></div>'
+    +'<div class=row><span>'+I.wildcard+'</span><b>'+dots(mask^((1n<<32n)-1n))+'</b></div>'
+    +'<div class=row><span>'+I.class+'</span><b>'+cls+'</b></div>';
+  var sub=Math.min(p+3,32);
+  if(sub>p){
+    var count=2n**(sub-p),size=total/count,names=[];
+    for(var i=0n;i<count;i++)names.push(dots(net+i*size)+'/'+sub);
+    html+='<div class=row><span>'+I.subnets+'（'+count+'）</span></div><table><tr><th>#</th><th>CIDR</th><th>'+I.hosts+'</th></tr>';
+    for(var j=0;j<names.length&&j<16;j++)html+='<tr><td>'+(j+1)+'</td><td>'+names[j]+'</td><td>'+size+'</td></tr>';
+    html+='</table>';
+  }
+  out.innerHTML=html;out.hidden=false;
+});
+})();
+</script>
+</div>

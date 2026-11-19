@@ -1,0 +1,155 @@
+<div class="afw-tool afw-rv" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-rv{max-width:900px;margin:1.5rem 0;font-family:inherit}
+.afw-rv input[type=text]{width:100%;box-sizing:border-box;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.6rem .8rem;background:#fff;color:#1e293b}
+.afw-rv label{display:block;font-size:.85rem;font-weight:600;margin:.6rem 0 .35rem;color:#334155}
+.afw-rv .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem 0}
+.afw-rv .btn:hover{background:#1d4ed8}
+.afw-rv .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem}
+.afw-rv .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.afw-rv .msg.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.afw-rv .wrap{overflow-x:auto;background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:.8rem;margin-top:.6rem}
+.afw-rv svg{display:block}
+.afw-rv .note{font-size:.82rem;color:#64748b;margin-top:.7rem;line-height:1.5}
+</style>
+<label class="lbl-in"></label>
+<input type="text" id="afwRvIn" placeholder="(\\d{4})-(\\d{2})-(\\d{2})|today">
+<div>
+  <button class="btn" id="afwRvRun" type="button"></button>
+</div>
+<div class="msg" id="afwRvMsg" hidden></div>
+<div class="wrap" id="afwRvWrap" hidden></div>
+<div class="note" id="afwRvNote"></div>
+<script>
+(function(){
+var root=document.querySelector('.afw-rv');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{input:'Regular expression',run:'Visualize',err:'Unsupported or invalid pattern — supported: literals, \\d \\w \\s ., [classes], (groups), (?:non-capturing), | alternation, * + ? {n} {n,m} quantifiers, ^ $ anchors',ok:'matches visualized',note:'A simplified railroad diagram of how the regex engine reads your pattern. Complex constructs (lookahead, backreferences) are not supported — those belong in a full engine, not a diagram.'},
+ ja:{input:'正規表現',run:'可視化',err:'未対応または不正なパターンです——対応: リテラル、\\d \\w \\s .、[文字クラス]、(グループ)、(?:非キャプチャ)、| 選択、* + ? {n} {n,m} 数量子、^ $ アンカー',ok:'を図示しました',note:'正規表現エンジンがパターンをどう読むかを示す簡易レールロード図です。先読み・後方参照などの複雑な構文は未対応——それらは図ではなくエンジン本体の領域です。'},
+ zh:{input:'正则表达式',run:'可视化',err:'不支持或无效的正则——支持：字面量、\\d \\w \\s .、[字符类]、(分组)、(?:非捕获)、| 分支、* + ? {n} {n,m} 量词、^ $ 锚点',ok:'已可视化',note:'这是正则引擎如何读取你的模式的简化铁路图。复杂结构（先行断言、反向引用）不支持——它们属于引擎本体，不属于图。'}
+}[L]||I.en;
+document.querySelector('.afw-rv .lbl-in').textContent=I.input;
+document.getElementById('afwRvRun').textContent=I.run;
+document.getElementById('afwRvNote').textContent=I.note;
+var msg=document.getElementById('afwRvMsg'),wrap=document.getElementById('afwRvWrap');
+function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
+var BOX_H=26,BOX_MIN_W=30,GAP=16;
+var src='',i=0;
+var CLS_LBL={'\\d':'digit','\\w':'word','\\s':'space','\\D':'not digit','\\W':'not word','\\S':'not space','\\.':'dot','\\n':'newline','\\t':'tab'};
+function atom(){
+  var n;
+  var c=src[i];
+  if(c==='('){
+    var cap=true;
+    if(src[i+1]==='?'&&src[i+2]===':'){cap=false;i+=3;}else i+=1;
+    var inner=seq(true);
+    if(src[i]!==')')throw new Error('unclosed group');
+    i++;
+    n={t:'group',cap:cap,child:inner};
+  } else if(c==='['){
+    var s='';i++;
+    while(i<src.length&&src[i]!==']'){s+=src[i];i++;}
+    if(src[i]!==']')throw new Error('unclosed class');
+    i++;n={t:'class',v:s};
+  } else if(c==='^'&&i===0){i++;n={t:'anchor',v:'start ^'};}
+  else if(c==='$'){i++;n={t:'anchor',v:'end $'};}
+  else if(c==='^'){i++;n={t:'literal',v:'^'};}
+  else if(c==='\\'){
+    var e='\\'+src[i+1];if(src[i+1]===undefined)throw new Error('bad escape');i+=2;
+    n={t:'literal',v:CLS_LBL[e]||e};
+  } else if(c===undefined){throw new Error('unexpected end');
+  } else {n={t:'literal',v:c};i++;}
+  var q=src[i];
+  if(q==='*'||q==='+'||q==='?'){n.q=q;i++;if(src[i]==='?'){n.q+='?';i++;}}
+  else if(q==='{'){
+    var mm=src.slice(i).match(/^\{(\d+)(,(\d+)?)?\}/);
+    if(mm){n.q=mm[0];i+=mm[0].length;}
+  }
+  return n;
+}
+function seq(inGroup){
+  var branches=[[]];
+  while(i<src.length){
+    var c=src[i];
+    if(c===')')break;
+    if(c==='|'){branches.push([]);i++;continue;}
+    branches[branches.length-1].push(atom());
+  }
+  if(branches.length===1)return {t:'seq',items:branches[0]};
+  return {t:'alt',branches:branches.map(function(b){return {t:'seq',items:b};})};
+}
+function label(n){
+  if(n.t==='class')return '['+n.v+']';
+  if(n.t==='anchor')return n.v;
+  return n.v;
+}
+function layout(n){
+  if(n.t==='seq'){
+    var w=0,h=BOX_H;
+    n.items.forEach(function(c){var l=layout(c);c._w=l.w;c._h=l.h;c._x=w;c._y=(l.h-BOX_H)/2;w+=l.w+GAP;h=Math.max(h,l.h);});
+    n.w=Math.max(w-GAP,BOX_MIN_W);n.h=h;return {w:n.w,h:n.h};
+  }
+  if(n.t==='alt'){
+    var maxw=0,total=0;
+    n.branches.forEach(function(b){var l=layout(b);b._w=l.w;b._h=l.h;maxw=Math.max(maxw,l.w);total+=l.h+GAP;});
+    n.w=maxw+80;n.h=total-GAP+16;return {w:n.w,h:n.h};
+  }
+  if(n.t==='group'){
+    var l=layout(n.child);n.child._w=l.w;n.child._h=l.h;
+    n.w=l.w+30;n.h=l.h+30;return {w:n.w,h:n.h};
+  }
+  var lbl=label(n);
+  n.w=Math.max(BOX_MIN_W,lbl.length*7.2+16);n.h=BOX_H;return {w:n.w,h:n.h};
+}
+var NS='http://www.w3.org/2000/svg';
+function el(name,attrs,parent){var e=document.createElementNS(NS,name);for(var k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e;}
+function draw(n,x,y,svg){
+  if(n.t==='seq'){n.items.forEach(function(c){draw(c,x+(c._x||0),y+(c._y||0),svg);});return;}
+  if(n.t==='alt'){
+    var cy=y+8,totalY=n.h-16,centerY=y+8+totalY/2,mids=[];
+    n.branches.forEach(function(b){mids.push(cy+b._h/2);cy+=b._h+GAP;});
+    var mx=Math.max.apply(null,n.branches.map(function(b){return b._w;}));
+    el('line',{x1:x,y1:mids[0],x2:x,y2:mids[mids.length-1],stroke:'#94a3b8','stroke-width':1.5},svg);
+    el('line',{x1:x,y1:centerY,x2:x+30,y2:centerY,stroke:'#94a3b8','stroke-width':1.5},svg);
+    var cy2=y+8;
+    n.branches.forEach(function(b,idx){
+      var by=cy2+(b._h-BOX_H)/2;
+      el('line',{x1:x,y1:mids[idx],x2:x+30,y2:mids[idx],stroke:'#94a3b8','stroke-width':1.5},svg);
+      draw(b,x+30,by,svg);
+      el('line',{x1:x+30+b._w,y1:mids[idx],x2:x+30+mx+25,y2:mids[idx],stroke:'#94a3b8','stroke-width':1.5},svg);
+      cy2+=b._h+GAP;
+    });
+    el('line',{x1:x+30+mx+25,y1:mids[0],x2:x+30+mx+25,y2:mids[mids.length-1],stroke:'#94a3b8','stroke-width':1.5},svg);
+    el('line',{x1:x+30+mx+25,y1:centerY,x2:x+30+mx+50,y2:centerY,stroke:'#94a3b8','stroke-width':1.5},svg);
+    return;
+  }
+  if(n.t==='group'){
+    el('rect',{x:x,y:y,width:n.w,height:n.h,rx:8,fill:'#f8fafc',stroke:'#94a3b8','stroke-width':1.2,'stroke-dasharray':'4 3'},svg);
+    el('text',{x:x+8,y:y+14,'font-size':10,fill:'#64748b'},svg).textContent=n.cap?'( … )':'( group )';
+    draw(n.child,x+15,y+24,svg);
+    return;
+  }
+  var fill=n.t==='class'?'#dbeafe':(n.t==='anchor'?'#fef3c7':'#e2e8f0');
+  var stroke=n.t==='class'?'#3b82f6':(n.t==='anchor'?'#d97706':'#64748b');
+  el('rect',{x:x,y:y,width:n.w,height:BOX_H,rx:5,fill:fill,stroke:stroke,'stroke-width':1.2},svg);
+  var txt=el('text',{x:x+n.w/2,y:y+17,'font-size':11.5,'text-anchor':'middle',fill:'#0f172a','font-family':'ui-monospace,Menlo,monospace'},svg);
+  txt.textContent=label(n);
+  if(n.q){var qt=el('text',{x:x+n.w+3,y:y-3,'font-size':10.5,fill:'#dc2626','font-weight':'600','font-family':'ui-monospace,Menlo,monospace'},svg);qt.textContent=n.q;}
+}
+function visualize(){
+  src=document.getElementById('afwRvIn').value;i=0;
+  try{
+    var tree=seq(false);
+    var l=layout(tree);
+    wrap.hidden=false;
+    wrap.innerHTML='';
+    var svg=el('svg',{width:l.w+20,height:l.h+30},wrap);
+    draw(tree,10,12,svg);
+    show(I.ok,true);
+  }catch(e){wrap.hidden=true;show(I.err,false);}
+}
+document.getElementById('afwRvRun').addEventListener('click',visualize);
+})();
+</script>
+</div>

@@ -1,0 +1,84 @@
+<div class="afw-tool afw-sql" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-sql{max-width:860px;margin:1.5rem 0;font-family:inherit}
+.afw-sql textarea{width:100%;box-sizing:border-box;min-height:180px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.55;border:1px solid #cbd5e1;border-radius:8px;padding:.7rem .85rem;background:#fff;color:#1e293b;resize:vertical}
+.afw-sql .panes{display:flex;gap:.8rem;flex-wrap:wrap}
+.afw-sql .panes>div{flex:1;min-width:280px}
+.afw-sql label{display:block;font-size:.85rem;font-weight:600;margin:.5rem 0 .35rem;color:#334155}
+.afw-sql pre{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:.7rem .85rem;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;line-height:1.55;white-space:pre;overflow:auto;min-height:180px;color:#0f172a;margin:0}
+.afw-sql .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem .4rem .6rem 0}
+.afw-sql .btn:hover{background:#1d4ed8}
+.afw-sql .btn.sec{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1}
+.afw-sql .btn.sec:hover{background:#e2e8f0}
+</style>
+<div class="panes">
+  <div><label class="lbl-in"></label><textarea id="afwSqlIn" placeholder="select id,name from users where age>18 order by name desc limit 10"></textarea></div>
+  <div><label class="lbl-out"></label><pre id="afwSqlOut"></pre></div>
+</div>
+<div>
+  <button class="btn" id="afwSqlFmt" type="button"></button>
+  <button class="btn sec" id="afwSqlCopy" type="button"></button>
+</div>
+<script>
+(function(){
+var root=document.querySelector('.afw-sql');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{input:'SQL input',output:'Formatted SQL',format:'Format SQL',copy:'Copy'},
+ ja:{input:'SQL入力',output:'整形済みSQL',format:'SQLを整形',copy:'コピー'},
+ zh:{input:'SQL 输入',output:'格式化后的 SQL',format:'格式化 SQL',copy:'复制'}
+}[L]||I.en;
+document.querySelector('.afw-sql .lbl-in').textContent=I.input;
+document.querySelector('.afw-sql .lbl-out').textContent=I.output;
+document.getElementById('afwSqlFmt').textContent=I.format;
+document.getElementById('afwSqlCopy').textContent=I.copy;
+var tin=document.getElementById('afwSqlIn'),tout=document.getElementById('afwSqlOut');
+var CLAUSE=new Set(['SELECT','FROM','WHERE','GROUP','ORDER','HAVING','LIMIT','OFFSET','UNION','VALUES','SET','JOIN','INNER','LEFT','RIGHT','FULL','CROSS','OUTER','ON','WITH','RETURNING','INSERT','INTO','UPDATE','DELETE','CASE','WHEN','THEN','ELSE','END','AND','OR','NOT','AS','CREATE','TABLE','DISTINCT','ALL','BETWEEN','LIKE','IN','IS','NULL','BY','DESC','ASC','EXISTS']);
+var MAJOR=new Set(['SELECT','FROM','WHERE','GROUP','ORDER','HAVING','LIMIT','OFFSET','UNION','VALUES','SET','JOIN','INNER','LEFT','RIGHT','FULL','CROSS','ON','WITH','INSERT','UPDATE','DELETE','RETURNING']);
+function tokenize(s){
+  var toks=[],i=0;
+  while(i<s.length){
+    var c=s[i];
+    if(/\s/.test(c)){i++;continue;}
+    if(c==="'"||c==='"'||c==='`'){var q=c,j=i+1,str='';while(j<s.length&&s[j]!==q){if(s[j]==='\\'&&j+1<s.length){str+=s[j]+s[j+1];j+=2;}else{str+=s[j];j++;}}toks.push({t:'str',v:q+str+q});i=j+1;continue;}
+    if(c==='['){var k=i+1,st='[';while(k<s.length&&s[k]!==']'){st+=s[k];k++;}st+=']';toks.push({t:'str',v:st});i=k+1;continue;}
+    if(c==='-'&&s[i+1]==='-'){var e=s.indexOf('\n',i);if(e<0)e=s.length;toks.push({t:'cm',v:s.slice(i,e)});i=e;continue;}
+    if(c==='/'&&s[i+1]==='*'){var e2=s.indexOf('*/',i+2);if(e2<0)e2=s.length;else e2+=2;toks.push({t:'cm',v:s.slice(i,e2)});i=e2;continue;}
+    if(/[A-Za-z_]/.test(c)){var m=i+1;while(m<s.length&&/[A-Za-z0-9_.$]/.test(s[m]))m++;toks.push({t:'w',v:s.slice(i,m)});i=m;continue;}
+    if(/[0-9]/.test(c)){var n2=i+1;while(n2<s.length&&/[0-9.]/.test(s[n2]))n2++;toks.push({t:'n',v:s.slice(i,n2)});i=n2;continue;}
+    toks.push({t:'p',v:c});i++;
+  }
+  return toks;
+}
+function format(s){
+  var toks=tokenize(s),out='',depth=0,lineStart=true,prev='',prevTok=null;
+  function nl(ind){return '\n'+'  '.repeat(Math.max(0,depth+ind));}
+  for(var i=0;i<toks.length;i++){
+    var tk=toks[i],up=tk.v.toUpperCase(),isWord=tk.t==='w'&&CLAUSE.has(up);
+    if(tk.t==='cm'){if(!lineStart)out+=' ';out+=tk.v;out+=nl(0);lineStart=true;prev='';prevTok=tk;continue;}
+    if(tk.v==='('){out+='(';depth++;lineStart=false;prev='(';prevTok=tk;continue;}
+    if(tk.v===')'){depth=Math.max(0,depth-1);out=out.replace(/[ ]+$/,'');out+=')';lineStart=false;prev=')';prevTok=tk;continue;}
+    if(tk.v===','){out=out.replace(/[ ]+$/,'')+', ';lineStart=false;prev=',';prevTok=tk;continue;}
+    if(tk.v===';'){out=out.replace(/[ ]+$/,'')+';'+nl(0);lineStart=true;prev=';';prevTok=tk;continue;}
+    var text=tk.t==='w'?(isWord?up:tk.v):tk.v;
+    if(isWord&&MAJOR.has(up)&&!(prev==='(')){
+      if(!lineStart){out+=nl(0);lineStart=true;}
+      out+=text+' ';prev=text;prevTok=tk;lineStart=false;continue;
+    }
+    if(isWord&&(up==='AND'||up==='OR')&&!(prev==='(')){
+      if(!lineStart){out+=nl(0);lineStart=true;}
+      out+=text+' ';prev=text;prevTok=tk;lineStart=false;continue;
+    }
+    if(isWord&&up==='THEN'){if(!lineStart){out+=nl(1);lineStart=true;}out+=text+' ';prev=text;prevTok=tk;lineStart=false;continue;}
+    if(isWord&&(up==='END'||up==='ELSE')){depth=Math.max(0,depth-0);if(!lineStart){out+=nl(-1)+'  ';lineStart=true;}else{out+='  ';}out+=text+' ';prev=text;prevTok=tk;lineStart=false;continue;}
+    if(lineStart){out+=text;lineStart=false;}
+    else{out+=(prev===','?'':' ')+text;}
+    prev=text;prevTok=tk;
+  }
+  return out.trim();
+}
+document.getElementById('afwSqlFmt').addEventListener('click',function(){tout.textContent=format(tin.value);});
+document.getElementById('afwSqlCopy').addEventListener('click',function(){if(!tout.textContent)return;navigator.clipboard&&navigator.clipboard.writeText(tout.textContent);});
+})();
+</script>
+</div>
