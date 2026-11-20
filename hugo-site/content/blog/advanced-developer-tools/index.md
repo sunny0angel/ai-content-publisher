@@ -55,7 +55,7 @@ All six share the properties that made the original 17 trustworthy: **local exec
   {"q": "Can the regex visualizer handle any regular expression?", "a": "No — it supports the practical subset: literals, common escapes, character classes, groups, alternation, quantifiers, and anchors. Lookahead, backreferences, and other advanced constructs are intentionally out of scope."},
   {"q": "Where does the prompt comparison tester send my data?", "a": "Directly from your browser to the API base URL you configure. This site has no backend, so your API key and prompts never pass through it. The key is saved locally in localStorage and should be removed on shared computers."},
   {"q": "Is the CIDR calculator limited to IPv4?", "a": "Yes, v1 covers IPv4 with exact BigInt arithmetic including /31 and /32 edge cases. IPv6 support is on the roadmap."},
-  {"q": "Are these tools really free with no account?", "a": "Yes. All 23 tools on the hub are static pages with no backend, no signup, and no usage limits."}
+  {"q": "Are these tools really free with no account?", "a": "Yes. All 66 tools on the hub are static pages with no backend, no signup, and no usage limits."}
 ]
 {{< /faq-schema >}}
 
