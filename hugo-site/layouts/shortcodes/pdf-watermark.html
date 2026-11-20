@@ -1,0 +1,79 @@
+<div class="afw-tool afw-pwm" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-pwm{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-pwm input[type=file]{font-size:.9rem;color:#334155}
+.afw-pwm input[type=text],.afw-pwm input[type=number],.afw-pwm input[type=range]{font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.5rem .6rem;background:#fff;color:#1e293b;margin:.4rem .6rem .4rem 0}
+.afw-pwm input[type=text]{min-width:220px}
+.afw-pwm input[type=number]{width:90px}
+.afw-pwm input[type=range]{padding:0;border:none;width:180px}
+.afw-pwm label{display:block;font-size:.85rem;font-weight:600;margin:.6rem 0 .35rem;color:#334155}
+.afw-pwm .row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:.4rem}
+.afw-pwm .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem .4rem 0 0}
+.afw-pwm .btn:hover{background:#1d4ed8}
+.afw-pwm .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem}
+.afw-pwm .msg.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.afw-pwm .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.afw-pwm .val{font-size:.82rem;color:#64748b;margin-left:.2rem}
+</style>
+<input type="file" id="afwPwmFile" accept=".pdf">
+<div class="row">
+  <div><label class="lbl-text"></label><input type="text" id="afwPwmText" value="CONFIDENTIAL"></div>
+  <div><label class="lbl-size"></label><input type="number" id="afwPwmSize" value="60" min="10" max="160"></div>
+  <div><label class="lbl-op"></label><input type="range" id="afwPwmOp" min="5" max="100" value="18"><span class="val" id="afwPwmOpV">18%</span></div>
+  <div><label class="lbl-rot"></label><input type="number" id="afwPwmRot" value="45" min="-90" max="90"></div>
+</div>
+<div>
+  <button class="btn" id="afwPwmGo" type="button"></button>
+</div>
+<div class="msg" id="afwPwmMsg" hidden></div>
+<script src="/js/vendor/pdf-lib.min.js" defer></script>
+<script>
+(function(){
+var root=document.querySelector('.afw-pwm');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{text:'Watermark text',size:'Font size',op:'Opacity',rot:'Rotation (°)',go:'Apply watermark',pick:'Select a PDF and enter text',done:'Watermark applied — download started',load:'PDF engine failed to load — please refresh'},
+ ja:{text:'透かし文字',size:'文字サイズ',op:'不透明度',rot:'回転（°）',go:'透かしを適用',pick:'PDFと文字を入力してください',done:'透かしを適用しました——ダウンロード開始',load:'PDFエンジンの読み込みに失敗——再読み込みしてください'},
+ zh:{text:'水印文字',size:'字号',op:'不透明度',rot:'旋转角（°）',go:'添加水印',pick:'请选择 PDF 并输入文字',done:'水印已添加——开始下载',load:'PDF 引擎加载失败——请刷新页面'}
+}[L]||I.en;
+document.querySelector('.afw-pwm .lbl-text').textContent=I.text;
+document.querySelector('.afw-pwm .lbl-size').textContent=I.size;
+document.querySelector('.afw-pwm .lbl-op').textContent=I.op;
+document.querySelector('.afw-pwm .lbl-rot').textContent=I.rot;
+document.getElementById('afwPwmGo').textContent=I.go;
+var file=document.getElementById('afwPwmFile'),msg=document.getElementById('afwPwmMsg'),
+    text=document.getElementById('afwPwmText'),size=document.getElementById('afwPwmSize'),
+    op=document.getElementById('afwPwmOp'),opv=document.getElementById('afwPwmOpV'),
+    rot=document.getElementById('afwPwmRot');
+op.addEventListener('input',function(){opv.textContent=op.value+'%';});
+function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
+function boot(fn){if(window.PDFLib){fn();return;}var n=0,t=setInterval(function(){if(window.PDFLib){clearInterval(t);fn();}else if(++n>160){clearInterval(t);show(I.load,false);}},50);}
+function dl(doc,name){doc.save().then(function(b){var blob=new Blob([b],{type:'application/pdf'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();});}
+document.getElementById('afwPwmGo').addEventListener('click',function(){
+  if(!file.files[0]||!text.value.trim()){show(I.pick,false);return;}
+  var content=text.value.trim();
+  var fs=Math.max(10,Math.min(160,parseInt(size.value,10)||60));
+  var alpha=Math.max(0.05,Math.min(1,parseInt(op.value,10)/100));
+  var angle=Math.max(-90,Math.min(90,parseInt(rot.value,10)||0))*Math.PI/180;
+  boot(async function(){
+    try{
+      var doc=await window.PDFLib.PDFDocument.load(await file.files[0].arrayBuffer());
+      var font=await doc.embedFont(window.PDFLib.StandardFonts.HelveticaBold);
+      doc.getPages().forEach(function(p){
+        var w=p.getWidth(),h=p.getHeight();
+        var tw=font.widthOfTextAtSize(content,fs);
+        p.drawText(content,{
+          x:(w-tw*Math.cos(angle))/2,
+          y:h/2-tw*Math.sin(angle)/2,
+          size:fs,font:font,rotate:window.PDFLib.degrees(angle*180/Math.PI),
+          color:window.PDFLib.rgb(0.5,0.5,0.5),opacity:alpha
+        });
+      });
+      dl(doc,'watermarked.pdf');
+      show(I.done,true);
+    }catch(e){show(e.message,false);}
+  });
+});
+})();
+</script>
+</div>

@@ -1,0 +1,55 @@
+<div class="afw-tool afw-pdup" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-pdup{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-pdup input[type=file]{font-size:.9rem;color:#334155}
+.afw-pdup input[type=number]{font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.5rem .6rem;background:#fff;color:#1e293b;margin:.4rem .6rem .4rem 0;width:70px}
+.afw-pdup label{display:block;font-size:.85rem;font-weight:600;margin:.6rem 0 .35rem;color:#334155}
+.afw-pdup .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem .4rem 0 0}
+.afw-pdup .btn:hover{background:#1d4ed8}
+.afw-pdup .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem}
+.afw-pdup .msg.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.afw-pdup .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+</style>
+<input type="file" id="afwPdupFile" accept=".pdf">
+<label class="lbl-mode"></label>
+<input type="number" id="afwPdupN" value="2" min="1" max="20">
+<div>
+  <button class="btn" id="afwPdupGo" type="button"></button>
+</div>
+<div class="msg" id="afwPdupMsg" hidden></div>
+<script src="/js/vendor/pdf-lib.min.js" defer></script>
+<script>
+(function(){
+var root=document.querySelector('.afw-pdup');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{mode:'Copy the whole document N times',go:'Duplicate and download',pick:'Select a PDF first',done:'Duplicated — download started'},
+ ja:{mode:'文書全体をN回コピー',go:'複製してダウンロード',pick:'先にPDFを選択してください',done:'複製完了——ダウンロード開始'},
+ zh:{mode:'把整个文档复制 N 次',go:'复制并下载',pick:'请先选择 PDF',done:'已复制——开始下载'}
+}[L]||I.en;
+document.querySelector('.afw-pdup .lbl-mode').textContent=I.mode;
+document.getElementById('afwPdupGo').textContent=I.go;
+var file=document.getElementById('afwPdupFile'),n=document.getElementById('afwPdupN'),msg=document.getElementById('afwPdupMsg');
+function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
+function boot(fn){if(window.PDFLib){fn();return;}var n=0,t=setInterval(function(){if(window.PDFLib){clearInterval(t);fn();}else if(++n>160){clearInterval(t);show(I.load||'PDF engine failed to load — please refresh',false);}},50);}
+function dl(doc,name){doc.save().then(function(b){var blob=new Blob([b],{type:'application/pdf'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();});}
+document.getElementById('afwPdupGo').addEventListener('click',function(){
+  if(!file.files[0]){show(I.pick,false);return;}
+  var count=Math.max(1,Math.min(20,parseInt(n.value,10)||1));
+  boot(async function(){
+    try{
+      var src=await window.PDFLib.PDFDocument.load(await file.files[0].arrayBuffer());
+      var out=await window.PDFLib.PDFDocument.create();
+      var idx=src.getPageIndices();
+      for(var c=0;c<count;c++){
+        var pages=await out.copyPages(src,idx);
+        pages.forEach(function(p){out.addPage(p);});
+      }
+      dl(out,'duplicated.pdf');
+      show(I.done,true);
+    }catch(e){show(e.message,false);}
+  });
+});
+})();
+</script>
+</div>

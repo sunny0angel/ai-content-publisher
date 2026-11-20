@@ -1,0 +1,56 @@
+<div class="afw-tool afw-pres" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-pres{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-pres input[type=file]{font-size:.9rem;color:#334155}
+.afw-pres select{font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.5rem .6rem;background:#fff;color:#1e293b;margin:.4rem .6rem .4rem 0}
+.afw-pres label{display:block;font-size:.85rem;font-weight:600;margin:.6rem 0 .35rem;color:#334155}
+.afw-pres .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem .4rem 0 0}
+.afw-pres .btn:hover{background:#1d4ed8}
+.afw-pres .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem}
+.afw-pres .msg.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.afw-pres .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+</style>
+<input type="file" id="afwPresFile" accept=".pdf">
+<label class="lbl-mode"></label>
+<select id="afwPresSize">
+  <option value="a4">A4 (595×842)</option>
+  <option value="letter">Letter (612×792)</option>
+  <option value="a3">A3 (842×1191)</option>
+  <option value="legal">Legal (612×1008)</option>
+</select>
+<div>
+  <button class="btn" id="afwPresGo" type="button"></button>
+</div>
+<div class="msg" id="afwPresMsg" hidden></div>
+<script src="/js/vendor/pdf-lib.min.js" defer></script>
+<script>
+(function(){
+var root=document.querySelector('.afw-pres');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{mode:'Resize all pages to',go:'Resize and download',pick:'Select a PDF first',done:'Resized — download started'},
+ ja:{mode:'全ページのサイズを変更',go:'サイズ変更してダウンロード',pick:'先にPDFを選択してください',done:'サイズ変更完了——ダウンロード開始'},
+ zh:{mode:'调整全部页面尺寸为',go:'调整并下载',pick:'请先选择 PDF',done:'已调整——开始下载'}
+}[L]||I.en;
+document.querySelector('.afw-pres .lbl-mode').textContent=I.mode;
+document.getElementById('afwPresGo').textContent=I.go;
+var file=document.getElementById('afwPresFile'),sel=document.getElementById('afwPresSize'),msg=document.getElementById('afwPresMsg');
+var SIZES={a4:[595,842],letter:[612,792],a3:[842,1191],legal:[612,1008]};
+function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
+function boot(fn){if(window.PDFLib){fn();return;}var n=0,t=setInterval(function(){if(window.PDFLib){clearInterval(t);fn();}else if(++n>160){clearInterval(t);show(I.load||'PDF engine failed to load — please refresh',false);}},50);}
+function dl(doc,name){doc.save().then(function(b){var blob=new Blob([b],{type:'application/pdf'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();});}
+document.getElementById('afwPresGo').addEventListener('click',function(){
+  if(!file.files[0]){show(I.pick,false);return;}
+  var s=SIZES[sel.value];
+  boot(async function(){
+    try{
+      var doc=await window.PDFLib.PDFDocument.load(await file.files[0].arrayBuffer());
+      doc.getPages().forEach(function(p){p.setSize(s[0],s[1]);});
+      dl(doc,'resized.pdf');
+      show(I.done,true);
+    }catch(e){show(e.message,false);}
+  });
+});
+})();
+</script>
+</div>

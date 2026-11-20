@@ -1,0 +1,66 @@
+<div class="afw-tool afw-pdel" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-pdel{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-pdel input[type=file]{font-size:.9rem;color:#334155}
+.afw-pdel input[type=text]{font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.5rem .6rem;background:#fff;color:#1e293b;margin:.4rem .6rem .4rem 0}
+.afw-pdel label{display:block;font-size:.85rem;font-weight:600;margin:.6rem 0 .35rem;color:#334155}
+.afw-pdel .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem .4rem 0 0}
+.afw-pdel .btn:hover{background:#1d4ed8}
+.afw-pdel .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem}
+.afw-pdel .msg.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.afw-pdel .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+</style>
+<input type="file" id="afwPdFile" accept=".pdf">
+<label class="lbl-mode"></label>
+<input type="text" id="afwPdRange" placeholder="2, 4-6">
+<div>
+  <button class="btn" id="afwPdGo" type="button"></button>
+</div>
+<div class="msg" id="afwPdMsg" hidden></div>
+<script src="/js/vendor/pdf-lib.min.js" defer></script>
+<script>
+(function(){
+var root=document.querySelector('.afw-pdel');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{mode:'Pages to delete (e.g. "2, 4-6"; 1-based)',go:'Delete pages and download',pick:'Select a PDF and page range',done:'Pages deleted — download started'},
+ ja:{mode:'削除するページ（例: "2, 4-6"、1始まり）',go:'ページを削除してダウンロード',pick:'PDFとページ範囲を指定してください',done:'ページ削除完了——ダウンロード開始'},
+ zh:{mode:'要删除的页（如 "2, 4-6"，从 1 起）',go:'删除页面并下载',pick:'请选择 PDF 并填写页码范围',done:'页面已删除——开始下载'}
+}[L]||I.en;
+document.querySelector('.afw-pdel .lbl-mode').textContent=I.mode;
+document.getElementById('afwPdGo').textContent=I.go;
+var file=document.getElementById('afwPdFile'),range=document.getElementById('afwPdRange'),msg=document.getElementById('afwPdMsg');
+function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
+function boot(fn){if(window.PDFLib){fn();return;}var n=0,t=setInterval(function(){if(window.PDFLib){clearInterval(t);fn();}else if(++n>160){clearInterval(t);show(I.load||'PDF engine failed to load — please refresh',false);}},50);}
+function dl(doc,name){doc.save().then(function(b){var blob=new Blob([b],{type:'application/pdf'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();});}
+function parseRange(s){
+  var idx=[];
+  s.split(',').forEach(function(part){
+    part=part.trim();
+    var m=part.match(/^(\d+)\s*-\s*(\d+)$/);
+    if(m){for(var i=+m[1];i<=+m[2];i++)idx.push(i-1);}
+    else if(/^\d+$/.test(part)){idx.push(+part-1);}
+  });
+  return idx;
+}
+document.getElementById('afwPdGo').addEventListener('click',function(){
+  if(!file.files[0]||!range.value.trim()){show(I.pick,false);return;}
+  var del=parseRange(range.value);
+  if(!del.length){show(I.pick,false);return;}
+  boot(async function(){
+    try{
+      var src=await window.PDFLib.PDFDocument.load(await file.files[0].arrayBuffer());
+      var total=src.getPageCount();
+      var keep=[];
+      for(var i=0;i<total;i++){if(del.indexOf(i)<0)keep.push(i);}
+      var out=await window.PDFLib.PDFDocument.create();
+      var pages=await out.copyPages(src,keep);
+      pages.forEach(function(p){out.addPage(p);});
+      dl(out,'deleted.pdf');
+      show(I.done,true);
+    }catch(e){show(e.message,false);}
+  });
+});
+})();
+</script>
+</div>

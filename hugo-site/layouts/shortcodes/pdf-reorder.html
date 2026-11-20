@@ -1,0 +1,55 @@
+<div class="afw-tool afw-preo" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-preo{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-preo input[type=file]{font-size:.9rem;color:#334155}
+.afw-preo input[type=text]{font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.5rem .6rem;background:#fff;color:#1e293b;margin:.4rem .6rem .4rem 0;width:100%;box-sizing:border-box}
+.afw-preo label{display:block;font-size:.85rem;font-weight:600;margin:.6rem 0 .35rem;color:#334155}
+.afw-preo .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem .4rem 0 0}
+.afw-preo .btn:hover{background:#1d4ed8}
+.afw-preo .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem}
+.afw-preo .msg.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.afw-preo .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+</style>
+<input type="file" id="afwPreoFile" accept=".pdf">
+<label class="lbl-mode"></label>
+<input type="text" id="afwPreoOrder" placeholder="3, 1, 2, 5, 4">
+<div>
+  <button class="btn" id="afwPreoGo" type="button"></button>
+</div>
+<div class="msg" id="afwPreoMsg" hidden></div>
+<script src="/js/vendor/pdf-lib.min.js" defer></script>
+<script>
+(function(){
+var root=document.querySelector('.afw-preo');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{mode:'New page order (1-based, e.g. "3, 1, 2")',go:'Reorder and download',pick:'Select a PDF and enter the new order',done:'Reordered — download started'},
+ ja:{mode:'新しいページ順（1始まり、例: "3, 1, 2"）',go:'並べ替えてダウンロード',pick:'PDFと新しい順序を入力してください',done:'並べ替え完了——ダウンロード開始'},
+ zh:{mode:'新页面顺序（从 1 起，如 "3, 1, 2"）',go:'重排并下载',pick:'请选择 PDF 并填写新顺序',done:'已重排——开始下载'}
+}[L]||I.en;
+document.querySelector('.afw-preo .lbl-mode').textContent=I.mode;
+document.getElementById('afwPreoGo').textContent=I.go;
+var file=document.getElementById('afwPreoFile'),order=document.getElementById('afwPreoOrder'),msg=document.getElementById('afwPreoMsg');
+function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
+function boot(fn){if(window.PDFLib){fn();return;}var n=0,t=setInterval(function(){if(window.PDFLib){clearInterval(t);fn();}else if(++n>160){clearInterval(t);show(I.load||'PDF engine failed to load — please refresh',false);}},50);}
+function dl(doc,name){doc.save().then(function(b){var blob=new Blob([b],{type:'application/pdf'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();});}
+document.getElementById('afwPreoGo').addEventListener('click',function(){
+  if(!file.files[0]||!order.value.trim()){show(I.pick,false);return;}
+  var idx=order.value.split(',').map(function(x){return parseInt(x.trim(),10)-1;}).filter(function(i){return i>=0;});
+  if(!idx.length){show(I.pick,false);return;}
+  boot(async function(){
+    try{
+      var src=await window.PDFLib.PDFDocument.load(await file.files[0].arrayBuffer());
+      var total=src.getPageCount();
+      idx=idx.filter(function(i){return i<total;});
+      var out=await window.PDFLib.PDFDocument.create();
+      var pages=await out.copyPages(src,idx);
+      pages.forEach(function(p){out.addPage(p);});
+      dl(out,'reordered.pdf');
+      show(I.done,true);
+    }catch(e){show(e.message,false);}
+  });
+});
+})();
+</script>
+</div>

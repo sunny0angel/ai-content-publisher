@@ -1,0 +1,76 @@
+<div class="afw-tool afw-pmeta" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-pmeta{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-pmeta input[type=file]{font-size:.9rem;color:#334155}
+.afw-pmeta input[type=text]{width:100%;box-sizing:border-box;font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.5rem .6rem;background:#fff;color:#1e293b}
+.afw-pmeta label{display:block;font-size:.85rem;font-weight:600;margin:.6rem 0 .35rem;color:#334155}
+.afw-pmeta .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem .4rem 0 0}
+.afw-pmeta .btn:hover{background:#1d4ed8}
+.afw-pmeta .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem}
+.afw-pmeta .msg.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.afw-pmeta .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.afw-pmeta .cur{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:.6rem .8rem;font-size:.82rem;color:#475569;line-height:1.7;margin:.5rem 0;font-family:ui-monospace,Menlo,Consolas,monospace;word-break:break-word}
+</style>
+<input type="file" id="afwPmetaFile" accept=".pdf">
+<div class="cur" id="afwPmetaCur" hidden></div>
+<label class="lbl-title"></label><input type="text" id="afwPmetaTitle">
+<label class="lbl-author"></label><input type="text" id="afwPmetaAuthor">
+<label class="lbl-subject"></label><input type="text" id="afwPmetaSubject">
+<label class="lbl-keywords"></label><input type="text" id="afwPmetaKeywords">
+<label class="lbl-creator"></label><input type="text" id="afwPmetaCreator">
+<div>
+  <button class="btn" id="afwPmetaGo" type="button"></button>
+</div>
+<div class="msg" id="afwPmetaMsg" hidden></div>
+<script src="/js/vendor/pdf-lib.min.js" defer></script>
+<script>
+(function(){
+var root=document.querySelector('.afw-pmeta');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{title:'Title',author:'Author',subject:'Subject',keywords:'Keywords (comma separated)',creator:'Creator',go:'Save metadata and download',pick:'Select a PDF first',done:'Metadata saved — download started',cur:'Current metadata:',none:'(none)',load:'PDF engine failed to load — please refresh'},
+ ja:{title:'タイトル',author:'作成者',subject:'件名',keywords:'キーワード（カンマ区切り）',creator:'作成ツール',go:'メタデータを保存してダウンロード',pick:'先にPDFを選択してください',done:'メタデータを保存しました——ダウンロード開始',cur:'現在のメタデータ:',none:'（なし）',load:'PDFエンジンの読み込みに失敗——再読み込みしてください'},
+ zh:{title:'标题',author:'作者',subject:'主题',keywords:'关键词（逗号分隔）',creator:'创建工具',go:'保存元数据并下载',pick:'请先选择 PDF',done:'元数据已保存——开始下载',cur:'当前元数据：',none:'（无）',load:'PDF 引擎加载失败——请刷新页面'}
+}[L]||I.en;
+document.querySelector('.afw-pmeta .lbl-title').textContent=I.title;
+document.querySelector('.afw-pmeta .lbl-author').textContent=I.author;
+document.querySelector('.afw-pmeta .lbl-subject').textContent=I.subject;
+document.querySelector('.afw-pmeta .lbl-keywords').textContent=I.keywords;
+document.querySelector('.afw-pmeta .lbl-creator').textContent=I.creator;
+document.getElementById('afwPmetaGo').textContent=I.go;
+var file=document.getElementById('afwPmetaFile'),msg=document.getElementById('afwPmetaMsg'),cur=document.getElementById('afwPmetaCur');
+var loaded=null;
+function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
+function boot(fn){if(window.PDFLib){fn();return;}var n=0,t=setInterval(function(){if(window.PDFLib){clearInterval(t);fn();}else if(++n>160){clearInterval(t);show(I.load,false);}},50);}
+function dl(doc,name){doc.save().then(function(b){var blob=new Blob([b],{type:'application/pdf'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();});}
+file.addEventListener('change',function(){
+  if(!file.files[0])return;
+  boot(async function(){
+    try{
+      var doc=await window.PDFLib.PDFDocument.load(await file.files[0].arrayBuffer());
+      loaded=doc;
+      var t=doc.getTitle()||'',a=doc.getAuthor()||'',s=doc.getSubject()||'',k=doc.getKeywords()||'',c=doc.getCreator()||'';
+      document.getElementById('afwPmetaTitle').value=t;
+      document.getElementById('afwPmetaAuthor').value=a;
+      document.getElementById('afwPmetaSubject').value=s;
+      document.getElementById('afwPmetaKeywords').value=k;
+      document.getElementById('afwPmetaCreator').value=c;
+      cur.hidden=false;
+      cur.textContent=I.cur+' '+[t?'Title: '+t:'',a?'Author: '+a:'',s?'Subject: '+s:'',k?'Keywords: '+k:'',c?'Creator: '+c:''].filter(Boolean).join(' · ')||I.none;
+    }catch(e){show(e.message,false);}
+  });
+});
+document.getElementById('afwPmetaGo').addEventListener('click',function(){
+  if(!loaded){show(I.pick,false);return;}
+  loaded.setTitle(document.getElementById('afwPmetaTitle').value);
+  loaded.setAuthor(document.getElementById('afwPmetaAuthor').value);
+  loaded.setSubject(document.getElementById('afwPmetaSubject').value);
+  var kw=document.getElementById('afwPmetaKeywords').value.split(',').map(function(x){return x.trim();}).filter(Boolean);
+  loaded.setKeywords(kw);
+  loaded.setCreator(document.getElementById('afwPmetaCreator').value);
+  dl(loaded,'metadata.pdf');
+  show(I.done,true);
+});
+})();
+</script>
+</div>

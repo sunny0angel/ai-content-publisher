@@ -1,0 +1,71 @@
+<div class="afw-tool afw-i2p" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-i2p{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-i2p input[type=file]{font-size:.9rem;color:#334155}
+.afw-i2p select{font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.5rem .6rem;background:#fff;color:#1e293b;margin:.4rem .6rem .4rem 0}
+.afw-i2p label{display:block;font-size:.85rem;font-weight:600;margin:.6rem 0 .35rem;color:#334155}
+.afw-i2p .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem .4rem 0 0}
+.afw-i2p .btn:hover{background:#1d4ed8}
+.afw-i2p .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem}
+.afw-i2p .msg.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.afw-i2p .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.afw-i2p .list{font-size:.82rem;color:#64748b;margin:.5rem 0}
+</style>
+<input type="file" id="afwI2pFile" accept="image/*" multiple>
+<label class="lbl-mode"></label>
+<select id="afwI2pPage">
+  <option value="a4">A4 portrait</option>
+  <option value="a4l">A4 landscape</option>
+  <option value="letter">Letter portrait</option>
+</select>
+<div>
+  <button class="btn" id="afwI2pGo" type="button"></button>
+</div>
+<div class="list" id="afwI2pList"></div>
+<div class="msg" id="afwI2pMsg" hidden></div>
+<script src="/js/vendor/pdf-lib.min.js" defer></script>
+<script>
+(function(){
+var root=document.querySelector('.afw-i2p');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{mode:'Page size',go:'Images to PDF',pick:'Select at least 1 image',done:'images added — download started',list:'Selected:'},
+ ja:{mode:'ページサイズ',go:'画像をPDFに',pick:'画像を1つ以上選択してください',done:'枚の画像を追加——ダウンロード開始',list:'選択中:'},
+ zh:{mode:'页面尺寸',go:'图片转 PDF',pick:'请至少选择 1 张图片',done:'张图片已加入——开始下载',list:'已选:'}
+}[L]||I.en;
+document.querySelector('.afw-i2p .lbl-mode').textContent=I.mode;
+document.getElementById('afwI2pGo').textContent=I.go;
+var file=document.getElementById('afwI2pFile'),sel=document.getElementById('afwI2pPage'),msg=document.getElementById('afwI2pMsg'),list=document.getElementById('afwI2pList');
+var SIZES={a4:[595,842],a4l:[842,595],letter:[612,792]};
+function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
+function boot(fn){if(window.PDFLib){fn();return;}var n=0,t=setInterval(function(){if(window.PDFLib){clearInterval(t);fn();}else if(++n>160){clearInterval(t);show(I.load||'PDF engine failed to load — please refresh',false);}},50);}
+function dl(doc,name){doc.save().then(function(b){var blob=new Blob([b],{type:'application/pdf'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();});}
+file.addEventListener('change',function(){
+  list.textContent=I.list+' '+file.files.length;
+});
+document.getElementById('afwI2pGo').addEventListener('click',function(){
+  var fs=file.files;
+  if(!fs.length){show(I.pick,false);return;}
+  var s=SIZES[sel.value];
+  boot(async function(){
+    try{
+      var out=await window.PDFLib.PDFDocument.create();
+      for(var i=0;i<fs.length;i++){
+        var buf=await fs[i].arrayBuffer();
+        var page=out.addPage([s[0],s[1]]);
+        var ext=fs[i].name.split('.').pop().toLowerCase();
+        var img;
+        if(ext==='png')img=await out.embedPng(buf);
+        else img=await out.embedJpg(buf);
+        var iw=img.width,ih=img.height;
+        var scale=Math.min(s[0]/iw,s[1]/ih);
+        page.drawImage(img,{x:(s[0]-iw*scale)/2,y:(s[1]-ih*scale)/2,width:iw*scale,height:ih*scale});
+      }
+      dl(out,'images.pdf');
+      show(fs.length+' '+I.done,true);
+    }catch(e){show(e.message,false);}
+  });
+});
+})();
+</script>
+</div>

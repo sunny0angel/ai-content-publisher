@@ -1,13 +1,35 @@
 ---
 title: "免费 AI 与开发者工具"
 date: 2026-11-17
-lastmod: 2026-11-19
-description: "AI 与 API 工具、开发者工具、图片/音频/视频编辑器、日常计算器共 46 款免费浏览器工具。无需注册，数据不出浏览器。"
+lastmod: 2026-11-20
+description: "AI 与 API 工具、开发者工具、图片/音频/视频编辑器、日常计算器共 66 款免费浏览器工具。无需注册，数据不出浏览器。"
 draft: false
 authors: ["AI Forward"]
 ---
 
 AI Forward 提供的免费浏览器工具。所有工具 100% 在浏览器本地运行——数据不会上传，无需注册账号。
+
+**PDF 工具**——文件永不离开浏览器
+- [PDF 合并](/zh/tools/pdf-merge/) — 按你选择的顺序合并多个 PDF
+- [PDF 拆分](/zh/tools/pdf-split/) — 把指定页面提取成新文件
+- [删除 PDF 页面](/zh/tools/pdf-delete-pages/) — 移除不需要的页面
+- [PDF 旋转](/zh/tools/pdf-rotate/) — 全部页面转 90°、180° 或 270°
+- [PDF 页面重排](/zh/tools/pdf-reorder/) — 任意页面顺序
+- [PDF 页面倒序](/zh/tools/pdf-reverse-pages/) — 整份文档反转
+- [PDF 页面复制](/zh/tools/pdf-duplicate-pages/) — 把文档重复 N 次
+- [PDF 尺寸调整](/zh/tools/pdf-resize/) — 统一为 A4、Letter、A3 或 Legal
+- [PDF N-up](/zh/tools/pdf-n-up/) — 每张 2 页或 4 页
+- [图片转 PDF](/zh/tools/images-to-pdf/) — JPG/PNG 合成一份文档
+- [空白 PDF 生成](/zh/tools/pdf-blank-pages/) — 1–100 张空白页
+- [添加页码](/zh/tools/pdf-page-numbers/) — 位置、起始编号与 X/Y 格式
+- [添加水印](/zh/tools/pdf-watermark/) — 可调透明度的斜向文字
+- [PDF 元数据编辑](/zh/tools/pdf-metadata/) — 标题、作者、主题、关键词
+- [PDF 检查](/zh/tools/pdf-info/) — 页数、尺寸、体积、元数据
+- [PDF 裁切](/zh/tools/pdf-crop/) — 按百分比裁掉白边
+- [PDF 表单扁平化](/zh/tools/pdf-flatten/) — 固定已填写的表单值
+- [PDF 签名](/zh/tools/pdf-sign/) — 盖上签名图片
+- [PDF 转 JPG](/zh/tools/pdf-to-jpg/) — 96–300 DPI 渲染页面
+- [PDF 压缩](/zh/tools/pdf-compress/) — 以更小体积重绘扫描件
 
 **对比与差异**
 - [JSON 差异对比](/zh/tools/json-diff/) — 逐字段对比两个 JSON 文档

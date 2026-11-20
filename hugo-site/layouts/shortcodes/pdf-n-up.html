@@ -1,0 +1,64 @@
+<div class="afw-tool afw-pnup" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-pnup{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-pnup input[type=file]{font-size:.9rem;color:#334155}
+.afw-pnup select{font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.5rem .6rem;background:#fff;color:#1e293b;margin:.4rem .6rem .4rem 0}
+.afw-pnup label{display:block;font-size:.85rem;font-weight:600;margin:.6rem 0 .35rem;color:#334155}
+.afw-pnup .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem .4rem 0 0}
+.afw-pnup .btn:hover{background:#1d4ed8}
+.afw-pnup .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem}
+.afw-pnup .msg.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.afw-pnup .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+</style>
+<input type="file" id="afwPnFile" accept=".pdf">
+<label class="lbl-mode"></label>
+<select id="afwPnN">
+  <option value="2">2-up (2 per sheet)</option>
+  <option value="4">4-up (4 per sheet)</option>
+</select>
+<div>
+  <button class="btn" id="afwPnGo" type="button"></button>
+</div>
+<div class="msg" id="afwPnMsg" hidden></div>
+<script src="/js/vendor/pdf-lib.min.js" defer></script>
+<script>
+(function(){
+var root=document.querySelector('.afw-pnup');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{mode:'Layout',go:'Create N-up PDF',pick:'Select a PDF first',done:'N-up created — download started'},
+ ja:{mode:'レイアウト',go:'N-up PDFを作成',pick:'先にPDFを選択してください',done:'N-up作成完了——ダウンロード開始'},
+ zh:{mode:'版式',go:'生成 N-up PDF',pick:'请先选择 PDF',done:'N-up 已生成——开始下载'}
+}[L]||I.en;
+document.querySelector('.afw-pnup .lbl-mode').textContent=I.mode;
+document.getElementById('afwPnGo').textContent=I.go;
+var file=document.getElementById('afwPnFile'),sel=document.getElementById('afwPnN'),msg=document.getElementById('afwPnMsg');
+function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
+function boot(fn){if(window.PDFLib){fn();return;}var n=0,t=setInterval(function(){if(window.PDFLib){clearInterval(t);fn();}else if(++n>160){clearInterval(t);show(I.load||'PDF engine failed to load — please refresh',false);}},50);}
+function dl(doc,name){doc.save().then(function(b){var blob=new Blob([b],{type:'application/pdf'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();});}
+document.getElementById('afwPnGo').addEventListener('click',function(){
+  if(!file.files[0]){show(I.pick,false);return;}
+  var n=parseInt(sel.value,10);
+  boot(async function(){
+    try{
+      var src=await window.PDFLib.PDFDocument.load(await file.files[0].arrayBuffer());
+      var out=await window.PDFLib.PDFDocument.create();
+      var pages=src.getPages();
+      var cols=n===4?2:2,rows=n===4?2:1;
+      for(var i=0;i<pages.length;i+=n){
+        var page=out.addPage([842,595]);
+        var w=842/cols,h=595/rows;
+        for(var j=0;j<n&&i+j<pages.length;j++){
+          var emb=await out.embedPage(pages[i+j]);
+          var col=j%cols,row=Math.floor(j/cols);
+          page.drawPage(emb,{x:col*w,y:595-(row+1)*h,xScale:w/pages[i+j].getWidth(),yScale:h/pages[i+j].getHeight()});
+        }
+      }
+      dl(out,'n-up.pdf');
+      show(I.done,true);
+    }catch(e){show(e.message,false);}
+  });
+});
+})();
+</script>
+</div>

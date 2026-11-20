@@ -1,0 +1,47 @@
+<div class="afw-tool afw-prev" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-prev{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-prev input[type=file]{font-size:.9rem;color:#334155}
+.afw-prev .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem .4rem 0 0}
+.afw-prev .btn:hover{background:#1d4ed8}
+.afw-prev .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem}
+.afw-prev .msg.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.afw-prev .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+</style>
+<input type="file" id="afwPrevFile" accept=".pdf">
+<div>
+  <button class="btn" id="afwPrevGo" type="button"></button>
+</div>
+<div class="msg" id="afwPrevMsg" hidden></div>
+<script src="/js/vendor/pdf-lib.min.js" defer></script>
+<script>
+(function(){
+var root=document.querySelector('.afw-prev');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{go:'Reverse page order',pick:'Select a PDF first',done:'Reversed — download started'},
+ ja:{go:'ページ順を反転',pick:'先にPDFを選択してください',done:'反転完了——ダウンロード開始'},
+ zh:{go:'反转页面顺序',pick:'请先选择 PDF',done:'已反转——开始下载'}
+}[L]||I.en;
+document.getElementById('afwPrevGo').textContent=I.go;
+var file=document.getElementById('afwPrevFile'),msg=document.getElementById('afwPrevMsg');
+function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
+function boot(fn){if(window.PDFLib){fn();return;}var n=0,t=setInterval(function(){if(window.PDFLib){clearInterval(t);fn();}else if(++n>160){clearInterval(t);show(I.load||'PDF engine failed to load — please refresh',false);}},50);}
+function dl(doc,name){doc.save().then(function(b){var blob=new Blob([b],{type:'application/pdf'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();});}
+document.getElementById('afwPrevGo').addEventListener('click',function(){
+  if(!file.files[0]){show(I.pick,false);return;}
+  boot(async function(){
+    try{
+      var src=await window.PDFLib.PDFDocument.load(await file.files[0].arrayBuffer());
+      var idx=src.getPageIndices().reverse();
+      var out=await window.PDFLib.PDFDocument.create();
+      var pages=await out.copyPages(src,idx);
+      pages.forEach(function(p){out.addPage(p);});
+      dl(out,'reversed.pdf');
+      show(I.done,true);
+    }catch(e){show(e.message,false);}
+  });
+});
+})();
+</script>
+</div>

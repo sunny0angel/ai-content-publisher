@@ -1,0 +1,102 @@
+<div class="afw-tool afw-psign" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-psign{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-psign input[type=file]{font-size:.9rem;color:#334155;margin-right:.6rem}
+.afw-psign input[type=number],.afw-psign select{font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.5rem .6rem;background:#fff;color:#1e293b;margin:.4rem .6rem .4rem 0}
+.afw-psign input[type=number]{width:90px}
+.afw-psign label{display:block;font-size:.85rem;font-weight:600;margin:.6rem 0 .35rem;color:#334155}
+.afw-psign .row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:.4rem}
+.afw-psign .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem .4rem 0 0}
+.afw-psign .btn:hover{background:#1d4ed8}
+.afw-psign .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem}
+.afw-psign .msg.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.afw-psign .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.afw-psign .hint{font-size:.78rem;color:#64748b;margin-top:.3rem}
+.afw-psign img.prev{max-width:180px;max-height:80px;display:block;margin-top:.4rem;border:1px solid #e2e8f0;border-radius:6px;background:#f8fafc}
+</style>
+<label class="lbl-pdf"></label>
+<input type="file" id="afwPsignPdf" accept=".pdf">
+<label class="lbl-img"></label>
+<input type="file" id="afwPsignImg" accept="image/png,image/jpeg">
+<img class="prev" id="afwPsignPrev" alt="" hidden>
+<div class="row">
+  <div><label class="lbl-page"></label><select id="afwPsignPage">
+    <option value="last">last</option>
+    <option value="first">first</option>
+  </select></div>
+  <div><label class="lbl-pos"></label><select id="afwPsignPos">
+    <option value="br">bottom right</option>
+    <option value="bl">bottom left</option>
+    <option value="bc">bottom center</option>
+  </select></div>
+  <div><label class="lbl-width"></label><input type="number" id="afwPsignW" value="25" min="5" max="80">%</div>
+  <div><label class="lbl-margin"></label><input type="number" id="afwPsignM" value="36" min="0" max="200">pt</div>
+</div>
+<div class="hint" id="afwPsignHint"></div>
+<div>
+  <button class="btn" id="afwPsignGo" type="button"></button>
+</div>
+<div class="msg" id="afwPsignMsg" hidden></div>
+<script src="/js/vendor/pdf-lib.min.js" defer></script>
+<script>
+(function(){
+var root=document.querySelector('.afw-psign');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{pdf:'PDF to sign',img:'Signature image (PNG with transparent background works best)',page:'Place on',pos:'Position',width:'Width',margin:'Margin',last:'last page',first:'first page',hint:'The image is stamped onto the page as vector content. Nothing is uploaded — signing happens in this tab.',go:'Stamp signature and download',pick:'Select a PDF and a signature image',done:'Signature stamped — download started',load:'PDF engine failed to load — please refresh'},
+ ja:{pdf:'署名するPDF',img:'署名画像（背景透過PNG推奨）',page:'配置ページ',pos:'位置',width:'幅',margin:'余白',last:'最終ページ',first:'先頭ページ',hint:'画像はページにベクターコンテンツとして貼り付けられます。アップロードは不要——署名はこのタブ内で完結します。',go:'署名を押してダウンロード',pick:'PDFと署名画像を選択してください',done:'署名を押しました——ダウンロード開始',load:'PDFエンジンの読み込みに失敗——再読み込みしてください'},
+ zh:{pdf:'要签名的 PDF',img:'签名图片（推荐透明背景 PNG）',page:'放置页码',pos:'位置',width:'宽度',margin:'边距',last:'最后一页',first:'第一页',hint:'图片以矢量内容盖到页面上。全程不上传——签名在本标签页内完成。',go:'盖章并下载',pick:'请选择 PDF 和签名图片',done:'签名已盖上——开始下载',load:'PDF 引擎加载失败——请刷新页面'}
+}[L]||I.en;
+document.querySelector('.afw-psign .lbl-pdf').textContent=I.pdf;
+document.querySelector('.afw-psign .lbl-img').textContent=I.img;
+document.querySelector('.afw-psign .lbl-page').textContent=I.page;
+document.querySelector('.afw-psign .lbl-pos').textContent=I.pos;
+document.querySelector('.afw-psign .lbl-width').textContent=I.width;
+document.querySelector('.afw-psign .lbl-margin').textContent=I.margin;
+document.querySelector('#afwPsignPage option[value=last]').textContent=I.last;
+document.querySelector('#afwPsignPage option[value=first]').textContent=I.first;
+document.getElementById('afwPsignHint').textContent=I.hint;
+document.getElementById('afwPsignGo').textContent=I.go;
+var pdfFile=document.getElementById('afwPsignPdf'),imgFile=document.getElementById('afwPsignImg'),
+    prev=document.getElementById('afwPsignPrev'),msg=document.getElementById('afwPsignMsg');
+var imgBuf=null;
+function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
+function boot(fn){if(window.PDFLib){fn();return;}var n=0,t=setInterval(function(){if(window.PDFLib){clearInterval(t);fn();}else if(++n>160){clearInterval(t);show(I.load,false);}},50);}
+function dl(doc,name){doc.save().then(function(b){var blob=new Blob([b],{type:'application/pdf'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();});}
+imgFile.addEventListener('change',function(){
+  var f=imgFile.files[0];if(!f)return;
+  prev.src=URL.createObjectURL(f);prev.hidden=false;
+  var fr=new FileReader();
+  fr.onload=function(e){imgBuf=e.target.result;};
+  fr.readAsArrayBuffer(f);
+});
+document.getElementById('afwPsignGo').addEventListener('click',function(){
+  if(!pdfFile.files[0]||!imgBuf){show(I.pick,false);return;}
+  var pageSel=document.getElementById('afwPsignPage').value;
+  var pos=document.getElementById('afwPsignPos').value;
+  var wPct=Math.max(5,Math.min(80,parseFloat(document.getElementById('afwPsignW').value)||25))/100;
+  var margin=Math.max(0,Math.min(200,parseFloat(document.getElementById('afwPsignM').value)||36));
+  boot(async function(){
+    try{
+      var doc=await window.PDFLib.PDFDocument.load(await pdfFile.files[0].arrayBuffer());
+      var pages=doc.getPages();
+      var page=pageSel==='first'?pages[0]:pages[pages.length-1];
+      var isPng=/png$/i.test(imgFile.files[0].name)||/png/i.test(imgFile.files[0].type);
+      var img=isPng?await doc.embedPng(imgBuf):await doc.embedJpg(imgBuf);
+      var iw=img.width,ih=img.height;
+      var w=page.getWidth()*wPct;
+      var h=w*ih/iw;
+      var pw=page.getWidth(),ph=page.getHeight();
+      var x=pos==='br'||pos==='bc'?pw-w-margin:margin;
+      if(pos==='bc')x=(pw-w)/2;
+      var y=margin;
+      if(y+h>ph-margin)y=ph-h-margin;
+      page.drawImage(img,{x:x,y:Math.max(0,y),width:w,height:h});
+      dl(doc,'signed.pdf');
+      show(I.done,true);
+    }catch(e){show(e.message,false);}
+  });
+});
+})();
+</script>
+</div>

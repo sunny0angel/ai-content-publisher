@@ -1,13 +1,35 @@
 ---
 title: "Free AI & Developer Tools"
 date: 2026-11-17
-lastmod: 2026-11-19
-description: "46 free browser-based tools: AI and API utilities, developer tools, image/audio/video editors, and everyday calculators. No signup, no data upload — everything runs locally in your browser."
+lastmod: 2026-11-20
+description: "66 free browser-based tools: AI and API utilities, developer tools, image/audio/video editors, and everyday calculators. No signup, no data upload — everything runs locally in your browser."
 draft: false
 authors: ["AI Forward"]
 ---
 
 Free, browser-based tools from AI Forward. Every tool runs 100% locally in your browser — nothing is uploaded, no account is required, and no data leaves your machine.
+
+**PDF tools** — files never leave your browser
+- [Merge PDF](/tools/pdf-merge/) — combine multiple PDFs in your chosen order
+- [Split PDF](/tools/pdf-split/) — extract selected pages into a new file
+- [Delete PDF Pages](/tools/pdf-delete-pages/) — remove unwanted pages
+- [Rotate PDF](/tools/pdf-rotate/) — turn all pages 90°, 180°, or 270°
+- [Reorder PDF Pages](/tools/pdf-reorder/) — set any page sequence
+- [Reverse PDF Pages](/tools/pdf-reverse-pages/) — flip the whole document
+- [Duplicate PDF Pages](/tools/pdf-duplicate-pages/) — repeat the document N times
+- [Resize PDF](/tools/pdf-resize/) — standardize on A4, Letter, A3, or Legal
+- [PDF N-up](/tools/pdf-n-up/) — 2 or 4 pages per sheet
+- [Images to PDF](/tools/images-to-pdf/) — JPG/PNG into one document
+- [Blank PDF Generator](/tools/pdf-blank-pages/) — 1–100 empty pages
+- [Add Page Numbers](/tools/pdf-page-numbers/) — position, start, and X/Y format
+- [Add Watermark](/tools/pdf-watermark/) — diagonal text with opacity control
+- [PDF Metadata Editor](/tools/pdf-metadata/) — title, author, subject, keywords
+- [PDF Inspector](/tools/pdf-info/) — pages, dimensions, size, metadata
+- [Crop PDF](/tools/pdf-crop/) — trim margins by percentage
+- [Flatten PDF Forms](/tools/pdf-flatten/) — lock filled form values
+- [Sign PDF](/tools/pdf-sign/) — stamp a signature image
+- [PDF to JPG](/tools/pdf-to-jpg/) — render pages at 96–300 DPI
+- [Compress PDF](/tools/pdf-compress/) — re-render scans at lower size
 
 **Compare & diff**
 - [JSON Diff Checker](/tools/json-diff/) — compare two JSON documents field by field

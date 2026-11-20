@@ -1,0 +1,66 @@
+<div class="afw-tool afw-pinfo" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-pinfo{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-pinfo input[type=file]{font-size:.9rem;color:#334155}
+.afw-pinfo .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem .4rem 0 0}
+.afw-pinfo .btn:hover{background:#1d4ed8}
+.afw-pinfo .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem}
+.afw-pinfo .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.afw-pinfo .out{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:.9rem 1rem;margin-top:.7rem;font-size:.88rem;line-height:1.8;color:#334155}
+.afw-pinfo .out b{color:#0f172a}
+.afw-pinfo table{border-collapse:collapse;margin:.4rem 0;font-size:.84rem}
+.afw-pinfo th,.afw-pinfo td{border:1px solid #e2e8f0;padding:.3rem .55rem;text-align:left}
+.afw-pinfo th{background:#f1f5f9;color:#334155}
+</style>
+<input type="file" id="afwPinfoFile" accept=".pdf">
+<div>
+  <button class="btn" id="afwPinfoGo" type="button"></button>
+</div>
+<div class="msg" id="afwPinfoMsg" hidden></div>
+<div class="out" id="afwPinfoOut" hidden></div>
+<script src="/js/vendor/pdf-lib.min.js" defer></script>
+<script>
+(function(){
+var root=document.querySelector('.afw-pinfo');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{go:'Inspect PDF',pick:'Select a PDF first',load:'PDF engine failed to load — please refresh',pages:'Pages',size:'File size',version:'PDF version',meta:'Metadata',encrypted:'This PDF is encrypted or password-protected — pdf-lib cannot open it. Remove the password in your PDF reader first.',no:'—'},
+ ja:{go:'PDFを検査',pick:'先にPDFを選択してください',load:'PDFエンジンの読み込みに失敗——再読み込みしてください',pages:'ページ数',size:'ファイルサイズ',version:'PDFバージョン',meta:'メタデータ',encrypted:'このPDFは暗号化またはパスワード保護されています——pdf-libでは開けません。先にPDFリーダーでパスワードを解除してください。',no:'—'},
+ zh:{go:'检查 PDF',pick:'请先选择 PDF',load:'PDF 引擎加载失败——请刷新页面',pages:'页数',size:'文件大小',version:'PDF 版本',meta:'元数据',encrypted:'该 PDF 已加密或有密码保护——pdf-lib 无法打开。请先在阅读器中移除密码。',no:'—'}
+}[L]||I.en;
+document.getElementById('afwPinfoGo').textContent=I.go;
+var file=document.getElementById('afwPinfoFile'),msg=document.getElementById('afwPinfoMsg'),out=document.getElementById('afwPinfoOut');
+function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
+function boot(fn){if(window.PDFLib){fn();return;}var n=0,t=setInterval(function(){if(window.PDFLib){clearInterval(t);fn();}else if(++n>160){clearInterval(t);show(I.load,false);}},50);}
+function fmt(n){if(n<1024)return n+' B';if(n<1048576)return (n/1024).toFixed(1)+' KB';return (n/1048576).toFixed(2)+' MB';}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+document.getElementById('afwPinfoGo').addEventListener('click',function(){
+  if(!file.files[0]){show(I.pick,false);return;}
+  boot(async function(){
+    try{
+      var f=file.files[0];
+      var doc=await window.PDFLib.PDFDocument.load(await f.arrayBuffer());
+      var sizes={};
+      doc.getPages().forEach(function(p){
+        var k=Math.round(p.getWidth())+'×'+Math.round(p.getHeight());
+        sizes[k]=(sizes[k]||0)+1;
+      });
+      var rows=Object.keys(sizes).map(function(k){return '<tr><td>'+esc(k)+' pt</td><td>'+sizes[k]+'</td></tr>';}).join('');
+      var meta=[['Title',doc.getTitle()],['Author',doc.getAuthor()],['Subject',doc.getSubject()],['Keywords',doc.getKeywords()],['Creator',doc.getCreator()],['Producer',doc.getProducer()]]
+        .filter(function(x){return x[1];})
+        .map(function(x){return '<div>'+x[0]+': <b>'+esc(x[1])+'</b></div>';}).join('');
+      out.innerHTML='<div>'+I.pages+': <b>'+doc.getPageCount()+'</b></div>'+
+        '<div>'+I.size+': <b>'+fmt(f.size)+'</b></div>'+
+        '<table><tr><th>Page size (pt)</th><th>Count</th></tr>'+rows+'</table>'+
+        (meta?'<div style="margin-top:.4rem">'+I.meta+':</div>'+meta:'');
+      out.hidden=false;
+      msg.hidden=true;
+    }catch(e){
+      show(/encrypt/i.test(e.message)?I.encrypted:e.message,false);
+      out.hidden=true;
+    }
+  });
+});
+})();
+</script>
+</div>

@@ -1,0 +1,72 @@
+<div class="afw-tool afw-pcrop" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-pcrop{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-pcrop input[type=file]{font-size:.9rem;color:#334155}
+.afw-pcrop input[type=number]{font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.5rem .6rem;background:#fff;color:#1e293b;margin:.4rem .6rem .4rem 0;width:90px}
+.afw-pcrop label{display:block;font-size:.85rem;font-weight:600;margin:.6rem 0 .35rem;color:#334155}
+.afw-pcrop .row{display:flex;flex-wrap:wrap;gap:.4rem}
+.afw-pcrop .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem .4rem 0 0}
+.afw-pcrop .btn:hover{background:#1d4ed8}
+.afw-pcrop .btn.sec{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1}
+.afw-pcrop .btn.sec:hover{background:#e2e8f0}
+.afw-pcrop .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem}
+.afw-pcrop .msg.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.afw-pcrop .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.afw-pcrop .hint{font-size:.78rem;color:#64748b;margin-top:.3rem}
+</style>
+<input type="file" id="afwPcropFile" accept=".pdf">
+<div class="row">
+  <div><label class="lbl-top"></label><input type="number" id="afwPcropTop" value="0" min="0" max="45" step="0.5"></div>
+  <div><label class="lbl-right"></label><input type="number" id="afwPcropRight" value="0" min="0" max="45" step="0.5"></div>
+  <div><label class="lbl-bottom"></label><input type="number" id="afwPcropBottom" value="0" min="0" max="45" step="0.5"></div>
+  <div><label class="lbl-left"></label><input type="number" id="afwPcropLeft" value="0" min="0" max="45" step="0.5"></div>
+</div>
+<div class="hint" id="afwPcropHint"></div>
+<div>
+  <button class="btn" id="afwPcropGo" type="button"></button>
+  <button class="btn sec" id="afwPcropReset" type="button"></button>
+</div>
+<div class="msg" id="afwPcropMsg" hidden></div>
+<script src="/js/vendor/pdf-lib.min.js" defer></script>
+<script>
+(function(){
+var root=document.querySelector('.afw-pcrop');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{top:'Crop top',right:'Crop right',bottom:'Crop bottom',left:'Crop left',hint:'Percent of page size per side. Cropping only changes the visible area — content outside the crop box is hidden, not deleted.',go:'Crop and download',reset:'Reset',pick:'Select a PDF and set at least one margin',done:'Cropped — download started',load:'PDF engine failed to load — please refresh'},
+ ja:{top:'上をトリム',right:'右をトリム',bottom:'下をトリム',left:'左をトリム',hint:'各辺のページサイズに対する割合。トリミングは表示領域のみ変更——範囲外の内容は非表示になるだけで削除されません。',go:'トリムしてダウンロード',reset:'リセット',pick:'PDFを選択し、少なくとも1辺の余白を設定してください',done:'トリム完了——ダウンロード開始',load:'PDFエンジンの読み込みに失敗——再読み込みしてください'},
+ zh:{top:'上边裁切',right:'右边裁切',bottom:'下边裁切',left:'左边裁切',hint:'按页面尺寸的百分比计算。裁切只改变可见区域——框外内容被隐藏，不会被删除。',go:'裁切并下载',reset:'重置',pick:'请选择 PDF 并至少设置一边裁切量',done:'已裁切——开始下载',load:'PDF 引擎加载失败——请刷新页面'}
+}[L]||I.en;
+document.querySelector('.afw-pcrop .lbl-top').textContent=I.top;
+document.querySelector('.afw-pcrop .lbl-right').textContent=I.right;
+document.querySelector('.afw-pcrop .lbl-bottom').textContent=I.bottom;
+document.querySelector('.afw-pcrop .lbl-left').textContent=I.left;
+document.getElementById('afwPcropHint').textContent=I.hint;
+document.getElementById('afwPcropGo').textContent=I.go;
+document.getElementById('afwPcropReset').textContent=I.reset;
+var file=document.getElementById('afwPcropFile'),msg=document.getElementById('afwPcropMsg');
+var ids=['Top','Right','Bottom','Left'].map(function(x){return document.getElementById('afwPcrop'+x);});
+function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
+function boot(fn){if(window.PDFLib){fn();return;}var n=0,t=setInterval(function(){if(window.PDFLib){clearInterval(t);fn();}else if(++n>160){clearInterval(t);show(I.load,false);}},50);}
+function dl(doc,name){doc.save().then(function(b){var blob=new Blob([b],{type:'application/pdf'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();});}
+document.getElementById('afwPcropReset').addEventListener('click',function(){ids.forEach(function(i){i.value=0;});});
+document.getElementById('afwPcropGo').addEventListener('click',function(){
+  if(!file.files[0]){show(I.pick,false);return;}
+  var m=ids.map(function(i){return Math.max(0,Math.min(45,parseFloat(i.value)||0))/100;});
+  if(!m.some(function(x){return x>0;})){show(I.pick,false);return;}
+  boot(async function(){
+    try{
+      var doc=await window.PDFLib.PDFDocument.load(await file.files[0].arrayBuffer());
+      doc.getPages().forEach(function(p){
+        var w=p.getWidth(),h=p.getHeight();
+        var x=m[3]*w,y=m[2]*h,cw=w*(1-m[1]-m[3]),ch=h*(1-m[0]-m[2]);
+        if(cw>10&&ch>10)p.setCropBox(x,y,cw,ch);
+      });
+      dl(doc,'cropped.pdf');
+      show(I.done,true);
+    }catch(e){show(e.message,false);}
+  });
+});
+})();
+</script>
+</div>

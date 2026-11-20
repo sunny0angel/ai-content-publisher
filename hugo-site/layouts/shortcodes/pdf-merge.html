@@ -1,0 +1,54 @@
+<div class="afw-tool afw-pmerge" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-pmerge{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-pmerge input[type=file]{font-size:.9rem;color:#334155}
+.afw-pmerge .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem .4rem 0 0}
+.afw-pmerge .btn:hover{background:#1d4ed8}
+.afw-pmerge .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem}
+.afw-pmerge .msg.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.afw-pmerge .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.afw-pmerge .list{font-size:.82rem;color:#64748b;margin:.5rem 0;line-height:1.6}
+</style>
+<input type="file" id="afwPmFile" accept=".pdf" multiple>
+<div>
+  <button class="btn" id="afwPmGo" type="button"></button>
+</div>
+<div class="list" id="afwPmList"></div>
+<div class="msg" id="afwPmMsg" hidden></div>
+<script src="/js/vendor/pdf-lib.min.js" defer></script>
+<script>
+(function(){
+var root=document.querySelector('.afw-pmerge');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{go:'Merge PDFs (in selection order)',pick:'Select at least 2 PDF files',done:'merged files — download started',list:'Selected files:'},
+ ja:{go:'PDFを結合（選択順）',pick:'PDFを2つ以上選択してください',done:'件のファイルを結合——ダウンロード開始',list:'選択中のファイル:'},
+ zh:{go:'合并 PDF（按选择顺序）',pick:'请至少选择 2 个 PDF 文件',done:'个文件已合并——开始下载',list:'已选文件:'}
+}[L]||I.en;
+document.getElementById('afwPmGo').textContent=I.go;
+var file=document.getElementById('afwPmFile'),msg=document.getElementById('afwPmMsg'),list=document.getElementById('afwPmList');
+function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
+function boot(fn){if(window.PDFLib){fn();return;}var n=0,t=setInterval(function(){if(window.PDFLib){clearInterval(t);fn();}else if(++n>160){clearInterval(t);show(I.load||'PDF engine failed to load — please refresh',false);}},50);}
+function dl(doc,name){doc.save().then(function(b){var blob=new Blob([b],{type:'application/pdf'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();});}
+file.addEventListener('change',function(){
+  list.textContent=I.list+' '+Array.from(file.files).map(function(f){return f.name;}).join(', ');
+});
+document.getElementById('afwPmGo').addEventListener('click',function(){
+  var fs=file.files;
+  if(fs.length<2){show(I.pick,false);return;}
+  boot(async function(){
+    try{
+      var out=await window.PDFLib.PDFDocument.create();
+      for(var i=0;i<fs.length;i++){
+        var src=await window.PDFLib.PDFDocument.load(await fs[i].arrayBuffer());
+        var pages=await out.copyPages(src,src.getPageIndices());
+        pages.forEach(function(p){out.addPage(p);});
+      }
+      dl(out,'merged.pdf');
+      show(fs.length+' '+I.done,true);
+    }catch(e){show(e.message,false);}
+  });
+});
+})();
+</script>
+</div>

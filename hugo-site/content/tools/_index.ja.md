@@ -1,13 +1,35 @@
 ---
 title: "無料のAI・開発者向けツール"
 date: 2026-11-17
-lastmod: 2026-11-19
-description: "AI・APIユーティリティ、開発ツール、画像・音声・動画エディタ、日常の計算機まで46種の無料ブラウザツール。登録不要・データはすべてブラウザ内。"
+lastmod: 2026-11-20
+description: "AI・APIユーティリティ、開発ツール、画像・音声・動画エディタ、日常の計算機まで66種の無料ブラウザツール。登録不要・データはすべてブラウザ内。"
 draft: false
 authors: ["AI Forward"]
 ---
 
 AI Forwardの無料ブラウザツール。すべてのツールは100%ブラウザ内で動作し、データのアップロードやアカウント登録は不要です。
+
+**PDFツール** — ファイルはブラウザの外に出ません
+- [PDF結合](/ja/tools/pdf-merge/) — 複数PDFを選んだ順に1つに
+- [PDF分割](/ja/tools/pdf-split/) — 指定ページを新しいファイルに抽出
+- [PDFページ削除](/ja/tools/pdf-delete-pages/) — 不要なページを削除
+- [PDF回転](/ja/tools/pdf-rotate/) — 全ページを90°・180°・270°回転
+- [PDFページ並べ替え](/ja/tools/pdf-reorder/) — 任意のページ順に
+- [PDFページ順反転](/ja/tools/pdf-reverse-pages/) — 文書全体を逆順に
+- [PDFページ複製](/ja/tools/pdf-duplicate-pages/) — 文書をN回繰り返す
+- [PDFサイズ変更](/ja/tools/pdf-resize/) — A4・Letter・A3・Legalに統一
+- [PDF N-up](/ja/tools/pdf-n-up/) — 1枚に2ページ・4ページ
+- [画像→PDF](/ja/tools/images-to-pdf/) — JPG/PNGを1つの文書に
+- [空白PDF生成](/ja/tools/pdf-blank-pages/) — 空白ページを1〜100枚
+- [ページ番号追加](/ja/tools/pdf-page-numbers/) — 位置・開始番号・X/Y形式
+- [透かし追加](/ja/tools/pdf-watermark/) — 不透明度調整付きの斜め文字
+- [PDFメタデータ編集](/ja/tools/pdf-metadata/) — タイトル・作成者・件名・キーワード
+- [PDF検査](/ja/tools/pdf-info/) — ページ数・寸法・サイズ・メタデータ
+- [PDFトリム](/ja/tools/pdf-crop/) — 余白を割合でカット
+- [PDFフォーム平坦化](/ja/tools/pdf-flatten/) — 入力済みフォームを固定
+- [PDF署名](/ja/tools/pdf-sign/) — 署名画像を押印
+- [PDF→JPG](/ja/tools/pdf-to-jpg/) — 96〜300 DPIでページを描画
+- [PDF圧縮](/ja/tools/pdf-compress/) — スキャンを低サイズで再描画
 
 **比較・差分**
 - [JSON差分チェッカー](/ja/tools/json-diff/) — 2つのJSON文書をフィールド単位で比較
