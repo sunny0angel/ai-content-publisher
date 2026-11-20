@@ -2,12 +2,20 @@
 title: "免费 AI 与开发者工具"
 date: 2026-11-17
 lastmod: 2026-11-19
-description: "AI 与 API 工具、开发者工具、图片/音频/视频编辑器、日常计算器共 41 款免费浏览器工具。无需注册，数据不出浏览器。"
+description: "AI 与 API 工具、开发者工具、图片/音频/视频编辑器、日常计算器共 46 款免费浏览器工具。无需注册，数据不出浏览器。"
 draft: false
 authors: ["AI Forward"]
 ---
 
 AI Forward 提供的免费浏览器工具。所有工具 100% 在浏览器本地运行——数据不会上传，无需注册账号。
+
+**对比与差异**
+- [JSON 差异对比](/zh/tools/json-diff/) — 逐字段对比两个 JSON 文档
+- [文本相似度检测](/zh/tools/text-similarity/) — 带可视化进度条的相似度百分比
+- [文本差异对比](/zh/tools/text-diff/) — 逐行对比两段文本
+- [图片对比工具](/zh/tools/image-compare/) — 两张图片的前后对比滑块
+- [版本对比与排序](/zh/tools/semver-compare/) — 语义化版本的对比与排序
+- [对比表生成器](/zh/tools/comparison-table-generator/) — 条目与特征转成格式化表格
 
 **AI 与 API**
 - [AI Token 与 API 费用计算器](/zh/tools/ai-token-cost-calculator/) — 估算 GPT-5.6 与 DeepSeek V4 的 token 数量和 API 费用

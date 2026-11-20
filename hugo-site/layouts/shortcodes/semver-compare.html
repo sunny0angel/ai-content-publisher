@@ -1,0 +1,85 @@
+<div class="afw-tool afw-sv" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-sv{max-width:760px;margin:1.5rem 0;font-family:inherit}
+.afw-sv input[type=text]{font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:.55rem .7rem;background:#fff;color:#1e293b;margin:.4rem .6rem .4rem 0;font-family:ui-monospace,Menlo,Consolas,monospace}
+.afw-sv textarea{width:100%;box-sizing:border-box;min-height:90px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;line-height:1.6;border:1px solid #cbd5e1;border-radius:8px;padding:.7rem;background:#fff;color:#1e293b;resize:vertical}
+.afw-sv label{display:block;font-size:.85rem;font-weight:600;margin:.6rem 0 .35rem;color:#334155}
+.afw-sv .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem 0}
+.afw-sv .btn:hover{background:#1d4ed8}
+.afw-sv .out{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:.9rem 1rem;margin-top:.6rem;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.7;color:#0f172a;white-space:pre-wrap}
+.afw-sv .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem;background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+</style>
+<label class="lbl-a"></label>
+<input type="text" id="afwSvA" placeholder="1.2.3">
+<label class="lbl-b"></label>
+<input type="text" id="afwSvB" placeholder="1.2.4-rc.1">
+<div>
+  <button class="btn" id="afwSvGo" type="button"></button>
+</div>
+<div class="msg" id="afwSvMsg" hidden></div>
+<div class="out" id="afwSvOut" hidden></div>
+<label class="lbl-list"></label>
+<textarea id="afwSvList" placeholder="2.0.0&#10;1.9.9&#10;2.0.1&#10;1.10.0"></textarea>
+<div>
+  <button class="btn" id="afwSvSort" type="button"></button>
+</div>
+<script>
+(function(){
+var root=document.querySelector('.afw-sv');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{a:'Version A',b:'Version B',go:'Compare',list:'Version list (one per line) — sort',sort:'Sort versions',newer:'is NEWER than',older:'is OLDER than',same:'is EQUAL to',invalid:'Invalid version format — expected semver like 1.2.3 or 1.2.3-beta.1',sorted:'Sorted ascending:'},
+ ja:{a:'バージョンA',b:'バージョンB',go:'比較',list:'バージョンリスト（1行1件）',sort:'ソート',newer:'は より新しい',older:'は より古い',same:'は と同じ',invalid:'不正なバージョン形式です——1.2.3 や 1.2.3-beta.1 のようなsemverを期待',sorted:'昇順ソート結果:'},
+ zh:{a:'版本 A',b:'版本 B',go:'对比',list:'版本列表（每行一个）',sort:'排序',newer:'比 更新',older:'比 更旧',same:'与 相同',invalid:'版本格式无效——请用 1.2.3 或 1.2.3-beta.1 这样的语义化版本',sorted:'升序排序结果:'}
+}[L]||I.en;
+document.querySelector('.afw-sv .lbl-a').textContent=I.a;
+document.querySelector('.afw-sv .lbl-b').textContent=I.b;
+document.getElementById('afwSvGo').textContent=I.go;
+document.querySelector('.afw-sv .lbl-list').textContent=I.list;
+document.getElementById('afwSvSort').textContent=I.sort;
+var msg=document.getElementById('afwSvMsg'),out=document.getElementById('afwSvOut');
+function parse(v){
+  v=v.trim();
+  var m=v.match(/^(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Za-z.-]+))?$/);
+  if(!m)return null;
+  return {core:[+m[1],+m[2],+m[3]],pre:m[4]||null,raw:v};
+}
+function cmp(a,b){
+  for(var i=0;i<3;i++){
+    if(a.core[i]!==b.core[i])return a.core[i]-b.core[i];
+  }
+  if(!a.pre&&!b.pre)return 0;
+  if(!a.pre)return 1;
+  if(!b.pre)return -1;
+  var pa=a.pre.split('.'),pb=b.pre.split('.');
+  for(var j=0;j<Math.max(pa.length,pb.length);j++){
+    var x=pa[j],y=pb[j];
+    if(x===undefined)return -1;
+    if(y===undefined)return 1;
+    var nx=isNaN(Number(x)),ny=isNaN(Number(y));
+    if(!nx&&!ny){if(+x!==+y)return +x-+y;}
+    else{if(x!==y)return x<y?-1:1;}
+  }
+  return 0;
+}
+document.getElementById('afwSvGo').addEventListener('click',function(){
+  msg.hidden=true;out.hidden=true;
+  var a=parse(document.getElementById('afwSvA').value),b=parse(document.getElementById('afwSvB').value);
+  if(!a||!b){msg.hidden=false;msg.textContent=I.invalid;return;}
+  var c=cmp(a,b);
+  var rel=c>0?I.newer:(c<0?I.older:I.same);
+  out.innerHTML=a.raw+' <b>'+rel+'</b> '+b.raw;
+  out.hidden=false;
+});
+document.getElementById('afwSvSort').addEventListener('click',function(){
+  msg.hidden=true;out.hidden=true;
+  var lines=document.getElementById('afwSvList').value.split('\n').map(function(x){return x.trim();}).filter(Boolean);
+  var parsed=lines.map(parse);
+  if(parsed.some(function(x){return !x;})){msg.hidden=false;msg.textContent=I.invalid;return;}
+  parsed.sort(cmp);
+  out.innerHTML=I.sorted+'\n'+parsed.map(function(x){return '• '+x.raw;}).join('\n');
+  out.hidden=false;
+});
+})();
+</script>
+</div>

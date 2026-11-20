@@ -1,0 +1,89 @@
+<div class="afw-tool afw-jd" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-jd{max-width:900px;margin:1.5rem 0;font-family:inherit}
+.afw-jd textarea{width:100%;box-sizing:border-box;min-height:150px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.55;border:1px solid #cbd5e1;border-radius:8px;padding:.7rem .85rem;background:#fff;color:#1e293b;resize:vertical}
+.afw-jd label{display:block;font-size:.85rem;font-weight:600;margin:.5rem 0 .35rem;color:#334155}
+.afw-jd .grid{display:flex;gap:.8rem;flex-wrap:wrap}
+.afw-jd .grid>div{flex:1;min-width:280px}
+.afw-jd .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem 0}
+.afw-jd .btn:hover{background:#1d4ed8}
+.afw-jd .msg{margin:.6rem 0;padding:.55rem .9rem;border-radius:8px;font-size:.88rem}
+.afw-jd .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.afw-jd .msg.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.afw-jd .out{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:.8rem 1rem;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;line-height:1.7;color:#0f172a;white-space:pre-wrap;word-break:break-word;max-height:420px;overflow:auto}
+.afw-jd .add{background:#dcfce7;color:#14532d}
+.afw-jd .del{background:#fee2e2;color:#7f1d1d}
+.afw-jd .chg{background:#fef9c3;color:#854d0e}
+</style>
+<div class="grid">
+  <div><label class="lbl-a"></label><textarea id="afwJdA" placeholder='{"name":"Ada","plan":"pro","active":true}'></textarea></div>
+  <div><label class="lbl-b"></label><textarea id="afwJdB" placeholder='{"name":"Ada","plan":"basic","active":true,"trial":false}'></textarea></div>
+</div>
+<div>
+  <button class="btn" id="afwJdGo" type="button"></button>
+</div>
+<div class="msg" id="afwJdMsg" hidden></div>
+<div class="out" id="afwJdOut"></div>
+<script>
+(function(){
+var root=document.querySelector('.afw-jd');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{a:'JSON A (before)',b:'JSON B (after)',go:'Compare JSON',err:'Invalid JSON on one or both sides',same:'No differences — the documents are identical',changed:'diff entries'},
+ ja:{a:'JSON A（変更前）',b:'JSON B（変更後）',go:'JSONを比較',err:'片方または両方のJSONが不正です',same:'差分なし——ドキュメントは同一です',changed:'件の差分'},
+ zh:{a:'JSON A（修改前）',b:'JSON B（修改后）',go:'对比 JSON',err:'一边或两边的 JSON 无效',same:'无差异——两个文档完全相同',changed:'处差异'}
+}[L]||I.en;
+document.querySelector('.afw-jd .lbl-a').textContent=I.a;
+document.querySelector('.afw-jd .lbl-b').textContent=I.b;
+document.getElementById('afwJdGo').textContent=I.go;
+var msg=document.getElementById('afwJdMsg'),out=document.getElementById('afwJdOut');
+function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
+function diff(a,b,path,lines){
+  var isA=a!==null&&typeof a==='object'&&!Array.isArray(a);
+  var isB=b!==null&&typeof b==='object'&&!Array.isArray(b);
+  if(isA&&isB){
+    var keys={};
+    Object.keys(a).forEach(function(k){keys[k]=1;});
+    Object.keys(b).forEach(function(k){keys[k]=1;});
+    Object.keys(keys).sort().forEach(function(k){
+      var p=path?path+'.'+k:k;
+      if(!(k in a))lines.push({t:'a',s:p+': '+JSON.stringify(b[k])});
+      else if(!(k in b))lines.push({t:'d',s:p+': '+JSON.stringify(a[k])});
+      else diff(a[k],b[k],p,lines);
+    });
+    return;
+  }
+  var aA=Array.isArray(a),bA=Array.isArray(b);
+  if(aA&&bA){
+    var n=Math.max(a.length,b.length);
+    for(var i=0;i<n;i++){
+      var p=path+'['+i+']';
+      if(i>=a.length)lines.push({t:'a',s:p+': '+JSON.stringify(b[i])});
+      else if(i>=b.length)lines.push({t:'d',s:p+': '+JSON.stringify(a[i])});
+      else diff(a[i],b[i],p,lines);
+    }
+    return;
+  }
+  if(a!==b)lines.push({t:'c',s:path+': '+JSON.stringify(a)+' → '+JSON.stringify(b)});
+}
+document.getElementById('afwJdGo').addEventListener('click',function(){
+  var ta=document.getElementById('afwJdA').value.trim(),tb=document.getElementById('afwJdB').value.trim();
+  if(!ta||!tb){show(I.err,false);return;}
+  var A,B;
+  try{A=JSON.parse(ta);B=JSON.parse(tb);}catch(e){show(I.err,false);return;}
+  var lines=[];
+  diff(A,B,'',lines);
+  if(!lines.length){out.innerHTML=I.same;show(I.same,true);return;}
+  var html='';
+  lines.forEach(function(l){
+    var cls=l.t==='a'?'add':(l.t==='d'?'del':'chg');
+    var mark=l.t==='a'?'+ ':(l.t==='d'?'- ':'~ ');
+    html+='<span class="'+cls+'">'+mark+esc(l.s)+'</span>\n';
+  });
+  out.innerHTML=html;
+  show(lines.length+' '+I.changed,true);
+});
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+})();
+</script>
+</div>

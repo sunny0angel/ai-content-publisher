@@ -2,12 +2,20 @@
 title: "無料のAI・開発者向けツール"
 date: 2026-11-17
 lastmod: 2026-11-19
-description: "AI・APIユーティリティ、開発ツール、画像・音声・動画エディタ、日常の計算機まで41種の無料ブラウザツール。登録不要・データはすべてブラウザ内。"
+description: "AI・APIユーティリティ、開発ツール、画像・音声・動画エディタ、日常の計算機まで46種の無料ブラウザツール。登録不要・データはすべてブラウザ内。"
 draft: false
 authors: ["AI Forward"]
 ---
 
 AI Forwardの無料ブラウザツール。すべてのツールは100%ブラウザ内で動作し、データのアップロードやアカウント登録は不要です。
+
+**比較・差分**
+- [JSON差分チェッカー](/ja/tools/json-diff/) — 2つのJSON文書をフィールド単位で比較
+- [テキスト類似度チェッカー](/ja/tools/text-similarity/) — 視覚バー付きの類似度パーセント
+- [テキスト差分チェッカー](/ja/tools/text-diff/) — 2つのテキストを行単位で比較
+- [画像比較ツール](/ja/tools/image-compare/) — 2つの画像のビフォー/アフタースライダー
+- [セマンティックバージョン比較](/ja/tools/semver-compare/) — バージョンの比較とソート
+- [比較表ジェネレーター](/ja/tools/comparison-table-generator/) — 項目と特徴を整形された表に
 
 **AI・API**
 - [AIトークン・APIコスト計算機](/ja/tools/ai-token-cost-calculator/) — GPT-5.6 / DeepSeek V4のトークン数とAPIコストを試算

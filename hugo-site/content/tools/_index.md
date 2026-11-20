@@ -2,12 +2,20 @@
 title: "Free AI & Developer Tools"
 date: 2026-11-17
 lastmod: 2026-11-19
-description: "41 free browser-based tools: AI and API utilities, developer tools, image/audio/video editors, and everyday calculators. No signup, no data upload — everything runs locally in your browser."
+description: "46 free browser-based tools: AI and API utilities, developer tools, image/audio/video editors, and everyday calculators. No signup, no data upload — everything runs locally in your browser."
 draft: false
 authors: ["AI Forward"]
 ---
 
 Free, browser-based tools from AI Forward. Every tool runs 100% locally in your browser — nothing is uploaded, no account is required, and no data leaves your machine.
+
+**Compare & diff**
+- [JSON Diff Checker](/tools/json-diff/) — compare two JSON documents field by field
+- [Text Similarity Checker](/tools/text-similarity/) — similarity percentage with a visual bar
+- [Text Diff Checker](/tools/text-diff/) — compare two texts line by line
+- [Image Compare](/tools/image-compare/) — before/after slider for two images
+- [Semver Compare & Sort](/tools/semver-compare/) — compare and sort semantic versions
+- [Comparison Table Generator](/tools/comparison-table-generator/) — items and features into formatted tables
 
 **AI & API**
 - [AI Token & API Cost Calculator](/tools/ai-token-cost-calculator/) — estimate token counts and API costs for GPT-5.6 and DeepSeek V4

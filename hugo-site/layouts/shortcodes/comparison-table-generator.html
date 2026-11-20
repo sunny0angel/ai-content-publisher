@@ -1,0 +1,79 @@
+<div class="afw-tool afw-ctg" data-lang="{{ .Page.Lang }}">
+<style>
+.afw-ctg{max-width:860px;margin:1.5rem 0;font-family:inherit}
+.afw-ctg textarea,.afw-ctg input[type=text]{width:100%;box-sizing:border-box;font-size:13.5px;line-height:1.55;border:1px solid #cbd5e1;border-radius:8px;padding:.65rem .8rem;background:#fff;color:#1e293b}
+.afw-ctg textarea{min-height:80px;font-family:ui-monospace,Menlo,Consolas,monospace;resize:vertical}
+.afw-ctg input[type=text]{font-family:ui-monospace,Menlo,Consolas,monospace}
+.afw-ctg label{display:block;font-size:.85rem;font-weight:600;margin:.6rem 0 .35rem;color:#334155}
+.afw-ctg .hint{font-size:.78rem;color:#64748b;margin-top:.2rem}
+.afw-ctg .btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:.55rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;margin:.6rem .4rem .6rem 0}
+.afw-ctg .btn:hover{background:#1d4ed8}
+.afw-ctg .btn.sec{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1}
+.afw-ctg .btn.sec:hover{background:#e2e8f0}
+.afw-ctg .out{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:.9rem 1rem;margin-top:.6rem;overflow:auto}
+.afw-ctg table{border-collapse:collapse;font-size:.85rem}
+.afw-ctg th,.afw-ctg td{border:1px solid #e2e8f0;padding:.35rem .6rem;text-align:left}
+.afw-ctg th{background:#f1f5f9;color:#334155;font-weight:600}
+.afw-ctg .raw{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.6;white-space:pre-wrap;word-break:break-all}
+</style>
+<label class="lbl-title"></label>
+<input type="text" id="afwCtgTitle" placeholder="AI Meeting Tools">
+<div class="hint" id="afwCtgHint"></div>
+<label class="lbl-items"></label>
+<textarea id="afwCtgItems" placeholder="Fathom: free, 95% accuracy, 17 templates&#10;Fireflies: from $10/mo, 92% accuracy, CRM sync"></textarea>
+<label class="lbl-features"></label>
+<textarea id="afwCtgFeatures" placeholder="Pricing, Accuracy, Templates, Integrations"></textarea>
+<div>
+  <button class="btn" id="afwCtgGo" type="button"></button>
+  <button class="btn sec" id="afwCtgCopy" type="button"></button>
+</div>
+<div class="out" id="afwCtgOut" hidden></div>
+<script>
+(function(){
+var root=document.querySelector('.afw-ctg');if(!root)return;
+var L=root.getAttribute('data-lang')||'en';
+var I={
+ en:{title:'Table title (optional)',items:'Items — one per line, format "Name: value1, value2, …"',features:'Features — one per line (table header)',go:'Generate table',copy:'Copy Markdown',hint:'Item values match the features by position, separated by commas. Use "–" for empty cells.'},
+ ja:{title:'表のタイトル（任意）',items:'項目——1行1件、「名前: 値1, 値2, …」形式',features:'特徴——1行1件（表のヘッダー）',go:'表を生成',copy:'Markdownをコピー',hint:'項目の値はカンマ区切りで特徴と位置が対応します。空セルは「–」を。'},
+ zh:{title:'表格标题（可选）',items:'条目——每行一个，格式「名称: 值1, 值2, …」',features:'特征——每行一个（表头）',go:'生成表格',copy:'复制 Markdown',hint:'条目的值按逗号分隔与特征逐位对应；空单元格用「–」。'}
+}[L]||I.en;
+document.querySelector('.afw-ctg .lbl-title').textContent=I.title;
+document.querySelector('.afw-ctg .lbl-items').textContent=I.items;
+document.querySelector('.afw-ctg .lbl-features').textContent=I.features;
+document.getElementById('afwCtgGo').textContent=I.go;
+document.getElementById('afwCtgCopy').textContent=I.copy;
+document.getElementById('afwCtgHint').textContent=I.hint;
+var out=document.getElementById('afwCtgOut');
+var markdown='';
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+document.getElementById('afwCtgGo').addEventListener('click',function(){
+  var feats=document.getElementById('afwCtgFeatures').value.split('\n').map(function(x){return x.trim();}).filter(Boolean);
+  var items=document.getElementById('afwCtgItems').value.split('\n').map(function(x){return x.trim();}).filter(Boolean);
+  var title=document.getElementById('afwCtgTitle').value.trim();
+  var rows=items.map(function(line){
+    var idx=line.indexOf(':');
+    var name=idx>-1?line.slice(0,idx).trim():line;
+    var vals=idx>-1?line.slice(idx+1).split(',').map(function(x){return x.trim();}):[];
+    return {name:name,vals:vals};
+  });
+  var head=[title||'Item'].concat(feats);
+  var md='| '+head.join(' | ')+' |\n|'+head.map(function(){return' --- ';}).join('|')+'|\n';
+  rows.forEach(function(r){
+    var cells=[r.name];
+    feats.forEach(function(f,i){cells.push(r.vals[i]||'–');});
+    md+='| '+cells.join(' | ')+' |\n';
+  });
+  markdown=md;
+  var html='<table><tr>'+head.map(function(h){return '<th>'+esc(h)+'</th>';}).join('')+'</tr>';
+  rows.forEach(function(r){
+    var cells=[r.name];
+    feats.forEach(function(f,i){cells.push(r.vals[i]||'–');});
+    html+='<tr>'+cells.map(function(c){return '<td>'+esc(c)+'</td>';}).join('')+'</tr>';
+  });
+  html+='</table><div class="raw" style="margin-top:.8rem">'+esc(md)+'</div>';
+  out.innerHTML=html;out.hidden=false;
+});
+document.getElementById('afwCtgCopy').addEventListener('click',function(){if(!markdown)return;navigator.clipboard&&navigator.clipboard.writeText(markdown);});
+})();
+</script>
+</div>
