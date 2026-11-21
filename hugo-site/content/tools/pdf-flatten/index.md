@@ -1,13 +1,21 @@
 ---
 title: "Flatten PDF Forms"
 date: 2026-11-20
-lastmod: 2026-11-20
+lastmod: 2026-11-21
 description: "Flatten fillable PDF form fields into fixed content so values no longer change. Free and local — no upload."
 tags: [flatten PDF, PDF form flatten, lock PDF form, fillable PDF, flatten annotations]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "pdf-flatten"
+faq:
+  - q: "What does flattening a PDF do?"
+    a: "It merges form fields, annotations and layers into the page content, so the file looks the same everywhere and can no longer be edited field by field."
+  - q: "When should I flatten before sending?"
+    a: "When a filled form must not be changed, when annotations shift in another viewer, or when a print shop asks for a flat file."
+  - q: "Can I undo flattening?"
+    a: "No. Keep the original file; flattening is one-way and removes the interactive layer."
+related: [pdf-sign, pdf-metadata, pdf-compress, pdf-to-jpg]
 ---
 
 Turn a fillable PDF into a fixed document: form field values are baked into the page so they cannot be edited, tabbed through, or reset by another reader.

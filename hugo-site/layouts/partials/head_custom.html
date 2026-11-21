@@ -1,6 +1,37 @@
 {{/* Custom head hook — analytics, verification tags, or custom meta here */}}
 {{/* Cloudflare Pages Analytics is enabled by default via the Pages dashboard. */}}
 
+{{/* Thin taxonomy pages: keep them crawlable for readers, but out of the index. */}}
+{{ if or (eq .Kind "term") (eq .Kind "taxonomy") }}
+<meta name="robots" content="noindex, follow">
+{{ end }}
+
+{{/* x-default points at the English version of every translated page. */}}
+{{ $default := . }}
+{{ range .Translations }}
+  {{ if eq .Lang "en" }}{{ $default = . }}{{ end }}
+{{ end }}
+{{ if eq $default.Lang "en" }}
+<link rel="alternate" hreflang="x-default" href="{{ $default.Permalink }}">
+{{ end }}
+
+{{/* SoftwareApplication schema for tool pages. */}}
+{{ if and (eq .Section "tools") .IsPage }}
+{{ $schema := dict
+  "@context" "https://schema.org"
+  "@type" "SoftwareApplication"
+  "name" .Title
+  "description" .Description
+  "url" .Permalink
+  "applicationCategory" "UtilitiesApplication"
+  "operatingSystem" "Any"
+  "browserRequirements" "Requires JavaScript. Runs entirely in the browser; files are not uploaded."
+  "isAccessibleForFree" true
+  "offers" (dict "@type" "Offer" "price" "0" "priceCurrency" "USD")
+}}
+<script type="application/ld+json">{{ $schema | jsonify | safeJS }}</script>
+{{ end }}
+
 {{/* Google tag — GTM container: GTM-MPJMGKGK */}}
 {{/* 说明：此 partial 由 baseof.html 与 home.html 各引用一次，页面内只会注入一份。 */}}
 <script async src="https://www.googletagmanager.com/gtag/js?id=GTM-MPJMGKGK"></script>

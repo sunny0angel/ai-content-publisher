@@ -27,8 +27,8 @@
   <button class="btn" id="afwPcmpGo" type="button"></button>
 </div>
 <div class="msg" id="afwPcmpMsg" hidden></div>
-<script src="/js/vendor/pdf-lib.min.js" defer></script>
-<script src="/js/vendor/pdf.min.js" defer></script>
+<script src="/js/pdf-tools.js" defer></script>
+
 <script>
 (function(){
 var root=document.querySelector('.afw-pcmp');if(!root)return;
@@ -44,7 +44,7 @@ document.getElementById('afwPcmpHint').textContent=I.hint;
 document.getElementById('afwPcmpGo').textContent=I.go;
 var file=document.getElementById('afwPcmpFile'),msg=document.getElementById('afwPcmpMsg');
 function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
-function boot(fn){if(window.PDFLib&&window.pdfjsLib){fn();return;}var n=0,t=setInterval(function(){if(window.PDFLib&&window.pdfjsLib){clearInterval(t);fn();}else if(++n>200){clearInterval(t);show(I.load,false);}},50);}
+function boot(fn){if(!window.AFW){show(I.load,false);return;}Promise.all([window.AFW.loadPdfLib(),window.AFW.loadPdfJs()]).then(fn).catch(function(){show(I.load,false);});}
 function fmt(n){if(n<1024)return n+' B';if(n<1048576)return (n/1024).toFixed(1)+' KB';return (n/1048576).toFixed(2)+' MB';}
 document.getElementById('afwPcmpGo').addEventListener('click',function(){
   if(!file.files[0]){show(I.pick,false);return;}
@@ -85,4 +85,8 @@ document.getElementById('afwPcmpGo').addEventListener('click',function(){
 });
 })();
 </script>
+
+<p class="afw-pdfwarn">{{ i18n "pdf_compress_disclaimer" }}</p>
+<p class="afw-pdfnote">{{ i18n "pdf_original_note" }}</p>
+<p class="afw-pdfnote">{{ i18n "pdf_local_note" }}</p>
 </div>

@@ -7,10 +7,10 @@ url = "/ja/"
 
 {{< showcase-section
   title="AI Forward"
-  subtitle="ビジネス・人事・生産性のためのAI実践ガイド"
-  description="データ駆動のガイド、チュートリアル、分析記事でAIを活用した業務変革、人事プロセス最適化、生産性向上を実現します。1記事2,500字以上、表面的な情報ではなく深いインサイトをお届けします。"
-  buttonText="記事を読む"
-  button_url="/ja/blog/"
+  subtitle="無料ブラウザツールと実践AIガイド"
+  description="PDF、開発、画像、音声、動画、日常計算のための無料ツール66種——すべてブラウザ内で動作し、アップロードも登録も不要。ビジネスと人事のための実践的なAIガイドも掲載しています。"
+  button_text="66のツールを見る"
+  button_url="/ja/tools/"
   imgSrc="/images/profile-hero.jpg"
   imgWidth="400"
   imgHeight="400"
@@ -23,15 +23,20 @@ url = "/ja/"
 {{< /showcase-section >}}
 
 {{< stats-section >}}
-    {{< stat-item value="15+" label="詳細記事" >}}
+    {{< stat-item value="66" label="無料ツール" >}}
     {{< stat-item value="3" label="言語対応 (EN/JA/ZH)" >}}
-    {{< stat-item value="2,500+" label="1記事あたりの文字数" >}}
-    {{< stat-item value="2026" label="最新データと調査" >}}
+    {{< stat-item value="0" label="アップロード" >}}
+    {{< stat-item value="100%" label="ローカル処理" >}}
 {{< /stats-section >}}
 
 {{< spacer size="large" >}}
 
+## 無料ブラウザツール66種
+
+すべてのツールはタブ内でファイルを処理します——アップロードなし、アカウントなし、透かしなし。[PDFツール](/ja/tools/pdf-merge/)、[開発者ツール](/ja/tools/json-formatter/)、[画像編集](/ja/tools/image-compressor/)から始めて、[ツールハブ](/ja/tools/)で全体を見てください。
+
+[66のツールをすべて見る →](/ja/tools/)
+
 ## 最新のインサイト
 
 {{< blog-list count="4" >}}
-

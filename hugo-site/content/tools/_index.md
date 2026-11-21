@@ -31,6 +31,13 @@ Free, browser-based tools from AI Forward. Every tool runs 100% locally in your 
 - [PDF to JPG](/tools/pdf-to-jpg/) — render pages at 96–300 DPI
 - [Compress PDF](/tools/pdf-compress/) — re-render scans at lower size
 
+**PDF tools: what to know**
+- Files are processed in your browser; nothing is uploaded to a server.
+- Password-protected PDFs must be unlocked in your reader first.
+- Compression re-renders pages as images, so text becomes non-selectable.
+- A stamped signature is a visual signature, not a qualified digital signature.
+- Files over 100 MB are best handled on a desktop browser.
+
 **Compare & diff**
 - [JSON Diff Checker](/tools/json-diff/) — compare two JSON documents field by field
 - [Text Similarity Checker](/tools/text-similarity/) — similarity percentage with a visual bar

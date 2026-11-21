@@ -289,3 +289,130 @@
     overflow-y: visible;
   }
 }
+/* PDF tool trust notes */
+.afw-pdfnote {
+  margin: 1rem 0 0;
+  padding: 0.6rem 0.8rem;
+  border-left: 3px solid #93c5fd;
+  background: #f8fafc;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: #475569;
+}
+.afw-pdfwarn {
+  margin: 0.8rem 0 0;
+  padding: 0.6rem 0.8rem;
+  border-left: 3px solid #f59e0b;
+  background: #fffbeb;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: #92400e;
+}
+.afw-filewarn {
+  margin: 0.5rem 0;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  background: #fffbeb;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #92400e;
+}
+[data-bs-theme="dark"] .afw-pdfnote {
+  background: #1e293b;
+  color: #cbd5e1;
+  border-left-color: #3b82f6;
+}
+[data-bs-theme="dark"] .afw-pdfwarn,
+[data-bs-theme="dark"] .afw-filewarn {
+  background: #3b2f14;
+  color: #fcd34d;
+  border-color: #92400e;
+}
+/* Tool page trust bar, FAQ and related tools */
+.tool-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  align-items: center;
+  margin: 0.4rem 0 1.25rem;
+  font-size: 0.82rem;
+  color: #64748b;
+}
+.tool-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: #ecfdf5;
+  color: #047857;
+  font-weight: 600;
+}
+.tool-faq {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+.tool-faq h2,
+.tool-related h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+.tool-faq-item {
+  margin-bottom: 0.6rem;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+.tool-faq-item summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.tool-faq-answer {
+  margin-top: 0.6rem;
+  line-height: 1.7;
+  color: #334155;
+}
+.tool-related {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+.tool-related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+.tool-related-card {
+  display: block;
+  padding: 0.85rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #fff;
+  text-decoration: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.tool-related-card:hover {
+  border-color: #93c5fd;
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.08);
+  text-decoration: none;
+}
+.tool-related-name {
+  display: block;
+  font-weight: 600;
+  color: #1d4ed8;
+}
+.tool-related-desc {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: #64748b;
+}
+[data-bs-theme="dark"] .tool-faq,
+[data-bs-theme="dark"] .tool-related { border-top-color: #334155; }
+[data-bs-theme="dark"] .tool-faq-item,
+[data-bs-theme="dark"] .tool-related-card { background: #1e293b; border-color: #334155; }
+[data-bs-theme="dark"] .tool-faq-answer { color: #cbd5e1; }
+[data-bs-theme="dark"] .tool-badge { background: #064e3b; color: #6ee7b7; }

@@ -22,7 +22,7 @@
   <button class="btn" id="afwPresGo" type="button"></button>
 </div>
 <div class="msg" id="afwPresMsg" hidden></div>
-<script src="/js/vendor/pdf-lib.min.js" defer></script>
+<script src="/js/pdf-tools.js" defer></script>
 <script>
 (function(){
 var root=document.querySelector('.afw-pres');if(!root)return;
@@ -37,7 +37,7 @@ document.getElementById('afwPresGo').textContent=I.go;
 var file=document.getElementById('afwPresFile'),sel=document.getElementById('afwPresSize'),msg=document.getElementById('afwPresMsg');
 var SIZES={a4:[595,842],letter:[612,792],a3:[842,1191],legal:[612,1008]};
 function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
-function boot(fn){if(window.PDFLib){fn();return;}var n=0,t=setInterval(function(){if(window.PDFLib){clearInterval(t);fn();}else if(++n>160){clearInterval(t);show(I.load||'PDF engine failed to load — please refresh',false);}},50);}
+function boot(fn){if(!window.AFW){show(I.load||'PDF engine failed to load — please refresh',false);return;}window.AFW.loadPdfLib().then(fn).catch(function(){show(I.load||'PDF engine failed to load — please refresh',false);});}
 function dl(doc,name){doc.save().then(function(b){var blob=new Blob([b],{type:'application/pdf'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();});}
 document.getElementById('afwPresGo').addEventListener('click',function(){
   if(!file.files[0]){show(I.pick,false);return;}
@@ -53,4 +53,7 @@ document.getElementById('afwPresGo').addEventListener('click',function(){
 });
 })();
 </script>
+
+<p class="afw-pdfnote">{{ i18n "pdf_original_note" }}</p>
+<p class="afw-pdfnote">{{ i18n "pdf_local_note" }}</p>
 </div>

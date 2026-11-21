@@ -1,0 +1,56 @@
+{{ define "main" }}
+  <section id="main-content" tabindex="-1">
+    {{ if not .Params.hideTitle }}
+    <h1 id="title">{{ .Title }}</h1>
+    {{ end }}
+
+    <p class="tool-meta">
+      <span class="tool-badge">{{ i18n "tool_local_badge" }}</span>
+      {{ if not .Lastmod.IsZero }}
+      <span class="tool-updated">{{ i18n "tool_updated" }} {{ .Lastmod.Format "2006-01-02" }}</span>
+      {{ end }}
+    </p>
+
+    <div>
+      <article id="content">
+        {{ .Content }}
+      </article>
+    </div>
+
+    {{ with .Params.faq }}
+    <section class="tool-faq" aria-labelledby="tool-faq-title">
+      <h2 id="tool-faq-title">{{ i18n "tool_faq_title" }}</h2>
+      {{ range . }}
+      <details class="tool-faq-item">
+        <summary>{{ .q }}</summary>
+        <div class="tool-faq-answer">{{ .a | markdownify }}</div>
+      </details>
+      {{ end }}
+    </section>
+
+    {{ $items := slice }}
+    {{ range . }}
+      {{ $items = $items | append (dict "@type" "Question" "name" .q "acceptedAnswer" (dict "@type" "Answer" "text" (.a | markdownify | plainify))) }}
+    {{ end }}
+    {{ $schema := dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" $items }}
+    <script type="application/ld+json">{{ $schema | jsonify | safeJS }}</script>
+    {{ end }}
+
+    {{ with .Params.related }}
+    <aside class="tool-related" aria-labelledby="tool-related-title">
+      <h2 id="tool-related-title">{{ i18n "tool_related_title" }}</h2>
+      <div class="tool-related-grid">
+        {{ range . }}
+          {{ $slug := . }}
+          {{ with site.GetPage (printf "/tools/%s" $slug) }}
+          <a class="tool-related-card" href="{{ .RelPermalink }}">
+            <span class="tool-related-name">{{ .Title }}</span>
+            <span class="tool-related-desc">{{ .Description | truncate 90 }}</span>
+          </a>
+          {{ end }}
+        {{ end }}
+      </div>
+    </aside>
+    {{ end }}
+  </section>
+{{ end }}

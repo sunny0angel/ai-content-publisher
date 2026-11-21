@@ -18,7 +18,7 @@
 </div>
 <div class="msg" id="afwPinfoMsg" hidden></div>
 <div class="out" id="afwPinfoOut" hidden></div>
-<script src="/js/vendor/pdf-lib.min.js" defer></script>
+<script src="/js/pdf-tools.js" defer></script>
 <script>
 (function(){
 var root=document.querySelector('.afw-pinfo');if(!root)return;
@@ -31,7 +31,7 @@ var I={
 document.getElementById('afwPinfoGo').textContent=I.go;
 var file=document.getElementById('afwPinfoFile'),msg=document.getElementById('afwPinfoMsg'),out=document.getElementById('afwPinfoOut');
 function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
-function boot(fn){if(window.PDFLib){fn();return;}var n=0,t=setInterval(function(){if(window.PDFLib){clearInterval(t);fn();}else if(++n>160){clearInterval(t);show(I.load,false);}},50);}
+function boot(fn){if(!window.AFW){show(I.load||'PDF engine failed to load — please refresh',false);return;}window.AFW.loadPdfLib().then(fn).catch(function(){show(I.load||'PDF engine failed to load — please refresh',false);});}
 function fmt(n){if(n<1024)return n+' B';if(n<1048576)return (n/1024).toFixed(1)+' KB';return (n/1048576).toFixed(2)+' MB';}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 document.getElementById('afwPinfoGo').addEventListener('click',function(){
@@ -63,4 +63,6 @@ document.getElementById('afwPinfoGo').addEventListener('click',function(){
 });
 })();
 </script>
+
+<p class="afw-pdfnote">{{ i18n "pdf_local_note" }}</p>
 </div>

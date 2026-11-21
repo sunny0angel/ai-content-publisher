@@ -1,13 +1,23 @@
 ---
 title: "Compress PDF in Your Browser"
 date: 2026-11-20
-lastmod: 2026-11-20
+lastmod: 2026-11-21
 description: "Shrink PDFs by re-rendering pages at 72–150 DPI with adjustable JPEG quality. Local, no upload, no file limits."
 tags: [compress PDF, reduce PDF size, PDF compressor, shrink PDF, PDF file size]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "pdf-compress"
+faq:
+  - q: "How much smaller will the file get?"
+    a: "It depends on the source. Scanned image-only PDFs often shrink 50–80%; text-only PDFs may barely change because there is little raster data to drop."
+  - q: "Why does the text become unselectable?"
+    a: "Compression re-renders pages as images at the chosen quality. That is what removes the weight, but it also removes the text layer."
+  - q: "Can I keep searchable text and still compress?"
+    a: "Not with this tool. For searchable output, use an optimiser that downsamples images without rasterising text, or keep the original alongside the compressed copy."
+  - q: "What quality setting should I choose?"
+    a: "150 DPI is fine for screen reading, 200–300 DPI for printing. Lower values shrink more but blur small print."
+related: [pdf-to-jpg, pdf-resize, pdf-merge, pdf-crop]
 ---
 
 Reduce a PDF's file size by re-rendering its pages as JPEG images at a resolution and quality you control — then compare the before and after size.

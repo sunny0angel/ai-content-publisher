@@ -17,7 +17,7 @@
   <button class="btn" id="afwPreoGo" type="button"></button>
 </div>
 <div class="msg" id="afwPreoMsg" hidden></div>
-<script src="/js/vendor/pdf-lib.min.js" defer></script>
+<script src="/js/pdf-tools.js" defer></script>
 <script>
 (function(){
 var root=document.querySelector('.afw-preo');if(!root)return;
@@ -31,7 +31,7 @@ document.querySelector('.afw-preo .lbl-mode').textContent=I.mode;
 document.getElementById('afwPreoGo').textContent=I.go;
 var file=document.getElementById('afwPreoFile'),order=document.getElementById('afwPreoOrder'),msg=document.getElementById('afwPreoMsg');
 function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
-function boot(fn){if(window.PDFLib){fn();return;}var n=0,t=setInterval(function(){if(window.PDFLib){clearInterval(t);fn();}else if(++n>160){clearInterval(t);show(I.load||'PDF engine failed to load — please refresh',false);}},50);}
+function boot(fn){if(!window.AFW){show(I.load||'PDF engine failed to load — please refresh',false);return;}window.AFW.loadPdfLib().then(fn).catch(function(){show(I.load||'PDF engine failed to load — please refresh',false);});}
 function dl(doc,name){doc.save().then(function(b){var blob=new Blob([b],{type:'application/pdf'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();});}
 document.getElementById('afwPreoGo').addEventListener('click',function(){
   if(!file.files[0]||!order.value.trim()){show(I.pick,false);return;}
@@ -52,4 +52,7 @@ document.getElementById('afwPreoGo').addEventListener('click',function(){
 });
 })();
 </script>
+
+<p class="afw-pdfnote">{{ i18n "pdf_original_note" }}</p>
+<p class="afw-pdfnote">{{ i18n "pdf_local_note" }}</p>
 </div>

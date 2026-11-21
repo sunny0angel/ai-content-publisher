@@ -1,13 +1,21 @@
 ---
 title: "扁平化 PDF 表单"
 date: 2026-11-20
-lastmod: 2026-11-20
+lastmod: 2026-11-21
 description: "把可填写的 PDF 表单字段固化为固定内容，数值不再被修改。免费本地，不上传。"
 tags: [PDF表单扁平化, 固定PDF表单, 锁定PDF表单, 可填写PDF]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "pdf-flatten"
+faq:
+  - q: "PDF 扁平化做了什么？"
+    a: "把表单域、批注和图层合并进页面内容，让文件在任何阅读器中外观一致，并且无法再逐字段编辑。"
+  - q: "什么时候需要在发送前扁平化？"
+    a: "填写后的表单不希望被改动、批注在其他阅读器中错位、或印刷店要求平面文件时。"
+  - q: "扁平化能撤销吗？"
+    a: "不能。请保留原文件。这是单向操作，交互层会被移除。"
+related: [pdf-sign, pdf-metadata, pdf-compress, pdf-to-jpg]
 ---
 
 把可填写的 PDF 变成固定文档：表单数值烘焙进页面，无法再编辑、切换字段或被其他阅读器重置。

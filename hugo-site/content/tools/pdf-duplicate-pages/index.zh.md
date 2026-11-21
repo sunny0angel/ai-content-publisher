@@ -1,13 +1,21 @@
 ---
 title: "PDF 页面复制"
 date: 2026-11-20
-lastmod: 2026-11-20
+lastmod: 2026-11-21
 description: "把整个 PDF 重复 N 次放进一个文件——适合打印多份。本地、免费、不上传。"
 tags: [PDF复制, PDF重复, PDF多份, PDF页面副本]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "pdf-duplicate-pages"
+faq:
+  - q: "什么情况下需要复制页面？"
+    a: "同一份空白表格打印多张、重复封面或标签页、插入手写备注页，都是常见用途。"
+  - q: "可以一次复制多份吗？"
+    a: "可以。为所选页面设置份数，副本会紧跟在原页之后。"
+  - q: "复制会让文件变大吗？"
+    a: "会。副本共享内容但增加页面结构，20 页复制两份会明显变大，必要时再压缩。"
+related: [pdf-blank-pages, pdf-reorder, pdf-merge, pdf-compress]
 ---
 
 在一份 PDF 里把整个文档重复两次、五次或二十次——适合打印份数、讲义包和票据页。

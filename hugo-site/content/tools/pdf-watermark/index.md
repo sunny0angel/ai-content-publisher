@@ -1,13 +1,23 @@
 ---
 title: "Add Watermark to PDF"
 date: 2026-11-20
-lastmod: 2026-11-20
+lastmod: 2026-11-21
 description: "Stamp a diagonal text watermark on every PDF page — custom text, size, opacity, and angle. Runs locally, nothing uploads."
 tags: [PDF watermark, add watermark to PDF, confidential stamp, PDF draft watermark]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "pdf-watermark"
+faq:
+  - q: "Is the watermark added to the original file?"
+    a: "No. A new PDF is written and the source stays unchanged."
+  - q: "Can I use a logo instead of text?"
+    a: "Yes. Upload a PNG or JPG and set opacity, scale and rotation. Transparent PNG logos work best."
+  - q: "Can I watermark only some pages?"
+    a: "Yes. Choose all pages or a range, which is useful for stamping DRAFT on the first page only."
+  - q: "Does the watermark survive editing?"
+    a: "It is drawn into the page content, so casual editing will not remove it. It is a visible mark, not DRM."
+related: [pdf-page-numbers, pdf-sign, pdf-flatten, pdf-compress]
 ---
 
 Mark drafts, confidential documents, and internal copies with a diagonal text watermark — custom wording, size, opacity, and angle, applied to every page.

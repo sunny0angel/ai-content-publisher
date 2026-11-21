@@ -1,13 +1,23 @@
 ---
 title: "给 PDF 添加水印"
 date: 2026-11-20
-lastmod: 2026-11-20
+lastmod: 2026-11-21
 description: "为 PDF 每页盖上斜向文字水印——自定义文字、字号、不透明度和角度。本地运行，不上传。"
 tags: [PDF水印, 添加水印, 机密印章, PDF草稿水印]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "pdf-watermark"
+faq:
+  - q: "水印会加到原文件上吗？"
+    a: "不会。工具生成新的 PDF，原文件保持不变。"
+  - q: "可以用 logo 代替文字吗？"
+    a: "可以。上传 PNG 或 JPG，并设置透明度、大小和角度，透明背景的 PNG 效果最好。"
+  - q: "可以只给部分页面加水印吗？"
+    a: "可以。选择全部页面或指定范围，例如只在首页盖「DRAFT」。"
+  - q: "水印会被编辑掉吗？"
+    a: "水印绘制在页面内容中，简单编辑不会去掉。它是可见标记，不是 DRM。"
+related: [pdf-page-numbers, pdf-sign, pdf-flatten, pdf-compress]
 ---
 
 给草稿、机密文件和内部副本加上斜向文字水印——自定义文字、字号、不透明度和角度，应用到每一页。

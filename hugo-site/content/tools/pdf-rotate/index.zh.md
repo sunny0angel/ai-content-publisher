@@ -1,13 +1,21 @@
 ---
 title: "PDF 旋转页面"
 date: 2026-11-20
-lastmod: 2026-11-20
+lastmod: 2026-11-21
 description: "把 PDF 全部页面旋转 90°、180° 或 270° 后下载。免费、本地、不上传。"
 tags: [PDF旋转, PDF页面转向, 修正PDF方向, PDF横页]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "pdf-rotate"
+faq:
+  - q: "旋转会重新压缩页面吗？"
+    a: "不会。工具只修改页面的旋转标记，文字和图片不会重新压缩，画质保持不变。"
+  - q: "可以只旋转部分页面吗？"
+    a: "可以。选择全部页面，或输入「1, 4-6」这样的范围，只修正横置的扫描页。"
+  - q: "为什么在别的阅读器里还是歪的？"
+    a: "部分阅读器会忽略旋转标记。用本工具重新保存后，换一个阅读器确认；文件中的方向已经修正。"
+related: [pdf-reorder, pdf-delete-pages, pdf-n-up, pdf-crop]
 ---
 
 修正横向扫描和倒置导出的文件。把全部页面旋转 90°、180° 或 270°，下载打开方向正确的 PDF。

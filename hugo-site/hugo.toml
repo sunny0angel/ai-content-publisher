@@ -68,8 +68,8 @@ source = "node_modules/bootstrap-print-css/css/bootstrap-print.css"
 target = "assets/css/bootstrap-print.css"
 
 [params]
-title = "AI Forward — Practical AI Guides for Business & HR"
-description = "Practical guides, tutorials, and insights on leveraging AI for business, HR, and productivity. Stay ahead with the latest AI trends and automation strategies."
+title = "AI Forward — Free Browser Tools & Practical AI Guides"
+description = "66 free AI, developer, PDF, image, audio, and video tools that run entirely in your browser — no uploads, no signup — plus practical guides on AI for business and HR."
 images = ["/images/og-image.png"]
 themeColor = "#2563eb"
 colorScheme = "default"

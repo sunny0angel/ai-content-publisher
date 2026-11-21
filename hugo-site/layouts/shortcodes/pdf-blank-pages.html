@@ -21,7 +21,7 @@
   <button class="btn" id="afwPblankGo" type="button"></button>
 </div>
 <div class="msg" id="afwPblankMsg" hidden></div>
-<script src="/js/vendor/pdf-lib.min.js" defer></script>
+<script src="/js/pdf-tools.js" defer></script>
 <script>
 (function(){
 var root=document.querySelector('.afw-pblank');if(!root)return;
@@ -37,7 +37,7 @@ document.getElementById('afwPblankGo').textContent=I.go;
 var n=document.getElementById('afwPblankN'),sel=document.getElementById('afwPblankS'),msg=document.getElementById('afwPblankMsg');
 var SIZES={a4:[595,842],letter:[612,792]};
 function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
-function boot(fn){if(window.PDFLib){fn();return;}var n=0,t=setInterval(function(){if(window.PDFLib){clearInterval(t);fn();}else if(++n>160){clearInterval(t);show(I.load||'PDF engine failed to load — please refresh',false);}},50);}
+function boot(fn){if(!window.AFW){show(I.load||'PDF engine failed to load — please refresh',false);return;}window.AFW.loadPdfLib().then(fn).catch(function(){show(I.load||'PDF engine failed to load — please refresh',false);});}
 function dl(doc,name){doc.save().then(function(b){var blob=new Blob([b],{type:'application/pdf'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();});}
 document.getElementById('afwPblankGo').addEventListener('click',function(){
   var count=Math.max(1,Math.min(100,parseInt(n.value,10)||1));
@@ -53,4 +53,6 @@ document.getElementById('afwPblankGo').addEventListener('click',function(){
 });
 })();
 </script>
+
+<p class="afw-pdfnote">{{ i18n "pdf_local_note" }}</p>
 </div>

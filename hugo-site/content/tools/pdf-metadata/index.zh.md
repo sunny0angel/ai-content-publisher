@@ -1,13 +1,21 @@
 ---
 title: "PDF 元数据编辑器"
 date: 2026-11-20
-lastmod: 2026-11-20
+lastmod: 2026-11-21
 description: "查看并修改 PDF 的标题、作者、主题、关键词和创建工具后下载。本地、免费、不上传。"
 tags: [PDF元数据, 修改PDF属性, PDF作者, PDF标题, 清除PDF信息]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "pdf-metadata"
+faq:
+  - q: "可以删除作者和软件信息吗？"
+    a: "可以。清空对应字段即可删除，包括姓名、Office 版本、制作工具等容易意外泄露的信息。"
+  - q: "修改元数据会改变正文吗？"
+    a: "不会。只重写文档属性，页面、图片和文字都不受影响。"
+  - q: "为什么保存后有些信息又回来了？"
+    a: "部分软件在导出时会重写自己的字段。建议最后用本工具保存，发布前再检查一次。"
+related: [pdf-info, pdf-flatten, pdf-compress, pdf-sign]
 ---
 
 查看 PDF 自我描述的信息——标题、作者、主题、关键词、创建工具——并在分享前改写这些字段。

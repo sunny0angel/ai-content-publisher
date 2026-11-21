@@ -23,7 +23,7 @@
 </div>
 <div class="list" id="afwI2pList"></div>
 <div class="msg" id="afwI2pMsg" hidden></div>
-<script src="/js/vendor/pdf-lib.min.js" defer></script>
+<script src="/js/pdf-tools.js" defer></script>
 <script>
 (function(){
 var root=document.querySelector('.afw-i2p');if(!root)return;
@@ -38,7 +38,7 @@ document.getElementById('afwI2pGo').textContent=I.go;
 var file=document.getElementById('afwI2pFile'),sel=document.getElementById('afwI2pPage'),msg=document.getElementById('afwI2pMsg'),list=document.getElementById('afwI2pList');
 var SIZES={a4:[595,842],a4l:[842,595],letter:[612,792]};
 function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
-function boot(fn){if(window.PDFLib){fn();return;}var n=0,t=setInterval(function(){if(window.PDFLib){clearInterval(t);fn();}else if(++n>160){clearInterval(t);show(I.load||'PDF engine failed to load — please refresh',false);}},50);}
+function boot(fn){if(!window.AFW){show(I.load||'PDF engine failed to load — please refresh',false);return;}window.AFW.loadPdfLib().then(fn).catch(function(){show(I.load||'PDF engine failed to load — please refresh',false);});}
 function dl(doc,name){doc.save().then(function(b){var blob=new Blob([b],{type:'application/pdf'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();});}
 file.addEventListener('change',function(){
   list.textContent=I.list+' '+file.files.length;
@@ -68,4 +68,7 @@ document.getElementById('afwI2pGo').addEventListener('click',function(){
 });
 })();
 </script>
+
+<p class="afw-pdfnote">{{ i18n "pdf_original_note" }}</p>
+<p class="afw-pdfnote">{{ i18n "pdf_local_note" }}</p>
 </div>

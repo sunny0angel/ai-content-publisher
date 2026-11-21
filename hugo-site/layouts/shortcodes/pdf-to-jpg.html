@@ -37,7 +37,7 @@
 </div>
 <div class="msg" id="afwP2jMsg" hidden></div>
 <div class="grid" id="afwP2jGrid"></div>
-<script src="/js/vendor/pdf.min.js" defer></script>
+<script src="/js/pdf-tools.js" defer></script>
 <script>
 (function(){
 var root=document.querySelector('.afw-p2jpg');if(!root)return;
@@ -56,7 +56,7 @@ document.getElementById('afwP2jAll').textContent=I.all;
 var file=document.getElementById('afwP2jFile'),msg=document.getElementById('afwP2jMsg'),grid=document.getElementById('afwP2jGrid'),allBtn=document.getElementById('afwP2jAll');
 var blobs=[];
 function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
-function boot(fn){if(window.pdfjsLib){fn();return;}var n=0,t=setInterval(function(){if(window.pdfjsLib){clearInterval(t);fn();}else if(++n>200){clearInterval(t);show(I.load,false);}},50);}
+function boot(fn){if(!window.AFW){show(I.load,false);return;}window.AFW.loadPdfJs().then(fn).catch(function(){show(I.load,false);});}
 function parsePages(s,total){
   s=(s||'').trim();
   if(!s){var a=[];for(var i=0;i<total;i++)a.push(i);return a;}
@@ -115,4 +115,7 @@ allBtn.addEventListener('click',function(){
 });
 })();
 </script>
+
+<p class="afw-pdfnote">{{ i18n "pdf_original_note" }}</p>
+<p class="afw-pdfnote">{{ i18n "pdf_local_note" }}</p>
 </div>

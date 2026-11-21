@@ -27,7 +27,7 @@
   <button class="btn sec" id="afwPcropReset" type="button"></button>
 </div>
 <div class="msg" id="afwPcropMsg" hidden></div>
-<script src="/js/vendor/pdf-lib.min.js" defer></script>
+<script src="/js/pdf-tools.js" defer></script>
 <script>
 (function(){
 var root=document.querySelector('.afw-pcrop');if(!root)return;
@@ -47,7 +47,7 @@ document.getElementById('afwPcropReset').textContent=I.reset;
 var file=document.getElementById('afwPcropFile'),msg=document.getElementById('afwPcropMsg');
 var ids=['Top','Right','Bottom','Left'].map(function(x){return document.getElementById('afwPcrop'+x);});
 function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
-function boot(fn){if(window.PDFLib){fn();return;}var n=0,t=setInterval(function(){if(window.PDFLib){clearInterval(t);fn();}else if(++n>160){clearInterval(t);show(I.load,false);}},50);}
+function boot(fn){if(!window.AFW){show(I.load||'PDF engine failed to load — please refresh',false);return;}window.AFW.loadPdfLib().then(fn).catch(function(){show(I.load||'PDF engine failed to load — please refresh',false);});}
 function dl(doc,name){doc.save().then(function(b){var blob=new Blob([b],{type:'application/pdf'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();});}
 document.getElementById('afwPcropReset').addEventListener('click',function(){ids.forEach(function(i){i.value=0;});});
 document.getElementById('afwPcropGo').addEventListener('click',function(){
@@ -69,4 +69,7 @@ document.getElementById('afwPcropGo').addEventListener('click',function(){
 });
 })();
 </script>
+
+<p class="afw-pdfnote">{{ i18n "pdf_original_note" }}</p>
+<p class="afw-pdfnote">{{ i18n "pdf_local_note" }}</p>
 </div>

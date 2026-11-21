@@ -15,7 +15,7 @@
 </div>
 <div class="list" id="afwPmList"></div>
 <div class="msg" id="afwPmMsg" hidden></div>
-<script src="/js/vendor/pdf-lib.min.js" defer></script>
+<script src="/js/pdf-tools.js" defer></script>
 <script>
 (function(){
 var root=document.querySelector('.afw-pmerge');if(!root)return;
@@ -28,7 +28,7 @@ var I={
 document.getElementById('afwPmGo').textContent=I.go;
 var file=document.getElementById('afwPmFile'),msg=document.getElementById('afwPmMsg'),list=document.getElementById('afwPmList');
 function show(t,ok){msg.hidden=false;msg.className='msg '+(ok?'ok':'err');msg.textContent=t;}
-function boot(fn){if(window.PDFLib){fn();return;}var n=0,t=setInterval(function(){if(window.PDFLib){clearInterval(t);fn();}else if(++n>160){clearInterval(t);show(I.load||'PDF engine failed to load — please refresh',false);}},50);}
+function boot(fn){if(!window.AFW){show(I.load||'PDF engine failed to load — please refresh',false);return;}window.AFW.loadPdfLib().then(fn).catch(function(){show(I.load||'PDF engine failed to load — please refresh',false);});}
 function dl(doc,name){doc.save().then(function(b){var blob=new Blob([b],{type:'application/pdf'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();});}
 file.addEventListener('change',function(){
   list.textContent=I.list+' '+Array.from(file.files).map(function(f){return f.name;}).join(', ');
@@ -51,4 +51,7 @@ document.getElementById('afwPmGo').addEventListener('click',function(){
 });
 })();
 </script>
+
+<p class="afw-pdfnote">{{ i18n "pdf_original_note" }}</p>
+<p class="afw-pdfnote">{{ i18n "pdf_local_note" }}</p>
 </div>
