@@ -1,13 +1,23 @@
 ---
 title: "AI Token & API Cost Calculator"
 date: 2026-11-17
-lastmod: 2026-11-17
+lastmod: 2026-11-21
 description: "Estimate token counts and API costs for GPT-5.6 (Sol, Terra, Luna) and DeepSeek V4 (Pro, Flash). Free browser calculator using official August 2026 list prices. No signup."
 tags: [token calculator, API cost calculator, LLM pricing, token count, GPT-5.6 pricing, DeepSeek V4 pricing, AI cost estimator]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "ai-token-cost-calculator"
+faq:
+  - q: "Which models and prices are included?"
+    a: "GPT-5.6 Sol, Terra and Luna plus DeepSeek V4 Pro and Flash, at official August 2026 list prices."
+  - q: "How accurate is the token count?"
+    a: "It uses a four-characters-per-token heuristic, not the provider's tokenizer, so expect roughly plus or minus 10 to 30 percent depending on language and code."
+  - q: "Does it include cached input or batch discounts?"
+    a: "No. It uses standard list prices; caching and batch tiers change the real bill."
+  - q: "Is my prompt uploaded?"
+    a: "No. Token estimation and cost math run in the tab."
+related: [prompt-compare, json-formatter, json-to-csv, text-similarity]
 ---
 
 Paste any prompt or API payload and get an instant estimate of token count and cost across the five major frontier models. Prices are the official list prices as of August 2026, taken from our [GPT-5.6 vs DeepSeek-V4 pricing analysis](/blog/gpt-5.6-vs-deepseek-v4-pricing-2026/).

@@ -1,13 +1,21 @@
 ---
 title: "Regex Visualizer"
 date: 2026-11-19
-lastmod: 2026-11-19
+lastmod: 2026-11-21
 description: "See your regular expression as a railroad diagram. Free in-browser visualizer for literals, classes, groups, alternation, quantifiers, and anchors."
 tags: [regex visualizer, regex diagram, regex railroad, regular expression visualizer, regex parser, developer tools]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "regex-visualizer"
+faq:
+  - q: "Which regex syntax is supported?"
+    a: "Literals, escapes such as \\d \\w \\s, character classes, groups, alternation, quantifiers and anchors. Lookahead and backreferences are not drawn."
+  - q: "Can I export the diagram?"
+    a: "The diagram is inline SVG in the page, so you can screenshot it or print the page. There is no separate download button."
+  - q: "Does it test whether my pattern matches?"
+    a: "No. It only visualizes structure. Use the regex tester to check matching against real text."
+related: [regex-tester, text-diff, markdown-previewer, json-formatter]
 ---
 
 Type a regular expression and see it drawn as a railroad diagram — boxes for literals and classes, containers for groups, branches for alternation, labels for quantifiers. Runs entirely in your browser.

@@ -1,13 +1,21 @@
 ---
 title: "Markdown Previewer"
 date: 2026-11-19
-lastmod: 2026-11-19
+lastmod: 2026-11-21
 description: "Live two-pane Markdown preview in your browser — headings, lists, code blocks, quotes, links, and images. Free local tool, no upload."
 tags: [markdown previewer, markdown preview, markdown editor, markdown to html, live markdown, developer tools]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "markdown-previewer"
+faq:
+  - q: "Which Markdown features are supported?"
+    a: "Headings, emphasis, inline and fenced code, links, images, lists and blockquotes. Tables, footnotes and raw HTML passthrough are out of scope."
+  - q: "Is raw HTML rendered?"
+    a: "No. HTML is escaped first, so pasted markup stays inert and cannot inject scripts."
+  - q: "Does it save my document?"
+    a: "No. Content lives in the tab only, so copy it out before closing."
+related: [text-diff, sql-formatter, lorem-ipsum-generator, case-converter]
 ---
 
 Type Markdown on the left, see the rendered result on the right — live, with no build step and no server. Covers the everyday subset: headings, emphasis, inline and fenced code, links, images, lists, and blockquotes.

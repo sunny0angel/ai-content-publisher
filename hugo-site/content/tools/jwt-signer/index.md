@@ -1,13 +1,23 @@
 ---
 title: "JWT Signer (HS256)"
 date: 2026-11-19
-lastmod: 2026-11-19
+lastmod: 2026-11-21
 description: "Sign JSON Web Tokens with HS256 (HMAC-SHA256) entirely in your browser via Web Crypto. Free local tool — your secret never leaves the page. Pairs with the JWT decoder."
 tags: [JWT signer, JWT generator, sign JWT, HS256, HMAC-SHA256, JWT token generator, JSON web token signer]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "jwt-signer"
+faq:
+  - q: "Where is the secret handled?"
+    a: "Only in this tab. HMAC-SHA256 is computed with Web Crypto, and the secret is never transmitted or stored."
+  - q: "Which algorithms can I sign with?"
+    a: "HS256 only. RS256 and ES256 need asymmetric keys and are better handled by server-side libraries."
+  - q: "Can I use the generated token in production?"
+    a: "Use it for testing and local development. Production tokens should be signed on the server so the secret is never exposed to a browser."
+  - q: "Why does my token fail verification?"
+    a: "Usually a different secret, a modified payload, or clock skew on exp and nbf. Re-sign after any payload edit."
+related: [jwt-decoder, hash-generator, base64-encoder, uuid-generator]
 ---
 
 Generate a signed JWT from your own header, payload, and secret — the HS256 signature is computed with the browser's Web Crypto API, so the secret never leaves your tab. The natural companion to the [JWT decoder](/tools/jwt-decoder/): decode to understand, sign to build.

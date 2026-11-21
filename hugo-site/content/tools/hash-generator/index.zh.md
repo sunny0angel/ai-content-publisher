@@ -1,13 +1,23 @@
 ---
 title: "SHA 哈希生成器"
 date: 2026-11-17
-lastmod: 2026-11-17
+lastmod: 2026-11-21
 description: "使用 Web Crypto API 在浏览器内生成 SHA-256、SHA-512、SHA-1 哈希。面向校验和、指纹与数据完整性检查的免费本地工具。"
 tags: [SHA256生成, SHA-256哈希, SHA512, SHA1, 哈希生成器, 校验和, 哈希工具]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "hash-generator"
+faq:
+  - q: "输入的文字会上传吗？"
+    a: "不会。哈希在本标签页内通过 crypto.subtle 计算，输入和摘要都不离开设备。"
+  - q: "可以给文件算哈希吗？"
+    a: "本工具只处理文本。文件请用系统命令（sha256sum 或 shasum -a 256）计算后比对。"
+  - q: "SHA-256 能还原吗？"
+    a: "不能。哈希是单向的，实际攻击只能靠猜测输入，这也是不加盐的密码哈希不安全的原因。"
+  - q: "该选哪个算法？"
+    a: "绝大多数场景用 SHA-256，高保证场景用 SHA-512，SHA-1 仅用于兼容旧系统。"
+related: [base64-encoder, uuid-generator, password-generator, jwt-signer]
 ---
 
 在浏览器内为任意文本生成密码学哈希——SHA-256、SHA-512 或 SHA-1——使用浏览器内置的 Web Crypto API。数据不出本机，相同输入永远得到相同摘要。

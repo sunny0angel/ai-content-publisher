@@ -1,13 +1,21 @@
 ---
 title: "Lorem Ipsum Generator"
 date: 2026-11-18
-lastmod: 2026-11-18
+lastmod: 2026-11-21
 description: "Generate placeholder text — paragraphs, sentences, or words — for layouts, mockups, and demos. Free local tool."
 tags: [lorem ipsum, placeholder text, dummy text, filler text, lorem ipsum generator, design tools]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "lorem-ipsum-generator"
+faq:
+  - q: "Is the text really random?"
+    a: "Sentence and paragraph lengths vary per run, but the vocabulary is the classic Latin word list, so the tone stays stable."
+  - q: "Can I generate a specific number of words?"
+    a: "Yes. Choose paragraphs, sentences or words and set the count."
+  - q: "Is it safe to use as production copy?"
+    a: "No. It is placeholder text; replace it before publishing."
+related: [case-converter, text-similarity, markdown-previewer, password-generator]
 ---
 
 Generate placeholder copy by the paragraph, sentence, or word — the classic filler for layouts, mockups, and API demo payloads. Runs entirely in your browser.

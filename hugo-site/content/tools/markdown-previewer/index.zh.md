@@ -1,13 +1,21 @@
 ---
 title: "Markdown 预览器"
 date: 2026-11-19
-lastmod: 2026-11-19
+lastmod: 2026-11-21
 description: "浏览器内实时双栏 Markdown 预览——标题、列表、代码块、引用、链接、图片。无上传的免费本地工具。"
 tags: [Markdown预览, Markdown编辑器, Markdown转HTML, 实时Markdown, 开发者工具]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "markdown-previewer"
+faq:
+  - q: "支持哪些 Markdown 功能？"
+    a: "标题、强调、行内与围栏代码、链接、图片、列表和引用。表格、脚注和原始 HTML 直通不在支持范围。"
+  - q: "原始 HTML 会被渲染吗？"
+    a: "不会。先转义 HTML，粘贴的标记保持惰性，无法注入脚本。"
+  - q: "文档会自动保存吗？"
+    a: "不会。内容只存在于标签页，关闭前请复制出去。"
+related: [text-diff, sql-formatter, lorem-ipsum-generator, case-converter]
 ---
 
 左边写 Markdown，右边实时看到渲染结果——无需构建、无需服务器。覆盖日常子集：标题、强调、行内与围栏代码、链接、图片、列表、引用。

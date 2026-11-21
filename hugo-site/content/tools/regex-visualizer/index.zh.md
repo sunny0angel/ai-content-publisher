@@ -1,13 +1,21 @@
 ---
 title: "正则表达式可视化器"
 date: 2026-11-19
-lastmod: 2026-11-19
+lastmod: 2026-11-21
 description: "把正则表达式画成铁路图。支持字面量、字符类、分组、分支、量词和锚点的免费浏览器可视化工具。"
 tags: [正则可视化, 正则图, 正则铁路图, 正则解析, 开发者工具]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "regex-visualizer"
+faq:
+  - q: "支持哪些语法？"
+    a: "支持字面量、\\d \\w \\s 等转义、字符类、分组、选择、量词和锚点。前瞻与反向引用不会绘制。"
+  - q: "可以导出图吗？"
+    a: "图是页面内的内联 SVG，可截图或打印保存，没有单独的下载按钮。"
+  - q: "会测试是否匹配吗？"
+    a: "不会，只做结构可视化。实际匹配请用正则测试工具。"
+related: [regex-tester, text-diff, markdown-previewer, json-formatter]
 ---
 
 输入正则表达式，即可看到它的铁路图——字面量和字符类是盒子、分组是容器、分支是岔路、量词是标签。完全在浏览器内运行。

@@ -1,13 +1,23 @@
 ---
 title: "AIトークン・APIコスト計算機"
 date: 2026-11-17
-lastmod: 2026-11-17
+lastmod: 2026-11-21
 description: "GPT-5.6（Sol・Terra・Luna）とDeepSeek V4（Pro・Flash）のトークン数とAPIコストを試算。2026年8月時点の公式リスト価格に基づく無料ブラウザ計算機。登録不要。"
 tags: [トークン計算, APIコスト計算, LLM料金, トークン数, GPT-5.6料金, DeepSeek V4料金, AIコスト見積り]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "ai-token-cost-calculator"
+faq:
+  - q: "どのモデルと価格に対応していますか？"
+    a: "GPT-5.6のSol・Terra・Lunaと、DeepSeek V4のPro・Flashを、2026年8月時点の公式リスト価格で計算します。"
+  - q: "トークン数はどの程度正確ですか？"
+    a: "4文字＝1トークンの近似で、プロバイダーのトークナイザーではありません。言語やコードにより±10〜30%程度の誤差があります。"
+  - q: "キャッシュ入力やバッチ割引は含まれますか？"
+    a: "いいえ。標準のリスト価格です。キャッシュやバッチ階層により実際の請求は変わります。"
+  - q: "プロンプトはアップロードされますか？"
+    a: "いいえ。トークン推定と費用計算はタブ内で行われます。"
+related: [prompt-compare, json-formatter, json-to-csv, text-similarity]
 ---
 
 プロンプトやAPIペイロードを貼り付けるだけで、主要5モデルのトークン数とコストを即座に試算できます。価格は2026年8月時点の公式リスト価格で、[GPT-5.6 vs DeepSeek-V4の料金比較分析](/ja/blog/gpt-5.6-vs-deepseek-v4-pricing-2026/)と同じ数値を使用しています。

@@ -1,13 +1,23 @@
 ---
 title: "Image Compressor"
 date: 2026-11-19
-lastmod: 2026-11-19
+lastmod: 2026-11-21
 description: "Compress JPG, PNG, and WebP images right in your browser — adjust quality and max width, see before/after sizes. Free local tool, your photos never leave your machine."
 tags: [image compressor, compress image online, reduce image size, jpg compressor, png compressor, image optimizer]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "image-compressor"
+faq:
+  - q: "How much smaller will my image get?"
+    a: "Photos usually drop 50 to 80 percent at quality 0.7 to 0.8. Screenshots and flat graphics shrink less because JPEG handles sharp edges poorly."
+  - q: "Does it preserve PNG transparency?"
+    a: "No. The output is JPEG, so transparent areas are flattened. Use the image converter when you need to keep PNG."
+  - q: "What quality should I choose?"
+    a: "0.75 to 0.85 is a good balance for web photos. Go lower for thumbnails and higher when the image contains text."
+  - q: "Are my photos uploaded?"
+    a: "No. Resizing and encoding happen on a canvas in this tab."
+related: [image-resizer, image-converter, image-compare, images-to-pdf]
 ---
 
 Shrink images for the web, email, or upload limits — set the JPEG quality and maximum width, and see the original and compressed versions side by side with the size saved. Everything runs locally in your browser: your photos are never uploaded anywhere.

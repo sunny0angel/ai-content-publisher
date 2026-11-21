@@ -1,13 +1,21 @@
 ---
 title: "Lorem Ipsum 生成器"
 date: 2026-11-18
-lastmod: 2026-11-18
+lastmod: 2026-11-21
 description: "按段落、句子或单词生成占位文本，用于布局、原型和演示。免费本地工具。"
 tags: [lorem ipsum, 占位文本, 假文本, 填充文本, 设计工具]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "lorem-ipsum-generator"
+faq:
+  - q: "文本是真随机吗？"
+    a: "每次运行的句长和段落长度会变化，但词库是经典拉丁文单词表，整体语气稳定。"
+  - q: "可以指定单词数量吗？"
+    a: "可以。选择段落、句子或单词为单位，再设置数量。"
+  - q: "能直接用作正式文案吗？"
+    a: "不能。这是占位文本，发布前必须替换。"
+related: [case-converter, text-similarity, markdown-previewer, password-generator]
 ---
 
 按段落、句子或单词生成占位文案——布局、原型和 API 演示请求体的经典填充物。完全在浏览器内运行。

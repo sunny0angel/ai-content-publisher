@@ -1,13 +1,23 @@
 ---
 title: "文本差异对比工具"
 date: 2026-11-18
-lastmod: 2026-11-18
+lastmod: 2026-11-21
 description: "逐行对比两段文本，用颜色标出新增、删除和未变行。面向配置、日志和 API 响应的免费本地 diff 工具。"
 tags: [文本对比, diff检查器, 文本比较, 文件diff, 行diff, 开发者工具]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "text-diff"
+faq:
+  - q: "是按行还是按字符比较？"
+    a: "按行：标记新增、删除和未变化的行，行内字符级修改不会单独高亮。"
+  - q: "会忽略空白吗？"
+    a: "不会。缩进和行尾空格也算差异。只关心内容时，请先统一格式。"
+  - q: "可以比较大日志吗？"
+    a: "数千行没问题，但差分在页面内计算，超大输入会变慢。"
+  - q: "文本会上传吗？"
+    a: "不会。差分在本地计算。"
+related: [text-similarity, json-diff, case-converter, markdown-previewer]
 ---
 
 粘贴任意文本的两个版本——配置、日志、API 响应、代码——一眼看清改了什么：新增行绿色、删除行红色。完全在浏览器内做行级 diff，不会上传任何内容。

@@ -1,13 +1,23 @@
 ---
 title: "URL 编码与解码器"
 date: 2026-11-18
-lastmod: 2026-11-18
+lastmod: 2026-11-21
 description: "用百分号编码正确地对 URL 组件进行编码和解码。构建查询串、链接和永不失效的 API URL 的免费本地工具。"
 tags: [URL编码, URL解码, 百分号编码, encodeURIComponent, URL转义, 开发者工具]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "url-encoder"
+faq:
+  - q: "和哪个 JavaScript 函数一致？"
+    a: "与 encodeURIComponent / decodeURIComponent 一致，结果和你代码里查询参数发送的值相同。"
+  - q: "为什么空格编码成 %20 而不是 +？"
+    a: "%20 是标准百分号编码；+ 属于 application/x-www-form-urlencoded，并非在所有场景等价。"
+  - q: "可以编码整个 URL 吗？"
+    a: "本工具按组件编码，://?& 也会被转义。只应编码动态值，不要编码完整 URL。"
+  - q: "支持日文和 emoji 吗？"
+    a: "支持。文本先转 UTF-8 再做百分号编码，多字节字符不会丢失。"
+related: [base64-encoder, json-formatter, hash-generator, case-converter]
 ---
 
 把任意文本转成 URL 安全的百分号编码字符串，并可还原。正确处理 UTF-8，中文、日文和 emoji 都能安全通过查询串。全部在浏览器内运行，不会发送任何内容。

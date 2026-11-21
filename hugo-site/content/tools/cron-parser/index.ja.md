@@ -1,13 +1,21 @@
 ---
 title: "cron式パーサー"
 date: 2026-11-18
-lastmod: 2026-11-18
+lastmod: 2026-11-21
 description: "cron式を日本語で解説し、次の実行時刻を表示。*、*/n、範囲、リストに対応。スケジューリングとデバッグのための無料ローカルツール。"
 tags: [cronパーサー, cron式, crontab, cron構文, スケジュールパーサー, cronテスター, 開発ツール]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "cron-parser"
+faq:
+  - q: "どのcron形式に対応していますか？"
+    a: "標準の5フィールドcron（分・時・日・月・曜日）です。秒や@rebootマクロには対応していません。"
+  - q: "次回実行時刻はどう計算されますか？"
+    a: "ブラウザのローカル時計を基準に、5件見つかるまで1分ずつ照合します。タイムゾーンは端末の設定です。"
+  - q: "日と曜日のORルールとは？"
+    a: "両方のフィールドが指定されている場合、どちらかが一致すれば実行されます。標準のcron仕様で、誤解されやすい点です。"
+related: [timestamp-converter, date-interval-calculator, json-formatter, regex-tester]
 ---
 
 cron式——`*/15 * * * *`——を貼り付けると、フィールドごとの解説と、ローカル時計から計算した次の5回の実行時刻を表示します。完全にブラウザ内で動作します。

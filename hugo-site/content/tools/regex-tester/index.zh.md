@@ -1,13 +1,23 @@
 ---
 title: "正则表达式测试器"
 date: 2026-11-18
-lastmod: 2026-11-18
+lastmod: 2026-11-21
 description: "在浏览器里测试正则表达式：匹配高亮、标志开关（g/i/m/s）、实时匹配数。免费本地工具，你的正则不会离开页面。"
 tags: [正则测试器, 正则表达式测试, 正则标志, 正则调试, 开发者工具]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "regex-tester"
+faq:
+  - q: "使用哪个正则引擎？"
+    a: "通过 new RegExp 使用浏览器原生引擎，与 JavaScript 和 Node.js 相同，结果与代码一致。"
+  - q: "可以切换哪些标志？"
+    a: "g、i、m、s。未启用 g 时只高亮第一个匹配。"
+  - q: "正则或测试文本会上传吗？"
+    a: "不会。编译与匹配都在标签页内完成。"
+  - q: "为什么这里能匹配，Python 里却失败？"
+    a: "不同语言在后向断言、命名分组和 Unicode 类上存在差异。上线前请在目标语言中验证。"
+related: [regex-visualizer, text-diff, case-converter, json-formatter]
 ---
 
 输入正则、粘贴文本，所有匹配即刻高亮——可切换 `g`/`i`/`m`/`s` 标志并实时显示匹配数。运行在浏览器原生正则引擎上，结果与你的 JavaScript 代码完全一致。

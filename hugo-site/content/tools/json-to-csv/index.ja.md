@@ -1,13 +1,21 @@
 ---
 title: "JSON to CSV変換"
 date: 2026-11-17
-lastmod: 2026-11-17
+lastmod: 2026-11-21
 description: "オブジェクトのJSON配列をCSVに変換。ヘッダー自動検出、Excel対応のUTF-8 BOM付き。アップロード不要の無料ローカルツール。"
 tags: [JSON to CSV, JSON CSV変換, JSON配列をCSVへ, CSVエクスポート, データ変換ツール]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "json-to-csv"
+faq:
+  - q: "どのような入力を変換できますか？"
+    a: "オブジェクトの配列です。各オブジェクトが1行になり、キーの和集合がヘッダーになります。単一オブジェクトや配列の配列は受け付けません。"
+  - q: "ネストしたオブジェクトはどうなりますか？"
+    a: "1つのセルに文字列化されます。列を分けたい場合は、事前にデータをフラットにしてください。"
+  - q: "Excelで日本語が文字化けしませんか？"
+    a: "UTF-8 BOMを付けて出力するため、Excelで正しく開けます。古いツールで化ける場合はUTF-8として読み込んでください。"
+related: [json-formatter, json-diff, base64-encoder, comparison-table-generator]
 ---
 
 オブジェクトのJSON配列をCSVテーブルに変換します。ヘッダーはオブジェクトのキーから自動検出され、値は正しくエスケープ、日本語や中国語がExcelで正しく開けるようUTF-8 BOMも付与します。すべてブラウザ内で処理され、アップロードはありません。

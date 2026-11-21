@@ -1,13 +1,21 @@
 ---
 title: "Number Base Converter (HEX / DEC / BIN / OCT)"
 date: 2026-11-18
-lastmod: 2026-11-18
+lastmod: 2026-11-21
 description: "Convert numbers between hex, decimal, binary, octal, and base-36 with arbitrary precision. Free local tool for developers."
 tags: [number base converter, hex to decimal, binary converter, octal converter, base36, radix converter, developer tools]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "number-base-converter"
+faq:
+  - q: "Does it lose precision on large numbers?"
+    a: "No. It uses BigInt, so 64-bit IDs and longer integers convert exactly instead of being rounded like JavaScript Numbers."
+  - q: "Which bases are supported?"
+    a: "Decimal, hexadecimal, binary, octal and base-36, with live conversion between all of them."
+  - q: "Can it convert negative numbers?"
+    a: "It handles the sign, but it does not perform two's-complement conversion for fixed-width integers."
+related: [hash-generator, color-converter, base64-encoder, timestamp-converter]
 ---
 
 Convert any integer between decimal, hex, binary, octal, and base-36 — with BigInt precision, so 64-bit values and beyond never lose digits. Runs entirely in your browser.

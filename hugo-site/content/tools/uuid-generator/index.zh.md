@@ -1,13 +1,23 @@
 ---
 title: "UUID 生成器"
 date: 2026-11-17
-lastmod: 2026-11-17
+lastmod: 2026-11-21
 description: "批量生成 RFC 9562 第 4 版 UUID，支持大小写。基于 Web Crypto API 的浏览器本地生成，无服务器交互、无追踪，完全免费。"
 tags: [UUID生成器, GUID生成, UUID v4, RFC 9562, 随机ID, UUID在线工具]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "uuid-generator"
+faq:
+  - q: "UUID 是真随机吗？"
+    a: "是。使用 crypto.getRandomValues 生成 v4 UUID，而不是 Math.random。"
+  - q: "一次能生成多少个？"
+    a: "每次最多 100 个，需要更多可重复生成。"
+  - q: "能生成 v7 吗？"
+    a: "本工具只生成 v4。需要时间有序的数据库主键时，请使用 v7 库。"
+  - q: "生成的 UUID 会重复吗？"
+    a: "实际上不会。122 位随机数，即使每秒生成数十亿个、持续多年，碰撞概率也极低。"
+related: [hash-generator, password-generator, base64-encoder, timestamp-converter]
 ---
 
 一次最多生成 100 个 v4 UUID，可选择小写或大写。ID 通过 Web Crypto API（`crypto.getRandomValues` / `crypto.randomUUID`）在浏览器本地生成，不会向外部发送任何请求，实际应用中也不会发生碰撞。

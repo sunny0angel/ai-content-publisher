@@ -1,13 +1,21 @@
 ---
 title: "JSON 格式化与校验器"
 date: 2026-11-17
-lastmod: 2026-11-17
+lastmod: 2026-11-21
 description: "在浏览器中格式化、压缩和校验 JSON。面向处理 API 与 LLM 请求的开发者的免费工具——全部在本地运行，数据不会上传。"
 tags: [JSON格式化, JSON校验, JSON压缩, JSON美化, JSON解析, JSON在线工具]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "json-formatter"
+faq:
+  - q: "JSON 会上传到服务器吗？"
+    a: "不会。格式化与校验都在本标签页内用浏览器原生 JSON.parse 完成，生产数据也不会离开你的设备。"
+  - q: "能排序键或自动修复错误 JSON 吗？"
+    a: "不能。格式化会保留键顺序，也不会改写数据。文档无效时会指出解析失败的位置，请回到源数据修改。"
+  - q: "能处理多大的数据？"
+    a: "几 MB 没有问题。超大日志会让输入框变卡，建议先拆分。"
+related: [json-diff, json-to-csv, jwt-decoder, base64-encoder]
 ---
 
 粘贴难以阅读的 JSON——API 响应、日志行或 LLM 函数调用请求——即可即时格式化、压缩或校验。工具完全在浏览器本地运行，任何数据都不会发送到服务器，调试生产数据也无需顾虑。

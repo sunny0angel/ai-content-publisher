@@ -1,13 +1,21 @@
 ---
 title: "JSON to CSV Converter"
 date: 2026-11-17
-lastmod: 2026-11-17
+lastmod: 2026-11-21
 description: "Convert a JSON array of objects to CSV in your browser, with automatic header detection and Excel-friendly UTF-8 BOM. Free local tool, no upload."
 tags: [JSON to CSV, JSON to CSV converter, convert JSON to Excel, JSON array to CSV, CSV export, data conversion tools]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "json-to-csv"
+faq:
+  - q: "What input does the converter accept?"
+    a: "A JSON array of objects. Each object becomes a row and the union of keys becomes the header. A bare object or an array of arrays is rejected."
+  - q: "How are nested objects handled?"
+    a: "They are stringified into a single cell. Flatten nested data first if you need separate columns."
+  - q: "Will Excel open Japanese or Chinese correctly?"
+    a: "Yes. The output includes a UTF-8 BOM, which tells Excel the encoding. If a legacy tool still garbles it, import the file as UTF-8."
+related: [json-formatter, json-diff, base64-encoder, comparison-table-generator]
 ---
 
 Turn a JSON array of objects into a CSV table — headers detected automatically from the object keys, values escaped properly, and a UTF-8 BOM added so Excel opens Japanese and Chinese text correctly. All in your browser, nothing uploaded.

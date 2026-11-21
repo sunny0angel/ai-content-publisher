@@ -1,13 +1,23 @@
 ---
 title: "Image Pixelator (Mosaic Blur)"
 date: 2026-11-19
-lastmod: 2026-11-19
+lastmod: 2026-11-21
 description: "Pixelate images to hide faces, license plates, or sensitive text with adjustable mosaic size. Free local tool — files never leave your machine."
 tags: [pixelate image, mosaic blur, blur face, pixelate photo, censor image]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "image-pixelator"
+faq:
+  - q: "Is pixelation safe for redacting sensitive text?"
+    a: "Large blocks stop casual recovery, but determined attackers can sometimes infer characters from patterns. For legal or medical documents, use true redaction that removes the pixels."
+  - q: "Can I pixelate just a face or license plate?"
+    a: "The whole image is pixelated. For a partial mosaic, use an image editor with a selection tool."
+  - q: "How do I make the blocks bigger?"
+    a: "Increase the pixel size. Larger values produce coarser blocks and stronger obscuring."
+  - q: "Is the file uploaded?"
+    a: "No. Downsampling and export happen on a canvas in this tab."
+related: [image-filter, image-cropper, image-compressor, image-watermark]
 ---
 
 Turn any image into a mosaic with an adjustable pixel size — the classic way to hide faces, license plates, and sensitive text before sharing screenshots. Runs entirely in your browser.

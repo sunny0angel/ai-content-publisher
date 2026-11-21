@@ -2,7 +2,7 @@
 {{/* Cloudflare Pages Analytics is enabled by default via the Pages dashboard. */}}
 
 {{/* Thin taxonomy pages: keep them crawlable for readers, but out of the index. */}}
-{{ if or (eq .Kind "term") (eq .Kind "taxonomy") }}
+{{ if or (eq .Kind "term") (eq .Kind "taxonomy") .Params.noindex }}
 <meta name="robots" content="noindex, follow">
 {{ end }}
 

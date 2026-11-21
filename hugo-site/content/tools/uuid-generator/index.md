@@ -1,13 +1,23 @@
 ---
 title: "UUID Generator"
 date: 2026-11-17
-lastmod: 2026-11-17
+lastmod: 2026-11-21
 description: "Generate RFC 9562 version 4 UUIDs in bulk, in lowercase or uppercase. Free browser tool using crypto.getRandomValues — no server round-trip, no tracking."
 tags: [UUID generator, GUID generator, UUID v4, RFC 9562, random ID, UUID online tool, UUID uppercase]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "uuid-generator"
+faq:
+  - q: "Are the UUIDs really random?"
+    a: "Yes. They are version 4 UUIDs built from crypto.getRandomValues, not Math.random."
+  - q: "How many can I generate at once?"
+    a: "Up to 100 per run. Generate again for more."
+  - q: "Can I generate version 7 UUIDs?"
+    a: "Not with this tool; it produces v4 only. Use a v7 library when you need time-ordered database keys."
+  - q: "Can two generated UUIDs collide?"
+    a: "Practically no. With 122 random bits, you would need billions of IDs per second for years before a collision becomes likely."
+related: [hash-generator, password-generator, base64-encoder, timestamp-converter]
 ---
 
 Generate up to 100 version 4 UUIDs at once, in lowercase or uppercase. IDs are created locally with the Web Crypto API (`crypto.getRandomValues` / `crypto.randomUUID`), so no request ever leaves your browser and no two runs can collide in practice.

@@ -1,13 +1,21 @@
 ---
 title: "Base64エンコーダー／デコーダー"
 date: 2026-11-17
-lastmod: 2026-11-17
+lastmod: 2026-11-21
 description: "UTF-8完全対応のBase64エンコード／デコード。API、JWT、テキストに埋め込まれたバイナリデータを扱う開発者向けの無料ローカルツール。"
 tags: [Base64エンコード, Base64デコード, Base64変換, URLセーフBase64, 開発ツール]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "base64-encoder"
+faq:
+  - q: "日本語や絵文字も扱えますか？"
+    a: "はい。テキストをUTF-8バイトに変換してから符号化するため、マルチバイト文字も正しく往復します。btoa()とは異なります。"
+  - q: "Base64は暗号化ですか？"
+    a: "いいえ。可逆な転送用エンコードで、誰でも復号できます。機密性にはTLSと正式な暗号化を使ってください。"
+  - q: "ファイルや画像を変換できますか？"
+    a: "このツールはテキスト専用です。画像は画像→Base64ツールを使ってください。ファイルをローカルで読み込みデータURLを生成します。"
+related: [image-to-base64, url-encoder, hash-generator, jwt-decoder]
 ---
 
 テキストとBase64を相互変換できます。UTF-8に完全対応しており、`btoa()` と違い日本語・中国語・絵文字でも壊れません。すべてブラウザ内で処理され、アップロードは一切ありません。

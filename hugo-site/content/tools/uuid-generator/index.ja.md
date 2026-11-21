@@ -1,13 +1,23 @@
 ---
 title: "UUIDジェネレーター"
 date: 2026-11-17
-lastmod: 2026-11-17
+lastmod: 2026-11-21
 description: "RFC 9562準拠のUUID v4を一括生成。小文字・大文字を選択可能。Web Crypto APIによるブラウザ内生成で、サーバー通信なし。無料。"
 tags: [UUIDジェネレーター, GUID生成, UUID v4, RFC 9562, ランダムID, UUIDツール]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "uuid-generator"
+faq:
+  - q: "UUIDは本当にランダムですか？"
+    a: "はい。Math.randomではなくcrypto.getRandomValuesから生成するバージョン4 UUIDです。"
+  - q: "一度に何個まで生成できますか？"
+    a: "1回100個までです。それ以上は繰り返し生成してください。"
+  - q: "バージョン7は生成できますか？"
+    a: "このツールはv4のみです。時刻順のデータベースキーが必要な場合はv7ライブラリを使ってください。"
+  - q: "生成したUUIDが重複することはありますか？"
+    a: "実質的にありません。122ビットの乱数では、毎秒数十億個を何年も生成しない限り衝突しません。"
+related: [hash-generator, password-generator, base64-encoder, timestamp-converter]
 ---
 
 UUID v4を最大100個まで一度に生成できます（小文字／大文字選択可）。IDはWeb Crypto API（`crypto.getRandomValues` / `crypto.randomUUID`）でブラウザ内生成されるため、リクエストが外部に送信されることはなく、実用上衝突も起こりません。

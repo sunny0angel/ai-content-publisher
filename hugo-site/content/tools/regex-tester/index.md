@@ -1,13 +1,23 @@
 ---
 title: "Regex Tester"
 date: 2026-11-18
-lastmod: 2026-11-18
+lastmod: 2026-11-21
 description: "Test regular expressions in your browser with live match highlighting, flag toggles (g/i/m/s), and match counts. Free local tool — your patterns never leave the page."
 tags: [regex tester, regex test online, regular expression tester, regex flags, regex playground, developer tools]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "regex-tester"
+faq:
+  - q: "Which regex engine does it use?"
+    a: "The browser's native engine via new RegExp, the same one JavaScript and Node.js use, so results match your code."
+  - q: "Which flags can I toggle?"
+    a: "g, i, m and s. Without g, only the first match is highlighted."
+  - q: "Is my pattern or test text uploaded?"
+    a: "No. Compilation and matching happen in the tab."
+  - q: "Why does my pattern work here but fail in Python?"
+    a: "Regex dialects differ on lookbehind, named groups and Unicode classes. Verify the pattern in the target language before shipping."
+related: [regex-visualizer, text-diff, case-converter, json-formatter]
 ---
 
 Type a pattern, paste your text, and see every match highlighted instantly — with `g`/`i`/`m`/`s` flags toggleable and a live match count. Runs on the browser's native regex engine, so results match your JavaScript code exactly.

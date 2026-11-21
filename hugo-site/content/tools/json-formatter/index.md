@@ -1,13 +1,21 @@
 ---
 title: "JSON Formatter & Validator"
 date: 2026-11-17
-lastmod: 2026-11-17
+lastmod: 2026-11-21
 description: "Format, minify, and validate JSON in your browser. Free tool for developers working with APIs and LLM payloads — runs entirely locally, no data is uploaded."
 tags: [JSON formatter, JSON validator, JSON minify, pretty print JSON, JSON parser, JSON beautifier, online JSON tools]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "json-formatter"
+faq:
+  - q: "Is my JSON uploaded to a server?"
+    a: "No. Formatting and validation run in this tab using the browser's native JSON.parse, so even production payloads stay on your machine."
+  - q: "Can it sort keys or fix invalid JSON?"
+    a: "No. Formatting preserves key order and never rewrites data. When the document is invalid, the tool reports where parsing failed so you can fix the source."
+  - q: "How large a payload can it handle?"
+    a: "Several megabytes are fine. Very large logs can make the text area sluggish, so split them into chunks first."
+related: [json-diff, json-to-csv, jwt-decoder, base64-encoder]
 ---
 
 Paste unreadable JSON — an API response, a log line, or an LLM function-call payload — and format it, minify it, or validate it instantly. The tool runs entirely in your browser: nothing is sent to any server, which matters when you are debugging production data.

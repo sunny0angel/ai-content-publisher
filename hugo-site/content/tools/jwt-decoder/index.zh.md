@@ -1,13 +1,23 @@
 ---
 title: "JWT 解码器"
 date: 2026-11-17
-lastmod: 2026-11-17
+lastmod: 2026-11-21
 description: "在浏览器内解码 JWT 的 header、payload 与签名，无需密钥即可查看 claims 和时间戳。免费本地工具，你的 token 不会离开页面。"
 tags: [JWT解码, JWT解析, JSON Web Token, JWT claims, JWT header, token调试]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "jwt-decoder"
+faq:
+  - q: "解码会验证签名吗？"
+    a: "不会。只对头部和载荷做 Base64url 解码。验证需要密钥，应在服务端完成。"
+  - q: "解码需要密钥吗？"
+    a: "不需要。正因如此，令牌里绝不能放敏感信息——任何截获者都能读到声明。"
+  - q: "令牌会上传吗？"
+    a: "不会。解析在标签页内完成，关闭页面即丢弃。"
+  - q: "排查 401 时先看什么？"
+    a: "先对比 exp 与当前时间，再检查 iss、aud，最后确认后端使用相同的算法和密钥。"
+related: [jwt-signer, base64-encoder, hash-generator, json-formatter]
 ---
 
 粘贴 JSON Web Token，即刻解码其 header、payload 与签名，`iat`/`exp` 自动换算为本地时间。token 始终留在浏览器内，不会被发送到任何地方。

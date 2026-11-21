@@ -14,25 +14,25 @@
 <input type="date" id="afwDintB">
 <div class="out" id="afwDintOut" hidden>
   <div class="row lbl-days"><span></span><b id="afwDintDays"></b></div>
+  <div class="row lbl-inc"><span></span><b id="afwDintInc"></b></div>
   <div class="row lbl-workdays"><span></span><b id="afwDintWork"></b></div>
   <div class="row lbl-weeks"><span></span><b id="afwDintWeeks"></b></div>
-  <div class="row lbl-bd"><span></span><b id="afwDintBd"></b></div>
 </div>
 <script>
 (function(){
 var root=document.querySelector('.afw-dint');if(!root)return;
 var L=root.getAttribute('data-lang')||'en';
 var I={
- en:{a:'Start date',b:'End date',days:'Days between',workdays:'Working days (Mon–Fri)',weeks:'Weeks',bd:'Business days excluding weekends',note:'Working days count excludes weekends. Public holidays vary by country and are not included.'},
- ja:{a:'開始日',b:'終了日',days:'日数',workdays:'営業日（月–金）',weeks:'週数',bd:'週末を除く営業日',note:'営業日は週末を除きます。祝日は国により異なるため含まれません。'},
- zh:{a:'开始日期',b:'结束日期',days:'相差天数',workdays:'工作日（周一至周五）',weeks:'周数',bd:'不含周末的工作日',note:'工作日不含周末。法定节假日因国家而异，未计入。'}
+ en:{a:'Start date',b:'End date',days:'Days between',inc:'Calendar days (inclusive)',workdays:'Working days (Mon–Fri, inclusive)',weeks:'Weeks',note:'Working days include both dates and exclude weekends. Public holidays vary by country and are not included.'},
+ ja:{a:'開始日',b:'終了日',days:'日数（差）',inc:'暦日数（両端を含む）',workdays:'営業日（月–金・両端を含む）',weeks:'週数',note:'営業日は開始日と終了日の両方を含み、週末を除きます。祝日は国により異なるため含まれません。'},
+ zh:{a:'开始日期',b:'结束日期',days:'相差天数',inc:'日历天数（含首尾）',workdays:'工作日（周一至周五，含首尾）',weeks:'周数',note:'工作日包含首尾两天并排除周末。法定节假日因国家而异，未计入。'}
 }[L]||I.en;
 document.querySelector('.afw-dint .lbl-a').textContent=I.a;
 document.querySelector('.afw-dint .lbl-b').textContent=I.b;
 document.querySelector('.afw-dint .lbl-days span').textContent=I.days;
 document.querySelector('.afw-dint .lbl-workdays span').textContent=I.workdays;
 document.querySelector('.afw-dint .lbl-weeks span').textContent=I.weeks;
-document.querySelector('.afw-dint .lbl-bd span').textContent=I.bd;
+document.querySelector('.afw-dint .lbl-inc span').textContent=I.inc;
 var a=document.getElementById('afwDintA'),b=document.getElementById('afwDintB'),out=document.getElementById('afwDintOut');
 function calc(){
   if(!a.value||!b.value){out.hidden=true;return;}
@@ -42,10 +42,10 @@ function calc(){
   var work=0;var cur=new Date(d1);
   while(cur<=d2){var wd=cur.getDay();if(wd!==0&&wd!==6)work++;cur.setDate(cur.getDate()+1);}
   document.getElementById('afwDintDays').textContent=days;
+  document.getElementById('afwDintInc').textContent=days+1;
   document.getElementById('afwDintWork').textContent=work;
   document.getElementById('afwDintWeeks').textContent=(days/7).toFixed(1);
-  document.getElementById('afwDintBd').textContent=work;
-  out.hidden=false;
+    out.hidden=false;
 }
 a.addEventListener('change',calc);
 b.addEventListener('change',calc);

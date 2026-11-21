@@ -1,13 +1,21 @@
 ---
 title: "SQL 格式化器"
 date: 2026-11-19
-lastmod: 2026-11-19
+lastmod: 2026-11-21
 description: "把杂乱的 SQL 整理成清晰可读的查询——关键字大写、子句换行、缩进分层。无服务器、无上传的免费本地格式化器。"
 tags: [SQL格式化, SQL美化, SQL查询格式化, 开发者工具]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "sql-formatter"
+faq:
+  - q: "会校验 SQL 吗？"
+    a: "不会。只做格式化，不检查方言或语义，无效 SQL 也会原样排版。"
+  - q: "会保留方言特性吗？"
+    a: "会。Postgres 类型转换、MySQL 反引号和引号字符串都原样保留。"
+  - q: "查询会上传吗？"
+    a: "不会。分词和格式化都在标签页内完成，生产查询不离开本机。"
+related: [json-formatter, case-converter, markdown-previewer, json-to-csv]
 ---
 
 粘贴一行 SQL 查询，得到规范格式的版本：关键字大写、每个子句独立成行、子查询缩进。完全在浏览器内运行——生产查询不会离开你的机器。

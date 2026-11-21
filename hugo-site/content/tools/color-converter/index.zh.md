@@ -1,13 +1,21 @@
 ---
 title: "颜色转换器（HEX / RGB / HSL）"
 date: 2026-11-18
-lastmod: 2026-11-18
+lastmod: 2026-11-21
 description: "在 HEX、RGB、HSL 之间转换颜色，带实时预览色块。面向设计与前端工作的免费本地工具。"
 tags: [颜色转换, hex转rgb, rgb转hsl, 颜色选择, hex颜色, hsl转换, 设计工具]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "color-converter"
+faq:
+  - q: "可以输入哪些格式？"
+    a: "支持 #2563eb 这样的 HEX、rgb(37,99,235) 这样的 RGB，以及 hsl(221,83%,53%) 这样的 HSL，三种输出同步更新。"
+  - q: "转换结果和 CSS 一致吗？"
+    a: "一致。按浏览器使用的 CSS Color Module 公式计算，hsl() 输出与渲染结果相符。"
+  - q: "支持透明度吗？"
+    a: "生成的 HEX、RGB、HSL 均为不透明色。需要透明时请在 CSS 中手动添加 alpha 通道。"
+related: [image-color-picker, number-base-converter, image-converter, image-compressor]
 ---
 
 输入任意格式的颜色——HEX（`#2563eb`）、RGB（`rgb(37,99,235)`）或 HSL（`hsl(221,83%,53%)`）——即可看到三种格式和实时预览色块。完全在浏览器内运行。

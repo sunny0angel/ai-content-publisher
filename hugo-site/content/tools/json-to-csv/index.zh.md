@@ -1,13 +1,21 @@
 ---
 title: "JSON 转 CSV 转换器"
 date: 2026-11-17
-lastmod: 2026-11-17
+lastmod: 2026-11-21
 description: "在浏览器内把对象数组 JSON 转为 CSV，自动识别表头，附带 Excel 友好的 UTF-8 BOM。免费本地工具，无需上传。"
 tags: [JSON转CSV, JSON CSV转换, JSON转Excel, JSON数组转CSV, CSV导出, 数据转换工具]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "json-to-csv"
+faq:
+  - q: "支持什么输入格式？"
+    a: "对象数组。每个对象一行，所有键的并集作为表头。单个对象或数组的数组不支持。"
+  - q: "嵌套对象怎么处理？"
+    a: "会被序列化成单个单元格。需要独立列时，请先展平数据。"
+  - q: "Excel 打开中文会乱码吗？"
+    a: "输出带 UTF-8 BOM，Excel 可正常识别。若旧软件仍乱码，请按 UTF-8 导入。"
+related: [json-formatter, json-diff, base64-encoder, comparison-table-generator]
 ---
 
 把对象数组 JSON 转成 CSV 表格——表头按对象键自动识别，值正确转义，并附 UTF-8 BOM，让 Excel 能正确打开中文和日文内容。全部在浏览器内完成，不会上传任何数据。

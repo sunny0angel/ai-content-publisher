@@ -1,13 +1,21 @@
 ---
 title: "Base64 Encoder & Decoder"
 date: 2026-11-17
-lastmod: 2026-11-17
+lastmod: 2026-11-21
 description: "Encode and decode Base64 in your browser with full UTF-8 support. Free local tool for developers working with APIs, JWTs, and binary data embedded in text."
 tags: [Base64 encoder, Base64 decoder, Base64 converter, base64 encode, base64 decode, URL safe base64, developer tools]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "base64-encoder"
+faq:
+  - q: "Does it handle Japanese, Chinese and emoji?"
+    a: "Yes. Text is converted to UTF-8 bytes before encoding, so multi-byte characters round-trip correctly, unlike plain btoa()."
+  - q: "Is Base64 encryption?"
+    a: "No. It is a reversible transport encoding that anyone can decode. Use TLS and real encryption when confidentiality matters."
+  - q: "Can I encode a file or image?"
+    a: "This tool encodes text only. For images, use the image to Base64 tool, which reads the file locally and produces a data URL."
+related: [image-to-base64, url-encoder, hash-generator, jwt-decoder]
 ---
 
 Convert plain text to Base64 and back, with correct UTF-8 handling — unlike `btoa()`, this tool does not break on Japanese, Chinese, or emoji. Everything runs locally in your browser; nothing is uploaded.

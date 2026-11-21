@@ -1,13 +1,23 @@
 ---
 title: "URL Encoder & Decoder"
 date: 2026-11-18
-lastmod: 2026-11-18
+lastmod: 2026-11-21
 description: "Encode and decode URL components with proper percent-encoding. Free local tool for building query strings, links, and API URLs that never break."
 tags: [URL encoder, URL decoder, percent encoding, URL encode, encodeURIComponent, URL escape, developer tools]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "url-encoder"
+faq:
+  - q: "Which JavaScript function does it match?"
+    a: "encodeURIComponent and decodeURIComponent, so the output matches what your code sends in query strings."
+  - q: "Why is a space encoded as %20 instead of +?"
+    a: "%20 is standard percent-encoding. The + form belongs to application/x-www-form-urlencoded and is not interchangeable everywhere."
+  - q: "Can I encode a whole URL?"
+    a: "This tool encodes components, so ://?& would be escaped as well. Encode only the dynamic values, not the full URL."
+  - q: "Does it handle Japanese and emoji?"
+    a: "Yes. Text is converted to UTF-8 before percent-encoding, so multi-byte characters survive."
+related: [base64-encoder, json-formatter, hash-generator, case-converter]
 ---
 
 Convert any text to a URL-safe percent-encoded string and back. Handles UTF-8 correctly, so Japanese, Chinese, and emoji survive the trip through query strings. Runs entirely in your browser — nothing is sent anywhere.

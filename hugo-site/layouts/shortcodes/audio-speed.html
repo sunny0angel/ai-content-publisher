@@ -12,9 +12,6 @@
   <label class="lbl-speed"></label>
   <input type="range" id="afwAspSpeed" min="0.5" max="2" step="0.1" value="1">
   <b id="afwAspVal">1.0x</b>
-  <label class="lbl-pitch"></label>
-  <input type="range" id="afwAspPitch" min="0.5" max="2" step="0.1" value="1">
-  <b id="afwAspPv">1.0</b>
 </div>
 <audio id="afwAspAudio" controls></audio>
 <div class="meta" id="afwAspMeta"></div>
@@ -23,16 +20,14 @@
 var root=document.querySelector('.afw-asp');if(!root)return;
 var L=root.getAttribute('data-lang')||'en';
 var I={
- en:{speed:'Speed',pitch:'Pitch (Web Audio)',note:'Speed and pitch change live during playback. Learning a language? Slow to 0.7x — comprehension improves immediately.'},
- ja:{speed:'速度',pitch:'ピッチ（Web Audio）',note:'速度とピッチは再生中にリアルタイムで変わります。語学学習なら0.7倍へ——理解度がすぐ上がります。'},
- zh:{speed:'速度',pitch:'音调（Web Audio）',note:'速度和音调在播放中实时变化。学语言？调到 0.7 倍——理解度立刻提升。'}
+ en:{speed:'Speed',note:'Speed changes live during playback. Learning a language? Slow to 0.7x — comprehension improves immediately.'},
+ ja:{speed:'速度',note:'速度は再生中にリアルタイムで変わります。語学学習なら0.7倍へ——理解度がすぐ上がります。'},
+ zh:{speed:'速度',note:'速度在播放中实时变化。学语言？调到 0.7 倍——理解度立刻提升。'}
 }[L]||I.en;
 document.querySelector('.afw-asp .lbl-speed').textContent=I.speed;
-document.querySelector('.afw-asp .lbl-pitch').textContent=I.pitch;
 document.getElementById('afwAspMeta').textContent=I.note;
 var file=document.getElementById('afwAspFile'),audio=document.getElementById('afwAspAudio');
 var s=document.getElementById('afwAspSpeed'),sv=document.getElementById('afwAspVal');
-var p=document.getElementById('afwAspPitch'),pv=document.getElementById('afwAspPv');
 var ctx,srcEl,mediaSrc;
 file.addEventListener('change',function(){
   if(!file.files[0])return;

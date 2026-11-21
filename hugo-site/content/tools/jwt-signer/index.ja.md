@@ -1,13 +1,23 @@
 ---
 title: "JWT署名ツール（HS256）"
 date: 2026-11-19
-lastmod: 2026-11-19
+lastmod: 2026-11-21
 description: "Web CryptoでHS256（HMAC-SHA256）のJWTをブラウザ内で署名。秘密鍵はページの外に出ません。[JWTデコーダー]と対になる無料ローカルツール。"
 tags: [JWT署名, JWT生成, HS256, HMAC-SHA256, JWTトークン生成, JSON Web Token署名]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "jwt-signer"
+faq:
+  - q: "秘密鍵はどこで扱われますか？"
+    a: "このタブ内だけです。HMAC-SHA256はWeb Cryptoで計算され、秘密鍵は送信も保存もされません。"
+  - q: "どのアルゴリズムで署名できますか？"
+    a: "HS256のみです。RS256やES256は非対称鍵が必要で、サーバー側ライブラリの利用が適しています。"
+  - q: "生成したトークンを本番で使えますか？"
+    a: "テストやローカル開発向けです。本番は秘密鍵をブラウザに出さないよう、サーバー側で署名してください。"
+  - q: "検証に失敗するのはなぜですか？"
+    a: "秘密鍵の不一致、ペイロードの変更、expやnbfの時刻ずれが主な原因です。編集後は再署名してください。"
+related: [jwt-decoder, hash-generator, base64-encoder, uuid-generator]
 ---
 
 自分のヘッダー・ペイロード・秘密鍵から署名済みJWTを生成します——HS256署名はブラウザのWeb Crypto APIで計算されるため、秘密鍵がタブの外に出ることはありません。[JWTデコーダー](/ja/tools/jwt-decoder/)の自然な相棒です。理解するためにデコードし、構築するために署名する。

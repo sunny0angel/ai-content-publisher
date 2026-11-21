@@ -1,13 +1,21 @@
 ---
 title: "Unixタイムスタンプ変換"
 date: 2026-11-18
-lastmod: 2026-11-18
+lastmod: 2026-11-21
 description: "Unixタイムスタンプ（秒・ミリ秒）をローカル時刻・UTC・ISO 8601に即変換。現在時刻の取得もワンクリック。無料ローカルツール。"
 tags: [Unixタイムスタンプ変換, epoch変換, タイムスタンプから日時へ, Unix時刻, epoch時刻, 日時変換, 開発ツール]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "timestamp-converter"
+faq:
+  - q: "秒とミリ秒は自動判別されますか？"
+    a: "はい。10桁は秒、13桁はミリ秒として扱います。"
+  - q: "どのタイムゾーンが表示されますか？"
+    a: "ローカル時刻、UTC、ISO 8601です。サーバーログと手元の時刻を直接比較できます。"
+  - q: "2038年問題の影響はありますか？"
+    a: "JavaScriptの日付は64ビットで2038年より先も扱えます。制限があるのは32ビットのtime_tを使うシステムです。"
+related: [cron-parser, date-interval-calculator, uuid-generator, jwt-decoder]
 ---
 
 Unixタイムスタンプを貼り付けると——秒でもミリ秒でも——ローカル時刻・UTC・ISO 8601と「2時間前」のような相対時刻を即座に表示します。現在時刻の取得もワンクリック。すべてブラウザ内で動作します。

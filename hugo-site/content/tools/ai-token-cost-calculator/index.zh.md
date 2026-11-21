@@ -1,13 +1,23 @@
 ---
 title: "AI Token 与 API 费用计算器"
 date: 2026-11-17
-lastmod: 2026-11-17
+lastmod: 2026-11-21
 description: "估算 GPT-5.6（Sol、Terra、Luna）与 DeepSeek V4（Pro、Flash）的 token 数量和 API 费用。基于 2026 年 8 月官方列表价的免费浏览器计算器，无需注册。"
 tags: [token计算器, API费用计算器, 大模型价格, token数量, GPT-5.6价格, DeepSeek V4价格, AI成本估算]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "ai-token-cost-calculator"
+faq:
+  - q: "包含哪些模型和价格？"
+    a: "GPT-5.6 的 Sol、Terra、Luna，以及 DeepSeek V4 的 Pro、Flash，按 2026 年 8 月官方标价计算。"
+  - q: "Token 数有多准？"
+    a: "使用「4 字符约 1 token」的估算，并非服务商分词器；按语言和代码不同，误差约 ±10–30%。"
+  - q: "包含缓存输入或批量折扣吗？"
+    a: "不包含。按标准标价计算；缓存和批量阶梯会改变实际账单。"
+  - q: "提示词会上传吗？"
+    a: "不会。Token 估算和费用计算都在标签页内完成。"
+related: [prompt-compare, json-formatter, json-to-csv, text-similarity]
 ---
 
 粘贴任意提示词或 API 请求内容，即可即时估算五大前沿模型的 token 数量和费用。价格采用 2026 年 8 月的官方列表价，与 [GPT-5.6 与 DeepSeek-V4 价格对比分析](/zh/blog/gpt-5.6-vs-deepseek-v4-pricing-2026/)使用同一套数据。

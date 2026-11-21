@@ -1,13 +1,21 @@
 ---
 title: "Lorem Ipsumジェネレーター"
 date: 2026-11-18
-lastmod: 2026-11-18
+lastmod: 2026-11-21
 description: "段落・文・単語単位でプレースホルダーテキストを生成。レイアウト、モックアップ、デモ用の無料ローカルツール。"
 tags: [lorem ipsum, プレースホルダーテキスト, ダミーテキスト, フィラーテキスト, デザインツール]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "lorem-ipsum-generator"
+faq:
+  - q: "テキストは本当にランダムですか？"
+    a: "文や段落の長さは実行ごとに変わりますが、語彙は伝統的なラテン語の単語リストのため、雰囲気は一定です。"
+  - q: "単語数を指定できますか？"
+    a: "はい。段落・文・単語から単位を選び、数を指定できます。"
+  - q: "本番の文章に使えますか？"
+    a: "いいえ。ダミーテキストなので、公開前に必ず差し替えてください。"
+related: [case-converter, text-similarity, markdown-previewer, password-generator]
 ---
 
 段落・文・単語単位でプレースホルダーコピーを生成——レイアウト、モックアップ、APIデモペイロードの定番フィラーです。完全にブラウザ内で動作します。

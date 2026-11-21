@@ -1,13 +1,23 @@
 ---
 title: "SHAハッシュジェネレーター"
 date: 2026-11-17
-lastmod: 2026-11-17
+lastmod: 2026-11-21
 description: "Web Crypto APIでSHA-256・SHA-512・SHA-1ハッシュをブラウザ内生成。チェックサムやフィンガープリント、データ整合性チェック向けの無料ローカルツール。"
 tags: [SHA256生成, SHA-256ハッシュ, SHA512, SHA1, ハッシュ生成, チェックサム, ハッシュツール]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "hash-generator"
+faq:
+  - q: "入力したテキストは送信されますか？"
+    a: "いいえ。ハッシュ計算はこのタブ内のcrypto.subtleで行われ、入力もダイジェストも端末外に出ません。"
+  - q: "ファイルのハッシュも計算できますか？"
+    a: "このツールはテキスト専用です。ファイルはOSのコマンド（sha256sumやshasum -a 256）で計算し、値と比較してください。"
+  - q: "SHA-256は復元できますか？"
+    a: "できません。一方向関数で、現実的な攻撃は入力を推測することだけです。塩なしのパスワードハッシュが危険な理由でもあります。"
+  - q: "どのアルゴリズムを選べばよいですか？"
+    a: "ほとんどの用途はSHA-256、高い保証が必要ならSHA-512、SHA-1はレガシー互換のみです。"
+related: [base64-encoder, uuid-generator, password-generator, jwt-signer]
 ---
 
 任意のテキストの暗号学的ハッシュをブラウザ内で生成します——SHA-256、SHA-512、SHA-1——ブラウザ内蔵のWeb Crypto APIを使用。データはマシンの外に出ず、同じ入力からは常に同じハッシュ値が得られます。

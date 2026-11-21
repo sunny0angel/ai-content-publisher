@@ -1,13 +1,23 @@
 ---
 title: "JWT Decoder"
 date: 2026-11-17
-lastmod: 2026-11-17
+lastmod: 2026-11-21
 description: "Decode JWT header, payload, and signature in your browser. Inspect claims and timestamps without a key. Free local tool — your token never leaves the page."
 tags: [JWT decoder, JWT parser, decode JWT, JSON web token, JWT header payload, JWT claims, token debugger]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "jwt-decoder"
+faq:
+  - q: "Does decoding verify the signature?"
+    a: "No. Decoding only Base64url-decodes the header and payload. Verification requires the signing key and must happen server-side."
+  - q: "Do I need the secret to decode?"
+    a: "No. That is exactly why tokens must never contain sensitive data: anyone who intercepts one can read the claims."
+  - q: "Is my token uploaded?"
+    a: "No. Parsing happens in the tab and the token is discarded when you close the page."
+  - q: "What should I check first when debugging a 401?"
+    a: "Compare exp with the current time, then check iss and aud, and confirm the backend uses the same algorithm and key."
+related: [jwt-signer, base64-encoder, hash-generator, json-formatter]
 ---
 
 Paste a JSON Web Token and see its header, payload, and signature decoded instantly — including `iat`/`exp` converted to local time. The token stays in your browser; it is never sent anywhere.

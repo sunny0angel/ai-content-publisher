@@ -1,13 +1,23 @@
 ---
 title: "画像フォーマット変換（JPG / PNG / WebP）"
 date: 2026-11-19
-lastmod: 2026-11-19
+lastmod: 2026-11-21
 description: "JPG・PNG・WebPを相互変換。ファイルはマシン上で処理され、アップロードされない無料ローカルツール。"
 tags: [画像変換, pngからjpg, jpgからpng, webp変換, 画像フォーマット変換]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "image-converter"
+faq:
+  - q: "どの形式に変換できますか？"
+    a: "ブラウザがデコードできる画像から、JPG・PNG・WebPを出力できます。アニメーションは保持されません。"
+  - q: "JPGにすると透過は失われますか？"
+    a: "はい。JPGにはアルファチャンネルがないため、透過部分は単色になります。透過が必要な場合はPNGかWebPを選んでください。"
+  - q: "EXIFは保持されますか？"
+    a: "いいえ。canvas経由の再エンコードでEXIF（カメラ情報やGPS）は削除されます。公開前には多くの場合好都合です。"
+  - q: "PNGにしたら大きくなったのはなぜですか？"
+    a: "PNGは可逆圧縮です。写真をPNGにすると容量は増えるのが普通で、写真はJPGかWebPのままが適しています。"
+related: [image-compressor, image-resizer, image-to-base64, image-rotator]
 ---
 
 任意の画像をJPG、PNG、WebPに変換——対象フォーマットを選んでダウンロードするだけ。変換はすべてブラウザ内のキャンバスで行われ、ファイルがマシンの外に出ることはありません。

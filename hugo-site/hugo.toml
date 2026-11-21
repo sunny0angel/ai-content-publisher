@@ -68,7 +68,7 @@ source = "node_modules/bootstrap-print-css/css/bootstrap-print.css"
 target = "assets/css/bootstrap-print.css"
 
 [params]
-title = "AI Forward — Free Browser Tools & Practical AI Guides"
+title = "AI Forward — Free Tools & AI Guides"
 description = "66 free AI, developer, PDF, image, audio, and video tools that run entirely in your browser — no uploads, no signup — plus practical guides on AI for business and HR."
 images = ["/images/og-image.png"]
 themeColor = "#2563eb"

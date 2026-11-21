@@ -1,13 +1,23 @@
 ---
 title: "音频波形可视化器"
 date: 2026-11-19
-lastmod: 2026-11-19
+lastmod: 2026-11-21
 description: "任意音频文件播放时显示实时频率柱状图。基于 Web Audio API 的免费本地工具。"
 tags: [音频可视化, 波形可视化, 音频频谱, 音乐可视化]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "audio-waveform"
+faq:
+  - q: "音频会上传吗？"
+    a: "不会。文件在本标签页内用 Web Audio API 解码和分析。"
+  - q: "可以导出可视化吗？"
+    a: "不能。这是 canvas 实时绘制，需要静态图请截图。"
+  - q: "为什么没有画面？"
+    a: "请按播放。浏览器在用户操作前会阻止音频，分析器也只在播放时产生数据。"
+  - q: "支持哪些格式？"
+    a: "浏览器能解码的格式都支持。不支持的编码不会显示频谱。"
+related: [audio-speed, audio-recorder, video-info, video-thumbnail]
 ---
 
 加载音频文件，看着实时频率柱随播放舞动——基于 Web Audio AnalyserNode 的彩色频谱。完全在浏览器内运行。

@@ -1,13 +1,21 @@
 ---
 title: "CIDR Subnet Calculator"
 date: 2026-11-19
-lastmod: 2026-11-19
+lastmod: 2026-11-21
 description: "Calculate network, broadcast, host range, subnet mask, wildcard, and subnet splits for any IPv4 CIDR. Free local tool for network engineers and devs."
 tags: [CIDR calculator, subnet calculator, subnet mask calculator, IPv4 subnet, IP range calculator, network tools]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "cidr-calculator"
+faq:
+  - q: "Does it support IPv6?"
+    a: "No, IPv4 only. It covers every prefix from /0 to /32, including the /31 and /32 edge cases."
+  - q: "What does the split table show?"
+    a: "The block divided into eight smaller subnets (prefix +3), useful for planning allocations at a glance."
+  - q: "Are the results exact?"
+    a: "Yes. Bitwise math runs on BigInt, so there is no floating-point rounding."
+related: [number-base-converter, hash-generator, url-encoder, password-generator]
 ---
 
 Enter an IPv4 CIDR like `192.168.1.0/24` and get everything: network and broadcast addresses, first and last host, usable count, subnet and wildcard masks, class, and a ready-made split into smaller subnets. All computed locally with exact BigInt arithmetic.

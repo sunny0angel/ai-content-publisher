@@ -1,13 +1,23 @@
 ---
 title: "URLエンコーダー／デコーダー"
 date: 2026-11-18
-lastmod: 2026-11-18
+lastmod: 2026-11-21
 description: "パーセントエンコーディングでURLコンポーネントを正しくエンコード／デコード。クエリ文字列やリンク構築のための無料ローカルツール。"
 tags: [URLエンコード, URLデコード, パーセントエンコーディング, encodeURIComponent, URLエスケープ, 開発ツール]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "url-encoder"
+faq:
+  - q: "どのJavaScript関数と同じ結果ですか？"
+    a: "encodeURIComponentとdecodeURIComponentです。クエリ文字列として送信する値と一致します。"
+  - q: "スペースが+ではなく%20になるのはなぜですか？"
+    a: "%20が標準のパーセントエンコードです。+はapplication/x-www-form-urlencodedの形式で、どこでも同じ意味ではありません。"
+  - q: "URL全体をエンコードできますか？"
+    a: "このツールはコンポーネント用のため、://?&もエスケープされます。動的な値だけをエンコードしてください。"
+  - q: "日本語や絵文字も扱えますか？"
+    a: "はい。UTF-8に変換してからパーセントエンコードするため、マルチバイト文字も保持されます。"
+related: [base64-encoder, json-formatter, hash-generator, case-converter]
 ---
 
 任意のテキストをURLセーフなパーセントエンコード文字列に変換し、戻せます。UTF-8を正しく扱うため、日本語・中国語・絵文字もクエリ文字列を無事に通過します。すべてブラウザ内で処理され、外部送信はありません。

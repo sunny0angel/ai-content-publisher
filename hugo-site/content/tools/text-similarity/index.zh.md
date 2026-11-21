@@ -1,13 +1,23 @@
 ---
 title: "文本相似度检测器"
 date: 2026-11-20
-lastmod: 2026-11-20
+lastmod: 2026-11-21
 description: "对比两段文本，得到带可视化进度条的相似度百分比。用于查重、去重和 diff 前置判断的免费本地工具。"
 tags: [文本相似度, 相似度检测, 查重, 文本对比百分比]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "text-similarity"
+faq:
+  - q: "相似度是怎么算的？"
+    a: "用最长公共子序列比率：公共子序列长度除以较长文本，以百分比显示。"
+  - q: "能用来查重吗？"
+    a: "不能。它只比较你提供的两段文本，不会搜索网络或数据库。"
+  - q: "为什么改写过只有 60% 左右？"
+    a: "LCS 奖励相同的序列，改写措辞会降低分数，即使意思没变。"
+  - q: "文本会上传吗？"
+    a: "不会。比较在标签页内完成。"
+related: [text-diff, comparison-table-generator, case-converter, prompt-compare]
 ---
 
 粘贴两段文本，得到由最长公共子序列算法计算的相似度百分比和可视化进度条。适合检查改写、发现近似重复、在完整 diff 前做筛选。完全在浏览器内运行。

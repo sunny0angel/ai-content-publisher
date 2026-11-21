@@ -1,13 +1,23 @@
 ---
 title: "JWT 签发工具（HS256）"
 date: 2026-11-19
-lastmod: 2026-11-19
+lastmod: 2026-11-21
 description: "用 Web Crypto 在浏览器内完成 HS256（HMAC-SHA256）JWT 签发。密钥绝不离开页面。与 JWT 解码器配套的免费本地工具。"
 tags: [JWT签发, JWT生成, HS256, HMAC-SHA256, JWT token生成, JSON Web Token签名]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "jwt-signer"
+faq:
+  - q: "密钥在哪里处理？"
+    a: "只在本标签页内。HMAC-SHA256 通过 Web Crypto 计算，密钥不会传输或保存。"
+  - q: "支持哪些算法？"
+    a: "仅 HS256。RS256 和 ES256 需要非对称密钥，建议使用服务端库。"
+  - q: "生成的令牌能用于生产吗？"
+    a: "适合测试和本地开发。生产环境应在服务端签名，避免密钥暴露给浏览器。"
+  - q: "为什么令牌验证失败？"
+    a: "常见原因是密钥不一致、载荷被修改，或 exp/nbf 时钟偏差。修改载荷后必须重新签名。"
+related: [jwt-decoder, hash-generator, base64-encoder, uuid-generator]
 ---
 
 用你自己的 header、payload 和密钥生成签名 JWT——HS256 签名由浏览器 Web Crypto API 计算，密钥不会离开你的标签页。它是 [JWT 解码器](/zh/tools/jwt-decoder/)的天然搭档：解码为了理解，签发为了构建。

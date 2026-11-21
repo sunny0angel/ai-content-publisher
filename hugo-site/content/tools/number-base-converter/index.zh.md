@@ -1,13 +1,21 @@
 ---
 title: "进制转换器（HEX / DEC / BIN / OCT）"
 date: 2026-11-18
-lastmod: 2026-11-18
+lastmod: 2026-11-21
 description: "在十六进制、十进制、二进制、八进制和 base36 之间转换数字，任意精度。面向开发者的免费本地工具。"
 tags: [进制转换, hex转十进制, 二进制转换, 八进制转换, base36, 基数转换, 开发者工具]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "number-base-converter"
+faq:
+  - q: "大数会丢精度吗？"
+    a: "不会。使用 BigInt，64 位 ID 及更长整数都能精确转换，不会像 JavaScript Number 那样被舍入。"
+  - q: "支持哪些进制？"
+    a: "十进制、十六进制、二进制、八进制和 36 进制，可实时互转。"
+  - q: "能转换负数吗？"
+    a: "会处理符号，但不做定宽整数的补码转换。"
+related: [hash-generator, color-converter, base64-encoder, timestamp-converter]
 ---
 
 在十进制、十六进制、二进制、八进制和 base36 之间转换任意整数——使用 BigInt 精度，64 位及更大的值也不会丢位。完全在浏览器内运行。

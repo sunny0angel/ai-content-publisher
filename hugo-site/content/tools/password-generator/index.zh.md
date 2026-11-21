@@ -1,13 +1,23 @@
 ---
 title: "密码生成器"
 date: 2026-11-18
-lastmod: 2026-11-18
+lastmod: 2026-11-21
 description: "用密码学安全随机源生成强密码，可调长度与字符集，带强度估算。免费本地工具。"
 tags: [密码生成, 强密码, 随机密码, 安全密码, 密码强度, 安全工具]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "password-generator"
+faq:
+  - q: "生成的密码会上传吗？"
+    a: "不会。随机数来自 crypto.getRandomValues，密码只存在于本标签页，直到你复制。"
+  - q: "强度是怎么估算的？"
+    a: "按熵计算：长度 × log2(字符集大小)。约 80 位可抵御离线暴力破解，长期使用的密钥建议 100 位以上。"
+  - q: "会排除易混淆字符吗？"
+    a: "会。0/O、1/l/I 等易看错的字符被排除，便于阅读和输入。"
+  - q: "能用作 API 密钥吗？"
+    a: "可以，但请存进密钥管理器而不是文档。用户密码建议配合密码管理器使用。"
+related: [uuid-generator, hash-generator, base64-encoder, jwt-signer]
 ---
 
 用 `crypto.getRandomValues`——浏览器 TLS 使用的同一密码学安全随机源——在本地生成强密码。可选长度（8–64）和字符集，附带基于熵的强度估算。不会传输任何内容，密码只存在于你的标签页里。

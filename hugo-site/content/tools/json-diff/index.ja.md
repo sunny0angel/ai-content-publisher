@@ -1,13 +1,21 @@
 ---
 title: "JSON差分チェッカー"
 date: 2026-11-20
-lastmod: 2026-11-20
+lastmod: 2026-11-21
 description: "2つのJSON文書を比較し、追加・削除・変更されたフィールドをパス付きでハイライト。データがページの外に出ない無料ローカルツール。"
 tags: [JSON差分, JSON比較, JSON diff, JSON差異]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "json-diff"
+faq:
+  - q: "2つのJSONはアップロードされますか？"
+    a: "いいえ。どちらもこのタブ内で解析・比較され、送信されません。"
+  - q: "キーの順番は影響しますか？"
+    a: "いいえ。オブジェクトはキーで比較されるため、順番だけの違いは差分になりません。配列の順番は差分になります。"
+  - q: "APIレスポンスの比較に使えますか？"
+    a: "はい。主な用途です。変更前と変更後を左右に貼り付けると、追加・削除・変更されたパスを確認できます。"
+related: [json-formatter, text-diff, comparison-table-generator, json-to-csv]
 ---
 
 2つのJSON文書——デプロイ前後のAPIレスポンス、設定変更、2つの環境——を貼り付けると、追加・削除・変更されたフィールドがフルパス付きで分かります。完全にブラウザ内で動作します。

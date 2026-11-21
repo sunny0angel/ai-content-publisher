@@ -1,13 +1,23 @@
 ---
 title: "SHA Hash Generator"
 date: 2026-11-17
-lastmod: 2026-11-17
+lastmod: 2026-11-21
 description: "Generate SHA-256, SHA-512, and SHA-1 hashes in your browser using the Web Crypto API. Free local tool for checksums, fingerprints, and data integrity checks."
 tags: [SHA256 generator, SHA-256 hash, SHA512, SHA1, hash generator, checksum, hash tool, crypto hash]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "hash-generator"
+faq:
+  - q: "Is the text sent anywhere?"
+    a: "No. Hashing uses crypto.subtle in this tab, so both the input and the digest stay on your device."
+  - q: "Can I hash a file?"
+    a: "This tool hashes text. For files, use your OS command line (sha256sum or shasum -a 256) and compare the digest."
+  - q: "Can a SHA-256 hash be reversed?"
+    a: "No. Hashing is one-way; the only practical attack is guessing the input. That is also why unsalted password hashes are unsafe."
+  - q: "Which algorithm should I pick?"
+    a: "SHA-256 for almost everything, SHA-512 for high-assurance contexts, and SHA-1 only to match legacy systems."
+related: [base64-encoder, uuid-generator, password-generator, jwt-signer]
 ---
 
 Generate cryptographic hashes of any text in your browser — SHA-256, SHA-512, or SHA-1 — using the built-in Web Crypto API. No data leaves your machine, and the same input always produces the same digest.

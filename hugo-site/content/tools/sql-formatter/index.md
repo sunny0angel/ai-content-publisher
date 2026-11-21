@@ -1,13 +1,21 @@
 ---
 title: "SQL Formatter"
 date: 2026-11-19
-lastmod: 2026-11-19
+lastmod: 2026-11-21
 description: "Format messy SQL into clean, readable queries — keyword uppercasing, clause line breaks, and indentation. Free local formatter, no server, no upload."
 tags: [SQL formatter, format SQL, SQL beautifier, SQL pretty printer, SQL query formatter, developer tools]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "sql-formatter"
+faq:
+  - q: "Does it validate SQL?"
+    a: "No. It formats; it does not check dialect rules or semantics. Invalid SQL is formatted as-is."
+  - q: "Are dialect-specific constructs preserved?"
+    a: "Yes. Postgres casts, MySQL backticks and quoted strings pass through unchanged."
+  - q: "Is my query uploaded?"
+    a: "No. Tokenizing and formatting run in the tab, so production queries stay local."
+related: [json-formatter, case-converter, markdown-previewer, json-to-csv]
 ---
 
 Paste a one-line SQL query and get a properly formatted version: keywords uppercased, each clause on its own line, subqueries indented. Runs entirely in your browser — production queries never leave your machine.

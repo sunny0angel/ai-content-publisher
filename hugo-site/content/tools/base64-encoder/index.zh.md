@@ -1,13 +1,21 @@
 ---
 title: "Base64 编码与解码器"
 date: 2026-11-17
-lastmod: 2026-11-17
+lastmod: 2026-11-21
 description: "完整支持 UTF-8 的 Base64 编码与解码。面向处理 API、JWT 和文本内嵌二进制数据的开发者的免费本地工具。"
 tags: [Base64编码, Base64解码, Base64转换, URL安全Base64, 开发者工具]
 categories: ["Tools"]
 draft: false
 authors: ["AI Forward"]
 slug: "base64-encoder"
+faq:
+  - q: "支持日文、中文和 emoji 吗？"
+    a: "支持。文本先转为 UTF-8 字节再编码，多字节字符可正确往返，这一点与 btoa() 不同。"
+  - q: "Base64 是加密吗？"
+    a: "不是。它是可逆的传输编码，任何人都能解码。保密需要 TLS 和真正的加密。"
+  - q: "可以编码文件或图片吗？"
+    a: "本工具只处理文本。图片请用「图片转 Base64」工具，它在本地读取文件并生成 data URL。"
+related: [image-to-base64, url-encoder, hash-generator, jwt-decoder]
 ---
 
 在纯文本与 Base64 之间互相转换，并正确处理 UTF-8——不同于 `btoa()`，本工具不会在中文、日文或 emoji 上出错。全部在浏览器本地运行，不会上传任何内容。
